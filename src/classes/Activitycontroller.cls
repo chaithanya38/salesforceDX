@@ -2,7 +2,7 @@
 Class Name: Activitycontroller
 Author:Nagaraju G           Last modified by:Raju GN
 Date: 14/7/2014             Date:18/03/2015
-Description:Adding select and uploade links with popupwindow 
+Description:Adding select and uploade links with popupwindows
 ********©2013 Musqot marketing technology Pvt ltd ***********/
 public with sharing class Activitycontroller {
     public Activitytype__c act{get;set;}
