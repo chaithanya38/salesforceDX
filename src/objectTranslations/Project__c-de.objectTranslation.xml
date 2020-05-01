@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Plan --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Performance CRM --></label>
+        <name>CRM__c</name>
+    </fields>
+    <fields>
+        <help><!-- Add your project description here (max 4000 chars) --></help>
+        <label>简档</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Performance ERP --></label>
+        <name>ERP__c</name>
+    </fields>
+    <fields>
+        <label>End date</label>
+        <name>Ends_date__c</name>
+    </fields>
+    <fields>
+        <label>Headline</label>
+        <name>Headline__c</name>
+    </fields>
+    <fields>
+        <label>档</label>
+        <name>Plantype__c</name>
+        <relationshipLabel><!-- Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product__c</name>
+        <picklistValues>
+            <masterLabel>PROD B</masterLabel>
+            <translation><!-- PROD B --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Performance Social media --></label>
+        <name>Social_media__c</name>
+    </fields>
+    <fields>
+        <label>Start date</label>
+        <name>Starts_date__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>StatusImage__c</name>
+    </fields>
+    <fields>
+        <label>Status image id</label>
+        <name>Status_Image_Id__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deferred</masterLabel>
+            <translation><!-- Deferred --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation><!-- Not Started --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Projects layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Plan Name --></nameFieldLabel>
+    <webLinks>
+        <label><!-- Fund_request --></label>
+        <name>Fund_request</name>
+    </webLinks>
+</CustomObjectTranslation>

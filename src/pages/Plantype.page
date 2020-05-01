@@ -1,0 +1,27 @@
+<apex:page controller="PlantypePageController" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_Plantypes}" tabStyle="Musqot_admin__tab">   
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="{!$Label.btn_New}" action="{!NewPrtype}" styleClass="btn"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel layout="block" styleclass="container">
+                <apex:pageBlockTable value="{!plan }" var="pln"  style="width:700px;">
+                    <apex:column headerValue="{!$Label.clm_Action}" style="width:100px;">
+                        <apex:commandLink value="{!$Label.btn_edit}" action="{!plantypedit}" style="color:#015ba7">
+                            <apex:param Name="p" value="{!pln.id}" assignTo="{!planid}"/>
+                        </apex:commandLink>&nbsp;|&nbsp;
+                        <apex:commandLink action="{!DeleteAccount}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!pln.Name} ?')) return false;" value="{!$Label.btn_Del}" style="color:#015ba7">               
+                            <apex:param value="{!pln.Id}" name="deleteid" assignTo="{!planid}"/>    
+                        </apex:commandLink>
+                    </apex:column>
+                    <apex:column value="{!pln.Name}" headerValue="{!$Label.pt_Plantype}" style="width:250px;"/>
+                    <apex:column value="{!pln.Fieldset__c}" style="width:200px;"/>
+                    <apex:column headerValue="{!$Label.actt_Bar_color}" style="width:100px;">
+                        <div Style="background-color:#{!HTMLENCODE(pln.Barcolor__c)};padding-bottom:2px;padding-top:2px;padding-left:20px;padding-right:20px; height:20px;width:200px;display:inline;"> 
+                            <span style="color:#fff;">{!pln.Barcolor__c}</span></div>       
+                    </apex:column>     
+                </apex:pageBlockTable>
+            </apex:outputPanel>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,37 @@
+<apex:page standardController="Subproject__c" sidebar="false" extensions="subprojectClass" tabStyle="Project__c">
+    <apex:form id="frm">
+        <apex:sectionHeader title="{!$Label.sub_Project}"  subtitle="{!$Label.sub_New_project}" />
+        <apex:pageBlock title="{!$Label.pt_Create_project}" mode="edit" tabStyle="Musqot_admin__tab" id="Pbloc">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton action="{!save}" value="{!$Label.btn_save}"/>
+                <apex:commandButton action="{!cancel}" value="{!$Label.btn_cancel}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbs">
+                <apex:inputfield value="{!subprj.Name}" required="true" label="{!$Label.sub_Project_name}"/>
+                <apex:inputfield value="{!subprj.Priority_level__c}" label="{!$Label.sp_prioritylevel}"/>
+                <apex:inputfield style="width:300px;height:100px;"  value="{!subprj.Description__c}"  label="{!$Label.inv_Description}"/>                
+                <apex:inputhidden value="{!subprj.Parent_project__c}" />
+                <apex:inputfield value="{!subprj.Starts_date__c}" label="{!$Label.pt_Start_date}" required="false" />
+                <apex:inputfield value="{!subprj.Ends_date__c}" label="{!$Label.pt_End_date}" required="false"/>
+                <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="{!$Label.sub_Project_type}" for="protype"/>
+                <apex:actionRegion >
+                <apex:selectList id="proype" value="{!subprj.Project_type__c}" style="widht:200;" size="1" multiselect="false" >
+                    <apex:selectOptions value="{!PROTList}" />
+                    <apex:actionSupport event="onchange" action="{!getCustomSettRec}" rerender="customseting" />
+                </apex:selectList>
+                </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:inputfield value="{!subprj.Status__c}" required="true" label="{!$Label.tsk_Status}"/>
+            </apex:pageBlockSection>
+            <apex:outputPanel id="customseting">
+            <apex:pageblocksection title="Custom setting" rendered="{!IF(fields.size>0,true,false)}" columns="2" >  
+               <apex:repeat value="{!fields}" var="f">  
+                   <apex:inputfield value="{!subprj[f.fieldPath]}" required="{!OR(f.required, f.dbrequired)}">  
+               </apex:inputfield></apex:repeat>  
+           </apex:pageblocksection> 
+           </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

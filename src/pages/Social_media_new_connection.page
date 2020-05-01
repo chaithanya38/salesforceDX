@@ -1,0 +1,115 @@
+<apex:page standardController="OAuthService__c" extensions="Social_media_new_connection" sidebar="false" id="pg">
+    <script>
+    function GetQueryStringByParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    if(GetQueryStringByParameter('newid') != ''){
+         if (window.opener != null && !window.opener.closed) {
+             var txtName = window.opener.document.getElementById("j_id0:j_id2:j_id4:j_id46:j_id47:0:j_id48");
+             txtName.value = GetQueryStringByParameter('newid');
+             var newid = GetQueryStringByParameter('newid');
+             if(newid.length > 13){
+                window.opener.document.getElementById("j_id0:j_id2:j_id4:j_id31:mrkSave").click();
+             }
+         }
+         window.close();   
+    }
+    function changeslsocialmedia(){
+        if(document.getElementById('pg:frm:j_id1:j_id8:slsocialmedia').value == "Facebook"){
+            if({!isSystemsIntegrations}){
+                document.getElementById('pg:frm:j_id1:j_id2:cbCreateAdvert').style.display = "inline-block";
+            }
+            document.getElementById('pg:frm:j_id1:j_id8:j_id10').value = '{!JSINHTMLENCODE(facebookkey.Access_Token_URL__c)}';
+            document.getElementById('pg:frm:j_id1:j_id8:j_id11').value = '{!JSINHTMLENCODE(facebookkey.Consumer_Key__c)}';
+            document.getElementById('pg:frm:j_id1:j_id8:j_id12').value = '{!JSINHTMLENCODE(facebookkey.Page_Id__c)}';
+        } 
+        else{
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateAdvert').style.display = "none";
+        }
+        if(document.getElementById('pg:frm:j_id1:j_id8:slsocialmedia').value == "MailChimp"){
+            if({!isSystemsIntegrations}){
+            	document.getElementById('pg:frm:j_id1:j_id2:cbCreateMailChimpCampaign').style.display = "inline-block";
+            }
+            document.getElementById('pg:frm:j_id1:j_id7:j_id10').value = '{!JSINHTMLENCODE(mailchimpkey.Access_Token_URL__c)}';
+            document.getElementById('pg:frm:j_id1:j_id7:j_id11').value = '{!JSINHTMLENCODE(mailchimpkey.Consumer_Key__c)}';
+        } 
+        else{
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateMailChimpCampaign').style.display = "none";
+        }
+        if(document.getElementById('pg:frm:j_id1:j_id8:slsocialmedia').value == "LinkedIn"){
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateLinkedInShare').style.display = "inline-block";
+            document.getElementById('pg:frm:j_id1:j_id7:j_id10').value = '{!JSINHTMLENCODE(linkedinkey.Access_Token_URL__c)}';
+            document.getElementById('pg:frm:j_id1:j_id7:j_id12').value = '{!JSINHTMLENCODE(linkedinkey.Page_Id__c)}';
+        } 
+        else{
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateLinkedInShare').style.display = "none";
+        }
+        <!--chaithanya modified start-->
+        var dd = document.getElementById('pg:frm:j_id1:j_id8:slsocialmedia').value;
+        if(dd != "Facebook" && dd !="MailChimp"){
+            document.getElementById('pg:frm:j_id1:j_id7:j_id10').value = '';
+            document.getElementById('pg:frm:j_id1:j_id7:j_id12').value = '';
+        }
+        <!--chaithanya modified end-->
+    }       
+    </script>
+    <apex:form id="frm">
+        <apex:pageBlock title="{!$Label.musadmin_Social_media} {!$Label.musadmin_New_connection}" tabStyle="Musqot_admin__tab" mode="Edit">            
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="{!$Label.btn_save}" rendered="{!isshowcontrol}" action="{!insertsoscailmedia}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" rendered="{!isshowcontrol}" action="{!cancel}"/>
+                <apex:commandButton value="Create Advert" action="{!createAdvert}" style="display:none" oncomplete="createFacebookAd()"  id="cbCreateAdvert" /><!--rendered="{!isCreateAdd}"/>-->
+                <apex:actionFunction action="{!createFacebookAd}" name="createFacebookAd" />
+                <apex:commandButton value="Create Campaign" action="{!createMailChimpCampaign}" style="display:none" oncomplete="createcampaignMailChimp()"  id="cbCreateMailChimpCampaign"/>
+                <apex:actionFunction action="{!createcampaignMailChimp}" name="createcampaignMailChimp" />
+                <apex:commandButton value="Create Share" action="{!createLinkedInShare}" style="display:none" oncomplete="createshareLinkedIn()"  id="cbCreateLinkedInShare"/>
+                <apex:actionFunction action="{!createshareLinkedIn}" name="createshareLinkedIn" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.musadmin_New_connection}" >
+                <apex:inputField value="{!socmedia.Name}" required="True" style="width:200px;" /> 
+                <apex:inputField value="{!socmedia.Access_Token_URL__c}" style="width:300px;" />
+                <apex:inputField value="{!socmedia.Social_media__c}" onchange="changeslsocialmedia()" id="slsocialmedia" />
+                <!--<apex:inputField value="{!socmedia.Authorization_Type__c}" required="False" />
+                <apex:inputField value="{!socmedia.Authorization_URL__c}" style="width:300px;" />-->
+                <apex:inputField value="{!socmedia.Consumer_Key__c}" style="width:200px;" />
+                <apex:inputField value="{!socmedia.Page_Id__c}" style="width:200px;" /> 
+                <apex:inputField value="{!socmedia.Consumer_Secret__c}" rendered="{!isshowcontrol}" style="width:300px;" />
+                <apex:inputField value="{!socmedia.Post_ID__c}" rendered="{!isshowcontrol}" style="width:200px;"  /> 
+                
+                <apex:inputField value="{!socmedia.Bar_color__c}" style="width:300px;" required="true" />
+                <apex:inputField value="{!socmedia.Campaign_Id__c}" style="width:200px;" />                
+                <!--<apex:inputField value="{!socmedia.Request_Token_URL__c}" style="width:300px;" />-->
+                <apex:inputField value="{!socmedia.End_Date__c}" />
+                <apex:inputField value="{!socmedia.ad_id__c}" style="width:200px;" /> 
+                <!--<apex:inputField value="{!socmedia.Response_Type__c}" />
+                <apex:inputField value="{!socmedia.Scope__c}" style="width:300px;" />
+                <apex:inputField value="{!socmedia.Signature_Method__c}"  />--> 
+                <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                <apex:inputField value="{!socmedia.Redirect_URL__c}" style="width:300px;" />
+            </apex:pageBlockSection>     
+            <apex:pageMessages id="showmsg"></apex:pageMessages>
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+        if(document.getElementById('pg:frm:j_id1:j_id7:slsocialmedia').value == "Facebook"){
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateAdvert').style.display = "inline-block";
+            document.getElementById('pg:frm:j_id1:j_id7:j_id9').value = '{!JSINHTMLENCODE(facebookkey.Access_Token_URL__c)}';
+            document.getElementById('pg:frm:j_id1:j_id7:j_id10').value = '{!JSINHTMLENCODE(facebookkey.Consumer_Key__c)}';
+            document.getElementById('pg:frm:j_id1:j_id7:j_id11').value = '{!JSINHTMLENCODE(facebookkey.Page_Id__c)}';
+        } 
+        else{
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateAdvert').style.display = "none";
+        }
+        if(document.getElementById('pg:frm:j_id1:j_id7:slsocialmedia').value == "MailChimp"){
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateMailChimpCampaign').style.display = "inline-block";
+            document.getElementById('pg:frm:j_id1:j_id7:j_id9').value = '{!JSINHTMLENCODE(mailchimpkey.Access_Token_URL__c)}';
+            document.getElementById('pg:frm:j_id1:j_id7:j_id10').value = '{!JSINHTMLENCODE(mailchimpkey.Consumer_Key__c)}';
+        } 
+        else{
+            document.getElementById('pg:frm:j_id1:j_id2:cbCreateMailChimpCampaign').style.display = "none";
+        } 
+    </script>
+</apex:page>

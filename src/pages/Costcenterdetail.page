@@ -1,0 +1,126 @@
+<apex:page standardController="Costcentre__c" sidebar="false" standardStylesheets="false" extensions="costcenterdetailcls">
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" />
+    <!--<apex:outputPanel layout="block" style=" {!if(Level5=true,'  float: left; width: 65%; padding-right: 1.5%; border-right: 1px solid #DADADA','float: left; width: 65%; padding-right: 1.5%; border-right: 1px solid #DADADA')}">-->  
+    <apex:outputPanel layout="block" style=" {!if(Level5=true,'  float: left; width: 65%; padding-right: 1%; border-right: 1px solid #DADADA','')}">
+        <apex:form >
+            
+            <apex:sectionHeader title="Costcenter" subtitle="{!Costcentre__c.Name}"/>
+            <apex:outputPanel layout="block" style="{!if(Level5=true,'float:left;width:50%;','')}">            
+                <apex:pageBlock title="Costcenter" tabStyle="Costcentre__c">
+                    <apex:pageBlockButtons location="top" rendered="{!Level2}">
+                        <apex:commandButton value="{!$Label.btn_edit}" action="{!costcenteredit}"/>                       
+                        <apex:commandButton value="{!$Label.btn_Custom_setting}" disabled="true"/> 
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection columns="1" >
+                        <apex:outputField value="{!Costcentre__c.Name}" label="Costcenter name"/>                                                                        
+                        <apex:outputField value="{!Costcentre__c.Description__c}" label="{!$Label.inv_Description}"/> 
+                        
+                        <apex:outputField id="owner" value="{!Costcentre__c.OwnerId}" label="{!$Label.pt_Owner}">&nbsp;&nbsp;&nbsp;
+                            <apex:outputLink rendered="{!Level3}" value="{!URLFOR('/' + workId + '/a?retURL=' + URLENCODE($CurrentPage.Url))}">[Change]</apex:outputLink>
+                        </apex:outputField> 
+                        <apex:outputField value="{!Costcentre__c.StatusImage__c}" label="{!$Label.tsk_Status}"/> 
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:outputPanel>
+            
+            <apex:outputPanel layout="block"  style="float:left;display:inline; margin-right:0px;margin-left:1%;width:49%;" id="pie">                
+                <apex:pageBlock title="{!$Label.musadmin_Performance}" tabStyle="Costcentre__c"   id="perform">             
+                    <apex:pageBlockButtons location="top"  style="float:right;height:24px;">
+                        <apex:outputLink value="" target="_self">
+                            <img  src="{!URLFOR($Resource.musqot__Gantt_chart)}"   alt="{!$Label.btn_performance}" title="{!$Label.btn_performance}" height="24" />
+                        </apex:outputLink>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection columns="1" >
+                    <apex:include pageName="Financialpiechart"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                  
+                </apex:outputPanel>
+                <!--<img style="-webkit-user-select: none" src="https://eu2.salesforce.com/servlet/servlet.ChartServer?rsid=0FLb0000000agIT&ruid=005b00000017Ci7&did=01Zb00000004HEY&s=7&fs=10&tfg=12&tfs=-16777216&explode=0&c=pie&cs=0&title=Cost+center+allocation+for+plan&eh=yes&compo=no&fg=-16777216&bg1=-1&bg2=-1&bgdir=2&dl1=To+plan&dl2=&l=1&sax=yes&Yman=no&nc=0&actUrl=%2F00Ob0000003g5b5&sd=1&scv=no&sct=no&spt=yes&bd=yes&cu=USD&ab=Y&u=0&vt=2&ab2=X&u2=0&vt2=0&vl0=Sum+of+Approved+amount&spoc=no&topn=no&gm=0.0&gc0=-1&gm0=1.0&gc1=-1&gm1=2.0&gc2=-1&gm2=3.0&sona=0&refreshts=1450941563000"/>-->
+           
+        </apex:form> 
+        <apex:tabPanel switchType="client"  id="theTabPanel" value="{!tabInFocus}">
+            <apex:tab label="{!$Label.tb_Overview}"  name="tabDetails" id="tabDetails">
+                <apex:form > 
+                    <apex:pageBlock title="{!$Label.pt_Presentation}" tabStyle="Costcentre__c">
+                        <apex:pageBlockButtons location="top" >                       
+                            <apex:commandButton value="{!$Label.btn_edit}" action="{!costcenteroverview}" immediate="true" rendered="{!Level2}"/>                                                 
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </apex:form>
+                <apex:form id="cc">            
+                    <table width="100%" id="table1" style="border-spacing: 10px;">                    
+                        <apex:repeat value="{!CCList}" var="ccover">
+                            <tr>                            
+                                <td  valign="top">
+                                    
+                                    <h1><apex:outputText value="{!CCList[0].Headline__c}"/><br/></h1>
+                                    <apex:dynamicComponent componentValue="{!gadgetHTMLContent}"/>
+                                </td>                           
+                                
+                            </tr>
+                        </apex:repeat>
+                    </table>               
+                </apex:form>
+            </apex:tab>
+            
+            <apex:tab label="{!$Label.tb_Tasks}" rendered="{!Level1}" id="tb3">
+                <apex:form >
+                    <apex:pageBlock title="{!$Label.pt_Tasks_list}" helpTitle="{!$Label.Help_Tasks_help_page}" helpUrl="/apex/Taskhelppage" tabStyle="Costcentre__c">
+                        <apex:pageBlockButtons location="top" rendered="{!Level2}">
+                            <apex:commandButton value="{!$Label.btn_New_task}" action="{!newtask}" />
+                        </apex:pageBlockButtons>               
+                        <apex:pageBlockTable value="{!taskrecs}" var="t" id="myTable1" columnsWidth="*,140,140,35,35,75,35" rendered="{!IF(taskrecs.size>0,true,false)}">                 
+                            <apex:column headerValue="{!$Label.tsk_Task}">
+                                <apex:commandLink value="{!t.Task_name__c}" action="{!gotoTaskEdit}">
+                                    <apex:param name="taskid" value="{!t.id}"/></apex:commandLink>
+                            </apex:column> 
+                            <apex:column value="{!t.OwnerId}" headerValue="{!$Label.tsk_Assigned_To}"/>
+                            <apex:column value="{!t.CreatedById}" headerValue="{!$Label.taskcreatedby}"/>
+                            <apex:column value="{!t.Allocated_h__c}"  headerValue="{!$Label.tsk_estimated_time_short}" title="{!$Label.tsk_estimated_time}" />
+                            <apex:column value="{!t.Outcome_h__c}"  headerValue="{!$Label.tsk_outcome_time_short}" title="{!$Label.tsk_outcome_time}" /> 
+                            <apex:column value="{!t.ActivityDate}" headerValue="{!$Label.tsk_Due_Date}"/>
+                            <apex:column value="{!t.StatusImage__c}" styleClass="tooltip" title="{!t.Status}" headerValue="{!$Label.tsk_Status}"/>
+                        </apex:pageBlockTable>
+                        
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+            
+            <apex:tab label="{!$Label.tb_Members}" id="tb4" rendered="{!Level1}"> 
+                <apex:form >
+                    <apex:pageBlock title="{!$Label.pt_Members}" helpTitle="{!$Label.Help_Members_help_page}" helpUrl="/apex/Membershelppage" tabStyle="Costcentre__c">
+                        <apex:pageBlockButtons location="top" >
+                            <apex:commandButton value="{!$Label.btn_Add_member}" action="{!newMember}" rendered="{!Level2}"/>
+                        </apex:pageBlockButtons> 
+                        <apex:pageBlockTable value="{!members}" var="mi" columnsWidth="200,200,200,*" rendered="{!IF(members.size>0,true,false)}"> 
+                            <apex:column rendered="{!Level2}" headerValue="{!$Label.musadmin_Name}" >
+                                <apex:image value="{!mi.ProjUsers__r.smallphotourl}" height="16px" style="margin:0px;"/>&nbsp;&nbsp;&nbsp;
+                                <apex:commandLink value="{!mi.ProjUsers__r.name}" rendered="{!IF(mi.Role__c<>'Owner'&&Level2,true,false)}" action="{!gotoMemberEdit}">
+                                    <apex:param name="mbrId" value="{!mi.Id}"/> 
+                                </apex:commandLink>
+                                <apex:outputText value="{!mi.ProjUsers__r.name}" rendered="{!IF(mi.Role__c='Owner'&&Level2,true,false)}" />
+                            </apex:column>
+                            <apex:column value="{!mi.ProjUsers__r.email}" id="text" headerValue="{!$Label.mem_Email}"/>
+                            <apex:column value="{!mi.Role__c}" headerValue="{!$Label.mem_Role}"/>                            
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+        </apex:tabPanel><br/>    
+        <apex:include pageName="costcenterfinance"/>
+    </apex:outputPanel>
+    <apex:outputPanel layout="block" style="float:right;width:33%;">
+        <chatter:feed entityId="{!Id}"/>
+    </apex:outputPanel> 
+    <script>      
+    window.onload = function(){
+        var y = document.getElementsByTagName("tspan");
+        for (i = 0;i<y.length/2;i++) {
+            var x = document.getElementsByTagName("tspan")[i].innerHTML;
+            document.getElementsByTagName("tspan")[i].innerHTML = x.substring(x.indexOf('-')+1);
+        }
+    }
+    </script>
+</apex:page>

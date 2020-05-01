@@ -1,0 +1,58 @@
+<apex:page controller="approvalRequests" showHeader="false">
+    
+    <style>
+    .container
+        {
+        overflow:auto; 
+        height:135px; 
+        }
+        .headerRow .headerStyle
+        {
+        color:#000000 !important;
+        position:relative;
+        TOP: expression(this.offsetParent.scrollTop-2);        
+        }
+     .bPageBlock {
+            border-top: 4px solid #1797C0;
+        }
+    </style>    
+    <apex:form id="frm"> 
+        <apex:pageBlock title="{!$Label.Musqot_request}" rendered="{!IF(wrapList.size>0,true,false)}">
+            <apex:outputPanel layout="block" styleClass="container">        
+                <apex:pageBlockTable value="{!wrapList}" var="p" id="myTable1" rendered="{!IF(wrapList.size>0,true,false)}"  headerclass="headerStyle" >
+                    <apex:column headerValue="{!$Label.clm_Action}" style="width:155px;color:#015ba7">
+                        <apex:commandLink onclick="window.open('Approvalhourdetail?id={!p.pw.ProcessInstanceId}&arsId={!p.pw.ProcessInstance.TargetObjectId}','_top');return false;" value="{!$Label.Approve_reject}" reRender="frm" rendered="{!if(p.allocResource!=null,true,false)}"  immediate="true" style="color:#015ba7"/>               
+                        <apex:commandLink onclick="window.open('approvalDetailPage?id={!p.pw.ProcessInstanceId}&amtId={!p.pw.ProcessInstance.TargetObjectId}','_top');return false;" value="{!$Label.Approve_reject}" reRender="frm" rendered="{!if(p.allocAmount!=null,true,false)}"  immediate="true" style="color:#015ba7"/>               
+                        <apex:outputPanel rendered="{!if(p.allocAmount==null && p.allocResource==null,true,false)}" >
+                        <apex:commandLink onclick="window.open('{!p.baseUrl}/{!p.pw.Id}/e?et=REASSIGN&retURL=%2Fhome%2Fhome.jsp','_top');return false;" value="Reassign" reRender="frm" rendered="{!if(p.allocAmount==null && p.allocResource==null,true,false)}" style="color:#015ba7"/>&nbsp;|&nbsp;
+                        <apex:commandLink onclick="window.open('{!p.baseUrl}/p/process/ProcessInstanceWorkitemWizardStageManager?id={!p.pw.Id}','_top');return false;" value="{!$Label.Approve_reject}" reRender="frm" rendered="{!if(p.allocAmount==null && p.allocResource==null,true,false)}" style="color:#015ba7"/>
+                        </apex:outputPanel>
+                        </apex:column>
+                    <apex:column headerValue="{!$Label.task_Related_To}">
+                        <apex:outputLink value="/{!p.pw.ProcessInstance.TargetObjectId}" id="theParentLink" target="_top">{!p.pw.ProcessInstance.TargetObject.name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column headerValue="Type" >
+                        <apex:outputPanel rendered="{!if(p.allocAmount<>null || p.allocResource<>null,true,false)}">
+                            <apex:outputLabel value="{!if(p.allocAmount!=null,'Allocation amount','Allocation resources')}"/>
+                        </apex:outputPanel>    
+                        <apex:outputLabel rendered="{!if(p.allocAmount==null&& p.allocResource==null,true,false)}" value="{!p.objNmae}">  
+                        </apex:outputLabel>
+                    </apex:column>             
+                    <apex:column headerValue="Request">                     
+                        <apex:outputField value="{!p.allocAmount.Allocated__c}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                        <apex:outputField value="{!p.allocResource.Requested_hours__c}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                    </apex:column>
+                    <apex:column headerValue="Request By">
+                        <apex:outputPanel rendered="{!if(p.allocAmount<>null || p.allocResource<>null,true,false)}">
+                            <apex:outputField value="{!p.allocAmount.LastModifiedById}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                            <apex:outputField value="{!p.allocResource.LastModifiedById}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!p.pw.CreatedById}" rendered="{!if(p.allocAmount==null && p.allocResource==null,true,false)}"/>  
+                    </apex:column>
+                    <apex:column headerValue="Date Submitted">
+                        <apex:outputField value="{!p.pw.CreatedDate}"/>
+                    </apex:column>
+                </apex:pageBlockTable></apex:outputPanel>  
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

@@ -1,0 +1,3070 @@
+<apex:page controller="GanttPageController" standardStylesheets="false" sidebar="false" id="pg" docType="html-5.0" tabStyle="Gantt__tab">
+    <apex:includeScript value="/soap/ajax/29.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/29.0/apex.js"/>
+    <script src="https://export.dhtmlx.com/gantt/api.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet"/>
+    
+    <style>
+        #outerDiv {
+            height:500px;
+            overflow:hidden;
+        }
+        body {
+            overflow:hidden  !important;
+        }
+    
+        .gantt_task_content > #mrkt_activity { display:none;}
+        .gantt_task_content > #mrkt_subactivity { display:none;}
+        .gantt_grid_head_cell {
+            text-align: left;
+            padding-left: 43px; 
+            padding-top: 3px;
+        }
+        
+        .Perf_gantt {
+            height:20px;
+            width: 40px ;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background: url("{!URLFOR($Resource.musqot__GanttView)}") no-repeat;
+            padding:0px;
+            -moz-border-radius: 0px ;
+            -webkit-border-radius: 0px;
+            border-radius: 0px !important;
+            border: 0px ;margin:0px ;margin-top:15px ;
+            cursor: pointer;
+        }
+    	.downloadOptions {
+        	height:24px !important;
+            width: 28px !important;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 0px ;
+            -moz-border-radius: 0px;
+            -webkit-border-radius: 0px;
+            border-radius: 0px;
+            border: 0px solid #B8B8B8;
+            margin: 0px 7px;
+            margin-top:2px ;
+            cursor: pointer;
+        }
+        #PDF {
+            background:url("{!URLFOR($Resource.musqot__pdf_icon)}")no-repeat;
+        }
+        #xlsx {
+            background:url("{!URLFOR($Resource.musqot__xlsx_icon)}")no-repeat;
+        }
+    	#png {
+            background:url("{!URLFOR($Resource.musqot__PNG_Icon)}")no-repeat;
+        }
+    	.downloadIcon {
+            height:24px !important;
+            width: 28px !important;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background:url("{!URLFOR($Resource.Download)}")no-repeat;
+            padding: 0px ;
+            -moz-border-radius: 0px;
+            -webkit-border-radius: 0px;
+            border-radius: 0px;
+            border: 0px solid #B8B8B8;
+            margin:0px ;
+            margin-top:2px ;
+            cursor: pointer;
+        }
+        .gantt_task_content > img{
+            float:right;
+            vertical-align:middle;
+            padding:1px;
+        }
+        .noTableFooter{ margin-left: 0px !important; }
+        .bPageFooter{ padding: 5px !important; }
+    
+        .weekend{ background: #dedede !important;}
+        .gantt_task_cell.holiday{ background: red !important;}
+        .activity_task{
+            border:2px solid #BFC518;
+            color:#6ba8e3;
+            background: #F6F6D6;
+        }
+        .activity_task .gantt_task_progress{
+            background:#D9DF29;
+        }
+        .popup-progress {
+            width:100%;
+            height:20px;
+            border: 3px solid #6EB638;
+            background:#7ED43E;
+            display:block;
+            -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+            text-align: center;
+         }
+         .popup-description {
+             display: block;
+             width: 100%
+             height: 30px;
+             overflow: auto;
+             border-bottom: 1px solid #E4E4E4;
+             color:red;
+         }
+                 
+         .gantt_tree_content img{
+             padding:3px !important;
+             height:20px !important;
+             width:20px !important;
+             padding-top: 7px !important;
+         }
+             
+         .gantt_last_cell .gantt_tree_content.priority {background: #ff9933;}
+         .gantt_last_cell .gantt_tree_content:first-child{width: 33px; text-align: center;}
+         .gantt_row .gantt_cell:first-child{width: 74% !important;}
+         .gantt_grid_head_text {width: 56.5%; !important}
+                 
+         .topButton {
+             color: #696666 !important;
+             font-weight:600;
+             box-shadow: 0px 0px 0px 0px green #fff ;
+             -webkit-box-shadow: 0px 0px 0px 0px red #fff ;
+             -moz-box-shadow: 0px 0px 0px 0px #fff ;
+             padding: 0px 8px;
+             -moz-border-radius: 2px;
+             -webkit-border-radius: 2px;
+             border-radius: 2px;
+             border: 1px solid #B8B8B8;
+             background: #F9FAFE;
+             height:22px;
+         }
+         .topButton:hover {
+             color: #FFFFFF !important;
+             background: #00A0DE;
+         }
+         .topButton:visited {
+             color: #696666 !important;
+             background: #F9FAFE;
+         }
+         .topButton:active {
+             color: #696666 !important;
+             background: #00A0DE;
+         } 
+         .redFont {
+             color:#B50909;
+         }                           
+         .expButton {
+             width: 21px;
+             cursor: pointer;
+         }  
+         .gantselecttype {
+             height: 22px !important;
+             width: 175px;
+             border: 1px solid #B8B8B8;
+             background: #F9FAFE;
+         }
+         .gantselecttype:hover {
+             height: 100px !important;
+             background: #F9FAFE;
+         }
+         .gantselecttype:active {
+             height: 100px !important;
+             background: #F9FAFE;
+         }
+         #gantt {
+             margin:0px !important;
+         }
+    
+         {!JSENCODE(taskstyleString)}
+         {!JSENCODE(styleString)}
+    
+         .custPopup{
+             background-color: white;
+             border-width: 2px;
+             border-style: solid;
+             z-index: 9999;
+             left: 18px;
+             padding:10px;
+             position: absolute;
+             /* These are the 3 css properties you will need to change so the popup 
+                displays in the center of the screen. First set the width. Then set 
+                margin-left to negative half of what the width is. You can add 
+                the height property for a fixed size pop up if you want.*/
+             width: 700px;
+             margin-left: 0px;
+             top:50px;
+         }
+         .popupBackground{
+             background-color:black;
+             opacity: 0.20;
+             filter: alpha(opacity = 20);
+             position: absolute;
+             width: 100%;
+             height: 100%;
+             top: 0;
+             left: 0;
+             z-index: 9998;
+         }
+         #ganttNav {
+             position: absolute;
+             height: 30px;
+             display:block;
+             z-index: 100;
+             width:70px;
+         }
+    
+         #ganttNavMenu {
+             -moz-box-shadow: 0 2px 4px rgba(127, 127, 127, .3);
+             -webkit-box-shadow: 0 2px 4px rgba(127, 127, 127, .3);
+             box-shadow: 0 2px 4px rgba(127, 127, 127, .3);
+             padding: 1px  !important;
+             background-color: #fff;
+             margin-top: 0px  !important;
+             left: auto;
+             right: 0;
+             width: 150px
+         }
+    
+         .ganttmenuButtonActivated #ganttNavMenu {
+             border: 1;
+             -moz-border-radius-bottomright: 3px;
+             -moz-border-radius-bottomleft: 3px;
+             -webkit-border-bottom-right-radius: 3px;
+             -webkit-border-bottom-left-radius: 3px;
+             border-bottom-right-radius: 3px;
+             border-bottom-left-radius: 3px
+         }
+    
+         #ganttNavMenu.ganttmenuWidthExtended {
+             -moz-border-radius-topleft: 3px;
+             -webkit-border-top-left-radius: 3px;
+             border-top-left-radius: 3px;
+             padding-top:13px ;
+         }
+    
+         #ganttNavMenu a {
+            color: #333435;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            margin: 0px;
+            display:block ;
+         }           
+    
+         #ganttNavMenu a:hover {
+            color: #015ba7 ;
+         }
+    
+         #ganttNavMenu.ganttmenuWidthExtended {
+            -moz-border-radius-topleft: 3px;
+            -webkit-border-top-left-radius: 3px;
+            border-top-left-radius: 3px;
+            padding-top: 13px;
+         }
+    
+         .ganttmenuButton .ganttmenuButtonMenu {
+             background-color:#f6f6f6 !important;
+             border: 1px solid #7d7d7d;
+             border-top: 0;
+             -moz-box-shadow: 0 1px 5px #727272;
+             -webkit-box-shadow: 0 1px 5px #727272;
+             box-shadow: 0 1px 5px #727272;
+             padding: 0;
+         }
+         .ganttmenuButton .ganttmenuButtonMenu a:hover {
+             background: #e3f3ff none;
+             color: #015ba7;
+             border: 0;
+             text-decoration: underline;
+             cursor: pointer;
+         }
+         .ganttmenuButton .ganttmenuButtonMenu a {
+             background-color: transparent;
+             border: 0;
+             padding-top: 2px ;
+             padding-left:  4px ;
+             font-weight: normal;
+             font-size: 1em;
+         }
+    
+         .ganttmenuButton .ganttmenuButtonMenu a{border-bottom: 1px solid #dfdfdf;}
+         .ganttmenuButton .ganttmenuButtonMenu a:last-child{border-bottom: 0px;}
+                                                            
+         .gantt_grid_data .gantt_row.odd:hover,.gantt_grid_data .gantt_row:hover{background-color:#f6f6f6;}
+    
+         .ganttmenuButton {
+             margin: 0;
+             padding: 0;
+             display: inline-block;
+         }
+    
+         .detailList td.dataCol.first:nth-child(4) {
+             position: relative;
+             bottom: 10px;
+         }
+                                                                                 
+         .gantt_tree_icon.gantt_Task{background-image:url("{!URLFOR($Resource.musqot__Gantt_Task)}")}
+         .gantt_tree_icon.gantt_Marketingact{background-image:url("{!URLFOR($Resource.musqot__Gantt_Marketingact)}")}
+         .gantt_tree_icon.gantt_Project{background-image:url("{!URLFOR($Resource.musqot__Gantt_Project)}")}
+         .gantt_tree_icon.gantt_Plan{background-image:url("{!URLFOR($Resource.musqot__Gantt_Plan)}")}
+         .gantt_tree_icon.gantt_SubMarketingact{background-image:url("{!URLFOR($Resource.musqot__Gantt_Marketingact)}")}
+    
+         // additional css for sub ma - start -
+         .child_preview {
+			box-sizing: border-box;
+			margin-top: 2px;
+			position: absolute;
+			z-index: 1;
+			color: white;
+			text-align: center;
+			font-size: 12px;
+		}
+
+		.gantt_task_line.task-collapsed {
+			height: 4px;
+			opacity: 0.25;
+		}
+
+		.gantt_task_line.gantt_project.task-collapsed .gantt_task_content {
+			display: none;
+		}
+        // additional css for sub ma - end -
+                                                                                 
+         #searchBox {
+             margin: 0;
+             width: 100px;
+             height: 14px;
+             position: relative;
+             bottom: 1px;
+         }
+         .searchBtn {
+             height: 19px;
+             position: relative;
+             bottom: 1px;
+             color: #444;
+             width: 22px;
+             padding: 0;
+             font-family: Arial, Helvetica, sans-serif;
+             right: 4px;
+             border-radius: 0;
+         }
+         .gantt_selected {
+             background-color: #f6f6f6 !important;
+         }
+                                                              
+         /* Confirm Box Style - start - */
+         .lower button::-moz-focus-inner {
+             border:0;
+             padding:0
+         }
+         .lower button {
+             width:auto;
+             border:0 none;
+             margin:0;
+             padding:0;
+             background:transparent;
+             overflow:visible;
+             font:14px arial, sans-serif;
+             #vertical-align:middle; /* IE6,IE7 */
+         }
+        
+         .popup {
+             display: none;
+             position: absolute;
+             left: 36%;
+             top: 100px;
+             width: 400px;
+             z-index: 10010;
+         }
+        
+         .upper {
+             box-sizing:border-box;
+             padding: 6% 8% 3% 8%;
+             background: #eee;
+             height: auto;
+             font-family:helvetica;
+             color: rgba(100,100,100,1);
+             font-size:18px;
+             transition: color 0.4s ease;
+         }
+        
+         .upper:hover {
+             color: rgba(100,100,100,1);
+         }
+        
+         .stroke {
+             height:5px;
+             background: #ff6633;
+         }
+        
+         .lower {
+             text-align: center;
+             box-sizing:border-box;
+             background-color: #333;
+             height:60px;
+             width:100%;
+             padding: 6% 15%;
+             color: rgb(200,200,200)
+         }
+        
+         .lower button {
+             float:left;
+             height:18px;
+             line-height:18px;
+             display:block;
+             color: rgba(255, 255, 255, 0.6);
+             width:25%;
+             transition: color 0.3s ease;
+         }
+        
+         .lower button:focus {
+            border: 0;
+            outline: none;
+         }
+                                                              
+         .lower button:last-child {
+             margin-left:50%;
+         }
+        
+         .lower button i {
+             width:19px;
+             height:18px;
+             display:block;
+             float:left;
+         }
+        
+         .lower button:hover {
+             cursor: pointer;
+         }
+        
+         .lower button:hover {
+             color: rgba(255,255,255,1);
+         }
+        
+         .lower button:hover .icon-ok {
+             color:rgba(100,255,100,0.5);
+         }
+        
+         .lower button:hover .icon-remove {
+             color:rgba(255,102,51,0.8);
+         }  
+              
+         .lower span{
+             display: none;
+             color: #ff6633;
+             font-size: 1.3em;
+             font-weight: 700;
+             position: relative;
+             bottom: 13px;
+             left: 8px;
+         }
+                                                              
+         .lower i.success-mark{
+             font-size: 3em;
+             color: #009933;
+             position: relative;
+             bottom: 18px;
+             display: none;
+         }
+                                                              
+         .tr-bg {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            opacity: .15;
+            filter: alpha(opacity=10);
+         }    
+                                                              
+         @-webkit-keyframes gear-rotate {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(180deg); }
+         }
+         @-moz-keyframes gear-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(180deg); }
+         }
+         @keyframes gear-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(180deg); }
+         }
+        
+         .gear-rotate {
+            display: none;
+            width: 2em;
+            height: 2em;
+            background: #ff6633;
+            position: relative;
+            bottom: 5px;
+            border-radius: 1em;
+            -webkit-animation: 1s gear-rotate steps(10) infinite;
+            -moz-animation: 1s gear-rotate steps(10) infinite;
+            animation: 1s gear-rotate steps(10) infinite;
+         }
+         .gear-rotate::before {
+            width: 2.8em;
+            height: 2.8em;
+            background: -webkit-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-webkit-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-webkit-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: -moz-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-moz-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-moz-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: -o-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-o-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-o-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: -ms-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-ms-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-ms-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            position: absolute;
+            content:"";
+            top: -.4em;
+            left: -.4em;
+            border-radius:1.4em;
+         }
+         .gear-rotate::after {
+            width: 1em;
+            height: 1em;
+            background: #CDE8F0;
+            position: absolute;
+            content:"";
+            top: .5em;
+            left: .5em;
+            border-radius: .5em;
+         }
+         /* Confirm Box Style - end - */
+         /* Info Popup Style - start - */
+         #infoPopup {width: 600px;padding: 18px;left: 28%;top: -1000px;display:block;}
+         #infoPopup .upper {padding: 18px;}
+         #infoPopup .upper h2{font-size: 16px;color: #333;padding-left: 3px;}
+         #infoPopup .upper #description{margin-top: 5px;font-size: 13px;color: #333;padding-left: 3px;}
+         #infoPopup table th,td{font-size: 13px;color: #333;}
+         #infoPopup table th{padding-right: 20px;}
+         #infoPopup .lower {padding: 2% 15%;padding-left: 22px;text-align: left;}
+         #infoPopup .upper i {position: absolute;top: 21px;right: 24px;font-size: 13px;cursor: pointer;}
+         #infoPopup .upper i:hover {color:rgba(255,102,51,0.8);}
+         #infoPopup .lower input{background: #eee;border: 0;outline: 0;padding: 9px 17px;cursor: pointer;margin-top: 1px;}
+         /* Info Popup Style - end - */
+                                                
+         /* taskReorderPopup Style - start - */
+         #taskReorderPopup .lower  button {display: none;}
+         #taskReorderPopup .lower input{background: #eee;border: 0;outline: 0;padding: 9px 26px;cursor: pointer;margin-top: -9px;display: none;}
+         /* taskReorderPopup Style - end - */
+                                  
+         /* planCopyPopup Style - start - */
+         #planCopyPopup .upper {line-height: 29px;}
+         #planCopyPopup .upper #planBeingCopied {font-weight: bold;}
+         #planCopyPopup .upper input#pc_npn{
+            height: 26px;
+            padding-left: 3px;
+            border: 1px solid #ddd;
+            font-size: 18px;
+            width: 215px;
+            color: rgba(100,100,100,1);
+            outline:none;
+         }
+         #planCopyPopup .upper input#pc_np_sd{
+             width: 80px;
+             font-size: 12px;
+             border: 1px solid #ddd;
+             outline: none;
+             position: relative;
+             bottom: 2.5px;
+             left: 8px;
+             height: 15px;
+             padding-top: 3px;
+             padding-left: 2px;
+         }
+         #planCopyPopup .upper input[type='checkbox'] {width:18px;height:18px;}
+         #planCopyPopup .upper input[type='checkbox'] +label {position:relative; bottom:3px;}
+         #planCopyPopup .lower span{bottom: 12px;}
+         #planCopyPopup .upper select {position: relative; bottom: 4px;}
+         /* planCopyPopup Style - end - */
+         
+         /* projectCopyPopup Style - start - */
+         #projectCopyPopup {top: 0px;}
+         #projectCopyPopup .upper {line-height: 29px;}
+         #projectCopyPopup .upper #projectBeingCopied {font-weight: bold;}
+         #projectCopyPopup .upper input#prc_npn{
+            height: 26px;
+            padding-left: 3px;
+            border: 1px solid #ddd;
+            font-size: 18px;
+            width: 215px;
+            color: rgba(100,100,100,1);
+            outline:none;
+         }
+         #projectCopyPopup .upper input#prc_np_sd{
+             width: 80px;
+             font-size: 12px;
+             border: 1px solid #ddd;
+             outline: none;
+             position: relative;
+             bottom: 2.5px;
+             left: 8px;
+             height: 15px;
+             padding-top: 3px;
+             padding-left: 2px;
+         }
+         #projectCopyPopup .upper input[type='checkbox'] {width:18px;height:18px;}
+         #projectCopyPopup .upper input[type='checkbox'] +label {position:relative; bottom:3px;}
+         #projectCopyPopup .lower span{bottom: 12px;}
+         #projectCopyPopup .upper select {position: relative; bottom: 4px;}
+         /* projectCopyPopup Style - end - */
+         
+         /* activityCopyPopup Style - start - */
+         #activityCopyPopup {top: 20px;}
+         #activityCopyPopup .upper {line-height: 29px;}
+         #activityCopyPopup .upper #activityBeingCopied {font-weight: bold;}
+         #activityCopyPopup .upper input#ac_nan{
+            height: 26px;
+            padding-left: 3px;
+            border: 1px solid #ddd;
+            font-size: 18px;
+            width: 215px;
+            color: rgba(100,100,100,1);
+            outline:none;
+         }
+         #activityCopyPopup .upper input#ac_na_sd{
+             width: 80px;
+             font-size: 12px;
+             border: 1px solid #ddd;
+             outline: none;
+             position: relative;
+             bottom: 2.5px;
+             left: 8px;
+             height: 15px;
+             padding-top: 3px;
+             padding-left: 2px;
+         }
+         #activityCopyPopup .upper input[type='checkbox'] {width:18px;height:18px;}
+         #activityCopyPopup .upper input[type='checkbox'] +label {position:relative; bottom:3px;}
+         #activityCopyPopup .lower span{bottom: 12px;}
+         /* activityCopyPopup Style - end - */
+         
+         /* onlyLoaderPopup Style - start - */
+         #onlyLoaderPopup .lower .gear-rotate,
+         #onlyLoaderPopup .lower span {display: inline-block;}
+         #onlyLoaderPopup .upper {text-align: center;}
+         /* onlyLoaderPopup Style - end - */
+    </style>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"/>
+    <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+                                                
+    <apex:stylesheet value="{!URLFOR($Resource.DHTMLGantt, 'codebase/dhtmlxgantt.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DHTMLGantt,'codebase/dhtmlxgantt.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DHTMLGantt,'codebase/ext/dhtmlxgantt_tooltip.js')}"/>
+                
+    <div id="outerDiv" style="height:100%;">
+        <div id="head" style="height:32px;padding:2px">
+            <div style="float:right;vertical-align:middle;border:0px solid #b8b8b8; margin:3px; padding:2px 10px;display:inline-block;">
+                 <span class="help" title="Gantt help page (New Window)"><a href="javascript:openPopupFocusEscapePounds('/apex/Gantthelppage', 'Help', 1024, 768, 'width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no', false, false);" class="linkCol"><span class="linkSpan">{!$label.Help_Help_page}&nbsp;</span><img src="/s.gif" alt="Gantt help page (New Window)" class="helpIcon" title="Gantt help page (New Window)" /></a></span>
+            </div>
+            <div style="float:right;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:5px; padding:0px;display:inline-block; ">
+                 <span value="" title="{!$Label.att_Download}" class="downloadIcon" style="display:inline-block;" onclick='$("#downloadIconsBlock").slideToggle("fast");'></span>
+            </div>
+            <div id="downloadIconsBlock" style="position: absolute;right: 4px;top: 46px;z-index: 1000;background: #ededed;border: 1px solid #b8b8b8;padding: 5px 10px;display: none;">
+                <span value="" title="{!$Label.btn_Export_to_PDF}" class="downloadOptions" id="PDF" style="display:inline-block;" onclick='pdfExport()'></span> 
+                <span value="" title="{!$Label.gantt_Export_Excel}" class="downloadOptions" id="xlsx" style="display:inline-block;" onclick='xlsxExport()'></span>
+                <span value="" title="{!$Label.gantt_Export_PNG}" class="downloadOptions" id="png" style="display:inline-block;" onclick='pngExport()'></span>
+            </div>     
+            <div style="float:right;vertical-align:top;border:0px solid #b8b8b8; margin-top:5px;margin-right:5px;margin-left:5px; padding:0px;">
+                 <!-- Rendered added by Narendra, to control Performance Button visibility -->
+                 <apex:form >        
+                      <apex:commandLink value="" title="{!$Label.btn_performance}" style="display:inline-block;height:20px; width: 45px ;-moz-box-sizing: border-box;box-sizing: border-box;background: url(/resource/1439299069000/musqot__GanttView) no-repeat;padding:0px;-moz-border-radius: 0px ;-webkit-border-radius: 0px;border-radius: 0px !important;border: 0px ;margin:0px ;" styleClass="" action="{!gotoPerformancePage}" />
+                 </apex:form>
+            </div>
+            <div id="zooming" style="float:right;vertical-align:middle;border:0px solid #b8b8b8; margin:3px; padding:2px 10px 5px 5px;display:inline-block;">
+                 <span style="font-weight:bold;">{!$label.gnt_Zooming} </span>
+                 <input type="radio" id="day" name="timeSlot" />{!$label.gnt_Days}&nbsp;
+                 <input type="radio" id="week" name="timeSlot" checked="checked" />{!$label.gnt_Weeks}&nbsp;
+                 <input type="radio" id="month" name="timeSlot"/>{!$label.gnt_Months}&nbsp;           
+            </div>
+            <div style="float: right; vertical-align: middle;margin:3px; padding:1px 5px 2px 0px;">
+                 <span style="font-weight:bold;">{!$label.gnt_Period}</span>
+                 <input type='text' id='startDate' style="width: 80px;font-size: 12px;"/>
+                 <input type='text' id='endDate' style="width: 80px;font-size: 12px;"/>
+            </div>                                         
+            <div style="float:left;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:15px; padding:0px;display:inline-block;z-index:99;">
+                 <apex:form id="frmFilter"> 
+                      <apex:inputHidden id="hdnstartDate" value="{!startDateVal}"/>
+                      <apex:inputHidden id="hdnendDate" value="{!endDateVal}"/>
+                      <apex:inputHidden id="hdnZomming" value="{!zoomingVal}"/>
+                 </apex:form> 
+            </div>
+                      
+            <div style="position:absolute ; top:15px;left:8px;  float:left;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:15px; padding:0px 5px;display:inline-block;z-index:100; ">
+                 <apex:form >    
+                      <span style="font-weight:bold;">{!$Label.filter} </span>                                                                        
+                      <apex:selectList id="paFilter"  styleClass="filterSelect" value="{!selectedFilter}" size="1" multiselect="false"  >
+                          <apex:selectOptions value="{!FilterList}" />
+                          <apex:actionFunction action="{!loadganttviewbyFilter}" name="loadganttviewbyFilterSelect" />
+                          <apex:actionSupport event="onchange" action="{!loadganttviewbyFilter}" onsubmit="saveFilterIdToBrowserCookie(this.value)"/>
+                      </apex:selectList>                                                   
+                      <apex:commandLink action="{!showPopup}" onclick="setplantypeSelected(this)" style="padding-left:5px;color:#1797c0;" value="{!lnkfilterTitle}" rerender="filterpopup" />                                                                                                                                                                                         
+                 </apex:form> 
+                                                
+                 <div id="sbContainer" style="position: relative; bottom: 18px; left: 147px;">
+                       <form id="searchForm">
+                            <input type="text" id="searchBox" placeholder=" Find"/>
+                            <button type="button" id="searchUpBtn" class="searchBtn" style="border-left: 0;border-right: 0;">&#8896;</button>
+                            <button type="submit" class="searchBtn" style="right: 9px;">&#8897;</button>
+                            <span id="hitCount" style="position: relative;right: 9px;"></span>
+                       </form>
+                 </div>
+             </div>
+                            
+             <div>
+                 <apex:form id="frmNewFilter">
+                      <apex:outputPanel id="filterpopup">                   
+                           <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+                           <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">   
+                                <apex:pageBlock title="{!$Label.btn_filter_settings}" mode="Edit">
+                                     <apex:pageBlockButtons location="top">                                                                     
+                                          <apex:commandButton styleClass="btn btn" value="{!$Label.btn_save}" action="{!SaveFilter}"  disabled="{!isGlobaluser}"/>
+                                          <apex:commandButton styleClass="btn btn" value="{!$Label.btn_Delete}" onclick="clearFilterFromCookie();" action="{!DeleteFilter}" disabled="{!isGlobaluser}" rendered="{!IF(selectedFilter != '0','true','false')}"/>
+                                          <apex:commandButton styleClass="btn btn" value="{!$Label.btn_cancel}" action="{!closePopup}" immediate="true" html-formnovalidate="true" />
+                                     </apex:pageBlockButtons>
+                                     <apex:pageBlockSection columns="2">
+                                           <apex:pageBlockSectionItem >
+                                               <apex:outputlabel value="{!$Label.Filtername}"/>
+                                               <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                                   <apex:outputPanel styleClass="requiredBlock"/>
+                                                   <apex:inputText value="{!FilterName}" required="True" disabled="{!isGlobaluser}" maxlength="20"/>
+                                               </apex:outputPanel>
+                                           </apex:pageBlockSectionItem>
+                                                   
+                                           <apex:pageBlockSectionItem >
+                                               <apex:outputlabel value="{!$Label.gnt_Zooming}" />                                                              
+                                               <apex:selectRadio id="srfilterzooming" value="{!FilterZooming}" disabled="{!isGlobaluser}" required="True" >
+                                                    <apex:selectOption itemLabel="{!$Label.gnt_Days}" itemValue="Days" />
+                                                    <apex:selectOption itemLabel="{!$Label.gnt_Weeks}"  itemValue="Weeks" />
+                                                    <apex:selectOption itemLabel="{!$Label.gnt_Months}" itemValue="Months" />
+                                               </apex:selectRadio> 
+                                           </apex:pageBlockSectionItem>
+                                                   
+                                           <apex:pageBlockSectionItem >
+                                               <apex:outputlabel value="{!$Label.pt_Plantype}"/>                                          
+                                               <apex:selectCheckboxes id="filterpatype" disabled="{!isGlobaluser}" value="{!selectedFilterTypes}" layout="pageDirection"  borderVisible="true" >
+                                                   <apex:selectOptions value="{!PLANList}" />
+                                               </apex:selectCheckboxes>                                                                      
+                                           </apex:pageBlockSectionItem>
+                                                   
+                                           <apex:pageBlockSectionItem >
+                                               {!$Label.Gantt_Highlight}<br/>{!$Label.sp_prioritylevel}
+                                               <apex:selectCheckboxes id="prioritySB" value="{!selectedPriorityLevels}" layout="pageDirection"  borderVisible="true" >
+                                                   <apex:selectOptions value="{!plList}" />
+                                               </apex:selectCheckboxes>
+                                           </apex:pageBlockSectionItem>
+                                                    
+                                           <apex:pageBlockSectionItem >
+                                               <apex:outputlabel value="{!$Label.pt_Start_date}"/>    
+                                               <apex:outputPanel styleClass="requiredInput" layout="block"> 
+                                                    <apex:outputPanel styleClass="requiredBlock"/>
+                                                    <apex:input type="date" value="{!FilterStartDate}" disabled="{!isGlobaluser}" id="filterstartDate" onchange="validatefilterPeriod(this)"  required="True"/>
+                                               </apex:outputPanel>
+                                           </apex:pageBlockSectionItem>
+                                                    
+                                           <apex:pageBlockSectionItem > 
+                                               <apex:outputlabel value="{!$Label.gnt_My_default}"/ >                                                     
+                                               <apex:inputCheckbox value="{!mydefaultFilter}" disabled="{!isGlobaluser}" />
+                                           </apex:pageBlockSectionItem>
+                                                    
+                                           <apex:pageBlockSectionItem >
+                                               <apex:outputlabel value="{!$Label.pt_End_date}"/ >
+                                               <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                                    <apex:outputPanel styleClass="requiredBlock"/>
+                                                    <apex:input type="date" value="{!FilterEndDate}" disabled="{!isGlobaluser}" id="filterendDate" onchange="validatefilterPeriod(this)" required="True" />
+                                               </apex:outputPanel>
+                                           </apex:pageBlockSectionItem>
+                                               
+                                           <apex:pageBlockSectionItem rendered="{!Level1}" > 
+                                                <apex:outputlabel value="{!$Label.gnt_Global}"/ >                                                     
+                                                <apex:inputCheckbox value="{!GlobalFilter}" disabled="{!isGlobaluser}" />
+                                           </apex:pageBlockSectionItem>
+                                      </apex:pageBlockSection>    
+                                 </apex:pageBlock>         
+                            </apex:outputPanel>
+                       </apex:outputPanel>
+                  </apex:form>
+             </div>
+        </div>
+        <div style="position:absolute ; top:12px;left:160px;  float:left;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:15px; padding:0px 5px;display:inline-block;z-index:100; ">
+              <apex:form >
+                    <apex:selectList id="patype" value="{!selectedTypes}" size="1" multiselect="true"  label="{!$Label.pt_Plantype}" style="width:175px;display:none;visibility:none;" styleClass="gantselecttype">
+                         <apex:selectOptions value="{!PLANList}"/>
+                     </apex:selectList>
+                     <apex:commandButton value="Go" style="width:25px;margin:0px;vertical-align:top;display:none;visibility:none;" styleClass="topButton" action="{!showSelectedPlanTypes}" />  
+              </apex:form>
+        </div>
+                                                            
+        <div class="expButtonC" style="position:absolute ; top:54px;left:14px;padding:0px 2px;display:inline-block;z-index:99;">
+              <img src="/resource/1450712230000/musqot__Expand_up" title="{!$Label.btn_Expand_all}"  class="expButton" id="ganttTreeCollapser" onclick='toggleExpand(this);'/>
+        </div>
+        <div onclick="toggleGridSection()" style="background:#fff;position:absolute;top:47px;left:235px;padding: 6px 3px 0px;display:inline-block;z-index:99;cursor:pointer;">
+            <img class="ganttGridCollapser" src="/resource/1450701262000/musqot__collaps_left" />
+        </div>
+        
+        <div id="ganttForExcel" style="display:none;"></div>
+            
+        <script>
+            var canPasteInPlan = false,
+                canPasteInProject = false;
+            gantt._render_grid_item = function (item) {
+                if (!gantt._is_grid_visible())
+                    return null;
+            
+                var columns = this.getGridColumns();
+                var cells = [];
+                var width = 0;
+                for (var i = 0; i < columns.length; i++) {
+                    var last = i == columns.length - 1;
+                    var col = columns[i];
+                    var cell;
+            
+                    var value;
+                    var itemType = item.objType;
+                    var menuItems = '';
+                    if(itemType == 'project') {
+                        menuItems = "<a href='/apex/GanttPerformance?pid=" + item.id + "' title='{!$Label.musadmin_Performance}'>&nbsp;{!$Label.musadmin_Performance}</a> \
+                                    <a href='/apex/ProjectDetails?id=" + item.id + "&sfdc.override=1' title='{!$Label.btn_status_open}'>&nbsp;{!$Label.btn_status_open}</a> \
+                                    <a href='javascript:showInfoPopup(&apos;" + item.id + "&apos;);' title='{!$Label.clm_Info}'>&nbsp;{!$Label.clm_Info}</a> \
+                                    <a href='javascript:showCopyPlanPopup(&apos;" + item.id + "&apos;);' title='Copy'>&nbsp;Copy</a> \
+                                    <a href='javascript:void(0);' onclick='cutPasteLoader(&apos;" + item.id + "&apos;);setTimeout(function(){pasteInPlan(&apos;" + item.id + "&apos;);}, 400);' title='Paste'>&nbsp;Paste</a>";
+                    } else if(itemType == 'subproject') {
+                       menuItems = "<a href='/apex/GanttDetailPage?id=" + item.id + "' title='{!$Label.btn_ganttDetail}'>&nbsp;{!$Label.btn_ganttDetail}</a> \
+                                    <a href='/apex/SubprojectPerformance?subid=" + item.id + "&maingantt=y' title='{!$Label.musadmin_Performance}'>&nbsp;{!$Label.musadmin_Performance}</a> \
+                                    <a href='/apex/SubProject?id=" + item.id + "&sfdc.override=1' title='{!$Label.btn_status_open}'>&nbsp;{!$Label.btn_status_open}</a> \
+                                    <a href='javascript:showInfoPopup(&apos;" + item.id + "&apos;);' title='{!$Label.clm_Info}'>&nbsp;{!$Label.clm_Info}</a> \
+                                    <a href='javascript:showProjectCopyPopup(&apos;" + item.id + "&apos;);' title='Copy'>&nbsp;Copy</a> \
+                                    <a href='javascript:cutProject(&apos;" + item.id + "&apos;);' title='Cut'>&nbsp;Cut</a> \
+                                    <a href='javascript:void(0);' onclick='cutPasteLoader(&apos;" + item.id + "&apos;);setTimeout(function(){pasteInProject(&apos;" + item.id + "&apos;);}, 400);' title='Paste'>&nbsp;Paste</a>";
+                    } else if(itemType == 'activity') {
+                        menuItems = "<a href='/apex/Marketingactivity?id=" + item.id + "&sfdc.override=1' title='{!$Label.btn_status_open}'>&nbsp;{!$Label.btn_status_open}</a> \
+                                    <a href='javascript:showInfoPopup(&apos;" + item.id + "&apos;);' title='{!$Label.clm_Info}'>&nbsp;{!$Label.clm_Info}</a> \
+                                    <a href='javascript:showActivityCopyPopup(&apos;" + item.id + "&apos;);' title='Copy'>&nbsp;Copy</a> \
+                                    <a href='javascript:cutActivity(&apos;" + item.id + "&apos;);' title='Cut'>&nbsp;Cut</a>";              
+                    } else if(itemType == 'task') {
+                        var openLink = baseUrl;
+                        var gantttaskurl = 'apex/TaskEditpage?taskid=' + item.id + '&maingantt=Y';
+                        openLink += gantttaskurl;
+                        menuItems = "<a href='" + openLink + "' title='{!$Label.btn_status_open}'>&nbsp;{!$Label.btn_status_open}</a> \
+                                    <a href='javascript:showInfoPopup(&apos;" + item.id + "&apos;);' title='{!$Label.clm_Info}'>&nbsp;{!$Label.clm_Info}</a>";
+                    }
+                    
+                    var gantt_View = "<div class='gantt_tree_content gantt_contextmenu'><img id='gantt_contextmenu_" + item.id + "' src='/resource/1433937565000/musqot__context_menu_icon' oncontextmenu='ganttcontextmenu(this,\""+item.objType+"\"); return false;' height='24' width='24' border='0'></div>";
+                    var ganttMenu = "<div item_id ='" + item.id + "' class='ganttmenuButton ganttmenuButtonRounded ganttmenuButtonActivated' id='ganttNav' title='' style='display: none;position: absolute;z-index: 100;'> \
+                                        <div class='ganttmenuButtonMenu ganttmenuWidthExtended' id='ganttNavMenu' style='display: block; position: absolute;'> \
+                                            <div>"+menuItems+"</div> \
+                                        </div> \
+                                    </div>";    
+                    if(itemType == 'subactivity')
+                        gantt_View = '';
+                    
+                    if (col.name == "add") {
+                        value = "<div class='gantt_add'></div>";
+                    } else {
+                        if (col.template)
+                            value = col.template(item);
+                        else
+                            value = item[col.name];
+            
+                        if (value instanceof Date)
+                            value = this.templates.date_grid(value, item);
+                        value = "<div class='gantt_tree_content"+ (item.isPriority ? " priority" : "") + "'>" + value + "</div>";
+                    }
+                    
+                    var css = "gantt_cell" + (last ? " gantt_last_cell" : "");
+            
+                    var tree = "";
+                    if (col.tree) {
+                        for (var j = 0; j < item.$level; j++)
+                            tree += this.templates.grid_indent(item);
+            
+                        var has_child = this._has_children(item.id);
+                        if (has_child) {                
+                            tree += this.templates.grid_open(item);
+                            if(itemType == 'project'){
+                                tree += this.templates.grid_plan(item);
+                            }else if(itemType == 'subproject'){
+                                tree += this.templates.grid_project(item);
+                            }else if(itemType == 'activity'){
+                                tree += this.templates.grid_marketingact(item);
+                            }else if(itemType == 'subactivity'){
+                                tree += this.templates.grid_submarketingact(item);
+                            }else if(itemType == 'task'){
+                                tree += this.templates.grid_task(item);
+                            }
+                            //tree += this.templates.grid_folder(item);
+                        } else {
+                            tree += this.templates.grid_blank(item);
+                            if(itemType == 'project'){
+                                tree += this.templates.grid_plan(item);
+                            }else if(itemType == 'subproject'){
+                                tree += this.templates.grid_project(item);
+                            }else if(itemType == 'activity'){
+                                tree += this.templates.grid_marketingact(item);
+                            }else if(itemType == 'subactivity'){
+                                tree += this.templates.grid_submarketingact(item);
+                            }else if(itemType == 'task'){
+                                tree += this.templates.grid_task(item);
+                            }
+                            //tree += this.templates.grid_file(item);
+                        }
+                    }
+                    var style = "width:" + (col.width - (last ? 1 : 0)) + "px;";
+                    if (gantt.defined(col.align))
+                        style += "text-align:" + col.align + ";";
+                    cell = "<div class='" + css + "' style='" + style + "'>" + tree + value +  (last ? gantt_View + ganttMenu : "") + "</div>";
+                    cells.push(cell);
+                }
+                var css = item.$index % 2 === 0 ? "" : " odd";
+                css += (item.$transparent) ? " gantt_transparent" : "";
+            
+                css += (item.$dataprocessor_class ? " " + item.$dataprocessor_class : "");
+            
+                if (this.templates.grid_row_class) {
+                    var css_template = this.templates.grid_row_class.call(this, item.start_date, item.end_date, item);
+                    if (css_template)
+                        css += " " + css_template;
+                }
+            
+                if (this.getState().selected_task == item.id) {
+                    css += " gantt_selected";
+                }
+                var el = document.createElement("div");
+                el.className = "gantt_row" + css;
+                el.style.height = this.config.row_height + "px";
+                el.style.lineHeight = (gantt.config.row_height) + "px";
+                el.setAttribute(this.config.task_attribute, item.id);
+                el.innerHTML = cells.join("");
+                return el;
+            };
+            gantt._init_templates = function(){
+                var labels = gantt.locale.labels;
+                labels.gantt_save_btn   = labels.icon_save;
+                labels.gantt_cancel_btn     = labels.icon_cancel;
+                labels.gantt_delete_btn     = labels.icon_delete;
+            
+                //build configuration based templates
+                var d = this.date.date_to_str;
+                var c = this.config;
+                gantt._init_template("date_scale", true);
+                gantt._init_template("date_grid", true, "grid_date_format");
+                gantt._init_template("task_date", true);
+            
+                gantt.mixin(this.templates,{
+                    xml_date:this.date.str_to_date(c.xml_date,c.server_utc),
+                    xml_format:d(c.xml_date,c.server_utc),
+                    api_date:this.date.str_to_date(c.api_date),
+                    progress_text:function(start, end, task){return "";},
+                    grid_header_class : function(column, config){
+                        return "";
+                    },
+            
+                    task_text:function(start, end, task){
+                        return task.text;
+                    },
+                    task_class:function(start, end, task){return "";},
+                    grid_row_class:function(start, end, task){
+                        return "";
+                    },
+                    task_row_class:function(start, end, task){
+                        return "";
+                    },
+                    task_cell_class:function(item, date){return "";},
+                    scale_cell_class:function(date){return "";},
+                    scale_row_class:function(date){return "";},
+            
+                    grid_indent:function(item) {
+                        return "<div class='gantt_tree_indent'></div>";
+                    },
+                    grid_folder:function(item) {
+                        return "<div class='gantt_tree_icon gantt_folder_" + (item.$open ? "open" : "closed") + "'></div>";
+                    },
+                    grid_file:function(item) {
+                        return "<div class='gantt_tree_icon gantt_file'></div>";
+                    },
+                    grid_open:function(item) {
+                        return "<div class='gantt_tree_icon gantt_" + (item.$open ? "close" : "open") + "'></div>";
+                    },
+                    grid_blank:function(item) {
+                        return "<div class='gantt_tree_icon gantt_blank'></div>";
+                    },
+                    grid_task:function(item) {
+                        return "<div class='gantt_tree_icon gantt_Task'></div>";
+                    },
+                    grid_marketingact:function(item) {
+                        return "<div class='gantt_tree_icon gantt_Marketingact'></div>";
+                    },
+                    grid_submarketingact:function(item) {
+                        return "<div class='gantt_tree_icon gantt_SubMarketingact'></div>";
+                    },
+                    grid_project:function(item) {
+                        return "<div class='gantt_tree_icon gantt_Project'></div>";
+                    },
+                    grid_plan:function(item) {
+                        return "<div class='gantt_tree_icon gantt_Plan'></div>";
+                    },
+                    date_grid: function(date, item) {
+                        if(item && gantt.isUnscheduledTask(item) && gantt.config.show_unscheduled){
+                            return gantt.templates.task_unscheduled_time(item);
+                        }else{
+                            return gantt.templates.grid_date_format(date);
+                        }
+                    },
+            
+                    task_time:function(start,end,ev){
+                        if(gantt.isUnscheduledTask(ev) && gantt.config.show_unscheduled){
+                            return gantt.templates.task_unscheduled_time(ev);
+                        }else{
+                            return gantt.templates.task_date(start)+" - "+gantt.templates.task_date(end);
+                        }
+                    },
+            
+                    task_unscheduled_time: function(task){
+                        return "";
+                    },
+            
+                    time_picker:d(c.time_picker),
+                    link_class : function(link){
+                        return "";
+                    },
+                    link_description : function(link){
+                        var from = gantt.getTask(link.source),
+                            to = gantt.getTask(link.target);
+            
+                        return "<b>" + from.text + "</b> &ndash;  <b>" + to.text+"</b>";
+                    },
+            
+                    drag_link : function(from, from_start, to, to_start) {
+                        from = gantt.getTask(from);
+                        var labels = gantt.locale.labels;
+            
+                        var text = "<b>" + from.text + "</b> " + (from_start ? labels.link_start : labels.link_end)+"<br/>";
+                        if(to){
+                            to = gantt.getTask(to);
+                            text += "<b> " + to.text + "</b> "+ (to_start ? labels.link_start : labels.link_end)+"<br/>";
+                        }
+                        return text;
+                    },
+                    drag_link_class: function(from, from_start, to, to_start) {
+                        var add = "";
+            
+                        if(from && to){
+                            var allowed = gantt.isLinkAllowed(from, to, from_start, to_start);
+                            add = " " + (allowed ? "gantt_link_allow" : "gantt_link_deny");
+                        }
+            
+                        return "gantt_link_tooltip" + add;
+                    }
+                });
+            
+                this.callEvent("onTemplatesReady",[]);
+            };
+            
+            function toggleGridSection() {
+                if(gantt.config.show_grid) {
+                    $('.ganttGridCollapser').attr('src','/resource/1450701236000/musqot__collaps_right').parent().css({
+                        'left':'10.5px',
+                        'top':'46.5px'
+                    });
+                    $('.expButtonC').hide();
+                } else {
+                    $('.ganttGridCollapser').attr('src','/resource/1450701262000/musqot__collaps_left').parent().css({
+                        'left':'235px',
+                        'top':'47px'
+                    });
+                    $('.expButtonC').show();
+                }
+                gantt.config.show_grid = !gantt.config.show_grid;
+                gantt.init('gantt');
+            }
+            
+            var bodyheight = bodyheight = $(window).height();
+            var bodywidth = bodywidth = $(window).width();
+            $(".bodyDiv").height(bodyheight-140);  //
+            $(".bodyDiv").width(bodywidth-44);//
+            $("#outerDiv").height($(".bodyDiv").height()); 
+            $("#outerDiv").width($(".bodyDiv").width()-20);
+            $("#gantt").height($("#outerDiv").height()-50);    //
+            $("#gantt").width($("#outerDiv").width()-20);
+            //  $("#gantt").margin(0);
+            
+            $(document).ready(function(){
+                gantt.templates.tooltip_text = function(start,end,task){
+                    var itemType = task.objType,
+                        typeLabel = '',
+                        priorityHtml = '';
+                    if(itemType == 'project')
+                        typeLabel = '{!$Label.pt_Plantype}';
+                    else if(itemType == 'subproject') {
+                        typeLabel = '{!$label.sub_Project_type}';
+                        priorityHtml = "<br/><b>{!$label.sp_prioritylevel}:</b> " + task.priorityLevel;
+                    }
+                    else if(itemType == 'activity' || itemType == 'subactivity')
+                        typeLabel = '{!$Label.mrk_Activity_type}';
+                    else if(itemType == 'task')
+                        typeLabel = '{!$Label.tsk_Subject}';
+                    
+                    var formattedSd = ("0" + (start.getMonth()+1)).slice(-2) + '-' + ("0" + (start.getDate())).slice(-2) + '-' + start.getFullYear();
+                    var formattedEd = ("0" + (end.getMonth()+1)).slice(-2) + '-' + ("0" + (end.getDate()-1)).slice(-2) + '-' + end.getFullYear();
+                    var toolTipText = task.text + "<br/><b>"+typeLabel+":</b> " + task.projectType + "<br/><b>{!$label.pt_Start_date}:</b> " + formattedSd + "<br/><b>{!$label.pt_End_date}:</b> " + formattedEd + priorityHtml;
+                    if(itemType == 'task')
+                        toolTipText = task.text + "<br/><b>"+typeLabel+":</b> " + task.projectType + "<br/><b>{!$label.tsk_Due_Date}:</b> " + formattedSd;
+                    return toolTipText;
+                };
+                
+                var incInFilterWidth = $('.filterSelect').width()-71;
+                var sbcLeft = $('#sbContainer').css('left');
+                sbcLeft = parseInt(sbcLeft) + incInFilterWidth;
+                $('#sbContainer').css('left',sbcLeft+'px');
+                
+                $(window).resize(function(){
+                    var bodyheight = bodyheight = $(window).height();
+                    var bodywidth = bodywidth = $(window).width();
+                    //    var ganttmargin = ganttmargin = 0;
+                    $(".bodyDiv").height(bodyheight-140);  //
+                    $(".bodyDiv").width(bodywidth-44);//
+                    $("#outerDiv").height($(".bodyDiv").height()); 
+                    $("#outerDiv").width($(".bodyDiv").width());
+                    $("#gantt").height($("#outerDiv").height()-50);    //
+                    $("#gantt").width($("#outerDiv").width()-20);
+                    //   $("#gantt").margin(ganttmargin+0);
+                    gantt.init("gantt"); 
+                });                                  
+            });
+             
+            //adding aditional custom functions to Date object
+            Date.prototype.getWeek = function() {
+                var onejan = new Date(this.getFullYear(),0,1);
+                return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+            }
+            Date.prototype.getWeekendDate = function() {
+                var endDate = this;
+                return endDate.setDate(this.getDate()+(6-this.getDay()));
+            }
+            Date.prototype.getWeekStartDate = function() {
+                var startDate = this;
+                return startDate.setDate(this.getDate()-this.getDay());
+            }
+            Date.prototype.getMonthStartDate = function() {
+                return (new Date(this.getFullYear(), this.getMonth(),1));
+            }
+            Date.prototype.getMonthendDate = function() {
+                return (new Date(this.getFullYear(), this.getMonth()+1, 0));
+            }
+            
+            
+            var timeOptions = document.getElementsByName('timeSlot');
+            var today = new Date();
+            var startDate = new Date();
+            var endDate = new Date();
+            startDate.setDate(today.getDate()-30);
+            startDate = startDate.getMonthStartDate();
+            endDate.setDate(today.getDate()+60);
+            //endDate = today.getMonthendDate();
+            endDate = endDate.getMonthendDate();
+            document.getElementById('startDate').value = (("0" + (startDate.getMonth()+1)).slice(-2))+'/'+(("0" + startDate.getDate()).slice(-2))+'/'+startDate.getFullYear();
+            document.getElementById('endDate').value = (("0" + (endDate .getMonth() + 1)).slice(-2))+'/'+(("0" + endDate .getDate()).slice(-2))+'/'+endDate .getFullYear();
+            //endDate.setDate(endDate.getDate()+1);
+            
+            //Filter Start
+            if(document.getElementById('pg:frmFilter:hdnstartDate').value != '' && document.getElementById('pg:frmFilter:hdnendDate').value != '' && document.getElementById('pg:frmFilter:hdnZomming').value != ''){
+                var fstartDate = new Date(Date.parse(document.getElementById('pg:frmFilter:hdnstartDate').value))
+                document.getElementById('startDate').value = (("0" + (fstartDate.getMonth()+1)).slice(-2))+'/'+(("0" + fstartDate.getDate()).slice(-2))+'/'+fstartDate.getFullYear();
+                var fendDate = new Date(Date.parse(document.getElementById('pg:frmFilter:hdnendDate').value))
+                document.getElementById('endDate').value = (("0" + (fendDate.getMonth()+1)).slice(-2))+'/'+(("0" + fendDate.getDate()).slice(-2))+'/'+fendDate.getFullYear();
+                if(document.getElementById('pg:frmFilter:hdnZomming').value == 'Weeks'){
+                    document.getElementById('week').checked  = true;
+                }else if(document.getElementById('pg:frmFilter:hdnZomming').value == 'Days'){
+                    document.getElementById('day').checked  = true;
+                }else if(document.getElementById('pg:frmFilter:hdnZomming').value == 'Months'){
+                    document.getElementById('month').checked  = true;
+                }
+                startDate = fstartDate;
+                endDate = fendDate;
+                
+            }        
+            
+            function setplantypeSelected(obj){
+                /*if(obj.text == "Add"){
+                    setTimeout(
+                        function() {
+                            var dd = document.getElementById('pg:frmNewFilter:j_id18:j_id23:j_id29:filterpatype').children[0].children;
+                            for (var i = 0; i < dd.length; i++) 
+                            {
+                                dd[i].children[0].children[0].checked = true;
+                            }
+                            alert('b');
+                            document.getElementById("pg:frmNewFilter:j_id19:j_id24:j_id33:srfilterzooming").checked="true";
+                        }, 1000);
+                }*/
+            }
+             function validatefilterPeriod(obj){
+                if(document.getElementById("pg:frmNewFilter:j_id20:j_id25:j_id42:filterstartDate").value > document.getElementById("pg:frmNewFilter:j_id20:j_id25:j_id49:filterendDate").value){
+                    document.getElementById("pg:frmNewFilter:j_id20:j_id25:j_id42:filterstartDate").className = "";       
+                    document.getElementById("pg:frmNewFilter:j_id20:j_id25:j_id49:filterendDate").className = "";             
+                }else{
+                    document.getElementById("pg:frmNewFilter:j_id20:j_id25:j_id49:filterendDate").className = "redFont";
+                }
+            }      
+            
+            //Filter End
+            
+            // before gantt context menu -- start --
+            function ganttcontextmenu(obj, itemType) {                           
+                  var contextMenu = obj.parentNode.nextSibling;
+                  var anchors = contextMenu.getElementsByTagName("a");                 
+                  $(".ganttmenuButton").hide();
+                 
+                  // check if Gantt Detail menu should be visible or not. - start-
+                  var id = obj.id.split("_")[2];
+                  if(itemType == 'project') {
+                      // whether paste should be allowed or not - start -
+                      if(copyCutType=='cut' && copyCutItemId != '') {
+                          var copyCutparentId = gantt.getParent(copyCutItemId);
+                          if(!canPasteInPlan || copyCutparentId==id)
+                              anchors[4].style.display = 'none';
+                      } else {
+                          if(!canPasteInPlan)
+                              anchors[4].style.display = 'none';
+                      }
+                      // whether paste should be allowed or not - end -
+                      
+                      // further restrictions on copy and paste
+                      var profileName = '{!$Profile.Name}';
+                      // is current user a system admin or musqot admin
+                      if(profileName != "System Administrator" && profileName != "Musqot admin") {
+                          // when current user is neither system admin nor musqot admin
+                          sforce.connection.sessionId = "{!$Api.Session_ID}";
+                          var result = sforce.connection.query("SELECT Id FROM musqot__Members__c where musqot__ProjMembers__c='"+ id +"' and (musqot__Role__c='Owner' or musqot__Role__c='Member') and musqot__ProjUsers__c='{!$User.Id}'", {
+                              onSuccess : function(result) {
+                                  var records = result.getArray("records");
+                                  // is current user owner or member of plan
+                                  if(records.length==0) {
+                                      // when current user is neither member nor owner of the plan
+                                      anchors[3].style.display = 'none';
+                                      anchors[4].style.display = 'none';
+                                  }
+                                  contextMenu.style.display = 'block';
+                              },
+                              onFailure : function(error) {
+                                  console.log("An error has occurred " + error);
+                              }
+                          });
+                      } else {
+                          // when current user is either system admin or musqot admin
+                          contextMenu.style.display = 'block';
+                      }
+                  } else if(itemType == 'subproject') {
+                      	// whether paste should be allowed or not - start -
+                        var canPaste = true;
+                        if(copyCutItemId != '') {
+                            gantt.eachTask(function(child){
+                                if(child.id == id) {
+                                    canPaste = false;
+                                    return;
+                                }
+                            }, copyCutItemId);
+                            
+                            if(copyCutType=='cut') {
+                                var copyCutParentId = gantt.getParent(copyCutItemId);
+                                if(copyCutParentId==id)
+                                    canPaste = false;
+                            }
+                        }
+                        if(!canPasteInProject || copyCutItemId==id || !canPaste)
+                            anchors[6].style.display = 'none';
+                        // whether paste should be allowed or not - end -
+                      
+                      	// further restrictions on copy and paste
+                      	var profileName = '{!$Profile.Name}';
+                      	// is current user a system admin or musqot admin
+                      	if(profileName != "System Administrator" && profileName != "Musqot admin") {
+                            // when current user is neither system admin nor musqot admin
+                            sforce.connection.sessionId = "{!$Api.Session_ID}";
+                            var result = sforce.connection.query("SELECT Id FROM musqot__Members__c where musqot__SubProjMembers__c='"+ id +"' and (musqot__Role__c='Owner' or musqot__Role__c='Member') and musqot__ProjUsers__c='{!$User.Id}'", {
+                                onSuccess : function(result) {
+                                    var records = result.getArray("records");
+                                    // is current user owner or member of project
+                                    if(records.length==0) {
+                                        // when current user is neither member nor owner of the project
+                                        anchors[4].style.display = 'none';
+                                        anchors[6].style.display = 'none';
+                                    }
+                                },
+                                onFailure : function(error) {
+                                    console.log("An error has occurred " + error);
+                                }
+                            });
+                            
+                            // should cut be allowed or not - start -
+                            var parentOwner = gantt.getTask(gantt.getParent(id)).owner;
+                            var parentId = gantt.getParent(id);
+                            var planId = parentId;
+                            while(parentId != '0') {
+                                planId = parentId;
+                                parentId = gantt.getParent(parentId);
+                            }
+                            var planOwner = gantt.getTask(planId).owner;
+                            var currUserFN = '{!$User.FirstName} {!$User.LastName}';
+                            // is current user a parent owner or plan owner
+                            if(currUserFN != parentOwner && currUserFN != planOwner)
+                                anchors[5].style.display = 'none'; // current user is neither parent owner nor plan owner
+                            // should cut be allowed or not - end -
+                        }
+                      
+                        sforce.connection.sessionId = "{!$Api.Session_ID}";
+                        // has any subproject?
+                        var result = sforce.connection.query("SELECT Id FROM musqot__Subproject__c  where musqot__Project_del__c='"+ id +"'", {
+                            onSuccess : function(result) {
+                                records = result.getArray("records");
+                                if(records.length > 0) {
+                                    // yes, then show entire menu, don't hide Gantt Detail and exit from function
+                                    //contextMenu.style.display = 'block';
+                                    preformaceMenuCheck(id,anchors,contextMenu);
+                                    return;
+                                } else{
+                                    // no, then check if has any activity?
+                                    if('{!musAct[0].Incl_Marketing_activity_Detail__c}'=='true') {
+                                    result = sforce.connection.query("SELECT Id FROM musqot__Marketing_activity__c where musqot__Project__c='"+ id +"'", {
+                                        onSuccess : function(result) {
+                                            records = result.getArray("records");
+                                            if(records.length > 0) {
+                                                // yes, then show entire menu, don't hide Gantt Detail and exit from function
+                                                //contextMenu.style.display = 'block';
+                                                preformaceMenuCheck(id,anchors,contextMenu);
+                                                return;
+                                            } else {
+                                                // no, then check if has any task?
+                                                if('{!musAct[0].Incl_Task_Detail__c}'=='true') {
+                                                result = sforce.connection.query("SELECT Id FROM Task where WhatId='"+ id +"'", {
+                                                    onSuccess : function(result) {
+                                                        records = result.getArray("records");
+                                                        if(records.length > 0) {
+                                                            // yes, then show entire menu, don't hide Gantt Detail and exit from function
+                                                            //contextMenu.style.display = 'block';
+                                                            preformaceMenuCheck(id,anchors,contextMenu);
+                                                            return;
+                                                        } else {
+                                                            // no, means it doesn't have any child node, then hide Gantt Detail and exit from function
+                                                            anchors[0].style.display = 'none';
+                                                            //contextMenu.style.display = 'block';
+                                                            preformaceMenuCheck(id,anchors,contextMenu);
+                                                            return;
+                                                        }
+                                                    },
+                                                    onFailure : function(error) {
+                                                        console.log("An error has occurred " + error);
+                                                        //contextMenu.style.display = 'block';
+                                                        preformaceMenuCheck(id,anchors,contextMenu);
+                                                        return;
+                                                    }
+                                                });
+                                                } else {
+                                                    // no, means it doesn't have any child node, then hide Gantt Detail and exit from function
+                                                    anchors[0].style.display = 'none';
+                                                    //contextMenu.style.display = 'block';
+                                                    preformaceMenuCheck(id,anchors,contextMenu);
+                                                    return;
+                                                }
+                                            }
+                                        },
+                                        onFailure : function(error) {
+                                            console.log("An error has occurred " + error);
+                                            //contextMenu.style.display = 'block';
+                                            preformaceMenuCheck(id,anchors,contextMenu);
+                                            return;
+                                        }
+                                    });
+                                    } else {
+                                        if('{!musAct[0].Incl_Task_Detail__c}'=='true') {
+                                            result = sforce.connection.query("SELECT Id FROM Task where WhatId='"+ id +"'", {
+                                                onSuccess : function(result) {
+                                                    records = result.getArray("records");
+                                                    if(records.length > 0) {
+                                                        // yes, then show entire menu, don't hide Gantt Detail and exit from function
+                                                        //contextMenu.style.display = 'block';
+                                                        preformaceMenuCheck(id,anchors,contextMenu);
+                                                        return;
+                                                    } else {
+                                                        // no, means it doesn't have any child node, then hide Gantt Detail and exit from function
+                                                        anchors[0].style.display = 'none';
+                                                        //contextMenu.style.display = 'block';
+                                                        preformaceMenuCheck(id,anchors,contextMenu);
+                                                        return;
+                                                    }
+                                                },
+                                                onFailure : function(error) {
+                                                    console.log("An error has occurred " + error);
+                                                    //contextMenu.style.display = 'block';
+                                                    preformaceMenuCheck(id,anchors,contextMenu);
+                                                    return;
+                                                }
+                                            });
+                                        } else {
+                                            // no, means it doesn't have any child node, then hide Gantt Detail and exit from function
+                                            anchors[0].style.display = 'none';
+                                            //contextMenu.style.display = 'block';
+                                            preformaceMenuCheck(id,anchors,contextMenu);
+                                            return;
+                                        }
+                                    }
+                                }
+                            },
+                            onFailure : function(error) {
+                                console.log("An error has occurred " + error);
+                                //contextMenu.style.display = 'block';
+                                preformaceMenuCheck(id,anchors,contextMenu);
+                                return;
+                            }
+                        });
+                  } else if(itemType == 'activity') {
+                      var profileName = '{!$Profile.Name}';
+                      // is current user a system admin or musqot admin
+                      if(profileName != "System Administrator" && profileName != "Musqot admin") {
+                          // when current user is neither system admin nor musqot admin
+                          
+                          // should copy be allowed or not - start -
+                          sforce.connection.sessionId = "{!$Api.Session_ID}";
+                          var result = sforce.connection.query("SELECT Id FROM musqot__Members__c where musqot__Marketingmebers__c='"+ id +"' and (musqot__Role__c='Owner' or musqot__Role__c='Member') and musqot__ProjUsers__c='{!$User.Id}'", {
+                              onSuccess : function(result) {
+                                  var records = result.getArray("records"); 
+                                  if(records.length==0) {
+                                      anchors[2].style.display = 'none';
+                                  }
+                                  contextMenu.style.display = 'block';
+                              },
+                              onFailure : function(error) {
+                                  console.log("An error has occurred " + error);
+                              }
+                          });
+                          // should copy be allowed or not - end -
+                          
+                          // should cut be allowed or not - start -
+                          var parentOwner = gantt.getTask(gantt.getParent(id)).owner;
+                          var parentId = gantt.getParent(id);
+                          var planId = parentId;
+                          while(parentId != '0') {
+                              planId = parentId;
+                              parentId = gantt.getParent(parentId);
+                          }
+                          var planOwner = gantt.getTask(planId).owner;
+                          var currUserFN = '{!$User.FirstName} {!$User.LastName}';
+                          // is current user a parent owner or plan owner
+                          if(currUserFN != parentOwner && currUserFN != planOwner)
+                              anchors[3].style.display = 'none';  // current user is neither parent owner nor plan owner
+                          // should cut be allowed or not - end -
+                      } else {
+                          // when current user is either system admin or musqot admin
+                          contextMenu.style.display = 'block';
+                      }
+                  } else if(itemType == 'task') {
+                      contextMenu.style.display = 'block';
+                  }
+                 
+                 var cmTopPos = $(obj).offset().top;
+                 var cmExceedAt = $(window).height()-250;
+                 //console.log(cmTopPos-cmExceedAt);
+                 if(cmTopPos>cmExceedAt) {
+                     var fromBottom = (anchors.length*15) + (cmTopPos-cmExceedAt)/3;
+                     $(obj).parent().next().animate({bottom : fromBottom+'px'},400);
+                 } 
+            }
+             
+    		// function to check if performance option in context menu should be visible or not
+            function preformaceMenuCheck(id,anchors,contextMenu){
+                // check for performance menu
+                 var result = sforce.connection.query("SELECT Id,musqot__CRM__c,musqot__ERP__c,musqot__Social_media__c from musqot__Subproject__c where id='"+ id +"'", {
+                     onSuccess : function(result) {
+                         records = result.getArray("records");
+                         var dataObj = records[0];
+                         if(dataObj.musqot__CRM__c==null && dataObj.musqot__ERP__c==null && dataObj.musqot__Social_media__c==null) {
+                             anchors[1].style.display = 'none';
+                         }
+                         contextMenu.style.display = 'block';
+                     },
+                     onFailure : function(error) {
+                         console.log("An error has occurred " + error);
+                         contextMenu.style.display = 'block';
+                         return;
+                     }
+                 });
+            }
+            // check if Gantt Detail menu should be visible or not. - end-
+            // before gantt context menu -- end --
+            
+            /*document.getElementById('startDate').onchange  = function(){
+                var vals = document.getElementById('startDate').value.split('-');
+                var endDateStr = document.getElementById('endDate').value;
+                endDateStr = endDateStr.split('-');
+                var endDate = new Date(endDateStr[0],parseInt(endDateStr[1])-1,endDateStr[2]);
+                document.getElementById('startDate').value = vals[0]+'-'+vals[1]+'-01';
+                var startDate = new Date(vals[0],parseInt(vals[1])-1,01);
+                if(endDate>startDate){
+                    $("#startDate").removeClass("redFont");   
+                    $("#endDate").removeClass("redFont");           
+                    gantt.config.start_date = startDate;
+                    gantt.config.end_date  = endDate;
+                    gantt.init("gantt");
+                    drawChart();
+                }else{
+                    $("#startDate").addClass("redFont");
+                }
+                
+            }
+            
+            document.getElementById('endDate').onchange  = function(){
+                var vals = document.getElementById('endDate').value.split('-');
+                var startDateStr = document.getElementById('startDate').value;
+                startDateStr = startDateStr.split('-');
+                var startDate = new Date(startDateStr[0],parseInt(startDateStr[1])-1,startDateStr[2]);
+                var endDate = (new Date(vals[0],parseInt(vals[1])-1,vals[2])).getMonthendDate();
+                document.getElementById('endDate').value = endDate.getFullYear()+'-'+(("0" + (endDate.getMonth() + 1)).slice(-2))+'-'+(("0" + endDate.getDate()).slice(-2));
+                endDate = new Date(endDate.setDate(endDate.getDate()+1));
+                if(endDate>startDate){
+                    $("#startDate").removeClass("redFont");       
+                    $("#endDate").removeClass("redFont");  
+                    gantt.config.start_date = startDate;
+                    gantt.config.end_date  = endDate;
+                    gantt.init("gantt");
+                    drawChart();
+                }else{
+                    $("#endDate").addClass("redFont");
+                }
+            }
+            */
+            //set subscale while refreshing
+            for(var i=0;i<timeOptions.length;i++){
+                
+                if(timeOptions[i].checked == true){
+                    
+                    if(timeOptions[i].id == "week"){
+                        gantt.config.scale_unit="month";
+                        gantt.config.date_scale="%F";
+                        gantt.config.subscales = [{ unit: "week", step: 1, date: "%W" }];
+                    }else if(timeOptions[i].id == "day"){
+                        gantt.config.scale_unit="month";
+                        gantt.config.date_scale="%F";
+                        gantt.config.subscales = [{ unit: "day", step: 1, date: "%d" }];
+                    }else if(timeOptions[i].id == "month"){
+                        gantt.config.scale_unit="year";
+                        gantt.config.date_scale="%Y";
+                        gantt.config.subscales = [{ unit: "month", step: 1, date: "%M" }];
+                    }else{
+                        gantt.config.scale_unit="year";
+                        gantt.config.date_scale="Year %y";
+                        gantt.config.subscales = [];
+                    }
+                }
+            }
+            
+            for(i=0;i<timeOptions.length;i++){
+                timeOptions[i].onclick=function(){
+                    if(this.id == "week"){
+                        gantt.config.scale_unit="month";
+                        gantt.config.date_scale="%F";
+                        gantt.config.subscales = [{ unit: "week", step: 1, date: "%W" }];
+                    }else if(this.id == "day"){
+                        gantt.config.scale_unit="month";
+                        gantt.config.date_scale="%F";
+                        gantt.config.subscales = [{ unit: "day", step: 1, date: "%d" }];
+                    }else if(this.id == "month"){
+                        gantt.config.scale_unit="year";
+                        gantt.config.date_scale="%Y";
+                        gantt.config.subscales = [{ unit: "month", step: 1, date: "%M" }];
+                    }else{
+                        gantt.config.scale_unit="year";
+                        gantt.config.date_scale="Year %y";
+                        gantt.config.subscales = [];
+                    }        
+                    gantt.init("gantt"); 
+                };
+            }
+            
+            
+            // PDF export -- start --
+            function pdfExport(){
+                var pdfStyle = '<style>'+'{!JSENCODE(taskstyleString)}'+'{!JSENCODE(styleString)}'+'{!JSENCODE(dataString)}'+'</style>';
+                gantt.exportToPDF({
+                    name: "Gantt_page.pdf",
+                    locale: "en",
+                    header: pdfStyle
+                });        
+            }  
+            // PDF export -- end --
+    
+    		// Excel export -- start --
+    		var ganttForExcel = Gantt.getGanttInstance();
+            ganttForExcel.init("ganttForExcel");
+    		ganttForExcel.config.show_chart = false;
+            ganttForExcel.parse(<apex:outputText value="{!dataString}" escape="true"/>);
+            ganttForExcel.config.columns=[
+                {name:"text", label:"{!$Label.gnt_Plan_hierarchy}",  tree:true},
+                {name:"status", label:"{!$Label.tsk_Status}", template:function(task){
+                    return task.status } },
+                {name:"start date", label:"{!$Label.pt_Start_date}", template:function(task){
+                    return task.start_date } },
+                {name:"end date", label:"{!$label.pt_End_date}", template:function(task){
+                    return task.end_date } }
+            ];
+            function xlsxExport(){
+                ganttForExcel.exportToExcel({
+                    name: "Gantt_page.xlsx",
+                    locale: "en"
+                });        
+            }  
+            // Excel export -- end --
+    
+    		// PNG export -- start --
+            function pngExport(){
+                var pngStyle = '<style>'+'{!JSENCODE(taskstyleString)}'+'{!JSENCODE(styleString)}'+'{!JSENCODE(dataString)}'+'</style>';
+                gantt.exportToPNG({
+                    name: "Gantt_page.png",
+                    locale: "en",
+                    header: pngStyle
+                });        
+            }  
+            // PNG export -- end --
+            
+    
+            // search through gantt tasks -- start --
+            $('#searchForm').on('submit',function(e){
+                e.preventDefault();
+                highlightMatches('down');
+            });
+            
+            $('#searchUpBtn').on('click',function(){
+                highlightMatches('up');
+            });
+            
+            /*$('#searchBox').on('input', function(){
+                highlightMatches('down');
+            });*/
+            
+            var closedNodes = [];
+            gantt.attachEvent("onTaskClosed", function(id) {
+                closedNodes.push(id);
+            });
+            gantt.attachEvent("onTaskOpened", function(id) {
+                var index = closedNodes.indexOf(id);
+                if (index > -1) {
+                    closedNodes.splice(index, 1);
+                }
+            });
+            
+            gantt.attachEvent("onBeforeTaskSelected", function(id,item){
+                $(".gantt_row").removeClass("gantt_selected");
+                return true;
+            });
+            
+            var gloabalSearchQuery = '';
+            var matchingNodes = [];
+            var tracedUpTo = -1;
+            var firstMatchingNode = 0;
+            var count = 0;
+            function highlightMatches(direction) {
+                if(!gantt.config.show_grid)
+                    toggleGridSection();
+                
+                var currentSearchQuery = document.getElementById('searchBox').value.trim();
+                if(currentSearchQuery == '' || currentSearchQuery.length<3) {
+                    var manuallySelectedTaskId = $('.gantt_task_row.gantt_selected').attr('task_id');
+                    $(".gantt_row").not($("[task_id=" + manuallySelectedTaskId + "].gantt_row")).removeClass("gantt_selected");
+                    $("#hitCount").text('');
+                    tracedUpTo = -1;
+                    gloabalSearchQuery = currentSearchQuery;
+                    return;
+                }
+                
+                $("#hitCount").text(count);
+                if(gloabalSearchQuery != currentSearchQuery) {
+                    count = 0;
+                    gloabalSearchQuery = currentSearchQuery;
+                    matchingNodes = [];
+                    tracedUpTo = -1;
+                    gantt.eachTask(function(task){
+                        if(task.text.toLowerCase().indexOf(currentSearchQuery.toLowerCase()) > -1)
+                            matchingNodes.push({taskId: task.id, parentId: gantt.getParent(task.id), text: task.text});
+                    });
+                    
+                    for(var i=0; i<matchingNodes.length; i++) {
+                        var node = matchingNodes[i];
+                        if($("[task_id=" + node["taskId"] + "].gantt_row").length == 0)
+                                gantt.open(node["parentId"]);
+                        
+                        if($("[task_id=" + node["taskId"] + "].gantt_row").length != 0)
+                            count++;
+                    }
+                    $("#hitCount").text(count);
+                    
+                    if(matchingNodes.length == 0) {
+                        gantt.unselectTask();
+                        $(".gantt_row").removeClass("gantt_selected");
+                        $("#hitCount").text('0');
+                    }
+                    
+                    for (var i=0; i<matchingNodes.length; i++) {
+                        var node = matchingNodes[i];
+                        tracedUpTo = i;
+                        if($("[task_id=" + node["taskId"] + "].gantt_row").length == 0) {
+                            continue;
+                        } else {
+                            gantt.unselectTask();
+                            $(".gantt_row").removeClass("gantt_selected");
+                            $("[task_id=" + node["taskId"] + "].gantt_row").addClass("gantt_selected");
+                            gantt.scrollTo(null, gantt.getTaskTop(node["taskId"])-300);
+                            firstMatchingNode = i;
+                            break;
+                        }
+                    }
+                } else {
+                    for(var i=0; i<closedNodes.length; i++) {
+                       gantt.open(closedNodes[i]);
+                    }
+                    if(direction == 'down') {
+                        var isNotFound = true;
+                        while(isNotFound){
+                            if(tracedUpTo == matchingNodes.length-1)
+                                tracedUpTo = -1;
+                            for (var i = tracedUpTo+1; i<matchingNodes.length; i++) {
+                                var node = matchingNodes[i];
+                                tracedUpTo = i;
+                                if($("[task_id=" + node["taskId"] + "].gantt_row").length == 0) {
+                                    continue;
+                                } else {
+                                    gantt.unselectTask();
+                                    $(".gantt_row").removeClass("gantt_selected");
+                                    $("[task_id=" + node["taskId"] + "].gantt_row").addClass("gantt_selected");
+                                    gantt.scrollTo(null, gantt.getTaskTop(node["taskId"])-300);
+                                    isNotFound = false;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        if(tracedUpTo == firstMatchingNode)
+                            tracedUpTo = matchingNodes.length;
+                        for (var i = tracedUpTo-1; i>-1; i--) {
+                            var node = matchingNodes[i];
+                            tracedUpTo = i;
+                            if($("[task_id=" + node["taskId"] + "].gantt_row").length == 0) {
+                                continue;
+                            } else {
+                                gantt.unselectTask();
+                                $(".gantt_row").removeClass("gantt_selected");
+                                $("[task_id=" + node["taskId"] + "].gantt_row").addClass("gantt_selected");
+                                gantt.scrollTo(null, gantt.getTaskTop(node["taskId"])-300);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // search through gantt tasks -- end --
+            
+            // on task click open contextmenu, and select the row.
+            gantt.attachEvent("onTaskClick", function(id,e){
+                if($(e.target).hasClass('gantt_tree_icon')){
+                    if($(e.target).hasClass('gantt_open'))
+                        gantt.open(id);
+                    else if($(e.target).hasClass('gantt_close'))
+                        gantt.close(id);
+                } else {
+                    gantt.selectTask(id);
+                    //$('#gantt_contextmenu_'+id).triggerHandler('contextmenu');
+                    var ganttTaskNameSection;
+                    var ganttProgressBar = $(e.target).parents('.gantt_task_line');
+                    if(ganttProgressBar.length == 0) {
+                        ganttTaskNameSection = $(e.target).parents('.gantt_row');
+                    } else {
+                        var tidFromBarSection = ganttProgressBar.attr('task_id');
+                        ganttTaskNameSection = $('.gantt_row[task_id="'+tidFromBarSection+'"]');
+                    }
+                    
+                    if(ganttTaskNameSection.find('#ganttNav').css('display') == 'none')
+                        $('#gantt_contextmenu_'+id).triggerHandler('contextmenu');
+                    else
+                        ganttTaskNameSection.find('#ganttNav').css('display','none');
+                }
+                
+            });
+    
+            // Navigation event
+                gantt.attachEvent("onTaskDblClick", function(id,e){
+                    var task = gantt.getTask(id);
+                    if(task.objType != 'subactivity')
+                    	top.location.href = baseUrl + id;
+                    else
+                        top.location.href = baseUrl + task.parent;
+                });   
+            
+            
+            function toggleExpand(el){
+                if(el.title == '{!$Label.btn_Expand_all}'){
+                    gantt.eachTask(function(task){
+                        task.$open = true;
+                    });
+                    gantt.render();
+                    el.title = '{!$Label.btn_Collapse_all}';
+                    el.src = '/resource/1450712262000/musqot__Expand_down';
+                }
+                else{
+                    gantt.eachTask(function(task){
+                        task.$open = false;
+                    });
+                    gantt.render();
+                    el.title = '{!$Label.btn_Expand_all}';
+                    el.src = '/resource/1450712230000/musqot__Expand_up';
+                }
+            }
+        </script>
+    
+    
+    
+        <div id="gantt" style="margin:auto; height:92%;  overflow-y:hidden;">
+            <script type="text/javascript">
+                // Just the base URL
+                var baseUrl = location.protocol + '//' + location.host +'/';    
+                var userProfile = "userprofile";
+                
+                <apex:outputText value="{!jsString}" escape="true"/>   
+                    
+                    
+                    // Test: The lightbox config
+                    gantt.config.lightbox.sections=[
+                    {name:"description", height:100, type:"template", map_to:"description"},       
+                    {name:"time", height:20, type:"time", map_to:"auto"}
+                ];
+                
+                // Test: Lightbox labeling
+                gantt.locale.labels.section_progress = "Current progress";  
+                gantt.locale.labels.template_description = "Description";  
+                
+                
+                // Test: Lightbox button config
+                gantt.config.buttons_right = ["view_btn"];
+                
+                
+                
+                if('{!$Profile.Name}' == 'System Administrator' || '{!$Profile.Name}' == "Musqot admin"){
+                    gantt.config.buttons_left = ["dhx_save_btn","dhx_cancel_btn"];
+                }
+                else{
+                    gantt.config.buttons_left = ["dhx_cancel_btn"];
+                }  
+                
+                
+                // Test: Custom lightbox templates
+                gantt.attachEvent("onBeforeLightbox", function(id) {
+                    var task = gantt.getTask(id);
+                    desc = (!task.description) ? "No description given" : task.description;
+                    task.template_description = "<span class='popup-description'>" + desc + "</span>";
+                    return true;
+                });
+                
+                
+                // Test: Lightbox button labeling
+                gantt.locale.labels["view_btn"] = "View";
+                gantt.locale.labels["dhx_cancel_btn"] = "Close2";
+                
+                // Custom button behaviour
+                gantt.attachEvent("onLightboxButton", function(button_id, node, e){
+                    // Navigates user to specific item
+                    if(button_id == "view_btn"){
+                        var id = gantt.getState().lightbox;
+                        top.location.href = baseUrl + id;
+                    }
+                    
+                });
+                
+                //gantt columns
+                gantt.config.columns=[
+                    {name:"text", label:"{!$Label.gnt_Plan_hierarchy}",  tree:true, width:'230px'},
+                    {name:"status", label:"{!$Label.tsk_Status}", width:'25px', template:function(task){
+                        return task.img } }                                                            
+                ];
+                //gantt.config.row_height = 24;
+                //to set the task text
+                gantt.templates.task_text=function(start, end, task){ 
+                    if(task.objType == 'activity'){
+                        return '<span id="mrkt_activity">'+task.text+"</span>"+task.actImg;
+                    } 
+                    if(task.objType == 'subactivity'){
+                        return '<span id="mrkt_subactivity">'+task.text+"</span>"+task.actImg;
+                    } 
+                    return task.text;
+                };
+                
+                function toDateTime(time){ //to yyyy-mm-ddThh:mm:ss format
+                    var month = time.getMonth()+1;
+                    var date = time.getDate();
+                    
+                    month =month < 10 ? '0'+month : month;
+                    date = date < 10 ? '0'+date : date;
+                    
+                    return time.getFullYear()+'-'+month+'-'+date+'T00:00:00';
+                }
+                
+                
+                // lightbox save event
+                gantt.attachEvent("onLightboxSave", function(button_id, node, e){
+                    gantt.updateTask(button_id);
+                    var recId = gantt.getState().lightbox;      
+                    sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                    var a;
+                    var myJ=gantt.getLightboxValues();
+                    if(gantt.getTask(button_id).objType == 'project')
+                        a = new sforce.SObject("musqot__Project__c");
+                    if(gantt.getTask(button_id).objType == 'subproject')
+                        a = new sforce.SObject("musqot__Subproject__c");
+                    if(gantt.getTask(button_id).objType == 'activity'){
+                        a = new sforce.SObject("musqot__Marketing_activity__c");
+                        a.Id = recId; 
+                        
+                        //converting date to datetime format
+                        st_time = toDateTime(myJ.start_date);
+                        end_time = toDateTime(myJ.end_date);
+                        
+                        a.musqot__Starts_date__c = st_time;  
+                        a.musqot__Ends_date__c = end_time;
+                        a.musqot__Description__c = myJ.description;                   
+                        sforce.connection.update([a]);
+                        
+                    }
+                    else{                       
+                        a.Id = recId;  
+                        a.musqot__Starts_date__c = myJ.start_date;  
+                        a.musqot__Ends_date__c = myJ.end_date;
+                        a.musqot__Description__c = myJ.description;                   
+                        sforce.connection.update([a]);
+                    }
+                    gantt.getTask(button_id).start_date = myJ.start_date;
+                    gantt.getTask(button_id).end_date = myJ.end_date;
+                    gantt.getTask(button_id).description = myJ.description;                   
+                    gantt.updateTask(button_id);       
+                    gantt.hideLightbox();
+                    gantt.init("gantt");
+                });
+            
+            
+            
+                // added by Narendra, to update task date on drag
+                function updateTaskDate(id, startDate, endDate){
+                    gantt.updateTask(id);
+                    sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                    var a;
+                    if(gantt.getTask(id).objType == 'project')
+                        a = new sforce.SObject("musqot__Project__c");
+                    if(gantt.getTask(id).objType == 'subproject')
+                        a = new sforce.SObject("musqot__Subproject__c");
+                    if(gantt.getTask(id).objType == 'activity'){
+                        a = new sforce.SObject("musqot__Marketing_activity__c");
+                        a.Id = id; 
+                        
+                        //converting date to datetime format
+                        st_time = toDateTime(startDate);
+                        end_time = toDateTime(endDate);
+                        
+                        a.musqot__Starts_date__c = st_time;  
+                        a.musqot__Ends_date__c = end_time;                  
+                        sforce.connection.update([a]);
+                    } else if(gantt.getTask(id).objType == 'task') {
+                        a = new sforce.SObject("Task");
+                        a.Id = id;
+                        a.ActivityDate  = startDate;                 
+                        sforce.connection.update([a]);
+                    } else{                       
+                        a.Id = id;  
+                        a.musqot__Starts_date__c = startDate;  
+                        a.musqot__Ends_date__c = endDate;                  
+                        sforce.connection.update([a]);
+                    }
+                   
+                    /* gantt.getTask(id).start_date = startDate;
+                    gantt.getTask(id).end_date = endDate;                  
+                    gantt.updateTask(id); */
+                    
+                    updateChildTasks();
+                }
+                
+                // added by Narendra
+                // to update corresponding child tasks together with parent tasks
+                function updateChildTasks() {
+                    for(var i=0; i<childTasks.length; i++) {
+                        var task = childTasks[i];
+                        var tempChildEndDate = new Date(task.endDate.getTime());
+                        tempChildEndDate.setDate(tempChildEndDate.getDate()-1);
+                        gantt.updateTask(task["id"]);      
+                        sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                        var a;
+                        if(gantt.getTask(task["id"]).objType == 'project')
+                            a = new sforce.SObject("musqot__Project__c");
+                        if(gantt.getTask(task["id"]).objType == 'subproject')
+                            a = new sforce.SObject("musqot__Subproject__c");
+                        if(gantt.getTask(task["id"]).objType == 'activity') {
+                            a = new sforce.SObject("musqot__Marketing_activity__c");
+                            a.Id = task["id"]; 
+                            //converting date to datetime format
+                            st_time = toDateTime(task["startDate"]);
+                            end_time = toDateTime(tempChildEndDate);
+                            a.musqot__Starts_date__c = st_time;  
+                            a.musqot__Ends_date__c = end_time;                   
+                            sforce.connection.update([a]);
+                        } else if(gantt.getTask(task["id"]).objType == 'task') {
+                            a = new sforce.SObject("Task");
+                            a.Id = task["id"];
+                            a.ActivityDate  = task["startDate"];                 
+                            sforce.connection.update([a]);
+                        } else if(gantt.getTask(task["id"]).objType != 'subactivity') {                       
+                            a.Id = task["id"];  
+                            a.musqot__Starts_date__c = task["startDate"];  
+                            a.musqot__Ends_date__c = tempChildEndDate;                   
+                            sforce.connection.update([a]);
+                        }
+                        /* gantt.getTask(task["id"]).start_date = task["startDate"];
+                        gantt.getTask(task["id"]).end_date = tempChildEndDate;                   
+                        gantt.updateTask(task["id"]); */
+                    }
+                    
+                    childTasksLastStatus = [];
+                    childTasks = [];
+                    
+                    $("#dragPopup #dragPopupLower .gear-rotate").hide();
+                    $("#dragPopup #dragPopupLower span").hide();
+                    $("#dragPopup #dragPopupLower i.success-mark").fadeIn();
+                    setTimeout(function(){
+                        $('.tr-bg').hide();$('#dragPopup').fadeOut();
+                    }, 1500);
+                    
+                    gantt.init("gantt");
+                }
+                
+                if('{!musAct[0].Incl_Task_main_gantt__c}'=='false') {
+                    gantt.attachEvent("onBeforeTaskDisplay", function(id, task){
+                         if (task.objType == 'task')
+                               return false;
+                         return true;
+                    });
+                }
+            
+                // Drag Task 
+                // Added/Modified by Narendra -- start --
+                var oldStartDate; var oldEndDate;  var childTasksLastStatus = [];
+                gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
+                   var modes = gantt.config.drag_mode;
+                   var taskObj = gantt.getTask(id);
+                   oldStartDate = taskObj.start_date;
+                   oldEndDate = taskObj.end_date;
+                    
+                   gantt.eachTask(function(child){
+                       childTasksLastStatus.push({id: child.id, startDate: child.start_date, endDate: child.end_date});
+                   },id );
+                   return '{!musAct[0].Drag_to_change_date_Main__c}'=='true';
+                });
+                
+                var childTasks = [];
+                var diff;
+                // moving all childs together with the parent -- start --
+                gantt.attachEvent("onTaskDrag", function(id, mode, task, original){
+                    var modes = gantt.config.drag_mode;
+                    taskBeingDragged = task;
+                    if(mode == modes.move) {
+                        diff = task.start_date - original.start_date;
+                        gantt.eachTask(function(child){
+                            child.start_date = new Date(+child.start_date + diff);
+                            child.end_date = new Date(+child.end_date + diff);
+                            gantt.refreshTask(child.id, true);
+                        },id );
+                    }
+                    return true;
+                });
+                
+                var globalTaskIdOnDrag;
+                var globalTaskStartDateOnDrag;
+                var globalTaskEndDateOnDrag;
+                gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
+                    var modes = gantt.config.drag_mode;
+                    var taskObj = gantt.getTask(id);
+                    if(mode == modes.move){
+                        gantt.eachTask(function(child){
+                            gantt.roundTaskDates(child);
+                            gantt.refreshTask(child.id, true);
+                            childTasks.push({id: child.id, startDate: child.start_date, endDate: child.end_date});
+                        },id );
+                    }
+                    
+                    var confirmMsg = '';
+                    var tempTaskEndDate = new Date(taskObj.end_date.getTime());
+                    tempTaskEndDate.setDate(tempTaskEndDate.getDate()-1);
+                    var formattedStartDate = ("0" + (taskObj.start_date.getMonth()+1)).slice(-2) + '/' + ("0" + (taskObj.start_date.getDate())).slice(-2) + '/' + ("0" + taskObj.start_date.getFullYear()).slice(-2);
+                    var formattedEndDate = ("0" + (tempTaskEndDate.getMonth()+1)).slice(-2) + '/' + ("0" + (tempTaskEndDate.getDate())).slice(-2) + '/' + ("0" + tempTaskEndDate.getFullYear()).slice(-2);
+                    
+                    var tempOldEndDate = new Date(oldEndDate.getTime());
+                    tempOldEndDate.setDate(tempOldEndDate.getDate()-1);
+                    var formattedOldStartDate = ("0" + (oldStartDate.getMonth()+1)).slice(-2) + '/' + ("0" + oldStartDate.getDate()).slice(-2) + '/' + ("0" + oldStartDate.getFullYear()).slice(-2);
+                    var formattedOldEndDate = ("0" + (tempOldEndDate.getMonth()+1)).slice(-2) + '/' + ("0" + (tempOldEndDate.getDate())).slice(-2) + '/' + ("0" + tempOldEndDate.getFullYear()).slice(-2);
+                    if(mode == modes.move) {
+                        confirmMsg = '<span>Will you change the dates for <b>'+ taskObj.text+'</b>:<br/>start date from <b>'+formattedOldStartDate+'</b> to <b>'+formattedStartDate+'</b><br/>and end date from <b>'+formattedOldEndDate+'</b> to <b>'+formattedEndDate+'</b>?</span><br/>';
+                        if(gantt.hasChild(id))
+                            confirmMsg += '<br/><span style="font-size: 12px;">Note: child nodes will be moved accordingly.</span>';
+                    } else if(mode == modes.resize) {
+                        if(oldStartDate==taskObj.start_date) {
+                            confirmMsg = '<span>Will you change end date for <b>'+ taskObj.text+'</b> from <b>'+formattedOldEndDate+'</b> to <b>'+formattedEndDate + '</b>?</span>';
+                        } else if(oldEndDate==taskObj.end_date) {
+                            confirmMsg = '<span>Will you change start date for <b>'+ taskObj.text+'</b> from <b>'+formattedOldStartDate+'</b> to <b>'+formattedStartDate + '</b>?</span>';
+                        }
+                    }
+                    /*if(confirm(confirmMsg))
+                        updateTaskDate(id, taskObj.start_date, taskObj.end_date);*/
+                     
+                    globalTaskIdOnDrag = id;
+                    globalTaskStartDateOnDrag = taskObj.start_date;
+                    globalTaskEndDateOnDrag = new Date(taskObj.end_date.getTime());
+                    globalTaskEndDateOnDrag.setDate(globalTaskEndDateOnDrag.getDate()-1);
+                    confirmUser(confirmMsg);
+                });        
+                // Added/Modified by Narendra -- end --
+                
+                 
+                gantt.config.details_on_dblclick = false;
+                gantt.config.initial_scroll = true;
+                gantt.config.show_progress = true;
+                gantt.config.drag_resize = true;
+                gantt.config.drag_progress = false;
+                gantt.config.drag_move = true;
+                gantt.config.drag_links = false;
+                gantt.init('gantt');
+                // Highlight weekends
+                gantt.templates.scale_cell_class = function(date){
+                    if(timeOptions[0].checked == true){
+                        var companyHolidays = '{!musAct[0].Company_holidays__c}';
+                    	var holidayArray = companyHolidays.split(',');
+                        var FormattedDate = ("0" + (date.getDate())).slice(-2) + '-' + ("0" + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
+                        if($.inArray(FormattedDate, holidayArray)!=-1) {
+                        	return "holiday";
+                        }
+                        if(date.getDay()==0||date.getDay()==6){
+                            return "weekend";
+                        }
+                    }
+                };
+                gantt.templates.task_cell_class = function(item,date){
+                    if(timeOptions[0].checked == true){
+                        var companyHolidays = '{!musAct[0].Company_holidays__c}';
+                    	var holidayArray = companyHolidays.split(',');
+                        var FormattedDate = ("0" + (date.getDate())).slice(-2) + '-' + ("0" + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
+                        if($.inArray(FormattedDate, holidayArray)!=-1) {
+                        	return "holiday";
+                        }
+                        if(date.getDay()==0||date.getDay()==6){ 
+                            return "weekend" ;
+                        }
+                    }
+                };
+                
+                var parentBeforeTaskReorder = null;
+                gantt.attachEvent("onRowDragStart", function(id, target, e) {
+                    parentBeforeTaskReorder = gantt.getParent(id);
+                    return true;
+                });
+            
+                var globalParentIdOnDrag, isParentSame = true;
+                gantt.attachEvent("onBeforeTaskMove", function(id, parent, tindex){
+                    var task = gantt.getTask(id);
+                    if(task.objType == 'project') {
+                        showTaskReorderPopup('Plans cannot be moved.','alert');
+                        return false;
+                    }
+                    
+                    if(parentBeforeTaskReorder == parent) {
+                        isParentSame = true;
+                        return false;
+                    }
+                    isParentSame = false;
+                    
+                    globalParentIdOnDrag = parent;
+                    var targetObj = null;
+                    if(parent != '0')
+                        var targetObj = gantt.getTask(parent); 
+                    
+                    if('{!$Profile.Name}' != 'System Administrator' && 
+                       '{!$Profile.Name}' != "Musqot admin" && '{!$User.FirstName} {!$User.LastName}' != task.owner) {
+                        showTaskReorderPopup('You are not allowed to move this.','alert');
+                        return false;
+                    }
+                    if(task.objType == 'subproject') {
+                        if(targetObj.objType == 'activity')
+                            return false;
+                    }
+                    if(task.objType == 'activity') {
+                        if(targetObj.objType == 'project')
+                            return false;
+                        if(targetObj.objType == 'activity')
+                            return false;
+                    }
+                    return true;
+                });
+            
+                var globalTaskOnReorder, globalTargetOnReorder;
+                gantt.attachEvent("onRowDragEnd", function(id, target) {
+                    if(!isParentSame) {
+                        var task = gantt.getTask(id);
+                        var targetObj = null;
+                        if(globalParentIdOnDrag != '0')
+                            var targetObj = gantt.getTask(globalParentIdOnDrag); 
+                        if(task.objType == 'subproject') {
+                            if(targetObj.objType == 'activity') {
+                                showTaskReorderPopup('Project/Subprojects cannot be moved under marketing activity.','alert');
+                                return;
+                            }
+                        }
+                        if(task.objType == 'activity') {
+                            if(targetObj.objType == 'project') {
+                                showTaskReorderPopup('Marketing activity cannot be moved under plan.','alert');
+                                return;
+                            }
+                            if(targetObj.objType == 'activity') {
+                                showTaskReorderPopup('Marketing activity cannot be moved under another marketing activity.','alert');
+                                return;
+                            }
+                        }
+                        
+                        globalTaskOnReorder = task; globalTargetOnReorder = targetObj;
+                        var confirmMsg = '<span>Will you move <b>'+ task.text +'</b>';
+                        if(gantt.hasChild(id))
+                            confirmMsg += ' and its child nodes';
+                        confirmMsg += ' to <b>'+ targetObj.text +'</b> ?</span><br/>'
+                        showTaskReorderPopup(confirmMsg,'confirm');
+                     }
+                });           
+                // Set column width
+                gantt.config.min_column_width = 30;
+                gantt.config.start_date = startDate;
+                gantt.config.end_date  = endDate ;
+            	/*if('{!musAct[0].Drag_to_change_date_Main__c}'=='true') {
+                    gantt.config.order_branch = true;
+                    gantt.config.order_branch_free = true;
+                    gantt.config.sort = false;
+                }*/
+                gantt.init("gantt"); 
+            	
+            	// additional js for sub ma - start -
+            	function createBox(sizes, class_name){
+                    var box = document.createElement('div');
+                    box.style.cssText = [
+                        "height:" + sizes.height + "px",
+                        "line-height:" + sizes.height + "px",
+                        "width:" + sizes.width + "px",
+                        "top:" + sizes.top + 'px',
+                        "left:" + sizes.left + "px",
+                        "position:absolute"
+                    ].join(";");
+                    box.className = class_name;
+                    return box;
+                }
+        		
+            	gantt.templates.grid_row_class = function(start, end, task){
+                    var css = [];
+                    if(gantt.hasChild(task.id) && task.objType=='activity'){
+                        css.push("task-parent");
+                    }
+                    if (!task.$open && gantt.hasChild(task.id) && task.objType=='activity') {
+                        css.push("task-collapsed");
+                    }
+        
+                    return css.join(" ");
+                };
+            
+                gantt.templates.task_class = function(start, end, task){
+                    var css = [];
+                    css.push(task.type+"_task");
+                    if(gantt.hasChild(task.id) && task.objType=='activity'){
+                        css.push("task-parent");
+                    }
+                    if (!task.$open && gantt.hasChild(task.id) && task.objType=='activity') {
+                        css.push("task-collapsed");
+                    }
+        
+                    return css.join(" ");
+                };
+        
+                gantt.addTaskLayer(function show_hidden(task) {
+                    if (!task.$open && gantt.hasChild(task.id) && task.objType=='activity') {
+                        var sub_height = gantt.config.row_height - 5,
+                            el = document.createElement('div'),
+                            sizes = gantt.getTaskPosition(task);
+        
+                        var sub_tasks = gantt.getChildren(task.id);
+        
+                        var child_el;
+        
+                        for (var i = 0; i < sub_tasks.length; i++){
+                            var child = gantt.getTask(sub_tasks[i]);
+                            var child_sizes = gantt.getTaskPosition(child);
+        
+                            child_el = createBox({
+                                height: sub_height,
+                                top:sizes.top+2,
+                                left:child_sizes.left,
+                                width: child_sizes.width
+                            }, "child_preview gantt_task_line "+child.type+"_task");
+                            child_el.innerHTML =  child.actImg;
+                            el.appendChild(child_el);
+                        }
+                        return el;
+                    }
+                    return false;
+                });
+            	// additional js for sub ma - end -
+            
+                gantt.parse(<apex:outputText value="{!dataString}" escape="true"/>);
+                
+                console.log(<apex:outputText value="{!dataString}" escape="true"/>);        
+                function saveFilterIdToBrowserCookie(filterId) {
+                    document.cookie="current_filter_id="+filterId;
+                }
+                
+                $(function(){
+                    var currentFilter = getCookieByName('current_filter_id');
+                    if(currentFilter != '{!JSINHTMLENCODE(selectedFilter)}' && currentFilter !='0'  && currentFilter !='') {
+                        $("select.filterSelect").val(currentFilter);
+                        loadganttviewbyFilterSelect();
+                    }
+                });
+                
+                function getCookieByName(cname) {
+                    var name = cname + "=";
+                    var ca = document.cookie.split(';');
+                    for(var i=0; i<ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0)==' ') c = c.substring(1);
+                        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+                    }
+                    return "";
+                }
+            
+            
+                function clearFilterFromCookie() {
+                    document.cookie="current_filter_id=0";
+                }
+            
+                function confirmUser(msg) {
+                    $('.tr-bg').show();
+                    $('#dragPopup #dragPopupUpper').html(msg).show();
+                    $("#dragPopup #dragPopupLower i.success-mark").hide();
+                    $("#dragPopup #dragPopupLower button").show();
+                    $('#dragPopup').fadeIn();
+                }
+            
+                function showLoader(popupId) {
+                    if(popupId=='#planCopyPopup') {
+                        if($('#pc_npn').val().trim()=='') {
+                            alert('Plan name is required!');
+                            return;
+                        } else if($('#pc_np_sd').val().trim()=='') {
+                            alert('Start date is required!');
+                            return;
+                        } else {
+                            $(popupId).animate({top:'100px'},600);
+                        }
+                    }
+                    $(popupId+" .upper").slideUp('slow');
+                    $(popupId+" .lower button").hide();
+                    $(popupId+" .lower .gear-rotate").css('display','inline-block');
+                    $(popupId+" .lower span").fadeIn();
+                }
+            
+                function revertDrag() {
+                    var t = gantt.getTask(globalTaskIdOnDrag);
+                    t.start_date = oldStartDate;
+                    t.end_date = oldEndDate;
+                    gantt.refreshTask(globalTaskIdOnDrag);
+                    for(var i=0; i<childTasksLastStatus.length; i++) {
+                        t = gantt.getTask(childTasksLastStatus[i].id);
+                        t.start_date = childTasksLastStatus[i].startDate;
+                        t.end_date = childTasksLastStatus[i].endDate;
+                        gantt.refreshTask(childTasksLastStatus[i].id);
+                    }
+                    $('.tr-bg').hide();$('#dragPopup').fadeOut();
+                    childTasksLastStatus = [];
+                    childTasks = [];
+                }
+            
+                $(function(){
+                    $('input#startDate').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        defaultDate: -30,
+                        showAnim: 'slide',
+                        onSelect: function (dateText, inst) {
+                            $('input#startDate').datepicker('hide');
+                            gantt.config.start_date = new Date(dateText);
+                            gantt.config.end_date  = new Date($('input#endDate').val());
+                            gantt.init("gantt");
+                            drawChart();
+                        },
+                        onClose: function(selectedDate){
+                            $("input#endDate").datepicker("option", "minDate", selectedDate);
+                        }
+                    });
+                    
+                    $('input#endDate').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        defaultDate: +60,
+                        showAnim: 'slide',
+                        onSelect: function (dateText, inst) {
+                            $('input#endDate').datepicker('hide');
+                            gantt.config.start_date = new Date($('input#startDate').val());
+                            gantt.config.end_date  = new Date(dateText);
+                            gantt.init("gantt");
+                            drawChart();
+                        },
+                        onClose: function(selectedDate){
+                            $("input#startDate").datepicker("option", "maxDate", selectedDate);
+                        }
+                    });
+                });
+            
+                
+                function applyDatePicker() {
+                    
+                    var sdfc = new Date("{!FilterStartDate}");
+                    var formattedSdfc = ("0" + (sdfc.getMonth()+1)).slice(-2) + '/' + ("0" + (sdfc.getDate())).slice(-2) + '/' + sdfc.getFullYear();
+                    $('.popUpSD').val(formattedSdfc);
+                    var edfc = new Date("{!FilterEndDate}");
+                    var formattedEdfc = ("0" + (edfc.getMonth()+1)).slice(-2) + '/' + ("0" + (edfc.getDate())).slice(-2) + '/' + edfc.getFullYear();
+                    $('.popUpED').val(formattedEdfc);
+                    $('.popUpSD').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        showAnim: 'slide',
+                        onClose: function(selectedDate){
+                            $(".popUpED").datepicker("option", "minDate", selectedDate);
+                        }
+                    });
+                    $('.popUpED').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        defaultDate: new Date(formattedEdfc),
+                        showAnim: 'slide',
+                        onClose: function(selectedDate){
+                            $(".popUpSD").datepicker("option", "maxDate", selectedDate);
+                        }
+                    });
+                }
+                
+                function showInfoPopup(id) {
+                    var taskObj = gantt.getTask(id);
+                    $('#infoPopup .upper #name').text(taskObj.text);
+                    $('#infoPopup .upper #description').text(taskObj.description);
+                   
+                    var itemType = taskObj.objType;
+                    var typeLabel = '';
+                    var ownerLabel = '';
+                    var sdLabel = '';
+                    var openLink = baseUrl + id;
+                    if(itemType == 'project') {
+                        typeLabel = '{!$Label.pt_Plantype}';
+                        ownerLabel = '{!$Label.pt_Owner}';
+                        sdLabel = '{!$Label.pt_Start_date}';
+                        $('#infoPopup .upper #ed').show();
+                    } else if(itemType == 'subproject') {
+                        typeLabel = '{!$Label.sub_Project_type}';
+                        ownerLabel = '{!$Label.pt_Owner}';
+                        sdLabel = '{!$Label.pt_Start_date}';
+                        $('#infoPopup .upper #ed').show();
+                    }
+                    else if(itemType == 'activity') {
+                        typeLabel = '{!$Label.mrk_Activity_type}';
+                        ownerLabel = '{!$Label.pt_Owner}';
+                        sdLabel = '{!$Label.pt_Start_date}';
+                        $('#infoPopup .upper #ed').show();
+                    }
+                    if(itemType == 'task') {
+                        typeLabel = '{!$Label.tsk_Subject}';
+                        ownerLabel = '{!$Label.tsk_Assigned_To}';
+                        sdLabel = '{!$Label.tsk_Due_Date}';
+                        $('#infoPopup .upper #ed').hide();
+                        
+                        var gantttaskurl = 'apex/TaskEditpage?taskid=' + id + '&maingantt=Y';
+                        openLink = baseUrl + gantttaskurl;
+                    }
+                    $('#infoPopup .upper #owner th').text(ownerLabel);
+                    $('#infoPopup .upper #owner td').text(taskObj.owner);
+                    $('#infoPopup .upper #type th').text(typeLabel);
+                    $('#infoPopup .upper #type td').text(taskObj.projectType);
+                    var sd = taskObj.start_date;
+                    var formattedSd = ("0" + (sd.getMonth()+1)).slice(-2) + '-' + ("0" + (sd.getDate())).slice(-2) + '-' + sd.getFullYear();
+                    $('#infoPopup .upper #sd th').text(sdLabel);
+                    $('#infoPopup .upper #sd td').text(formattedSd);
+                    if(itemType != 'task') {
+                        var ed = taskObj.end_date;
+                        var formattedEd = ("0" + (ed.getMonth()+1)).slice(-2) + '-' + ("0" + (ed.getDate()-1)).slice(-2) + '-' + ed.getFullYear();
+                        $('#infoPopup .upper #ed td').text(formattedEd);
+                    }
+                    $('#infoPopup .lower input').on('click',function(){
+                        top.location.href = openLink;
+                    });
+                    $('.tr-bg').show();
+                    //$('#infoPopup').fadeIn('fast');
+                    $('#infoPopup').animate({top:'75px'},300);
+                }
+                function closeInfoPopup() {
+                    //$('#infoPopup').slideUp('fast');
+                    $('.tr-bg').hide();
+                    $('#infoPopup').animate({top:'-1000px'},300);
+                }
+                function showTaskReorderPopup(msg,mode) {
+                    if(mode=='confirm') {
+                        $('#taskReorderPopup .lower button').show();
+                        $('#taskReorderPopup .upper').html(msg).show();
+                        $("#taskReorderPopup .lower i.success-mark").hide();
+                    } else if(mode=='alert') {
+                        $('#taskReorderPopup .lower input').show();
+                        $("#taskReorderPopup .lower i.success-mark").hide();
+                        $('#taskReorderPopup .upper').html('<i class="icon-large icon-remove" style="color: #ff6633;margin-right: 7px;font-size: 22px;"></i>'+msg).show();
+                    }
+                    $('.tr-bg').show();
+                    $('#taskReorderPopup').fadeIn();
+                }
+                function hideReorderAlertPopup() {
+                    $('.tr-bg, #taskReorderPopup .lower input').hide();
+                    $('#taskReorderPopup').fadeOut();
+                }
+                function updateTasksOnReorder() {
+                    var parentId = globalTaskOnReorder.parent;
+                    var planId;
+                    while(parentId != '0') {
+                        planId = parentId;
+                        parentId = gantt.getParent(parentId);
+                    }
+                    sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                    var obj;
+                    if(globalTaskOnReorder.objType == 'subproject') {
+                        obj = new sforce.SObject("musqot__Subproject__c");
+                        obj.id = globalTaskOnReorder.id;
+                        obj.musqot__Parent_project__c = planId;
+                        if(globalTargetOnReorder.objType == 'subproject')
+                            obj.musqot__Project_del__c = globalTargetOnReorder.id;
+                        else
+                            obj.musqot__Project_del__c = null;
+                        sforce.connection.update([obj]);
+                        // updating child nodes
+                        gantt.eachTask(function(child){
+                            if(child.objType == 'subproject') {
+                                obj = new sforce.SObject("musqot__Subproject__c");
+                                obj.musqot__Parent_project__c = planId;
+                            } else if(child.objType == 'activity') {
+                                obj = new sforce.SObject("musqot__Marketing_activity__c");
+                                obj.musqot__Plan__c = planId;
+                            }
+                            obj.id = child.id;
+                            sforce.connection.update([obj]);
+                        }, globalTaskOnReorder.id);
+                    } else if(globalTaskOnReorder.objType == 'activity') {
+                        obj = new sforce.SObject("musqot__Marketing_activity__c");
+                        obj.id = globalTaskOnReorder.id;
+                        obj.musqot__Plan__c = planId;
+                        obj.musqot__Project__c = globalTargetOnReorder.id;
+                        sforce.connection.update([obj]);
+                    }
+                    
+                    parentBeforeTaskReorder = null;
+                    globalTaskOnReorder = null; globalTargetOnReorder = null;
+                    
+                    $("#taskReorderPopup .lower .gear-rotate").hide();
+                    $("#taskReorderPopup .lower span").hide();
+                    $("#taskReorderPopup .lower i.success-mark").fadeIn();
+                    setTimeout(function(){
+                        $('.tr-bg').hide();$('#taskReorderPopup').fadeOut();
+                    }, 1500);
+                }
+                function revertReorder() {
+                    $('.tr-bg, #taskReorderPopup .lower button').hide();
+                    $('#taskReorderPopup').fadeOut();
+                    // reverting move
+                    gantt.clearAll();
+                    gantt.parse(<apex:outputText value="{!dataString}" escape="true"/>);
+                    var parent = parentBeforeTaskReorder;
+                    while(parent != '0') {
+                        gantt.open(parent);
+                        parent = gantt.getParent(parent);
+                    }
+                    parentBeforeTaskReorder = null;
+                    globalTaskOnReorder = null; globalTargetOnReorder = null;
+                }
+                function showCopyPlanPopup(id) {
+                    $('#planCopyPopup .upper, #planCopyPopup .lower button').show();
+                    $("#planCopyPopup .lower i.success-mark").hide();
+                    $('.tr-bg').show();
+                    $('#planCopyPopup').css('top','0px').fadeIn();
+                    
+                    var plan = gantt.getTask(id);
+                    $('#planCopyPopup .upper #planBeingCopied').text(plan.text);
+                    $('#pc_np_sd').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        showAnim: 'slide',
+                        minDate: 0
+                    }).datepicker("setDate", new Date());
+                    $('#planCopyPopup .lower button:first').attr("onclick","showLoader('#planCopyPopup');setTimeout(function(){createPlanCopy('"+id+"');}, 600);");
+                }
+            
+            function hideCopyPopup(popupId){
+                $('.tr-bg').hide();
+                $(popupId).fadeOut();
+            }
+            
+            function createPlanCopy(id) {
+                if($('#pc_npn').val().trim()!='' && $('#pc_np_sd').val().trim()!='') {
+                    sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                    try {
+                        var res = sforce.apex.execute("musqot.GanttPageController","createPlanCopy",{
+                            id : id,
+                            name : $('#pc_npn').val(),
+                            sd : new Date($('#pc_np_sd').val()),
+                            subsub: $('[name="subsub"]').prop('checked'),
+                            activities: $('[name="activities"]').prop('checked'),
+                            ownernmember: $('[name="ownernmember"]').prop('checked'),
+                            budget: $('[name="budget"]').prop('checked'),
+                            overnattach: $('[name="overnattach"]').prop('checked'),
+                            milestonenp: $('[name="milestonenp"]').prop('checked'),
+                            fydd: $('#fydd').val()
+                        });
+                        //console.log(res);
+                        $("#planCopyPopup .lower .gear-rotate").hide();
+                        $("#planCopyPopup .lower span").hide();
+                        $("#planCopyPopup .lower i.success-mark").fadeIn();
+                        document.cookie="focus_task="+res;
+                        location.reload();
+                    } catch(error) {
+                        console.log('Error detail: ' + error);
+                        alert('There was a problem. Please try again!');
+                        location.reload();
+                    }
+                }
+            }
+            
+            $(function(){
+                var focus_task = getCookieByName('focus_task');
+                if(focus_task != '') {
+                    document.cookie="focus_task=";
+                    var parentId = focus_task,
+                        loop = 1;
+                    while(parentId != '0') {
+                        var pObj = gantt.getTask(parentId);
+                        if(loop != 1)
+                            pObj.$open = true;
+                        parentId = pObj.parent;
+                        loop++;
+                    }
+                    gantt.render();
+                    gantt.scrollTo(null, gantt.getTaskTop(focus_task)-200);
+                    $("[task_id=" + focus_task + "].gantt_row").addClass("gantt_selected");
+                }
+            });
+            
+            function showProjectCopyPopup(projId) {
+                $('#projectCopyPopup .lower button').show();
+                $('.tr-bg').show();
+                $('#projectCopyPopup').fadeIn();
+                
+                var project = gantt.getTask(projId);
+                $('#projectCopyPopup .upper #projectBeingCopied').text(project.text);
+                $('#prc_np_sd').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showAnim: 'slide',
+                    minDate: 0
+                }).datepicker("setDate", new Date());
+                $('#projectCopyPopup .lower button:first').attr("onclick","copyProject('"+projId+"');");
+            }
+            var copyCutItemId = '',
+                copyCutType = '';
+            function copyProject(projId) {
+                if($('#prc_npn').val().trim()=='') {
+                    alert('Project name is required!');
+                    return;
+                } else if($('#prc_np_sd').val().trim()=='') {
+                    alert('Start date is required!');
+                    return;
+                }
+                $('.tr-bg').hide();
+                $('#projectCopyPopup').fadeOut();
+                canPasteInProject = true;
+                canPasteInPlan = true;
+                copyCutItemId = projId;
+                copyCutType = 'copy';
+            }
+            function cutProject(projId) {
+                canPasteInProject = true;
+                canPasteInPlan = true;
+                copyCutItemId = projId;
+                copyCutType = 'cut';
+                $(".gantt_row").removeClass("gantt_transparent");
+                $("[task_id=" + projId + "].gantt_row").addClass("gantt_transparent ");
+            }
+            
+            function showActivityCopyPopup(actId) {
+                $('#activityCopyPopup .lower button').show();
+                $('.tr-bg').show();
+                $('#activityCopyPopup').fadeIn();
+                
+                var activity = gantt.getTask(actId);
+                $('#activityCopyPopup .upper #activityBeingCopied').text(activity.text);
+                $('#ac_na_sd').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showAnim: 'slide',
+                    minDate: 0
+                }).datepicker("setDate", new Date());
+                $('#activityCopyPopup .lower button:first').attr("onclick","copyActivity('"+actId+"');");
+            }
+            function copyActivity(actId) {
+                if($('#ac_nan').val().trim()=='') {
+                    alert('Activity name is required!');
+                    return;
+                } else if($('#ac_na_sd').val().trim()=='') {
+                    alert('Start date is required!');
+                    return;
+                }
+                $('.tr-bg').hide();
+                $('#activityCopyPopup').fadeOut();
+                canPasteInProject = true;
+                canPasteInPlan = false;
+                copyCutItemId = actId;
+                copyCutType = 'copy';
+            }
+            function cutActivity(actId) {
+                canPasteInProject = true;
+                canPasteInPlan = false;
+                copyCutItemId = actId;
+                copyCutType = 'cut';
+                $(".gantt_row").removeClass("gantt_transparent");
+                $("[task_id=" + actId + "].gantt_row").addClass("gantt_transparent ");
+            }
+            function pasteInPlan(planId) {
+                if(copyCutType=='copy') {
+                    var task = gantt.getTask(copyCutItemId);
+                    if(task.objType=='subproject')
+                        createProjectCopy(copyCutItemId,planId,'project');
+                } else if(copyCutType=='cut'){
+                    var task = gantt.getTask(copyCutItemId),
+                        targetObj = gantt.getTask(planId);
+                    pasteForCut(task,targetObj);
+                    document.cookie="focus_task="+copyCutItemId;
+                    location.reload();
+                }
+            }
+            function pasteInProject(projId) {
+                if(copyCutType=='copy') {
+                    var task = gantt.getTask(copyCutItemId);
+                    if(task.objType=='subproject')
+                        createProjectCopy(copyCutItemId,projId,'subproject');
+                    else if(task.objType=='activity')
+                        createActivityCopy(copyCutItemId,projId);
+                } else if(copyCutType=='cut'){
+                    var task = gantt.getTask(copyCutItemId),
+                        targetObj = gantt.getTask(projId);
+                    pasteForCut(task,targetObj);
+                    document.cookie="focus_task="+copyCutItemId;
+                    location.reload();
+                }
+            }
+            function pasteForCut(task,targetObj){
+                var parentId = targetObj.id;
+                var planId;
+                while(parentId != '0') {
+                    planId = parentId;
+                    parentId = gantt.getParent(parentId);
+                }
+                sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                var obj;
+                if(task.objType == 'subproject') {
+                    obj = new sforce.SObject("musqot__Subproject__c");
+                    obj.id = task.id;
+                    obj.musqot__Parent_project__c = planId;
+                    if(targetObj.objType == 'subproject')
+                        obj.musqot__Project_del__c = targetObj.id;
+                    else
+                        obj.musqot__Project_del__c = null;
+                    sforce.connection.update([obj]);
+                    // updating child nodes
+                    gantt.eachTask(function(child){
+                        if(child.objType == 'subproject') {
+                            obj = new sforce.SObject("musqot__Subproject__c");
+                            obj.musqot__Parent_project__c = planId;
+                        } else if(child.objType == 'activity') {
+                            obj = new sforce.SObject("musqot__Marketing_activity__c");
+                            obj.musqot__Plan__c = planId;
+                        }
+                        obj.id = child.id;
+                        sforce.connection.update([obj]);
+                    }, task.id);
+                } else if(task.objType == 'activity') {
+                    obj = new sforce.SObject("musqot__Marketing_activity__c");
+                    obj.id = task.id;
+                    obj.musqot__Plan__c = planId;
+                    obj.musqot__Project__c = targetObj.id;
+                    sforce.connection.update([obj]);
+                }
+            }
+            function cutPasteLoader(targetId) {
+                var task = gantt.getTask(copyCutItemId);
+                var operationName = '';
+                if(copyCutType=='cut')
+                    operationName = 'Moving';
+                else if(copyCutType=='copy')
+                    operationName = 'Copying';
+                $('.tr-bg').show();
+                $('#onlyLoaderPopup .upper').html(operationName + ' <b>' + task.text + '</b> from <b>' + gantt.getTask(task.parent).text + '</b> to <b>' + gantt.getTask(targetId).text + '</b>.');
+                $('#onlyLoaderPopup').fadeIn();
+            }
+            function createProjectCopy(id,targetId,targetType) {
+                var parentId = targetId;
+                var targetPlanId;
+                while(parentId != '0') {
+                    targetPlanId = parentId;
+                    parentId = gantt.getParent(parentId);
+                }
+                if($('#prc_npn').val().trim()!='' && $('#prc_np_sd').val().trim()!='') {
+                    var subProIds = ['0'];
+                    gantt.eachTask(function(child){
+                        if(child.objType == 'subproject')
+                            subProIds.push(child.id);
+                    }, id);
+                    
+                    sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                    try {
+                        var res = sforce.apex.execute("musqot.GanttPageController","createProjectCopy",{
+                            id : id,
+                            targetId : targetId,
+                            targetType : targetType,
+                            targetPlanId : targetPlanId,
+                            name : $('#prc_npn').val(),
+                            sd : new Date($('#prc_np_sd').val()),
+                            subProIds : subProIds,
+                            activities: $('[name="prc_activities"]').prop('checked'),
+                            tasks: $('[name="prc_tasks"]').prop('checked'),
+                            ownernmember: $('[name="prc_ownernmember"]').prop('checked'),
+                            budget: $('[name="prc_budget"]').prop('checked'),
+                            overnattach: $('[name="prc_overnattach"]').prop('checked'),
+                            milestonenp: $('[name="prc_milestonenp"]').prop('checked'),
+                            fydd: $('#prc_fydd').val()
+                        });
+                        console.log(res);
+                        $('.tr-bg').hide();
+                        $('#onlyLoaderPopup').fadeOut();
+                        document.cookie="focus_task="+res;
+                        location.reload();
+                    } catch(error) {
+                        console.log('Error detail: ' + error);
+                        alert('There was a problem. Please try again!');
+                        location.reload();
+                    }
+                }
+            }
+            
+            function createActivityCopy(id,targetId) {
+                var parentId = gantt.getParent(targetId);
+                var targetPlanId;
+                while(parentId != '0') {
+                    targetPlanId = parentId;
+                    parentId = gantt.getParent(parentId);
+                }
+                if($('#ac_nan').val().trim()!='' && $('#ac_na_sd').val().trim()!='') {
+                    
+                    sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+                    try {
+                        var res = sforce.apex.execute("musqot.GanttPageController","createActivityCopy",{
+                            id : id,
+                            targetSubProId : targetId,
+                            targetPlanId : targetPlanId,
+                            name : $('#ac_nan').val(),
+                            sd : new Date($('#ac_na_sd').val()),
+                            tasks: $('[name="ac_tasks"]').prop('checked'),
+                            ownernmember: $('[name="ac_ownernmember"]').prop('checked'),
+                            overnattach: $('[name="ac_overnattach"]').prop('checked'),
+                            performance: $('[name="ac_performance"]').prop('checked')
+                        });
+                        console.log(res);
+                        $('.tr-bg').hide();
+                        $('#onlyLoaderPopup').fadeOut();
+                        document.cookie="focus_task="+res;
+                        location.reload();
+                    } catch(error) {
+                        console.log('Error detail: ' + error);
+                        alert('There was a problem. Please try again!');
+                        location.reload();
+                    }
+                }
+            }
+            </script>
+        </div>
+    </div>
+
+    <!-- Custom confirm box -->
+    <div class="popup" id="dragPopup">
+        <div class="upper" id="dragPopupUpper">Are you sure to perform this action?</div>
+        <div class="stroke"></div>
+        <div class="lower" id="dragPopupLower">
+            <div class="gear-rotate"></div>
+            <span>Updating...</span>
+            <i class="icon-large icon-ok success-mark"></i>
+            <button onclick="showLoader('#dragPopup');setTimeout(function(){updateTaskDate(globalTaskIdOnDrag, globalTaskStartDateOnDrag, globalTaskEndDateOnDrag);}, 600);"><i class="icon-large icon-ok"></i>Yes</button>
+            <button onclick="revertDrag();"><i class="icon-large icon-remove"></i>No</button>
+        </div>
+    </div>
+    <div class="tr-bg"></div>
+
+    <div class="popup" id="infoPopup">
+        <div class="upper">
+            <i class="icon-large icon-remove" 
+               onclick="closeInfoPopup();">
+            </i>
+            <h2 id="name"></h2>
+            <div id="description"></div><br/>
+            <table border="0">
+                <tr id="owner">
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="type">
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="sd">
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr id="ed">
+                    <th>{!$label.pt_End_date}</th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <input type="button" value="{!$Label.btn_status_open}" />
+        </div>
+    </div>
+    <div class="popup" id="taskReorderPopup">
+        <div class="upper">Are you sure to perform this action?</div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <div class="gear-rotate"></div>
+            <span>Updating...</span>
+            <i class="icon-large icon-ok success-mark"></i>
+            <input type="button" value="OK" onclick="hideReorderAlertPopup();"/>
+            <button onclick="showLoader('#taskReorderPopup');setTimeout(function(){updateTasksOnReorder();}, 600);"><i class="icon-large icon-ok"></i>Yes</button>
+            <button onclick="location.reload();"><i class="icon-large icon-remove"></i>No</button>
+        </div>
+    </div>
+
+    <div class="popup" id="planCopyPopup">
+        <div class="upper">
+            Will you copy the plan <span id="planBeingCopied"></span><br/>
+            Plan name <input type="text" placeholder="New plan name" id="pc_npn" autofocus="autofocus" /><br/>
+            {!$label.pt_Start_date} <input type="text" id="pc_np_sd"/><br/>
+            and include<br/>
+            <input type="checkbox" name="subsub" />
+            <label>Subsub and follow project</label><br/>
+            <input type="checkbox" name="activities" />
+            <label>Marketing activities</label><br/>
+            <input type="checkbox" name="ownernmember" />
+            <label>Owner and Members</label><br/>
+            <input type="checkbox" name="budget" />
+            <label>Budget, New fiscal year</label>
+            <select id="fydd">
+                <apex:repeat value="{!fys}" var="fy">
+                        <option value="{!fy.Id}">{!fy.Name}</option>
+                </apex:repeat>
+            </select><br/>
+            <input type="checkbox" name="overnattach" />
+            <label>Overview and attachment</label><br/>
+            <input type="checkbox" name="milestonenp" />
+            <label>Milestone, Performance</label><br/>
+            <span style="font-size: 12px;">Note: child nodes will be copied accordingly.</span>
+        </div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <div class="gear-rotate"></div>
+            <span>Creating New Plan...</span>
+            <i class="icon-large icon-ok success-mark"></i>
+            <button><i class="icon-large icon-ok"></i>Yes</button>
+            <button onclick="hideCopyPopup('#planCopyPopup');"><i class="icon-large icon-remove"></i>No</button>
+        </div>
+    </div>
+
+    <div class="popup" id="projectCopyPopup">
+        <div class="upper">
+            Will you copy the project <span id="projectBeingCopied"></span><br/>
+            Project name <input type="text" placeholder="New project name" id="prc_npn" autofocus="autofocus" /><br/>
+            {!$label.pt_Start_date} <input type="text" id="prc_np_sd"/><br/>
+            and include<br/>
+            <input type="checkbox" name="prc_activities" />
+            <label>Marketing activities</label><br/>
+            <input type="checkbox" name="prc_tasks" />
+            <label>Tasks</label><br/>
+            <input type="checkbox" name="prc_ownernmember" />
+            <label>Owner, Members and Task users</label><br/>
+            <input type="checkbox" name="prc_budget" />
+            <label>Budget, New fiscal year</label>
+            <select id="prc_fydd">
+                <apex:repeat value="{!fys}" var="fy">
+                        <option value="{!fy.Id}">{!fy.Name}</option>
+                </apex:repeat>
+            </select><br/>
+            <input type="checkbox" name="prc_overnattach" />
+            <label>Overview and attachment</label><br/>
+            <input type="checkbox" name="prc_milestonenp" />
+            <label>Milestone, Performance</label><br/>
+            <span style="font-size: 12px;">Note: child nodes will be copied accordingly.</span>
+        </div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <button><i class="icon-large icon-ok"></i>Yes</button>
+            <button onclick="hideCopyPopup('#projectCopyPopup');"><i class="icon-large icon-remove"></i>No</button>
+        </div>
+    </div>
+
+    <div class="popup" id="activityCopyPopup">
+        <div class="upper">
+            Will you copy the activity <span id="activityBeingCopied"></span><br/>
+            Activity name <input type="text" placeholder="New activity name" id="ac_nan" autofocus="autofocus" /><br/>
+            {!$label.pt_Start_date} <input type="text" id="ac_na_sd"/><br/>
+            and include<br/>
+            <input type="checkbox" name="ac_tasks" />
+            <label>Tasks</label><br/>
+            <input type="checkbox" name="ac_ownernmember" />
+            <label>Owner, Members and Task users</label><br/>
+            <input type="checkbox" name="ac_overnattach" />
+            <label>Overview and attachment</label><br/>
+            <input type="checkbox" name="ac_performance" />
+            <label>Performance</label><br/>
+            <span style="font-size: 12px;">Note: child nodes will be copied accordingly.</span>
+        </div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <button><i class="icon-large icon-ok"></i>Yes</button>
+            <button onclick="hideCopyPopup('#activityCopyPopup');"><i class="icon-large icon-remove"></i>No</button>
+        </div>
+    </div>
+
+    <div class="popup" id="onlyLoaderPopup">
+        <div class="upper">info text here...</div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <div class="gear-rotate"></div>
+            <span>Please Wait...</span>
+            <i class="icon-large icon-ok success-mark"></i>
+        </div>
+    </div>
+</apex:page>

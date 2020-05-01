@@ -1,0 +1,4 @@
+<apex:component controller="CmphoursApprovalURL" access="global">  
+<apex:attribute name="objID" description="Obj ID" type="Id" assignTo="{!arsId}"/>  
+  <a href="{!urlStr}">{!urlStr}</a>  
+</apex:component>

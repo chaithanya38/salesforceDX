@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>use for Musqot application setting</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Company_holidays__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>This should be a semicolon separate list
+DD-MM-YYYY, DD-MM-YYYY, DD-MM-YYYY</inlineHelpText>
+        <label>Company holidays</label>
+        <length>2000</length>
+        <type>LongTextArea</type>
+        <visibleLines>2</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Drag_to_change_date_Detail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Drag to change date_Detail</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Drag_to_change_date_Main__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Drag to change date_Main</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Forcasting_period__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Forcasting period</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Quarter</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Month</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Week</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Incl_Marketing_activity_Detail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Incl Marketing activity_Detail</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Incl_Marketing_activity_Main__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Incl Marketing activity_Main</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Incl_Milestone_Detail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Incl Milestone_Detail</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Incl_Milestone_Main__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Incl Milestone_Main</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Incl_Task_Detail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Incl Task_Detail</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Incl_Task_main_gantt__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Incl Task</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Performance_milestone_Detail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Performance milestone_Detail</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Plan_access_controll__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>If this is checked then you need to defined all user who should have access to each Plan</inlineHelpText>
+        <label>Plan access controll</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Allocation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use Allocation</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Budget__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use Budget</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Finance1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use Finance</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Forcasting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use Forcasting</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Performance_CRM__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use CRM Performance</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not used</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Salesforce (outside Musqot org)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other CRM system</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Use_Performance_ERP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use ERP Performance</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Resource__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Used for control of spent hours in maketing</description>
+        <externalId>false</externalId>
+        <label>Use Resource</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_milestones__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use milestones</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_socialmedia__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use Socialmedia</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>keycode__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>keycode</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Musqot setting</label>
+    <nameField>
+        <label>Title</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Musqot setting</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

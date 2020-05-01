@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Type of work</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Type of works</value>
+    </caseValues>
+    <fields>
+        <label><!-- Work description --></label>
+        <name>Work_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bar color --></label>
+        <name>bartaskcolor__c</name>
+    </fields>
+    <nameFieldLabel><!-- worktype Name --></nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

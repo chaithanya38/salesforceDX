@@ -1,0 +1,132 @@
+<apex:page sidebar="false" standardStylesheets="false" standardController="Activitytype__c" extensions="ActivityTypeClass" >
+    <apex:includeScript value="{!URLFOR($Resource.Colorpicker, 'jscolor/jscolor.js')}" />    
+    <apex:includeScript value="{!URLFOR($Resource.Colorpicker, 'jscolor/jscolor.js')}" />
+    <style>
+        .custPopup{
+        background-color: white;
+        border-width: 2px;
+        border-color:#f96302;
+        border-style: solid;
+        z-index: 9999;
+        left: 30%;
+        padding:10px;
+        position: absolute;
+        overflow-y:scroll;
+        width:300px;
+        max-height:350px;
+        margin-left: 0px;
+        top:50px;
+        }
+        .custUplodePopup{
+        background-color: white;
+        border-width: 2px;
+        border-color:#f96302;
+        border-style: solid;
+        z-index: 9999;
+        left: 30%;
+        padding:10px;
+        position: absolute;
+        width:400px;
+        margin-left: 0px;
+        top:50px;
+        }
+        .popupBackground{
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        }
+        .myClass { width: 280px; }
+    </style>
+    <apex:form id="frm" >
+        
+        <apex:actionRegion >
+            <apex:actionFunction name="methodOneInJavascript" action="{!closePopUp}" rerender="showImgPopUp,showUploadPopUp"/>
+        </apex:actionRegion>
+        <apex:pageBlock title="{!$Label.pt_New_Activity_type}" tabStyle="Musqot_admin__tab" mode="edit">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:inputText value="{!poptext}" id="outData" style="display:none"/>
+            <apex:pageBlockButtons location="Top" >
+                <apex:commandButton value="{!$Label.btn_save}" action="{!save}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageMessages rendered="{!filesizecheck}"/>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!ActivityType.name}" label="{!$Label.mrk_Activity_type}" required="true"/>
+                <apex:inputField value="{!ActivityType.Bar_color__c}" styleClass="color" label="{!$Label.actt_Bar_color}"/>
+                <!--<apex:outputPanel id="frm1" style="position:relative;left:210px;padding-bottom:10px;padding-top:10px;">-->
+                <apex:outputText styleClass="myClass" label="{!$Label.actt_Url_to_icon}" id="frm1">
+                    <apex:outputPanel rendered="{!if(ActivityType.Icon__c<>null,true,false)}" id="frmp">
+                        <div style="valign:top;background-color:#{!bgColor};height:50px;display:inline;padding-bottom:7px;padding-top:6px;padding-left:20px;padding-right:20px;">
+                            <apex:image url="{!ActivityType.Icon__c}" height="20" rendered="{!showImg}"/>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:commandLink value="Select" action="{!showActivityImagPopUp}" onclick="location.reload();"/>&nbsp;&nbsp;
+                    <apex:commandLink value="Upload" action="{!showUplodePopUp}"/>
+                </apex:outputText>
+                <!--</apex:outputPanel>-->
+                <apex:selectList value="{!ActivityType.F__c}" size="1" multiselect="false">
+                    <apex:selectOptions value="{!Fieldsetlist}" />
+                </apex:selectList>
+            </apex:pageBlockSection>
+            <apex:outputPanel id="showImgPopUp" >
+                <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!showImagePopUp}" onclick="methodOneInJavascript('Yes!')"/>
+                <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!showImagePopUp}"> 
+                    <apex:pageBlockTable value="{!listWrapper}" var="w" width="100px">
+                        <apex:column headerValue="{!$Label.musadmin_Name}" width="75">
+                            <apex:outputText value="{!w.resourceName}" /> 
+                            <apex:actionSupport event="onclick" reRender="frm,showUploadPopUp" action="{!selectActivityImage}" immediate="true">
+                                <apex:param name="imgeurl" value="{!w.resourcurl}"/>
+                            </apex:actionSupport>
+                        </apex:column>
+                        <apex:column headerValue="{!$Label.actt_Icon}" width="25" >
+                            <div style="valign:top;background-color:#ff9933;height:25px;display:inline;padding-bottom:5px;padding-top:5px;padding-left:10px;padding-right:0px;">
+                                <apex:image url="{!w.resourcurl}" alt="" height="20" >
+                                    <apex:actionSupport event="onclick" reRender="frm,showUploadPopUp" action="{!selectActivityImage}" immediate="true">
+                                        <apex:param name="imgeurl" value="{!w.resourcurl}"/>
+                                    </apex:actionSupport>
+                                </apex:image>
+                            </div>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:outputPanel> 
+            </apex:outputPanel> 
+            <apex:outputPanel id="showUploadPopUp" >
+                <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!showUploadPopUp}" onclick="methodOneInJavascript('Yes!')"/>
+                <apex:outputPanel styleClass="custUplodePopup" layout="block" rendered="{!showUploadPopUp}"> 
+                    <apex:pageMessages />
+                    <apex:pageBlock > 
+                        <apex:pageBlockButtons location="bottom">
+                            <apex:commandButton value="{!$Label.btn_Upload_file}" action="{!createStaticResource}"  onclick="FilenameCheck('{!$Component.j_id0:frm:j_id6:j_id50:j_id54:Ul}')"/> <!-- onclick="MyjavaFunction('{!$Component.j_id0:frm:j_id6:j_id50:j_id54:Ul}')"/>-->  
+                        </apex:pageBlockButtons>
+                        <apex:pageBlockSection title="Uploade activity immage" columns="1" collapsible="false">
+                            <apex:inputText value="{!fileName}" label="Name" id="Ul"/> 
+                            <apex:pageBlockSectionItem >
+                                <apex:outputText value=""></apex:outputText>
+                                <apex:inputFile value="{!fileImage}" filename="{!fileName}"  id="file" fileSize="{!filesize}" onchange="check(this)" />
+                            </apex:pageBlockSectionItem> 
+                            <apex:pageBlockSectionItem >
+                                <apex:outputText value=""></apex:outputText>
+                                <apex:outputText value="The icon should be in format 24x24 px, png" />
+                            </apex:pageBlockSectionItem> 
+                            
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </apex:outputPanel> 
+            </apex:outputPanel> 
+        </apex:pageBlock>                   
+    </apex:form>
+    <script>
+    function check(obj_inpf)
+    {     
+        var filname=obj_inpf.value;
+        var fn=filname.substring(12,filname.indexOf('.'));
+        document.getElementById("j_id0:frm:j_id6:outData").value=fn;
+    }
+    </script>
+</apex:page>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Socialmedia logfile</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Socialmedia logfile</value>
+    </caseValues>
+    <fields>
+        <label><!-- Connection id --></label>
+        <name>Connection_id__c</name>
+        <relationshipLabel><!-- Socialmedia logfile --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Import message --></label>
+        <name>Import_message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Imported --></label>
+        <name>Imported__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of records --></label>
+        <name>Number_of_records__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,105 @@
+<apex:page showHeader="false" tabStyle="Project__c" sidebar="false" standardController="Subproject__c" Extensions="Hoursprojectpopupcls">    
+    <apex:form id="frm">    
+        <apex:pageBlock mode="Edit" title="{!$Label.funr_Hours_request}"  tabStyle="musqot__Project__c">
+            <apex:pageMessages id="msgs" />
+            <apex:pageBlockButtons location="bottom">
+                <apex:outputPanel rendered="{!selfApp}">
+                <apex:commandButton action="{!saveHrs}" value="{!$Label.btn_Send_request}" oncomplete="check()" rendered="{!ccRequst}"/>
+                <apex:commandButton action="{!saveHrs}" value="{!$Label.btn_Set_approved}" oncomplete="CloseWindow()"  rendered="{!NOT(ccRequst)}"/>
+                </apex:outputPanel>
+                <apex:commandButton value="{!$Label.btn_Set_approved}" oncomplete="CloseWindowRef()" action="{!Selfhrs}" rendered="{!ccApp}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" onclick="window.close()"/>
+                <apex:actionStatus startText="{!$Label.funr_Saving}" stopText="" onStop="window.top.close();" id="close"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.funr_Send_request_to}: {!parentName}" columns="1"  rendered="{!selfApp}" id="pbss">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.finov_Sponsor}"/>
+                    <apex:actionRegion >
+                        <apex:selectList id="cc" label="{!$Label.finov_Sponsor}" value="{!ccId}"  size="1" multiselect="false" required="true" style="width:160px"> <!--onchange="fetchRecrdId();">-->
+                            <apex:selectOptions value="{!CCList}"/>                    
+                            <apex:actionSupport event="onchange" action="{!ccUserRec}" reRender="frm"/>                                              
+                        </apex:selectList>
+                        <apex:outputLabel id="ccname1" value="{!$Label.pt_Owner}: {!ownerName}" rendered="{!parentShow}"/>
+                        <apex:outputLabel id="ccname" value="{!$Label.cc_CC_Owner}: {!ccRec.owner.name}" rendered="{!if(parentShow==false,true,false)}"/>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:inputField value="{!hrs.Requested_hours__c}" id="requstA"  label="{!$Label.funr_Requested_hours}" rendered="{!ccRequst}" required="true" style="width:130px"/>                    	
+                <apex:inputField value="{!hrs.Approved_houver__c}"  rendered="{!NOT(ccRequst)}" required="true" id="approvA" style="width:130px"/>                      
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!hrs.FiscalYear__c}" size="1" id="year" style="width:80px"> 
+                        <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField style="width:300px;height:100px;"  value="{!hrs.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!$Label.funr_Self_approval}" columns="1" rendered="{!ccApp}">
+                <apex:inputField value="{!hrs.Approved_houver__c}" required="true"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!hrs.FiscalYear__c}" size="1" id="year1" style="width:80px"> 
+                        <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField style="width:300px;height:100px;"  value="{!hrs.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>             
+        </apex:pageBlock>
+    </apex:form>
+    <script language="JavaScript" type="text/javascript">
+    function check(){
+        var re=document.getElementById("j_id0:frm:j_id1:pbss:requstA").value;
+        if(re==''){
+            alert('Please enter Requested Hours');
+        }
+        else{
+            if(window.parent){
+                window.parent.opener.location.href = window.parent.opener.location.href;
+                window.parent.close();
+                window.parent.reload();
+            }   
+            else{
+                window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.prjId)}"
+                window.close();   
+            }
+        }
+        
+    }
+    function CloseWindow(){ 
+        var ap=document.getElementById("j_id0:frm:j_id1:pbss:approvA").value;
+        
+        if(ap==''){
+            alert('Please enter Approved Hours');
+        }
+        else{
+            if(window.parent){
+                window.parent.opener.location.href = window.parent.opener.location.href;
+                window.parent.close();
+                window.parent.reload();
+            }   
+            else{
+                window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.prjId)}"
+                window.close();   
+            }
+        }
+    }
+    function closeWindow_NoAction(){
+        window.close();
+    }
+    function CloseWindowRef(){
+         var ah=document.getElementById("j_id0:frm:j_id1:j_id42:j_id43").value;
+        if(ah==''){
+            alert('Please enter Approved Hours');
+        }else{
+        if(window.parent){
+            window.parent.opener.location.href = window.parent.opener.location.href;
+            window.parent.close();
+            window.parent.reload();
+        }   
+        else{
+            window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.prjId)}"
+            window.close();   
+        } 
+       }
+    }
+    </script>   
+</apex:page>

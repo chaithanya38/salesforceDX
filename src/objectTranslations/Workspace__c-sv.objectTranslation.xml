@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Presentation</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Presentation</value>
+    </caseValues>
+    <fields>
+        <help>Denna text visas uppe till hÃ¶ger.</help>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label>Marknadsaktivitet</label>
+        <name>Marketing_activity__c</name>
+        <relationshipLabel>Presentation</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project name --></label>
+        <name>ProjectName__c</name>
+        <relationshipLabel>Presentation</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Presentation --></label>
+        <name>html_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- oldId --></label>
+        <name>oldId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subproject --></label>
+        <name>subproject__c</name>
+        <relationshipLabel>Presentation</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- tempId --></label>
+        <name>tempId__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Workspace Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

@@ -1,0 +1,83 @@
+<apex:page showHeader="false" sidebar="false" standardController="Project__c" extensions="FinancialSummary" >
+    
+    <!-- Guage -->
+    
+    <apex:outputPanel style="margin: auto;" rendered="{!IF(fin[0].allocated > 0 , true, false)}">  
+        <canvas id="myCanvas" width="200px" height="200px" style="display:inline;"  ></canvas>
+    </apex:outputPanel> 
+    <script>
+    var suballocated = {!fin[0].suballocated}; 
+    var alloocated = {!fin[0].allocated}; 
+    var reserved = {!fin[0].reserved}; 
+    var spent =reserved+suballocated;
+    var spent2 = spent / alloocated;
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = 70;
+    var reserved_percent = (reserved / alloocated) * 100;
+    var spent_percent = (spent/alloocated)*100;
+    var remaining_percent = 100 - reserved_percent;
+    var a1, a2, a3, a4, spent_radians;
+    
+    /* var a1 = Math.PI;      
+      var a2 = Math.PI+((Math.PI*reserved_percent)/140);
+      var a3 = Math.PI+((Math.PI*100)/140);
+      var a4 = Math.PI*2;
+      var spent_radians;*/
+    
+    a1 =  Math.PI;
+    reserved_percent > 100 ? a2 = Math.PI+((Math.PI*100)/140) : a2 = Math.PI+((Math.PI*reserved_percent)/140);
+    a3 = Math.PI+((Math.PI*100)/140);
+    a4 = Math.PI*2;
+    spent_percent>140 ? spent_radians = a4 : spent_radians = Math.PI+((Math.PI*spent_percent)/140);
+    
+    // alert(a1+">>>"+a2+">>>"+a3+">>>"+a4+">>>"+spent_radians);
+    
+    // spent
+    context.beginPath();
+    context.arc(centerX, centerY, radius, a1, a2, false);
+    context.lineWidth = 33;
+    context.strokeStyle = '#ff9933';
+    context.stroke();
+    context.beginPath();
+    context.arc(centerX, centerY, radius,  a2,  a3, false);
+    context.lineWidth = 33;
+    context.strokeStyle = '#348017';
+    context.stroke();
+    context.beginPath();
+    context.arc(centerX, centerY, radius, a3, a4, false);
+    context.lineWidth = 33;
+    context.strokeStyle = '#eb2f4e';
+    context.stroke();   
+    //to draw the pointer
+    context.beginPath();
+    context.moveTo(centerX-2,centerY-1);
+    context.lineTo(centerX+(80*Math.cos(spent_radians)),centerY-Math.abs((80*Math.sin(spent_radians))));
+    context.lineTo(centerX+4,centerY-4);
+    context.fillStyle = '#722bd6';
+    context.fill();
+    //to draw a small semi circle at the center of the circle. This is just to beautify.
+    context.beginPath();
+    context.arc(centerX, centerY, 10, Math.PI, Math.PI*2, false);
+    context.lineWidth = 0;
+    context.fillStyle = '#722bd6';
+    context.fill();
+    context.fillStyle = "#333";
+    context.font = "14pt Arial";
+    context.fillText("{!$Label.pt_Financial_overview}", 25, 135);
+    context.fillStyle = "#333";
+    context.font = "8pt Arial";
+    var x1 = centerX+(100*Math.cos(a2));
+    var y1 = centerY+(90*Math.sin(a2));
+    if(a2 == a3){
+        var x1 = centerX+(25*Math.cos(a2));
+        var y1 = centerY+(70*Math.sin(a2));
+    }
+    context.fillText(Math.round(reserved_percent)+"%", x1, y1);
+    context.fillText("100%", 150, 30);
+    context.fillText(Math.round(spent_percent)+"%", 92, 110);
+    // alert("Allocated"+alloocated+"\nReserved"+reserved+"\nSubAllocated"+suballocated+"\nSpent"+spent);
+    </script>
+</apex:page>

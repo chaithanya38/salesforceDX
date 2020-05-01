@@ -1,0 +1,24 @@
+<apex:page standardController="Project_type__c" extensions="NewProjectTypeClass" sidebar="false">
+<apex:includeScript value="{!URLFOR($Resource.Colorpicker, 'jscolor/jscolor.js')}" />
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_New_Project_Type}" tabStyle="Musqot_admin__tab" mode="edit">
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Newrec}" />
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2">
+                <apex:inputField value="{!NewprType.Name}" label="{!$Label.prt_Project_type_name}"/> 
+                <apex:selectList value="{!NewprType.Fieldset__c}" size="1" multiselect="false" style="width:left-60px;">
+                    <apex:selectOptions value="{!Fieldsetlist}" />
+                </apex:selectList>
+                <apex:inputField value="{!NewprType.Color__c}" styleClass="color" label="{!$Label.prt_Color}"/> 
+                <apex:pageBlockSectionItem >
+                   <apex:outputlabel value="{!$Label.pt_Plantype}"/>                                          
+                   <apex:selectCheckboxes id="Plntype" value="{!selectedPlanTypes}"  borderVisible="true" layout="pageDirection" style="width:300px;">
+                        <apex:selectOptions value="{!planTypeOptions}" />
+                   </apex:selectCheckboxes>                                                                      
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

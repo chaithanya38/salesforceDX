@@ -1,0 +1,58 @@
+<apex:page standardController="OAuthService__c" extensions="Connectioneditsettingcont"  sidebar="false" id="pg"> 
+  <script>
+        function showStatus(val){
+            if(val){
+                alert('Connection Success, now you can import the data');
+            } 
+            else{
+                alert('Connection Fialed, Please verify social media settings');
+            }   
+        }         
+         function openLookupPopup(uri){
+          newWin=window.open(uri, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+          
+          if (window.focus){
+              newWin.focus();
+          }
+         }
+     </script>
+            
+    <apex:form id="frm">
+        <apex:actionFunction name="callImport" action="{!importData}" reRender="frm"/>
+        <apex:pageBlock title="" tabStyle="Musqot_admin__tab" mode="edit">
+        <apex:outputpanel layout="block" style="text-align:center;"><br/>                   
+                <apex:commandButton value="{!$Label.btn_save}"  action="{!updatecon}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}"/>          
+        </apex:outputpanel><br/>              
+            
+        <!--<apex:repeat value="{!connectionList}" var="c">-->           
+            <apex:pageBlockSection title="{!$Label.musadmin_Edit_connection}" collapsible="false"/>
+            <apex:outputpanel layout="block" style="text-align:center;">
+            <apex:commandButton value="Test connection" action="{!testConnection}" oncomplete="openLookupPopup('{!fbLoginURL}')">
+                <apex:param value="{!oauth.id}" assignTo="{!connectionId}" name="cntId"/>
+            </apex:commandButton>
+            <apex:commandButton value="Import all data" title="This will replace all data with data from, {!oauth.Name}" action="{!importData}" onclick="if(!confirm('Your existing social media will be erased/reset for this connection, still you want to import?')){return};" oncomplete="openLookupPopup('{!fbLoginURL}')" reRender="frm">
+                <apex:param value="{!oauth.id}" assignTo="{!connectionId}" name="cntId"/>
+           </apex:commandButton>
+            </apex:outputPanel>
+                       
+            <apex:pageBlockSection >
+                <apex:inputField value="{!oauth.Name}" required="True" style="width:200px;" label="{!$Label.musadmin_Service_Name}"/>
+                <apex:inputField value="{!oauth.Access_Token_URL__c}" style="width:300px;" label="{!$Label.musadmin_Access_Token_URL}"/>
+                <apex:inputField value="{!oauth.Authorization_Type__c}" required="False" label="{!$Label.musadmin_Authorization_Type}"/>
+                <apex:inputField value="{!oauth.Authorization_URL__c}" style="width:300px;" label="{!$Label.musadmin_Authorization_URL}"/>
+                <apex:inputField value="{!oauth.Consumer_Key__c}" style="width:200px;" label="{!$Label.musadmin_Consumer_Key}"/>               
+                <apex:inputField value="{!oauth.Page_Id__c}" style="width:200px;" label="Page ID"  />                 
+                <apex:inputField value="{!oauth.Consumer_Secret__c}" style="width:300px;" label="{!$Label.musadmin_Consumer_Secret}"/>
+                <apex:inputField value="{!oauth.Post_ID__c}" style="width:200px;" label="Post Id / Ad Set ID" /> 
+                <apex:inputField value="{!oauth.Redirect_URL__c}" style="width:300px;" label="{!$Label.musadmin_Redirect_URL}"/>
+                <apex:inputField value="{!oauth.Request_Token_URL__c}" style="width:300px;" label="{!$Label.musadmin_Request_Token_URL}"/>
+                <apex:inputField value="{!oauth.Response_Type__c}" label="{!$Label.musadmin_Response_Type}"/>
+                <apex:inputField value="{!oauth.Scope__c}" style="width:300px;" label="{!$Label.musadmin_Scope}"/>
+                <apex:inputField value="{!oauth.Signature_Method__c}" label="{!$Label.musadmin_Signature_Method}"/>
+                <apex:inputField value="{!oauth.Bar_color__c}" required="True" style="width:300px;"/>
+                <apex:inputField value="{!oauth.Auto_import__c}"/>
+            </apex:pageBlockSection>
+            </apex:pageBlock>      
+    </apex:form>                 
+</apex:page>

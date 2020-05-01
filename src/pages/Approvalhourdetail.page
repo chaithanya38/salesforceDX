@@ -1,0 +1,25 @@
+<apex:page sidebar="false" controller="approvalhourdetailcont" >
+    <apex:form id="frm">
+        <apex:pageBlock id="block" title="Hours request" mode="edit"  >
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_Approve}" action="{!approverec}" reRender="frm"/> 
+                <apex:commandButton value="{!$Label.btn_Reject}" action="{!rejectrec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancleApproval}"/>
+            </apex:pageBlockButtons>            
+            <apex:pageBlockSection title="{!$Label.pbs_Approve_request}" id="section" columns="1" >
+                 <apex:outputField label="{!$Label.appr_Request_to}" value="{!hrs.project__r.name}"  rendered="{!IF(hrs.project__r.name <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_to}" value="{!hrs.plan__r.name}"  rendered="{!IF(hrs.plan__r.name <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_to}" value="{!hrs.Cost_center__r.name}"  rendered="{!IF(hrs.Cost_center__r.name <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_from}" value="{!hrs.To_marketing_activity__c}"  rendered="{!IF(hrs.To_marketing_activity__c <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_from}" value="{!hrs.To_Project__c}"  rendered="{!IF(hrs.To_Project__c <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_from}" value="{!hrs.To_Plan__c}"  rendered="{!IF(hrs.To_Plan__c <> '',true,false)}"/>
+                <apex:outputText label="Fiscal Year" value="{!fiscalYear}"/>
+                <apex:inputField style="width:300px;hight:100px;"  value="{!hrs.Description__c}" label="{!$Label.inv_Description}"/> 
+                <apex:outputField id="requesthours" value="{!hrs.Requested_hours__c}"/>
+               <apex:inputField id="approvedhours"  value="{!hrs.Approved_houver__c}"/>                    
+                <apex:outputText value="{!Remaininghours}" label="{!$Label.finov_Remaining}" rendered="{!IF(hrs.To_Plan__c <> null,false,true)}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

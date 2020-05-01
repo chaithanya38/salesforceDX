@@ -1,0 +1,63 @@
+<apex:page StandardController="Purchase_order__c" tabStyle="Project__c" Extensions="PurchaseorderEditController" sidebar="false" id="pid">       
+    <apex:form id="frm" >
+        <apex:pageBlock title="{!$Label.tb_Purchase_orders}: {!purs.Purchase_order_name__c}" tabStyle="musqot_admin__tab" mode="edit" helpTitle="{!$Label.Help_Purchase_order_help_page}" helpUrl="/apex/Purchaseorderhelppage">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEditMode}" rendered="{!showRec}" reRender="frm" disabled="{!showbutton}"/>
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}" rendered="{!showEdt}" />
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!gotoInfoMode}" rendered="{!showEdt}"/>
+            </apex:pageBlockButtons>
+            <apex:inputhidden value="{!purs.Project__c}"/>
+            <apex:pageBlockSection columns="2" collapsible="false"   id="pst" rendered="{!showRec}">
+                <apex:outputField value="{!purs.Name}" label="{!$Label.pur_Purchase_order_name}" styleClass="myClass"/>
+                <apex:inputhidden value="{!purs.Marketing_activity__c}"/>
+                <apex:outputField style="width:300px; height:150px; "  value="{!purs.Description__c}" label="{!$Label.inv_Description}"/>
+                <apex:inputhidden value="{!purs.subproject__c}"/>
+                <apex:selectList id="patype" label="{!$Label.inv_Articel_type}" disabled="true" value="{!purs.Purchase_article__c}" style="width:200px;" size="1" multiselect="false"  >
+                    <apex:selectOptions value="{!PAList}" />
+                </apex:selectList>
+                <apex:outputField value="{!purs.Supplier__c}" label="{!$Label.inv_Supplier}"/>
+                <apex:outputField value="{!purs.Total_cost__c}"  label="{!$Label.pur_Cost}" />
+                <apex:outputField value="{!purs.Supplier_email__c}"  label="{!$Label.pur_Supplier_email}" />
+                <apex:outputField value="{!purs.Effective_date__c}" label="{!$Label.pur_Effective_date}" />
+                <apex:outputField value="{!purs.Send_date__c}" label="{!$Label.pur_Send_date}" /> 
+                <apex:outputField value="{!purs.Purchase_order_cloesed__c}" label="{!$Label.pur_Purchase_order_closed}"/>
+                <apex:outputField value="{!purs.Purchase_order_send__c}" label="{!$Label.pur_Purchase_order_send}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!$Label.pur_Purchase_order_document}" columns="2" id="block1" collapsible="false" rendered="{!if(atts!=null,true,false)}" >   
+                <apex:outputText label="{!$Label.attdocument}" value="{!Download}">
+                    <a target="_Blank" href="{!URLFOR($Action.Attachment.Download, atts.id)}" title="{!$Label.att_Download}" id="attName">{!attachmentName}</a>
+                </apex:outputText>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2"  collapsible="false" id="ps" rendered="{!showEdt}">
+                <apex:inputField value="{!purs.Name}" label="{!$Label.pur_Purchase_order_name}"/>
+                <apex:inputhidden value="{!purs.Marketing_activity__c}" />
+                <apex:inputField style="width:300px; height:150px; "  value="{!purs.Description__c}" label="{!$Label.inv_Description}"/>
+                <apex:inputhidden value="{!purs.subproject__c}" />
+                <apex:selectList id="patype" label="{!$Label.inv_Articel_type}" value="{!purs.Purchase_article__c}" style="width:200px;" size="1" multiselect="false"  >
+                    <apex:selectOptions value="{!PAList}"  />
+                </apex:selectList>
+                <apex:inputField value="{!purs.Supplier__c}" label="{!$Label.inv_Supplier}" required="true"/>
+                <apex:inputField value="{!purs.Total_cost__c}"  label="{!$Label.pur_Cost}" required="true"/>
+                <apex:inputField value="{!purs.Supplier_email__c}"  label="{!$Label.pur_Supplier_email}" />
+                <apex:outputText value="{!maxPO}" label="{!$Label.finov_Remaining}" />
+                <apex:inputField value="{!purs.Effective_date__c}" label="{!$Label.pur_Effective_date}" />
+                <apex:inputField value="{!purs.Purchase_order_cloesed__c}" label="{!$Label.pur_Purchase_order_closed}"/>
+                <apex:inputField value="{!purs.Send_date__c}" label="{!$Label.pur_Send_date}" /> 
+                <apex:outputText label=""></apex:outputText>
+                <apex:outputField value="{!purs.Purchase_order_send__c}" label="{!$Label.pur_Purchase_order_send}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!$Label.pur_Purchase_order_document}" collapsible="false" columns="1" id="block2" rendered="{!showEdt}"> 
+                <apex:outputText label="{!$Label.attdocument}" value="{!Download}" rendered="{!if(atts!=null,true,false)}" >
+                    <a target="_Blank" href="{!URLFOR($Action.Attachment.Download, atts.id)}" title="{!$Label.att_Download}" >{!atts.name}</a>&nbsp;&nbsp;
+                    <apex:commandLink value="[{!$Label.btn_Remove}]" onclick="if(!confirm('{!$Label.mem_Will_you_remove}, {!atts.Name}?')) return false;" action="{!DeleteAttchment}" ></apex:commandLink>
+                </apex:outputText>
+                <apex:pageBlockSectionItem rendered="{!if(atts!=null,false,true)}" >
+                    <apex:outputLabel value="{!$Label.attdocument}" />
+                    <apex:inputFile value="{!attachment.body}" contentType="{!contentType}" id="file" rendered="{!if(atts!=null,false,true)}" disabled="{!if(atts!=null,true,false)}" />
+                </apex:pageBlockSectionItem> 
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

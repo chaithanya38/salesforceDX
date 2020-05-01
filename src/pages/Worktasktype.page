@@ -1,0 +1,40 @@
+<apex:page controller="WorktasktypeController" sidebar="false" standardStylesheets="false">
+    <style type="text/css">
+        .outBorder
+        {
+        border:2px outset blue;
+        border-radius: 4px /4px;
+        } 
+        .inBorder
+        {
+        border-top:3px dotted black;
+        border-left:3px dotted black;
+        }    
+    </style>
+    <apex:form id="form" styleClass="outBorder">
+        <apex:pageBlock title="Recent Worktasktypes">  
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="New" action="{!NewWrtype}"/>
+            </apex:pageBlockButtons>
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockTable value="{!Worktask }" var="wr" >
+                <apex:column headerValue="Action">
+                    <apex:commandLink value="Edit" action="{!redirectPage1}">
+                        <apex:param Name="w" value="{!wr.id}" assignTo="{!worktaskid}"/>
+                        <!--  <apex:outputLink title="" value="/{!pln.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold">Edit</apex:outputLink>-->
+                    </apex:commandLink>&nbsp;|&nbsp;
+                    <apex:commandLink action="{!DeleteProject}" onclick="if(!confirm('Are you sure?')) return false;" value="Del" >               
+                        <apex:param value="{!wr.Id}" name="deleteid" assignTo="{!worktaskid}"/>    
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!wr.Name}"/>
+                <apex:column headerValue="Barcolor">
+                    <div Style="background-color:#{!HTMLENCODE(wr.bartaskcolor__c)};padding-left:20px;padding-right:20px; height:15px;width:200px;display:inline;">{!wr.bartaskcolor__c} </div>     
+                </apex:column>     
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:actionFunction action="{!DeleteProject}" name="DeleteProject" reRender="form" >
+            <apex:param name="worktaskid" value="" assignTo="{!SelectedWorktaskId }"/>
+        </apex:actionFunction>
+    </apex:form>
+</apex:page>

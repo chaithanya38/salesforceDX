@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Forcast</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Forcast</value>
+    </caseValues>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- End date --></label>
+        <name>End_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fiscal year --></label>
+        <name>Fiscal_year__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hours --></label>
+        <name>Hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period --></label>
+        <name>Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Plan__c</name>
+        <relationshipLabel><!-- Forcast --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Start date --></label>
+        <name>Start_date__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

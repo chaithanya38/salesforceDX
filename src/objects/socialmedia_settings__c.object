@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>The Name will show-up in the Performance Gantt view.</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Auto_import__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Auto import</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Bar_color__c</fullName>
+        <defaultValue>&quot;#222,#666,#ccc&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Bar color</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Chart__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Select type of charts to show in performance view</inlineHelpText>
+        <label>Chart</label>
+        <valueSet>
+		<valueSetDefinition>
+            <value>
+                <fullName>Area charts</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Bar charts</fullName>
+                <default>true</default>
+            </value>
+            <value>
+                <fullName>Line charts</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Spline charts</fullName>
+                <default>false</default>
+            </value>
+            <sorted>true</sorted>
+			</valueSetDefinition>
+        </valueSet>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>End_date__c</fullName>
+        <defaultValue>Today() + 365</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>End date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Import_rate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Import rate</label>
+        <valueSet>
+		<valueSetDefinition>
+            <value>
+                <fullName>Day</fullName>
+                <default>true</default>
+            </value>
+            <sorted>true</sorted>
+			</valueSetDefinition>
+        </valueSet>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Page_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Page Id</label>
+        <length>80</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Socialmedia__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Socialmedia</label>
+        <referenceTo>OAuthService__c</referenceTo>
+        <relationshipLabel>Socialmedia Settings</relationshipLabel>
+        <relationshipName>Socialmedia_Settings</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Socialmedia_type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Socialmedia type</label>
+        <valueSet>
+		<valueSetDefinition>
+            <value>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Ad</fullName>
+                <default>true</default>
+            </value>
+            <value>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </value>
+            <sorted>false</sorted>
+			</valueSetDefinition>
+        </valueSet>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Start_date__c</fullName>
+        <defaultValue>Today() + 1</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Start date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <valueSet>
+		<valueSetDefinition>
+            <value>
+                <fullName>Performance, general</fullName>
+                <default>true</default>
+            </value>
+            <value>
+                <fullName>Performance, project</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Performance, marketing activity</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Milestone</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Performance, costcenter</fullName>
+                <default>false</default>
+            </value>
+            <sorted>false</sorted>
+			</valueSetDefinition>
+        </valueSet>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Watch_type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Watch type</label>
+        <valueSet>
+		<valueSetDefinition>
+            <value>
+                <fullName>Unique visitors</fullName>
+                <default>true</default>
+            </value>
+            <value>
+                <fullName>Likes / click</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Members</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Unique visitor &amp; click/likes</fullName>
+                <default>false</default>
+            </value>
+            <sorted>false</sorted>
+			</valueSetDefinition>
+        </valueSet>
+        <required>false</required>
+        <type>Picklist</type>
+    </fields>
+    <label>Socialmedia Settings</label>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <namedFilters>
+        <fullName>nf_01Ib0000000kPblEAE_00Nb0000009dDu8EAE</fullName>
+        <active>true</active>
+        <field>Milestone__c.Target_Socialmedia__c</field>
+        <filterItems>
+            <field>socialmedia_settings__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Milestone</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+        <name>nf_01Ib0000001Hpy3EAC_00Nb000000AC36REAT</name>
+    </namedFilters>
+    <pluralLabel>Socialmedia Settings</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

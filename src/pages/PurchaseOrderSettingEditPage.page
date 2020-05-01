@@ -1,0 +1,26 @@
+<apex:page standardController="Purchase_order_setting__c" extensions="PurchasingOrderEditClass" sidebar="false" showHeader="false" >    
+    <apex:form id="frm">
+        <apex:pageBlock title="{!$Label.pur_Purchase_order_setting}" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEditMode}" rendered="{!showRec}" reRender="frm" style="margin-left:200px;"/>
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}" rendered="{!showEdt}" style="margin-left: 200px;"/>         
+                <!--<apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" rendered="{!showRec}"/>-->
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!gotoInfoMode}" rendered="{!showEdt}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1"  collapsible="false" rendered="{!showRec}" >  
+                <apex:outputText value="{!pos.PO_Startnumber__c}" label="{!$Label.musadmin_Start_number}" />
+                <apex:outputText value="{!pos.PO_Lastnumber__c}" label="{!$Label.musadmin_Last_used_number}" />
+                <apex:outputfield value="{!pos.PO_Prefix__c}" label="{!$Label.musadmin_PO_prefix}" />
+                <apex:outputfield value="{!pos.PO_Autoprefix__c}" label="{!$Label.musadmin_PO_prefix_auto}" /> 
+                <apex:outputfield value="{!pos.PO_External__c}" label="{!$Label.musadmin_PO_prefix_ext}"/>  
+            </apex:pageBlockSection>       
+            <apex:pageBlockSection columns="1"  rendered="{!showEdt}"> 
+                <apex:inputField value="{!pos.PO_Startnumber__c}" label="{!$Label.musadmin_Start_number}" />
+                <apex:outputText value="{!pos.PO_Lastnumber__c}" label="{!$Label.musadmin_Last_used_number}" />
+                <apex:inputField value="{!pos.PO_Prefix__c}" label="{!$Label.musadmin_PO_prefix}" />
+                <apex:inputField value="{!pos.PO_Autoprefix__c}" label="{!$Label.musadmin_PO_prefix_auto}" /> 
+                <apex:inputField value="{!pos.PO_External__c}" label="{!$Label.musadmin_PO_prefix_ext}"/>  
+            </apex:pageBlockSection>   
+        </apex:pageBlock>  
+    </apex:form>
+</apex:page>

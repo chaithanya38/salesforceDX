@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Socialmedia Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Socialmedia Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Auto import --></label>
+        <name>Auto_import__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bar color --></label>
+        <name>Bar_color__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select type of charts to show in performance view --></help>
+        <label><!-- Chart --></label>
+        <name>Chart__c</name>
+        <picklistValues>
+            <masterLabel>Area charts</masterLabel>
+            <translation><!-- Area charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bar charts</masterLabel>
+            <translation><!-- Bar charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Line charts</masterLabel>
+            <translation><!-- Line charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spline charts</masterLabel>
+            <translation><!-- Spline charts --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- End date --></label>
+        <name>End_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Import rate --></label>
+        <name>Import_rate__c</name>
+        <picklistValues>
+            <masterLabel>Day</masterLabel>
+            <translation><!-- Day --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Page Id --></label>
+        <name>Page_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Socialmedia --></label>
+        <name>Socialmedia__c</name>
+        <relationshipLabel><!-- Socialmedia Settings --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Socialmedia type --></label>
+        <name>Socialmedia_type__c</name>
+        <picklistValues>
+            <masterLabel>Ad</masterLabel>
+            <translation><!-- Ad --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Page</masterLabel>
+            <translation><!-- Page --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Post</masterLabel>
+            <translation><!-- Post --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start date --></label>
+        <name>Start_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Milestone</masterLabel>
+            <translation><!-- Milestone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, costcenter</masterLabel>
+            <translation><!-- Performance, costcenter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, general</masterLabel>
+            <translation><!-- Performance, general --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, marketing activity</masterLabel>
+            <translation><!-- Performance, marketing activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, project</masterLabel>
+            <translation><!-- Performance, project --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Watch type --></label>
+        <name>Watch_type__c</name>
+        <picklistValues>
+            <masterLabel>Likes / click</masterLabel>
+            <translation><!-- Likes / click --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Members</masterLabel>
+            <translation><!-- Members --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unique visitor &amp; click/likes</masterLabel>
+            <translation><!-- Unique visitor &amp; click/likes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unique visitors</masterLabel>
+            <translation><!-- Unique visitors --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

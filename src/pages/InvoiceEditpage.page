@@ -1,0 +1,64 @@
+<apex:page StandardController="Invoice__c" tabStyle="Project__c" Extensions="InvoiceEditController" sidebar="false" >
+    <apex:form id="frm">
+        <apex:pageBlock tabStyle="Musqot_admin__tab" title="{!$Label.pt_Invoices}: {!invs.Name}"  mode="edit" helpTitle="{!$Label.Help_Invoices_help_page}" helpUrl="/apex/Invoiceshelppage">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}" rendered="{!showEdt}"/>
+                <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEdit}"  reRender="frm" rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_Remove}" action="{!deleteinvoice}" onclick="return confirm('{!$Label.mem_Will_you_remove}, {!invs.Name} ?');"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}"  rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}"  rendered="{!showEdt}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" collapsible="false" rendered="{!showRec}">
+                <!--<apex:outputText value="{!invs.Purchase_orders__r.Purchase_order_name__c}" label="{!$Label.inv_Purchase_orders}"/>-->
+                <apex:outputText value="{!invs.Name}" label="{!$Label.inv_Invoice_Number}"/>
+                <apex:outputText value="{!invs.supplier__c}" label="{!$Label.inv_Supplier}"/>
+                <apex:outputText value="{!invs.Description__c}" style="width:300px;height:100px;"  label="{!$Label.inv_Description}"/>
+                <!--<apex:outputText value="{!invs.Total_spent__c}" label="{!$Label.inv_Total_spent}"/>-->
+                <apex:selectList id="patype" label="{!$Label.inv_Articel_type}" disabled="true" required="true" value="{!invs.Purchase_article__c}" style="width:200px;" size="1" multiselect="false"  >
+                    <apex:selectOptions value="{!PaList}" />
+                </apex:selectList> 
+                <apex:outputField value="{!invs.Total_spent__c}" label="{!$Label.inv_Total_spent}"/> 
+                <apex:outputText value="{!invs.Purchase_orders__r.Purchase_order_name__c}" label="{!$Label.inv_Purchase_orders}" rendered="{!validshowRec}"/>
+                <apex:outputField value="{!invs.Purchase_orders__r.Total_cost__c}" label="{!$Label.inv_PO_amount}" rendered="{!validshowRec}"/>
+                <apex:outputField value="{!invs.Purchase_orders__r.total_Invoice_cost__c}" label="{!$Label.inv_Previous_invoices}"  rendered="{!validshowRec}"/>
+                <apex:outputField value="{!invs.Purchase_orders__r.Purchase_order_cloesed__c}" label="{!$Label.pur_Purchase_order_closed}"  rendered="{!validshowRec}"/>
+                <apex:inputHidden value="{!invs.Project__c}" />
+                <apex:inputHidden value="{!invs.subproject__c}" />
+                <apex:inputHidden value="{!invs.Marketing_activity__c}" />
+            </apex:pageBlockSection>
+             <apex:pageBlockSection title="{!$Label.inv_Invoice_document}" columns="2" id="block1" collapsible="false" rendered="{!if(atts!=null,true,false)}">   
+                <apex:outputText label="{!$Label.attdocument}" value="{!Download}">
+                    <a target="_Blank" href="{!URLFOR($Action.Attachment.Download, atts.id)}" title="{!$Label.att_Download}" >{!invs.supplier__c}-{!invs.Name}</a>
+                </apex:outputText>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1"  collapsible="false" id="ps" rendered="{!showEdt}">
+                
+                <apex:inputField value="{!invs.Name}" label="{!$Label.inv_Invoice_Number}" required="true"/>
+                <apex:inputField value="{!invs.supplier__c}" label="{!$Label.inv_Supplier}" required="true"/>
+                <apex:inputField value="{!invs.Description__c}" style="width:300px;height:100px;"  label="{!$Label.inv_Description}"/>
+                
+                <apex:selectList id="patype" label="{!$Label.inv_Articel_type}" required="true" value="{!invs.Purchase_article__c}" style="width:200px;" size="1" multiselect="false"  >
+                    <apex:selectOptions value="{!PaList}" />
+                </apex:selectList> 
+                 <apex:inputField value="{!invs.Total_spent__c}" label="{!$Label.inv_Total_spent}" required="true"/>
+            
+                 <apex:outputText value="{!invs.Purchase_orders__r.Purchase_order_name__c}" label="{!$Label.inv_Purchase_orders}"  rendered="{!validshowRec}"/>
+                 <apex:outputField value="{!invs.Purchase_orders__r.Total_cost__c}" label="{!$Label.inv_PO_amount}" rendered="{!validshowRec}"/>
+                 <apex:outputField value="{!invs.Purchase_orders__r.total_Invoice_cost__c}" label="{!$Label.inv_Previous_invoices}" rendered="{!validshowRec}"/>
+                 <apex:inputField value="{!invs.Purchase_orders__r.Purchase_order_cloesed__c}" label="{!$Label.pur_Purchase_order_closed}" rendered="{!validshowRec}"/>
+           
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!$Label.inv_Invoice_document }" collapsible="false"   columns="1" id="block2"  rendered="{!showEdt}">    
+                <apex:outputText label="{!$Label.attdocument}" value="{!Download}" rendered="{!if(atts!=null,true,false)}" >
+                    <a target="_Blank" href="{!URLFOR($Action.Attachment.Download, atts.id)}" >{!invs.supplier__c}-{!invs.Name}</a>&nbsp;&nbsp;
+                    <apex:commandLink value="[Remove]"  action="{!DeleteAttchment}" >
+                    </apex:commandLink>
+                </apex:outputText>
+                <apex:pageBlockSectionItem rendered="{!if(atts!=null,false,true)}" >
+                    <apex:outputLabel value="{!$Label.attdocument}" />
+                    <apex:inputFile value="{!attachment.body}"    contentType="{!contentType}" id="file"   rendered="{!if(atts!=null,false,true)}" disabled="{!if(atts!=null,true,false)}" />
+                </apex:pageBlockSectionItem> 
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

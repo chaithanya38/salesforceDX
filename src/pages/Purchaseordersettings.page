@@ -1,0 +1,16 @@
+<apex:page standardController="Purchase_order_setting__c" extensions="PurchasingOrderClass" sidebar="false" showHeader="false" >
+    <apex:form >
+        <apex:pageBlock title="Purchase order setting" mode="edit">
+            <apex:pageBlockButtons location="top">    
+                <apex:commandButton value="Edit" action="{!Editpage}"/>    
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:outputField value="{!pos.PO_Startnumber__c}"/>
+                <apex:outputField value="{!pos.PO_Lastnumber__c}"/>
+                <apex:outputField value="{!pos.PO_Prefix__c}"/>
+                <apex:outputField value="{!pos.PO_Autoprefix__c}"/>
+                <apex:outputField value="{!pos.PO_External__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Allocation amount</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Allocation amounts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Requested amount --></label>
+        <name>Allocated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved amount --></label>
+        <name>Approved_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved By --></label>
+        <name>Approved_By__c</name>
+        <relationshipLabel><!-- Allocation amounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approved --></label>
+        <name>Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approve date --></label>
+        <name>Approvedate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost center --></label>
+        <name>Costcentre__c</name>
+        <relationshipLabel><!-- Allocation Amounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- FiscalYear --></label>
+        <name>FiscalYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Musqot fiscal year --></label>
+        <name>Musqot_fiscal_year__c</name>
+        <relationshipLabel><!-- Allocation amounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Request date --></label>
+        <name>Request_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- To marketing activity --></label>
+        <name>To_Marketing_activity__c</name>
+        <relationshipLabel><!-- Allocation Amounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- To plan --></label>
+        <name>To_Plan__c</name>
+        <relationshipLabel><!-- Allocation amounts (To plan) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- To project --></label>
+        <name>To_Project__c</name>
+        <relationshipLabel><!-- Allocation amounts (To project) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>plan__c</name>
+        <relationshipLabel><!-- Allocation amounts (Plan) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>project__c</name>
+        <relationshipLabel><!-- Allocation amounts (Project) --></relationshipLabel>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Allocation amount Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

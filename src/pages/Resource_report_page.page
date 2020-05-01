@@ -1,0 +1,62 @@
+<apex:page tabStyle="Project__c" docType="html-5.0" controller="Resource_report_Ctrl" sidebar="false">
+    <apex:form id="frm"> 
+    <style> 
+        .head{text-align: right;}
+        .foot{text-align: right;background-color:#eee !important;}
+        .focus{background-color:#cdcdcd !important;}
+        table, td, th {border: 0px !important;}
+        </style>
+        <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" />
+        <apex:pageBlock title="{!$Label.Resource_Resource_report}" mode="edit"> 
+            <apex:outputPanel >
+                <apex:pageBlockSection columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.sub_Status}" for="dl" />
+                        <apex:selectList size="1" value="{!selectedStatus}" id="status">
+                            <apex:selectOptions value="{!Items}"></apex:selectOptions>
+                            <apex:actionSupport event="onchange" rerender="aggregate"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!If(groupList.size>1,true,false)}">
+                        <apex:outputLabel value="{!$Label.Resource_Public_group}" for="pg"/>
+                        <apex:selectList size="1" value="{!selectedGroup}" id="pgroup">
+                            <apex:selectOptions value="{!groupList}"></apex:selectOptions>
+                            <apex:actionSupport event="onchange" rerender="aggregate"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:input label="{!$Label.Resource_Focusdate}" type="date" value="{!startDat}" >
+                    <apex:actionSupport event="onchange" rerender="aggregate" />
+                    </apex:input>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            <apex:pageBlockSection id="aggregate">
+                  <apex:outputPanel rendered="{!If(res.size<>0 ,true,false)}" >
+                    <apex:pageBlockTable value="{!res}" var="r" id="ma1" style="width:1280px;" > 
+                        <apex:column value="{!r.rUsername}" headerValue="{!$Label.mem_User}" style="width:180px;text-align:left;"/> 
+                        <apex:column headerValue="{!$Label.Resource_Title}" style="width:140px;text-align:left;">
+                            <apex:outputText value="{!r.rTitle}"/>
+                        </apex:column>  
+                        <apex:column value="{!r.rDepartment}" headerValue="{!$Label.Resource_Department}" style="width:100px;text-align:left;" />
+                        <apex:column value="{!r.rEmpNr}" headerValue="{!$Label.Resource_Empl_No}" style="width: 80px;text-align:left;"/>
+                        <apex:column value="{!r.rManager}" headerValue="{!$Label.Resource_Manager}" style="width:150px;text-align:left;"/>
+                        <apex:column footerValue="{!totWeekA}" value="{!r.rWeekA}" headerValue="{!lWeekA}" headerClass="head" footerClass="foot" styleClass="{!If(focusA,'focus','')}" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekB}" value="{!r.rWeekB}" headerValue="{!lWeekB}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;" />
+                        <apex:column footerValue="{!totWeekC}" value="{!r.rWeekC}" headerValue="{!lWeekC}" headerClass="head" footerClass="foot" styleClass="{!If(focusB,'focus','')}" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekD}" value="{!r.rWeekD}" headerValue="{!lWeekD}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekE}" value="{!r.rWeekE}" headerValue="{!lWeekE}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekF}" value="{!r.rWeekF}" headerValue="{!lWeekF}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekG}" value="{!r.rWeekG}" headerValue="{!lWeekG}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekH}" value="{!r.rWeekH}" headerValue="{!lWeekH}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekI}" value="{!r.rWeekI}" headerValue="{!lWeekI}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekJ}" value="{!r.rWeekJ}" headerValue="{!lWeekJ}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekK}" value="{!r.rWeekK}" headerValue="{!lWeekK}" headerClass="head" footerClass="foot" styleClass="{!If(focusL,'focus','')}" style="width: 50px;text-align:right;"/>
+                        <apex:column footerValue="{!totWeekL}" value="{!r.rWeekL}" headerValue="{!lWeekL}" headerClass="head" footerClass="foot" style="width: 50px;text-align:right;"/>
+                   
+                      </apex:pageBlockTable>  
+                    <apex:pageMessages />
+                </apex:outputPanel>
+            </apex:pageBlockSection>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

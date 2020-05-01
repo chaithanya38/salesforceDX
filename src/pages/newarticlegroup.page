@@ -1,0 +1,13 @@
+<apex:page standardController="Purchase_article__c" extensions="newPurchaseArticle" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_New_article}" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Newrec}" />                
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Newact.Name}" label="{!$Label.pur_Purchase_article}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

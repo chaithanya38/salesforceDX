@@ -1,0 +1,26 @@
+<apex:page standardController="Marketing_activity__c" sidebar="false" extensions="MarketingAcitivityController" tabStyle="Project__c">
+    <apex:form >
+        <apex:sectionHeader subtitle="{!objMarket.Name}" title="{!$Label.mrk_Marketing_activity}"  help="/apex/Customsetting_help"/>
+        <apex:pageBlock title="{!$Label.pt_Edit_marketing_activity}" mode="edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEditMode}" rendered="{!showEdt}" />
+                <apex:commandButton value="{!$Label.btn_save}" action="{!save}" rendered="{!hiderec}"/> 
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" rendered="{!hiderec}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.btn_Custom_setting}" rendered="{!showRec}">
+                <apex:repeat value="{!fields}" var="f">
+                    <apex:outputField value="{!objMarket[f.fieldPath]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="{!$Label.btn_Custom_setting}" rendered="{!hiderec}">
+                <apex:repeat value="{!fields}" var="f">
+                    <apex:inputField value="{!objMarket[f.fieldPath]}" 
+                                     required="{!OR(f.required, f.dbrequired)}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Allocation resources</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Allocation resources</value>
+    </caseValues>
+    <fields>
+        <label><!-- Approved By --></label>
+        <name>Approved_By__c</name>
+        <relationshipLabel><!-- Allocation resources --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approved --></label>
+        <name>Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved date --></label>
+        <name>Approved_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved hours --></label>
+        <name>Approved_houver__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost center --></label>
+        <name>Cost_center__c</name>
+        <relationshipLabel><!-- Allocation resources --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- FiscalYear --></label>
+        <name>FiscalYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Musqot fiscal year --></label>
+        <name>Musqot_fiscal_year__c</name>
+        <relationshipLabel><!-- Allocation resources --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Plan__c</name>
+        <relationshipLabel><!-- Allocation resources --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Allocation resources --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Request date --></label>
+        <name>Request_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Requested hours --></label>
+        <name>Requested_hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- To Plan --></label>
+        <name>To_Plan__c</name>
+        <relationshipLabel><!-- Allocation resources (To Plan) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- To Project --></label>
+        <name>To_Project__c</name>
+        <relationshipLabel><!-- Allocation resources (To Project) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- To marketing activity --></label>
+        <name>To_marketing_activity__c</name>
+        <relationshipLabel><!-- Allocation resources --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Allocation resources Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

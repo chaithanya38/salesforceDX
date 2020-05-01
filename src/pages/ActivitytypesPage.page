@@ -1,0 +1,35 @@
+<apex:page controller="ActivityEditController" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_Activity_types}" tabStyle="musqot__Project__c" >
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_New}" action="{!NewPrtype}" styleClass="btn"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!plan }" var="row" style="width:700px;">
+                <apex:column headerValue="{!$Label.clm_Action}" style="width:100px;">
+                    <apex:commandLink value="{!$Label.btn_edit}" action="{!redirectPage1}" style="color:#015ba7">
+                        <apex:param Name="p" value="{!row.id}" assignTo="{!planid}"/>
+                    </apex:commandLink>&nbsp;|&nbsp;
+                    <apex:commandLink action="{!DeleteAccount}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!row.Name} ?')) return false;" value="{!$Label.btn_Del}" style="color:#015ba7"> 
+                        <apex:param name="deleteid" value="{!row.Id}" assignTo="{!planid}"/>    
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!row.Name}" headerValue="{!$Label.mrk_Activity_type}" style="width:225px;"/>
+                <apex:column value="{!row.F__c}"  style="width:200px;"/>
+                <apex:column headerValue="{!$Label.actt_Icon}" style="width:75px;">
+                    <div style="valign:top;background-color:#{!HTMLENCODE(row.Bar_color__c)};height:25px;display:inline;padding-bottom:0px;padding-top:12px;padding-left:20px;padding-right:20px;">
+                        <!--<img src="{!row.Icon__c}" alt="" height="20"/>-->
+                        <apex:image value="{!row.Icon__c}" alt="" height="20"/>
+                    </div>
+                </apex:column>        
+                <apex:column headerValue="{!$Label.actt_Bar_color}" style="width:100px;">
+                    <div Style="valign:top; background-color:#{!HTMLENCODE(row.Bar_color__c)};height:25px;display:inline;padding-bottom:5px;padding-top:7px;padding-left:20px;padding-right:20px; width:100px;">
+                        <span style="color:#fff;padding-top:4px !important;">{!row.Bar_color__c}</span>
+                    </div>  
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:actionFunction action="{!DeleteAccount}" name="DeleteAccount" reRender="form" >
+            <apex:param name="accountid" value="" assignTo="{!SelectedAccountId}"/>
+        </apex:actionFunction>
+    </apex:form>      
+</apex:page>

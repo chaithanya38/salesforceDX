@@ -1,0 +1,180 @@
+<apex:page sidebar="false" standardController="Marketing_activity__c" extensions="Marketingactivity"  tabStyle="Project__c">
+    <style>    
+        h1{
+        color:black;
+        text-align:right top;
+        text-position:top;        
+        font-size:22px;
+        }   
+        div.tooltip {
+        width: 195px;
+        float: left;
+        }
+        div.tooltip:hover {
+        background:#ffffff; 
+        text-decoration: none;
+        } /*BG color is a must for IE6*/
+        div.tooltip span {
+        display: none;
+        padding: 2px 3px;
+        margin-left: 8px;
+        width: 195px;
+        }
+        div.tooltip:hover span {
+        display: inline;
+        position: absolute;
+        border: 1px solid #cccccc;
+        background: #FFC;
+        color:#000000;
+        }
+    </style>
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" />
+    <apex:outputPanel layout="block" style="float: left; width: 65%;margin:0px;padding-left:0px; padding-right: 1%; border-right: 1px solid #DADADA">
+        
+        <apex:form > 
+            <apex:sectionHeader title="{!$Label.mrk_Marketing_activity}" subtitle="{!Marketing_activity__c.Name}" />
+ 			<apex:outputPanel layout="block" style="{!if(Level1=true,'float:left;width:60%;','')}"  >
+                <apex:pageBlock tabStyle="musqot__Project__c" title="{!$Label.pt_Activity_detail}"  >
+                    <apex:pageBlockButtons location="top" rendered="{!Level2}"> 
+                        <apex:commandButton value="{!$Label.btn_edit}" action="{!gotomarketingEdit}"/>
+                          <!--<apex:commandButton value="{!$Label.btn_Delete}" action="{!delete}" onclick="return confirm('{!$Label.musadmin_Will_you_delete},{!Marketing_activity__c.Name} ?');"/>-->
+                        <apex:commandButton value="{!$Label.btn_Delete}" action="{!delMrkRe}" onclick="return confirm('{!$Label.musadmin_Will_you_delete},{!Marketing_activity__c.Name} ?');"/>
+                        <apex:commandButton value="{!$Label.btn_Custom_setting}" action="{!customset}" disabled="{!if((Marketing_activity__c.Activitytype__r.F__c==null || Marketing_activity__c.Activitytype__r.F__c=='None'),true,false)}"/>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection columns="2" >
+                        <apex:outputField label="{!$Label.mrk_Activity_name}" value="{!Marketing_activity__c.Name}"/>
+                        <apex:outputField value="{!Marketing_activity__c.Activitytype__r.name}" label="{!$Label.mrk_Activity_type}"/>
+                        <apex:outputField value="{!Marketing_activity__c.Description__c}" label="{!$Label.inv_Description}"/>
+                        <apex:outputfield value="{!Marketing_activity__c.Activity_Class__c}" />
+                        <apex:outputField id="owner" value="{!Marketing_activity__c.OwnerId}" label="{!$Label.mrk_Owner}">&nbsp;&nbsp;&nbsp;
+                            <apex:outputLink rendered="{!Level3}" value="{!URLFOR('/' + workId + '/a?retURL=' + URLENCODE($CurrentPage.Url))}">[Change]</apex:outputLink>
+                        </apex:outputField>
+                        <!--<apex:outputField value="{!Marketing_activity__c.Starts_date__c}" label="{!$Label.pt_Start_date}"/>-->
+                        <apex:outputText value="{!activityStartDate}" label="{!$Label.pt_Start_date}"></apex:outputText>
+                        <apex:outputField value="{!Marketing_activity__c.Plan__c}" label="{!$Label.mrk_Plan}"/>
+                        <!--<apex:outputField value="{!Marketing_activity__c.Ends_date__c}" label="{!$Label.pt_End_date}"/>-->
+                        <apex:outputText value="{!activityEndDate}" label="{!$Label.pt_End_date}"></apex:outputText>
+                        <apex:outputField value="{!Marketing_activity__c.Project__c}" label="{!$Label.sub_Project}"/>
+                        <apex:outputField value="{!Marketing_activity__c.StatusImage__c}" label="{!$Label.tsk_Status}"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:outputPanel>
+            <apex:outputPanel layout="block"  style="float:left;display:inline; width:0px; margin-right:0px;margin-left:1%; min-width:200px;width:39%;" rendered="{!Level1}" >                
+            
+            </apex:outputPanel>
+        </apex:form> 
+        <apex:tabPanel switchType="client" id="theTabPanel" value="{!tabInFocus}">
+            <apex:tab label="{!$Label.tb_Overview}" name="tabDetails" id="tabDetails">
+                <apex:form >
+                    <apex:pageBlock title="{!$Label.pt_Presentation}" tabStyle="musqot__Project__c" >
+                        <apex:pageBlockButtons location="top">                       
+                            <apex:commandButton value="{!$Label.btn_edit}" action="{!workSpace}" immediate="true" rendered="{!Level2}"/> 
+                            <apex:commandButton value="{!$Label.btn_Attachment_document}" action="{!Savedoc}" rendered="{!Level1}"/>                      
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </apex:form>
+                <apex:form id="for_workspace"> 
+                    <table width="100%" id="table1" style="border-spacing: 10px;">
+                        <apex:repeat value="{!workSpaceList}" var="wrk">
+                            <tr>                            
+                                <td valign="top">
+                                    <h1><apex:outputText value="{!workSpaceList[0].Name}"/><br/></h1>
+                                    <apex:outputText value="{!wrk.html_description__c}" escape="false"/>
+                                </td>                           
+                                <td width="250px" valign="top">                                
+                                    <apex:outputText value="{!workSpaceList[0].Description__c}"/>
+                                    <br/> <br/> 
+                                    <apex:pageBlock tabStyle="musqot__Project__c" rendered="{!Level1}">
+                                        <apex:outputText style="font-weight: bold;" value="{!$Label.pt_Attachments}"  rendered="{!IF(wrk.NotesAndAttachments.size>0,true,false)}"/><br/><br/>
+                                        <apex:repeat value="{!AttLinks}" var="wk">   
+                                            <apex:commandLink rendered="{!Level3}" value="{!$Label.clm_Info}" target="_self" action="{!gotoattchmentpage}">  
+                                                <apex:param name="atmid" value="{!wk.id}" />
+                                            </apex:commandLink>&nbsp;&nbsp;&nbsp; 
+                                            <apex:outputLink Target="_Blank" value="{!URLFOR($Action.Attachment.Download, wk.id)}"  title="{!$Label.att_Download}"  rendered="{!Level1}" id="optlink" styleClass="optlinkcls">{!wk.Name}</apex:outputLink><br/>                                                           
+                                        </apex:repeat>  
+                                    </apex:pageBlock>                             
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                    </table>               
+                </apex:form>
+            </apex:tab>
+            <apex:tab rendered="{!Marketing_activity__c.multi_pubication__c}" label="{!$Label.Mrk_Publication_dates}" focus="tb2" id="tb2">
+               <apex:form > 
+                <apex:pageBlock tabStyle="musqot__Project__c" title="{!$Label.Mrk_Publication_dates}"  >
+                        <apex:pageBlockButtons location="top" rendered="{!Level2}"> 
+                            <apex:commandButton value="{!$Label.btn_New}" action="{!redirectNewDatesPage}"/>
+                        </apex:pageBlockButtons>               
+              			<apex:pageBlockTable value="{!pubdatelist}" var="pdate" rendered="{!if(pubdatelist.size>0,true,false)}">
+                            <!--<apex:column value="{!IF(Level2,'{!$Label.btn_Del}','')}" headerValue="{!$Label.clm_Action}"/>-->
+                            <apex:column headerValue="{!$Label.mrk_Activity_name}">
+                                <apex:commandLink value="{!pdate.Name}" action="{!goToActivityDatEditMode}">
+                                    <apex:param name="pdateid" value="{!pdate.id}"/>
+                                </apex:commandLink>
+                            </apex:column>
+                            <!--<apex:column value="{!pdate.Name}" headerValue="{!$Label.mrk_Activity_name}"/>-->
+                            <apex:column value="{!pdate.Start_date__c}" headerValue="{!$Label.pt_Start_date}"/>
+                            <apex:column value="{!pdate.End_date__c}" headerValue="{!$Label.pt_End_date}" />
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+            <apex:tab label="{!$Label.tb_Tasks}" reRender="work1" rendered="{!Level1}" id="tb3">
+                <apex:form >
+                    <apex:pageBlock tabStyle="musqot__Project__c" title="{!$Label.pt_Task_list}"  helpTitle="{!$Label.Help_Tasks_help_page}" helpUrl="/apex/Taskhelppage">
+                        <apex:pageBlockButtons location="top" rendered="{!Level2}"> 
+                            <apex:commandButton value="{!$Label.btn_New_task}" action="{!newtask}"/>
+                        </apex:pageBlockButtons>               
+                        <apex:pageBlockTable value="{!taskrecs2}" var="t" id="myTable1"  columnsWidth="*,140,140,35,35,75,40" rendered="{!IF(taskrecs2.size>0,true,false)}">                 
+                            <apex:column headerValue="{!$Label.tsk_Task}">
+                                <apex:commandLink value="{!t.Task_name__c}" action="{!gotoTaskEdit}">
+                                    <apex:param name="taskid" value="{!t.id}"/>
+                                </apex:commandLink>
+                            </apex:column>
+                            <apex:column value="{!t.OwnerId}" headerValue="{!$Label.tsk_Assigned_To}"/>
+                            <apex:column value="{!t.CreatedById}" headerValue="{!$Label.taskcreatedby}"/>
+                            <apex:column value="{!t.Allocated_h__c}" headerValue="{!$Label.tsk_estimated_time_short}" title="{!$Label.tsk_estimated_time}" />
+                            <apex:column value="{!t.Outcome_h__c}"  headerValue="{!$Label.tsk_outcome_time_short}" title="{!$Label.tsk_outcome_time}" /> 
+                            <apex:column value="{!t.ActivityDate}" headerValue="{!$Label.tsk_Due_Date}"/>
+                            <apex:column value="{!t.StatusImage__c}" styleClass="tooltip" title="{!t.Status}" headerValue="{!$Label.tsk_Status}"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+            <apex:tab label="{!$Label.tb_Members}" rendered="{!Level1}" id="tb4">
+                <apex:form >
+                    <apex:pageBlock tabStyle="musqot__Project__c" title="{!$Label.pt_Members}" helpTitle="{!$Label.Help_Members_help_page}" helpUrl="/apex/Membershelppage">
+                        <apex:pageBlockButtons location="top">
+                            <apex:commandButton value="{!$Label.btn_New_member}" action="{!newMember}" rendered="{!Level2}"/>
+                        </apex:pageBlockButtons>
+                        <apex:pageBlockTable value="{!members}" var="mi" columnsWidth="200,200,100,*"  rendered="{!IF(members.size>0,true,false)}"> 
+                            <apex:column headerValue="{!$Label.musadmin_Name}" rendered="{!Level2}">
+                                <apex:image value="{!mi.ProjUsers__r.smallphotourl}" height="16px" style="margin:0px;"/>&nbsp;&nbsp;&nbsp;
+                                <apex:commandLink value="{!mi.ProjUsers__r.name}" action="{!gotoMemberEdit}"> <!--GJ---rendered="{!IF(mi.Role__c<>'Owner'&&Level2,true,false)}" action="{!gotoMemberEdit}">--> 
+                                    <apex:param name="mbrId" value="{!mi.Id}"/> 
+                                </apex:commandLink>   
+                            </apex:column> 
+                            <apex:column value="{!mi.User_Email__c}" headerValue="{!$Label.mem_Email}"/>
+                            <apex:column value="{!mi.Role__c}" headerValue="{!$Label.mem_Role}"/>
+                        </apex:pageBlockTable>
+                        <apex:pageBlockTable value="{!parentmembers}" var="pmi" columnsWidth="200,200,100,*"  rendered="{!IF(parentmembers.size>0,true,false)}"> 
+                            <apex:column headerValue="{!$Label.mem_Parent}" rendered="{!Level2}">
+                                <apex:image value="{!pmi.ProjUsers__r.smallphotourl}" height="16px" style="margin:0px;"/>&nbsp;&nbsp;&nbsp;
+                                <apex:commandLink value="{!pmi.ProjUsers__r.name}" rendered="{!IF(pmi.Role__c<>'Owner'&&Level2,true,false)}" action="{!gotoMemberEdit}"> 
+                                    <apex:param name="mbrId" value="{!pmi.Id}"/> 
+                                </apex:commandLink> 
+                            </apex:column>
+                            <apex:column value="{!pmi.User_Email__c}" headerValue="{!$Label.mem_Email}"/>
+                            <apex:column value="{!pmi.Role__c}" headerValue="{!$Label.mem_Role}"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+        </apex:tabPanel>      
+        <apex:include pageName="FinancialSummarymarketing" rendered="{!Level2}"/> 
+    </apex:outputPanel>
+    <apex:outputPanel layout="block" style="float:right;width:31%;" rendered="{!Level1}" >
+        <chatter:feed entityId="{!Id}"  />
+    </apex:outputPanel>    
+</apex:page>

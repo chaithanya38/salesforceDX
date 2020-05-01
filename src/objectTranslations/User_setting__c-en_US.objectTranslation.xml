@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>User setting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>User settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Gantt type --></label>
+        <name>Gantt_type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ganttview --></label>
+        <name>Ganttview__c</name>
+    </fields>
+    <fields>
+        <label><!-- Global --></label>
+        <name>Global__c</name>
+    </fields>
+    <fields>
+        <label><!-- My default --></label>
+        <name>My_default__c</name>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>Userid__c</name>
+        <relationshipLabel><!-- User settings --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

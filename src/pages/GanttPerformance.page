@@ -1,0 +1,2231 @@
+<apex:page controller="ERPSalesGanttController" standardStylesheets="false" id="pg" sidebar="false" docType="html-5.0" tabStyle="Gantt__tab">
+    <apex:includeScript value="/soap/ajax/29.0/connection.js" />
+    <apex:includeScript value="/soap/ajax/29.0/apex.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.DhtmlxChart, 'codebase/dhtmlxchart.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DhtmlxChart, 'codebase/dhtmlxchart.js')}" />
+     <script src="https://export.dhtmlx.com/gantt/api.js"></script> 
+ <!--   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/> -->
+     <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <style>
+    *, html, body{
+    box-sizing: border-box;
+    }
+
+BODY {
+    overflow: hidden !important;
+}
+.PDF{
+height:34px !important;
+  width: 44px !important;
+   -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url(/resource/1439298994000/musqot__ExportPDF) no-repeat ;
+  padding: 0px ;
+ -moz-border-radius: 0px;
+ -webkit-border-radius: 0px;
+ border-radius: 0px;
+ border: 0px solid #B8B8B8;
+ margin:0px ;
+  cursor: pointer;
+}
+.gantt_task_content> #mrkt_activity{
+    display: none;
+}
+.gantt_grid_head_cell{
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 3px; 
+    width: 245px !important;
+}
+.gantt_tree_icon.gantt_file {
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url(/resource/1438318756000/musqot__Gantt_Marketingact) no-repeat;
+  height: 18px; 
+ padding-left: 16px; 
+  margin-top: 8px; 
+  margin-left: 8px;
+}
+.gantt_tree_icon.gantt_blank {
+    width: 1px !important;
+}
+.gantt_task_content> img{
+    float: right;
+    vertical-align: middle;
+    top: 5px;
+}
+
+    .gantt_selected {
+        background-color: #f6f6f6 !important;
+    }
+    .gantt_grid_data .gantt_row.odd:hover,.gantt_grid_data .gantt_row:hover{background-color:#f6f6f6;}
+    .noTableFooter {
+        margin-left: 0px !important;
+    }
+
+.bPageFooter {
+    padding: 5px !important;
+}
+
+.view_btn_set {
+    background: #D2691E;
+    text-shadow: 0 -1px 0 #248a9f;
+    color: #fff;
+    margin: 5px 10px 5px 0px !important;
+    padding: 5px 15px 5px 15px !important;
+}
+
+.weekend {
+    background: #dedede !important;
+}
+
+.activity_task {
+    border: 2px solid #BFC518;
+    color: #6ba8e3;
+    background: #F6F6D6;
+}
+
+.activity_task .gantt_task_progress {
+    background: #D9DF29;
+}
+
+.popup-progress {
+    width: 100%;
+    height: 20px;
+    border: 3px solid #6EB638;
+    background: #7ED43E;
+    display: block;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.popup-description {
+    display: block;
+    width: 100% height:  30px;
+    overflow: auto;
+    border-bottom: 1px solid #E4E4E4;
+    color: red;
+}
+
+ 
+.gantt_tree_content img {
+    margin: 5px !important;
+    //  padding-bottom: 2px !important;
+    width:24px !important;
+    height:24px !important;
+}
+
+.gantt_row .gantt_cell:first-child{width: 82% !important;}
+.gantt_grid_head_text {width: 78% !important}
+                                                                            
+.bodyOuter {
+    overflow: auto;
+    width:100%;
+    margin-top: -3px;
+}
+#wrap_div {
+
+}
+
+#outerDiv {
+}
+.dhx_axis_item_y{
+display: none;
+}
+.redFont{
+color:#B50909;
+}
+
+.topButton {
+                 color: #696666 !important;
+                 font-weight:600;
+                 box-shadow: 0px 0px 0px 0px green #fff ;
+                 -webkit-box-shadow: 0px 0px 0px 0px red #fff ;
+                 -moz-box-shadow: 0px 0px 0px 0px #fff ;
+                 padding: 0px 8px;
+                 -moz-border-radius: 2px;
+                 -webkit-border-radius: 2px;
+                 border-radius: 2px;
+                 border: 1px solid #B8B8B8;
+                 background: #F9FAFE;
+                 height:22px;
+             }
+             .topButton:hover {
+                 color: #FFFFFF !important;
+                 background: #00A0DE;
+             }
+             .topButton:visited {
+                 color: #696666 !important;
+                 background: #F9FAFE;
+             }
+             .topButton:active {
+                 color: #696666 !important;
+                 background: #00A0DE;
+             }
+             
+             
+             .gantselecttype {
+                 height: 22px !important;
+                 width: 175px;
+                 border: 1px solid #B8B8B8;
+                 background: #F9FAFE;
+             }
+             .gantselecttype:hover {
+                 height: 100px !important;
+                 background: #F9FAFE;
+             }
+             .gantselecttype:active {
+                 height: 100px !important;
+                 background: #F9FAFE;
+             }
+    
+    		.gantt_tree_icon.gantt_Marketingact{background-image:url("/resource/1439451905000/musqot__Gantt_Marketingact")}
+             
+{!JSENCODE(taskstyleString)}
+    
+    
+    .custPopup{
+        background-color: white;
+        border-width: 2px;
+        border-style: solid;
+        z-index: 9999;
+        left: 18px;
+        padding:10px 10px 3px 10px;;
+        position: absolute;
+        /* These are the 3 css properties you will need to change so the popup 
+                displays in the center of the screen. First set the width. Then set 
+                margin-left to negative half of what the width is. You can add 
+                the height property for a fixed size pop up if you want.*/
+                 width: 500px;
+                 margin-left: 0px;
+                 top:34px;
+             }
+    .popupBackground{
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    }
+    #ganttNav {
+    position: absolute;
+    height: 30px;
+    display:block;
+    z-index: 100;
+    width:70px;
+    }
+    
+    #ganttNavMenu {
+    -moz-box-shadow: 0 2px 4px rgba(127, 127, 127, .3);
+    -webkit-box-shadow: 0 2px 4px rgba(127, 127, 127, .3);
+    box-shadow: 0 2px 4px rgba(127, 127, 127, .3);
+    padding: 1px  !important;
+    background-color: #fff;
+    margin-top: 0px  !important;
+    left: auto;
+    right: 0;
+    width: 150px
+    }
+    
+    .ganttmenuButtonActivated #ganttNavMenu {
+    border: 1;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px
+    }
+    
+    #ganttNavMenu.ganttmenuWidthExtended {
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    padding-top:13px ;
+  
+    }
+    
+    #ganttNavMenu a {
+    color: #333435;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    margin: 0px;
+    display:block ;
+    }           
+    
+    #ganttNavMenu a:hover {
+    color: #015ba7 ;
+    }
+    
+    #ganttNavMenu.ganttmenuWidthExtended {
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    padding-top: 13px;
+    
+    }
+    
+    .ganttmenuButton .ganttmenuButtonMenu {
+        background-color:#f8f8f8;
+        border: 1px solid #7d7d7d;
+        -moz-box-shadow: 0 1px 5px #727272;
+        -webkit-box-shadow: 0 1px 5px #727272;
+        box-shadow: 0 1px 5px #727272;
+        padding: 0;
+    }
+    .ganttmenuButton .ganttmenuButtonMenu a:hover {
+        background: #e3f3ff none;
+        color: #015ba7;
+        border: 0;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .ganttmenuButton .ganttmenuButtonMenu a {
+        background-color: transparent;
+        border: 0;
+        padding-top: 2px ;
+        padding-left:  4px ;
+        font-weight: normal;
+        font-size: 1em;
+    }
+    .ganttmenuButton {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+    }
+    
+    
+    /* Confirm Box Style - start - */
+         .lower button::-moz-focus-inner {
+             border:0;
+             padding:0
+         }
+         .lower button {
+             width:auto;
+          	 border:0 none;
+             margin:0;
+             padding:0;
+             background:transparent;
+             overflow:visible;
+             font:14px arial, sans-serif;
+             #vertical-align:middle; /* IE6,IE7 */
+         }
+        
+         .popup {
+             display: none;
+             position: absolute;
+          	 left: 36%;
+          	 top: 100px;
+          	 width: 400px;
+             z-index: 10010;
+         }
+        
+         .upper {
+             box-sizing:border-box;
+             padding: 6% 8% 3% 8%;
+             background: #eee;
+             height: auto;
+             font-family:helvetica;
+             color: rgba(100,100,100,1);
+             font-size:18px;
+             transition: color 0.4s ease;
+         }
+        
+         .upper:hover {
+             color: rgba(100,100,100,1);
+         }
+        
+         .stroke {
+          	 height:5px;
+          	 background: #ff6633;
+         }
+        
+         .lower {
+             text-align: center;
+          	 box-sizing:border-box;
+           	 background-color: #333;
+          	 height:60px;
+          	 width:100%;
+          	 padding: 6% 15%;
+          	 color: rgb(200,200,200)
+         }
+        
+         .lower button {
+          	 float:left;
+          	 height:18px;
+          	 line-height:18px;
+          	 display:block;
+          	 color: rgba(255, 255, 255, 0.6);
+          	 width:25%;
+          	 transition: color 0.3s ease;
+         }
+        
+         .lower button:focus {
+         	border: 0;
+            outline: none;
+         }
+                                                              
+         .lower button:last-child {
+         	 margin-left:50%;
+         }
+        
+         .lower button i {
+          	 width:19px;
+             height:18px;
+             display:block;
+             float:left;
+         }
+        
+         .lower button:hover {
+             cursor: pointer;
+         }
+        
+         .lower button:hover {
+             color: rgba(255,255,255,1);
+         }
+        
+         .lower button:hover .icon-ok {
+             color:rgba(100,255,100,0.5);
+         }
+        
+         .lower button:hover .icon-remove {
+             color:rgba(255,102,51,0.8);
+         }  
+              
+         .lower span{
+             display: none;
+             color: #ff6633;
+             font-size: 1.3em;
+             font-weight: 700;
+             position: relative;
+             bottom: 10px;
+             left: 8px;
+         }
+                                                              
+         .lower i.success-mark{
+         	 font-size: 3em;
+             color: #009933;
+             position: relative;
+             bottom: 18px;
+             display: none;
+         }
+                                                              
+         .tr-bg {
+            display: none;
+         	width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            opacity: .15;
+            filter: alpha(opacity=10);
+         }    
+                                                              
+         @-webkit-keyframes gear-rotate {
+          	0% { -webkit-transform: rotate(0deg); }
+          	100% { -webkit-transform: rotate(180deg); }
+         }
+         @-moz-keyframes gear-rotate {
+          	0% { transform: rotate(0deg); }
+          	100% { transform: rotate(180deg); }
+         }
+         @keyframes gear-rotate {
+          	0% { transform: rotate(0deg); }
+          	100% { transform: rotate(180deg); }
+         }
+        
+         .gear-rotate {
+            display: none;
+            width: 2em;
+            height: 2em;
+            background: #ff6633;
+            position: relative;
+            bottom: 5px;
+            border-radius: 1em;
+            -webkit-animation: 1s gear-rotate steps(10) infinite;
+            -moz-animation: 1s gear-rotate steps(10) infinite;
+            animation: 1s gear-rotate steps(10) infinite;
+         }
+         .gear-rotate::before {
+            width: 2.8em;
+            height: 2.8em;
+            background: -webkit-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-webkit-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-webkit-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: -moz-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-moz-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-moz-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: -o-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-o-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-o-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: -ms-linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),-ms-linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),-ms-linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            background: linear-gradient(0deg,transparent 39%,#ff6633 39%,#ff6633 61%, transparent 61%),linear-gradient(60deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%),linear-gradient(120deg,transparent 42%,#ff6633 42%,#ff6633 58%, transparent 58%);
+            position: absolute;
+            content:"";
+            top: -.4em;
+            left: -.4em;
+            border-radius:1.4em;
+         }
+         .gear-rotate::after {
+            width: 1em;
+            height: 1em;
+            background: #CDE8F0;
+            position: absolute;
+            content:"";
+            top: .5em;
+            left: .5em;
+            border-radius: .5em;
+         }
+         /* Confirm Box Style - end - */
+         /* Info Popup Style - start - */
+         #infoPopup {width: 600px;padding: 18px;left: 28%;top: -1000px;display:block;}
+         #infoPopup .upper {padding: 18px;}
+         #infoPopup .upper h2{font-size: 16px;color: #333;padding-left: 3px;}
+         #infoPopup .upper #description{margin-top: 5px;font-size: 13px;color: #333;padding-left: 3px;}
+         #infoPopup table th,td{font-size: 13px;color: #333;}
+         #infoPopup table th{padding-right: 20px;}
+         #infoPopup .lower {padding: 2% 15%;padding-left: 22px;text-align: left;}
+         #infoPopup .upper i {position: absolute;top: 21px;right: 24px;font-size: 13px;cursor: pointer;}
+         #infoPopup .upper i:hover {color:rgba(255,102,51,0.8);}
+         #infoPopup .lower input{background: #eee;border: 0;outline: 0;padding: 9px 17px;cursor: pointer;margin-top: 1px;}
+         /* Info Popup Style - end - */
+</style>
+
+<script>
+//pdf export
+    function pdfExport(){
+    	var pdfStyle ='<style>'+'{!JSENCODE(taskstyleString)}'+'{!JSENCODE(dataString)}'+'</style>';    	
+        gantt.exportToPDF({
+            name:"Gantt_page.pdf",
+            locale:"en",
+            header:pdfStyle 
+        });
+    }
+</script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"/>
+    <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+        
+    <apex:stylesheet value="{!URLFOR($Resource.DHTMLGantt, 'codebase/dhtmlxgantt.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DHTMLGantt,'codebase/dhtmlxgantt.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.DHTMLGantt,'codebase/ext/dhtmlxgantt_tooltip.js')}"/>
+    
+    <div class="bodyOuter" id="bodyOuter">
+            <div id="head" style="height:35px;width:100%;margin: 0px;padding: 0px;">
+            
+            <!-- Navigate to Gantt Page -->
+                <div style="float:left;vertical-align:top;border:0px solid #b8b8b8; margin:3px;margin-right:15px; padding:0px;display:inline-block;z-index:99;">
+                    <apex:form >
+                        <apex:commandButton value="{!$Label.btn_gantt}" styleClass="topButton" action="{!gotoGanttPage}"/>  
+                    </apex:form>
+                </div>
+
+                <!--<div style="position:absolute ; top:12px;left:100px;  float:left;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:15px; padding:0px 5px;display:inline-block;z-index:100; ">
+                    <apex:form >
+                        <apex:selectList id="patype" value="{!selectedTypes}" size="1" multiselect="true"  label="{!$Label.pt_Plantype}" style="width:175px;" styleClass="gantselecttype">
+                            <apex:selectOptions value="{!PLANList}"/>
+                        </apex:selectList>
+                        <apex:commandButton value="Go" style="width:25px;margin:0px;vertical-align:top;" styleClass="topButton" action="{!showSelectedPlanTypes}" />  
+                    </apex:form>
+                </div> -->
+                <div style="float:left;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:15px; padding:0px;display:inline-block;z-index:99;">
+                	<apex:form id="frmFilter" > 
+                    	<apex:inputHidden id="hdnstartDate" value="{!startDateVal}"/>
+                        <apex:inputHidden id="hdnendDate" value="{!endDateVal}"/>
+                            <apex:inputHidden id="hdnZomming" value="{!zoomingVal}"/>
+                    </apex:form> 
+                </div>
+                <div style="position:absolute ; top:12px;left:100px;  float:left;vertical-align:top;border:0px solid #b8b8b8; margin:0px;margin-right:15px; padding:0px 5px;display:inline-block;z-index:100; ">
+                    <apex:form >    
+                        <span style="font-weight:bold;">{!$Label.filter} </span>                                          
+                        <apex:selectList id="paFilter" value="{!selectedFilter}" size="1" multiselect="false">
+                            <apex:selectOptions value="{!FilterList}" />
+                            <apex:actionFunction action="{!loadviewbyFilter}" name="selectPlans"/>
+                            <apex:actionSupport event="onchange" action="{!loadviewbyFilter}" />
+                        </apex:selectList>                                                   
+                        <apex:commandLink action="{!showPopup}" onclick="setplantypeSelected(this)" style="padding-left:5px;color:#1797c0;" value="{!lnkfilterTitle}" rerender="filterpopup"/>                                                                                                                                                                                        
+                    </apex:form> 
+                </div>
+         
+                <apex:form id="frmNewFilter">
+                    <apex:outputPanel id="filterpopup" >                   
+                        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+                        <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">   
+                            <apex:pageBlock title="{!$Label.btn_filter_settings}" mode="Edit">
+                                
+                                <apex:pageBlockButtons location="top">                                                                     
+                                    <apex:commandButton styleClass="btn btn" value="{!$Label.btn_save}" action="{!SaveFilter}"  disabled="{!isGlobaluser}"/>
+                                    <apex:commandButton styleClass="btn btn" value="{!$Label.btn_Delete}" action="{!DeleteFilter}" disabled="{!isGlobaluser}"/>
+                                    <apex:commandButton styleClass="btn btn" value="{!$Label.btn_cancel}" action="{!closePopup}" immediate="true" html-formnovalidate="true" />
+                                </apex:pageBlockButtons>
+                                
+                                <apex:pageBlockSection columns="1" >
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputlabel value="{!$Label.Filtername}"/>
+                                        <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                        <apex:outputPanel styleClass="requiredBlock"/>
+                                        <apex:inputText value="{!FilterName}" required="True" disabled="{!isGlobaluser}" />
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputlabel value="{!$Label.mrk_Activity_type}"/>                                          
+                                        <apex:selectCheckboxes id="filterpatype" disabled="{!isGlobaluser}" value="{!selectedFilterTypes}" layout="pageDirection"  borderVisible="true">
+                                        <apex:selectOptions value="{!PLANList}" />
+                                        </apex:selectCheckboxes>                                                                      
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputlabel value="{!$Label.gnt_Zooming}" />                                                              
+                                        <apex:selectRadio id="srfilterzooming" value="{!FilterZooming}" disabled="{!isGlobaluser}" required="True">
+                                        <apex:selectOption itemLabel="{!$Label.gnt_Days}" itemValue="Days"/>
+                                        <apex:selectOption itemLabel="{!$Label.gnt_Weeks}"  itemValue="Weeks"/>                                        
+                                        </apex:selectRadio> 
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputlabel value="{!$Label.pt_Start_date}"/ >    
+                                        <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                        <apex:outputPanel styleClass="requiredBlock"/>
+                                        <apex:input type="date" value="{!FilterStartDate}" disabled="{!isGlobaluser}" id="filterstartDate" onchange="validatefilterPeriod(this)" required="True"/>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputlabel value="{!$Label.pt_End_date}"/ >
+                                        <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                        <apex:outputPanel styleClass="requiredBlock"/>
+                                        <apex:input type="date" value="{!FilterEndDate}" disabled="{!isGlobaluser}" id="filterendDate" onchange="validatefilterPeriod(this)" required="True" />
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem > 
+                                        <apex:outputlabel value="{!$Label.gnt_My_default}"/ >                                                     
+                                        <apex:inputCheckbox value="{!mydefaultFilter}" disabled="{!isGlobaluser}" />
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem rendered="{!Level1}" > 
+                                        <apex:outputlabel value="{!$Label.gnt_Global}"/ >                                                     
+                                        <apex:inputCheckbox value="{!GlobalFilter}" disabled="{!isGlobaluser}" />
+                                    </apex:pageBlockSectionItem>
+                
+                
+                                </apex:pageBlockSection>    
+                            </apex:pageBlock>         
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:form>
+
+
+                <div style="float: right; vertical-align: middle; border: 0px solid #b8b8b8; margin: 0px; margin-right: 5px; padding: 2px; display: inline-block;margin-top: 5px;">
+                    <span class="help" title="{!$label.Help_Help_page}">
+                    <a href="javascript:openPopupFocusEscapePounds('/apex/Gantthelppage', 'Help', 1024, 768, 'width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no', false, false);"
+                        class="linkCol">
+                            <span class="linkSpan">{!$label.Help_Help_page}&nbsp;</span>
+                            <img src="/s.gif" alt="{!$label.Help_Help_page}" class="helpIcon" title="{!$label.Help_Help_page}" />
+                    </a>
+                    </span>
+                </div>
+                                
+                <div style="float:right;vertical-align:top;border:0px solid #b8b8b8;margin-bottom:4px;padding:0px;display:inline-block;margin-top: 7px;" >
+              		<span value="" title="{!$Label.btn_Export_to_PDF}" class="PDF" style="display:inline-block;" onclick='pdfExport()'></span>            
+                </div>
+                                
+      
+                
+                <div id="zooming" style="float: right; vertical-align: middle; border: 0px solid #b8b8b8; margin: 3px; padding:2px 10px 5px 5px; display: inline-block;">
+                    <span style="font-weight: bold;">{!$label.gnt_Zooming} </span> 
+                    <input type="radio" id="day" name="timeSlot" checked="checked"/>{!$label.gnt_Days}&nbsp;
+                    <input type="radio" id="week" name="timeSlot"/>{!$label.gnt_Weeks}&nbsp;
+                    <!--<input type="radio" id="month" name="timeSlot" />Months&nbsp; -->
+                </div>
+                <div style="float: right; vertical-align: middle;margin:3px;padding:1px 5px 2px 0px;">
+                    <span style="font-weight:bold;">{!$label.gnt_Period}</span>
+                    <input type='text' id='startDate' value ="" style='width:80px'/>
+                    <input type='text' id='endDate' value="" style='width:80px'/>
+                </div>
+            </div>  
+
+            <div id="gantt" class = "ganttStyle" style="height:250px;width:100%"></div>
+            <div id="ERPSales" style='margin-top:5px;border: solid 0px #B8B8B8;height:140px;width:100%;overflow:hidden'>
+                <div id="ERPSalesLegend" style="border: solid 0px #B8B8B8;height:100%;overflow-y:auto;float:left;display:inline-block;width:300px">
+                    <div style='width:100%'>
+                        <apex:repeat value="{!erpChartList}" var="e">
+                             <div style='width:100%'>
+                                <input type='radio' name='ChartGroup' value='{!e}' style=''> {!e.Name} </input>
+                                <div name='colorBoxesDiv' style='width:100%;height:25px;overflow:auto;padding:0% 3% 0% 7%'>
+                                    <div id='{!e}' style='height:100%'></div>
+                                </div>
+                             </div>
+                         </apex:repeat>
+                         <!-- Hussain --> 
+                         
+                         <!-- Dynamic social media data representation(in charts per connection) is pending in Gantt Performance page because the data model of social media and connection is changed now.-->
+                         <apex:repeat value="{!mediaMap}" var="m">
+                             <div style='width:100%'>
+                                <input type='radio' name='ChartGroup' value='{!m}' style=''> {!mediaMap[m].Name}</input>
+                                <div name='colorBoxesDiv' style='width:100%;height:25px;overflow:auto;padding:0% 3% 0% 7%'>
+                                    <div id='{!m}' style='height:100%'></div>
+                                </div>
+                             </div>   
+                         </apex:repeat>
+                         <!-- Hussain -->                      
+                                                                        
+                    </div>
+                </div>
+                <apex:outputPanel rendered="{!isSecondSection}">
+                    <div id="wrap_div" style="border-bottom: solid 0px #B8B8B8;border: solid 1px #B8B8B8;height:100%;overflow:hidden;" onscroll='javascript:return false;'>
+                        <div id="chart_container" style="height:175px;border: 0px solid #A4BED4; margin-left: 0px;position:relative;top:-19px;"></div>
+                    </div>
+                </apex:outputPanel>
+            </div>   
+            
+    </div>   
+  
+   <script>
+
+
+    var bodyheight = bodyheight = $(window).height();
+    var bodywidth = bodywidth = $(window).width();
+    $(".bodyDiv").height(bodyheight-140);  //
+    $(".bodyDiv").width(bodywidth-44);//
+    $("#gantt").height($(".bodyDiv").height()-230); 
+    $("#gantt").width($(".bodyDiv").width()-20);
+    if("{!isSecondSection}"=="false") {
+        $("#bodyOuter").height($(".bodyDiv").height()); 
+    	$("#bodyOuter").width($(".bodyDiv").width()-20); 
+		$("#gantt").height($("#bodyOuter").height()-50);    //
+    	$("#gantt").width($("#bodyOuter").width()-20);    
+    }
+    // $("#gantt").height($("#outerDiv").height()-50);    //
+    // $("#gantt").width($("#outerDiv").width()-20);
+                 
+        $(document).ready(function(){
+            gantt.templates.tooltip_text = function(start,end,task){                
+                var formattedSd = ("0" + (start.getMonth()+1)).slice(-2) + '-' + ("0" + (start.getDate())).slice(-2) + '-' + start.getFullYear();
+                var formattedEd = ("0" + (end.getMonth()+1)).slice(-2) + '-' + ("0" + (end.getDate()-1)).slice(-2) + '-' + end.getFullYear();
+                return task.text + "<br/><b>{!$Label.mrk_Activity_type}:</b> " + task.projectType + "<br/><b>{!$label.pt_Start_date}:</b> " + formattedSd + "<br/><b>{!$label.pt_End_date}:</b> " + formattedEd;
+            };
+            $(window).resize(function(){
+                var bodyheight = bodyheight = $(window).height();
+                var bodywidth = bodywidth = $(window).width();
+                $(".bodyDiv").height(bodyheight-140);  //
+                $(".bodyDiv").width(bodywidth-44);//
+                $("#gantt").height($(".bodyDiv").height()-230); 
+                $("#gantt").width($(".bodyDiv").width()-20);
+                if("{!isSecondSection}"=="false") {
+                    $("#bodyOuter").height($(".bodyDiv").height()); 
+                    $("#bodyOuter").width($(".bodyDiv").width()-20); 
+                    $("#gantt").height($("#bodyOuter").height()-50);    //
+                    $("#gantt").width($("#bodyOuter").width()-20);    
+                }
+                // $("#gantt").height($("#outerDiv").height()-50);    //
+                // $("#gantt").width($("#outerDiv").width()-20);
+                     
+                document.getElementById('ERPSalesLegend').style.width = document.getElementsByClassName('gantt_grid')[0].offsetWidth+'px';
+                document.getElementById('wrap_div').style.width = document.getElementsByClassName('gantt_task')[0].offsetWidth+'px';
+                document.getElementById('chart_container').style.width = (document.getElementsByClassName('gantt_data_area')[0].offsetWidth)+'px';                
+             });
+          });
+   </script>
+                   
+<script>
+
+//adding aditional custom functions to Date object
+Date.prototype.getWeek = function() {
+    var onejan = new Date(this.getFullYear(),0,1);
+    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+}
+Date.prototype.getWeekendDate = function() {
+    var endDate = this;
+    return endDate.setDate(this.getDate()+(6-this.getDay()));
+}
+Date.prototype.getWeekStartDate = function() {
+    var startDate = this;
+    return startDate.setDate(this.getDate()-this.getDay());
+}
+Date.prototype.getMonthStartDate = function() {
+    return (new Date(this.getFullYear(), this.getMonth(),1));
+}
+Date.prototype.getMonthendDate = function() {
+    return (new Date(this.getFullYear(), this.getMonth()+1, 0));
+}
+
+
+var timeOptions = document.getElementsByName('timeSlot');
+var today = new Date();
+var startDate = new Date();
+startDate.setDate(today.getDate()-60);
+startDate = startDate.getMonthStartDate();
+endDate = today.getMonthendDate();
+document.getElementById('startDate').value = (("0" + (startDate.getMonth()+1)).slice(-2))+'/'+(("0" + startDate.getDate()).slice(-2))+'/'+startDate.getFullYear();
+document.getElementById('endDate').value = (("0" + (endDate .getMonth() + 1)).slice(-2))+'/'+(("0" + endDate .getDate()).slice(-2))+'/'+endDate .getFullYear();
+endDate.setDate(endDate.getDate()+1);
+                
+//Filter Start
+if(document.getElementById('pg:frmFilter:hdnstartDate').value != '' && document.getElementById('pg:frmFilter:hdnendDate').value != '' && document.getElementById('pg:frmFilter:hdnZomming').value != ''){
+    var fstartDate = new Date(Date.parse(document.getElementById('pg:frmFilter:hdnstartDate').value))
+    document.getElementById('startDate').value = (("0" + (fstartDate.getMonth()+1)).slice(-2))+'/'+(("0" + fstartDate.getDate()).slice(-2))+'/'+fstartDate.getFullYear();
+    var fendDate = new Date(Date.parse(document.getElementById('pg:frmFilter:hdnendDate').value))
+    document.getElementById('endDate').value = (("0" + (fendDate.getMonth()+1)).slice(-2))+'/'+(("0" + fendDate.getDate()).slice(-2))+'/'+fendDate.getFullYear();
+    if(document.getElementById('pg:frmFilter:hdnZomming').value == 'Weeks'){
+        document.getElementById('week').checked  = true;
+    }else if(document.getElementById('pg:frmFilter:hdnZomming').value == 'Days'){
+        document.getElementById('day').checked  = true;
+    }
+    startDate = fstartDate;
+    endDate = fendDate;
+    
+}                 
+
+    /*document.getElementById('startDate').onchange  = function(){
+    var vals = document.getElementById('startDate').value.split('-');
+    var endDateStr = document.getElementById('endDate').value;
+    endDateStr = endDateStr.split('-');
+    var endDate = new Date(endDateStr[0],parseInt(endDateStr[1])-1,endDateStr[2]);
+    document.getElementById('startDate').value = vals[0]+'-'+vals[1]+'-01';
+    var startDate = new Date(vals[0],parseInt(vals[1])-1,01);
+    if(endDate>startDate){
+        $("#startDate").removeClass("redFont");  
+        $("#endDate").removeClass("redFont");    
+        gantt.config.start_date = startDate;
+        gantt.config.end_date  = endDate;
+        gantt.init("gantt");
+        drawChart();
+    }else{
+        $("#startDate").addClass("redFont");
+    }
+
+}
+
+document.getElementById('endDate').onchange  = function(){
+    var vals = document.getElementById('endDate').value.split('-');
+    var startDateStr = document.getElementById('startDate').value;
+    startDateStr = startDateStr.split('-');
+    var startDate = new Date(startDateStr[0],parseInt(startDateStr[1])-1,startDateStr[2]);
+    var endDate = (new Date(vals[0],parseInt(vals[1])-1,vals[2])).getMonthendDate();
+    document.getElementById('endDate').value = endDate.getFullYear()+'-'+(("0" + (endDate.getMonth() + 1)).slice(-2))+'-'+(("0" + endDate.getDate()).slice(-2));
+    endDate = new Date(endDate.setDate(endDate.getDate()+1));
+    if(endDate>startDate){
+        $("#startDate").removeClass("redFont");  
+        $("#endDate").removeClass("redFont");               
+        gantt.config.start_date = startDate;
+        gantt.config.end_date  = endDate;
+        gantt.init("gantt");
+        drawChart();
+    }else{
+        $("#endDate").addClass("redFont");  
+    }
+}
+
+*/
+
+var erpAreaColors = [{color:'#ff0000' , name:'AColor1'}, {color:'#00ff00', name:'AColor2'}, {color:'#0000ff', name:'AColor3'}];
+var erpRegionColors = [{color:'#0ff000' , name:'RColor1'}, {color:'#000ff0', name:'RColor2'}, {color:'#0f0f0f', name:'RColor3'}];
+
+
+//start of ERP chart code
+var jsonData= {!data};
+var jsonCRMData= {!CRMdata};
+var regions=[]; //array of regions 
+var areaColors = ['#ff0000','#0ff000','#00ff00','#000ff0'];
+
+function ERPSalesObject(){
+    var scaleValue;
+    var EMEA = parseInt(0);
+    var APAC = parseInt(0);
+    var total = parseInt(0);
+}
+function arrangeScrolls(){
+var scrollTimer = null;
+document.getElementsByClassName('gantt_hor_scroll')[0].onscroll=function () {
+    if (scrollTimer) {
+        clearTimeout(scrollTimer);   // clear any previous pending timer
+    }
+    scrollTimer = setTimeout(
+    
+    function() {
+        scrollTimer = null;
+        document.getElementById('wrap_div').scrollLeft = document.getElementsByClassName('gantt_hor_scroll')[0].scrollLeft;
+    }, 1);   // set new timer
+ };
+  
+}
+
+
+//function to convert unformatted date to a valid date
+function formatDate(timeString){
+    var time = timeString.split('-');
+    var year = parseInt(time[0]);
+    var month = parseInt(time[1]) - 1;
+    var day = parseInt(time[2]);
+    return new Date(year, month, day);
+}
+
+
+//Start of Gantt code
+
+ 
+//set subscale while refreshing
+ for(var i=0;i<timeOptions.length;i++){
+
+    if(timeOptions[i].checked == true){
+    
+        if(timeOptions[i].id == "week"){
+            gantt.config.scale_unit="month";
+            gantt.config.date_scale="%F";
+            gantt.config.subscales = [{ unit: "week", step: 1, date: "%W" }];
+        }else if(timeOptions[i].id == "day"){
+            gantt.config.scale_unit="month";
+            gantt.config.date_scale="%F";
+            gantt.config.subscales = [{ unit: "day", step: 1, date: "%d" }];
+        }else if(timeOptions[i].id == "month"){
+            gantt.config.scale_unit="year";
+            gantt.config.date_scale="%Y";
+            gantt.config.subscales = [{ unit: "month", step: 1, date: "%M" }];
+        }else{
+            gantt.config.scale_unit="year";
+            gantt.config.date_scale="Year %y";
+            gantt.config.subscales = [];
+        }
+        gantt.init("gantt"); 
+    }
+ }
+
+ for(i=0;i<timeOptions.length;i++){    
+    timeOptions[i].onclick=function(){
+        if(this.id == "week"){
+             gantt.config.scale_unit="month";
+             gantt.config.date_scale="%F";
+             gantt.config.subscales = [{ unit: "week", step: 1, date: "%W" }];
+             gantt.init("gantt");
+             drawChart();
+        }else if(this.id == "day"){
+             gantt.config.scale_unit="month";
+             gantt.config.date_scale="%F";
+             gantt.config.subscales = [{ unit: "day", step: 1, date: "%d" }];
+             gantt.init("gantt");
+             drawChart();
+        }else if(this.id == "month"){
+             gantt.config.scale_unit="month";
+             gantt.config.date_scale="%Y";
+             gantt.config.subscales = [{ unit: "month", step: 1, date: "%M" }];
+             gantt.init("gantt");             
+             drawChart();
+        }else{
+             gantt.config.scale_unit="year";
+             gantt.config.date_scale="Year %y";
+             gantt.config.subscales = [];
+             gantt.init("gantt");
+             drawChart();
+        }                 
+    };
+ }
+ 
+
+//code for Gantt configuration
+
+ var baseUrl = location.protocol + '//' + location.host +'/';      // Just the base URL 
+ var userProfile = "userprofile";
+ var timeOptions = document.getElementsByName('timeSlot');
+    
+ <apex:outputText value="{!jsString}" escape="true"/>   
+   
+// Test: The lightbox config
+ gantt.config.lightbox.sections=[
+     {name:"description", height:100, type:"template", map_to:"description"},       
+     {name:"time", height:20, type:"time", map_to:"auto"}
+ ];
+    
+// Test: Lightbox labeling
+ gantt.locale.labels.section_progress = "Current progress";  
+ gantt.locale.labels.template_description = "Description";  
+          
+ gantt.config.buttons_right = ["view_btn"];  //Lightbox button config
+     
+//Getting Profile Name
+ sforce.connection.sessionId = "{!$Api.Session_ID}";  
+ if('{!$Profile.Name}' == 'System Administrator' || '{!$Profile.Name}' == "Musqot admin"){
+       gantt.config.buttons_left = ["dhx_save_btn","dhx_cancel_btn"];
+ }
+ else{
+     gantt.config.buttons_left = ["dhx_cancel_btn"];
+ }      
+
+// Test: Custom lightbox templates
+ gantt.attachEvent("onBeforeLightbox", function(id) {
+     var task = gantt.getTask(id);
+     desc = (!task.description) ? "No description given" : task.description;
+     task.template_description = "<span class='popup-description'>" + desc + "</span>";
+     return true;
+ });
+        
+// Test: Lightbox button labeling
+ gantt.locale.labels["view_btn"] = "View";
+ gantt.locale.labels["dhx_cancel_btn"] = "Close";
+    
+// Custom button behaviour
+ gantt.attachEvent("onLightboxButton", function(button_id, node, e){
+            
+    // Navigates user to specific item        
+    if(button_id == "view_btn"){
+        var id = gantt.getState().lightbox;
+        top.location.href = baseUrl + id;
+    }
+ });
+    
+//gantt columns
+ gantt.config.columns=[
+     {name:"text", label:"{!$Label.pt_Marketing_activities}",  tree:true, width:'230px' },
+     {name:"status", label:"Status", width:'15px', template:function(task){
+          return task.img;} 
+      }                                                            
+ ];
+    
+//to set the task text
+ gantt.templates.task_text=function(start, end, task){ 
+     if(task.objType == 'activity'){
+         return '<span id="mrkt_activity">'+task.text+"</span>"+task.actImg;
+     }  
+     return task.text;
+ };
+    
+ function toDateTime(time){ //to yyyy-mm-ddThh:mm:ss format
+     var month = time.getMonth();
+     var date = time.getDate();
+        
+     month =month < 10 ? '0'+month : month;
+     date = date < 10 ? '0'+date : date; 
+            
+     return time.getFullYear()+'-'+month+'-'+date+'T00:00:00';
+ }
+       
+//lightbox save event
+ gantt.attachEvent("onLightboxSave", function(button_id, node, e){
+     gantt.updateTask(button_id);
+     var recId = gantt.getState().lightbox;      
+     sforce.connection.sessionId = "{!$Api.Session_ID}"; 
+     var a;   
+     if(gantt.getTask(button_id).objType == 'activity'){
+         a = new sforce.SObject("musqot__Marketing_activity__c");
+         a.Id = recId; 
+         var myJ=gantt.getLightboxValues();
+         var time,time1;
+         
+         //converting date to datetime format
+         time = myJ.start_date;
+         st_time = toDateTime(time);//time.getFullYear()+'-'+time.getMonth()+'-'+time.getDate()+'T'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds();    
+         time = myJ.end_date;
+         end_time = toDateTime(time); //time.getFullYear()+'-'+time.getMonth()+'-'+time.getDate()+'T'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds();               
+
+         a.musqot__Starts_date__c = st_time;  
+         a.musqot__Ends_date__c = end_time;                     
+         sforce.connection.update([a]);
+         a=null;
+
+     }
+
+     if(a){                       
+         a.Id = recId; 
+         var myJ=gantt.getLightboxValues();   
+         a.musqot__Starts_date__c = myJ.start_date;  
+         a.musqot__Ends_date__c = myJ.end_date;                     
+         sforce.connection.update([a]);
+     }
+     gantt.getTask(button_id).start_date = myJ.start_date;
+     gantt.getTask(button_id).end_date = myJ.end_date;
+     gantt.updateTask(button_id);       
+     gantt.hideLightbox();
+
+
+     gantt.init("gantt");              
+ });
+  
+// Navigation event
+ gantt.attachEvent("onTaskDblClick", function(id,e){
+     top.location.href = baseUrl + id;
+ });
+
+// Lightbox event
+ gantt.attachEvent("onTaskClick", function(id,e){
+     showInfoPopup(id);
+ });
+    
+// Drag Task 
+ gantt.attachEvent("onAfterTaskDrag", function(id,e){
+     gantt.showLightbox(id);
+ });
+    
+ gantt.config.details_on_dblclick = false;
+ gantt.config.initial_scroll = true;
+ gantt.config.show_progress = true;
+ gantt.config.drag_resize = false;
+ gantt.config.drag_progress = false;
+ gantt.config.drag_move = false;
+ gantt.config.drag_links = false;
+ gantt.config.sort = true;
+ gantt.config.touch = true;
+  
+//Highlight weekends
+ gantt.templates.scale_cell_class = function(date){
+     if(timeOptions[0].checked == true){
+         if(date.getDay()==0||date.getDay()==6){
+             return "weekend";
+         }
+     }
+ };
+ gantt.templates.task_cell_class = function(item,date){
+     if(timeOptions[0].checked == true){
+         if(date.getDay()==0||date.getDay()==6){ 
+             return "weekend" ;
+         }
+     }
+ };
+
+// Set column width
+ gantt.config.min_column_width = 35;
+ gantt.config.grid_width = 300;
+ gantt.config.start_date = startDate;
+ gantt.config.end_date  = endDate ;
+ gantt.init("gantt");   
+ gantt.parse(<apex:outputText value="{!dataString}" escape="true"/>);
+     
+/* 'mindate:'+gantt.getState().min_date+'maxdate:'+gantt.getState().max_date */           
+
+//End of Gantt code
+
+
+
+//Start of Chart Code
+
+//chart by region
+
+function createColorBox(tooltip,color){
+    var colorBoxOuter = document.createElement('div');
+    var colorBox = document.createElement('div');
+    
+    colorBoxOuter.style.width = '25px';
+    colorBoxOuter.style.height = '25px';
+    
+    colorBox.style.width = '20px';
+    colorBox.style.margin = 'auto';
+    colorBox.style.height = '20px';  
+    colorBox.style.background = color; 
+    colorBoxOuter.setAttribute('title',tooltip);
+    colorBox.style.borderRadius = '2px';
+    colorBoxOuter.style.display = 'inline';
+    colorBoxOuter.appendChild(colorBox);
+    
+    colorBoxOuter.style.float = 'left';
+    
+    return colorBoxOuter;
+    
+}   
+    Date.prototype.yyyymmdd = function() {
+        var yyyy = this.getFullYear().toString();
+        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+        var dd  = this.getDate().toString();
+        return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]); // padding
+    };
+
+    Date.prototype.addDays = function(days) {
+        this.setDate(this.getDate() + parseInt(days));
+        return this;
+    };
+function getFBChartData(scale,chartView,chartColors,watchType,smId,smsId,smtype){
+    var preparedData = new Array();
+    var timeArray = new Array();
+    var fbJSONRawData = {!fbdata};
+    var maxLimit = 0;
+    var maxLimit2 = 0;
+    var maxLimit3 = 0;
+    var pages = []; 
+    var pagesbox = [];
+    var colors = chartColors.split(','); 
+    
+    for(var i=0;i<fbJSONRawData.length;i++){  
+        prepareData(fbJSONRawData[i]);        
+    }
+    pages = [];    
+    if(watchType == "Likes / click"){  
+        if(smtype != 'Ad'){
+    		pages = ['Likes'];
+    	}else{
+        	pages = ['Click'];
+        }
+    }else if(watchType == "Unique_visitors"){
+        pages = ['Unique_Impressions'];        
+    }else if(watchType == "Members"){ 
+        if(smtype != 'Ad'){
+    		pages = ['Followers'];
+    	}        
+    }else if(watchType == "Unique visitor & click/likes"){  
+        if(smtype != 'Ad'){
+    		pages = ['Likes','Unique_Impressions','Followers'];  
+    	}else{            
+        	pages = ['Click','Unique_Impressions'];   
+        }
+    }
+    drawColorBoxes();
+        
+    
+    function drawColorBoxes(){
+        var trgElement = document.getElementById(smsId);
+       
+        while(trgElement.firstChild) {
+            trgElement.removeChild( trgElement.firstChild);
+        }
+        for(var i=0;i<pages.length;i++){
+            if(pages[i]){
+                if(watchType == "Likes / click"){                        
+                    trgElement.appendChild(createColorBox(pages[i],colors[0]));
+                }else if(watchType == "Unique visitors"){                        
+                    trgElement.appendChild(createColorBox(pages[i],colors[1]));
+                }else if(watchType == "Members"){                        
+                    trgElement.appendChild(createColorBox(pages[i],colors[2]));
+                }else if(watchType == "Unique visitor & click/likes"){  
+                    trgElement.appendChild(createColorBox(pages[i],colors[i]));                   
+                }                
+            }
+        }
+        
+    }
+
+   var startTime = (new Date(gantt.getState().min_date)).getTime();
+   var endTime = (new Date(gantt.getState().max_date)).getTime();
+   var incrementValue;
+   var startDate = (new Date(gantt.getState().min_date));
+   var endDate = (new Date(gantt.getState().max_date));
+   if(scale == 'week'){
+       startTime = (new Date(gantt.getState().min_date.getWeekendDate())).getTime();
+       endTime = (new Date(gantt.getState().max_date.getWeekendDate())).getTime();
+       startDate = (new Date(gantt.getState().min_date.getWeekendDate()));
+       endDate = (new Date(gantt.getState().max_date.getWeekendDate()));
+       incrementValue = 7;
+   }else{
+       startTime = (new Date(gantt.getState().min_date)).getTime();
+       endTime = (new Date(gantt.getState().max_date)).getTime();
+       startDate = (new Date(gantt.getState().min_date));
+       endDate = (new Date(gantt.getState().max_date));
+       incrementValue = 1;   
+   }
+   var timeValue = startTime;
+   var actualData = new Array();
+    //while(timeValue <= endTime){
+    //   var chartDataRow;
+    //   var isPresent = timeArray.indexOf(timeValue)+1;
+    //   if(isPresent){
+    //       chartDataRow = preparedData[isPresent-1];
+    //   }else{
+    //       chartDataRow = new Object();
+    //       chartDataRow.year = timeValue;
+    //       for(var k=0;k<pages.length;k++){
+    //           chartDataRow[pages[k]] = 0;    
+    //       }
+    //       chartDataRow.total = 0;
+    //   }
+       
+    //   actualData[actualData.length] = chartDataRow;
+        
+    //   var a = new Date();
+    //   a.setTime(timeValue);
+    //   a.setDate(a.getDate()+incrementValue);
+    //   timeValue = a.getTime();               
+        
+    //   }    
+    //pages = ['Likes','Visitors','Members']; 
+    while(startDate <= endDate){        
+        for(var i=0;i<fbJSONRawData.length;i++){
+            if(startDate.yyyymmdd() == fbJSONRawData[i].date){
+                if(smId == fbJSONRawData[i].connection){
+                    var chartDataRow;
+                    chartDataRow = new Object();
+                    chartDataRow.year = startDate.getTime();
+                    if(watchType == "Likes / click"){                        
+                        chartDataRow[pages[0]] = fbJSONRawData[i].likes;
+                    }else if(watchType == "Unique visitors"){                        
+                        chartDataRow[pages[1]] = fbJSONRawData[i].visitors;
+                    }else if(watchType == "Members"){                        
+                        chartDataRow[pages[2]] = fbJSONRawData[i].members;
+                    }else if(watchType == "Unique visitor & click/likes"){  
+                        chartDataRow[pages[0]] = fbJSONRawData[i].likes;
+                        chartDataRow[pages[1]] = fbJSONRawData[i].visitors;
+                        chartDataRow[pages[2]] = fbJSONRawData[i].members;                        
+                    }
+                    chartDataRow.total = 0; 
+                    actualData[actualData.length] = chartDataRow;
+                }
+            }
+        }
+        startDate.addDays(incrementValue);
+    } 
+    var fbJSONRawFilterData = fbJSONRawData.filter(function(obj) {
+        return (obj.connection == smId);
+    });
+    if(watchType == "Likes / click"){                        
+        maxLimit = Math.max.apply(Math,fbJSONRawFilterData.map(function(o){return o.likes})); 
+    }else if(watchType == "Unique visitors"){                        
+        maxLimit = Math.max.apply(Math,fbJSONRawFilterData.map(function(o){return o.visitors})); 
+    }else if(watchType == "Members"){                        
+        maxLimit = Math.max.apply(Math,fbJSONRawFilterData.map(function(o){return o.members}));
+    }else if(watchType == "Unique visitor & click/likes"){                        
+        maxLimit = Math.max.apply(Math,fbJSONRawFilterData.map(function(o){return o.likes}));
+        maxLimit2 = Math.max.apply(Math,fbJSONRawFilterData.map(function(o){return o.visitors})); 
+        maxLimit3 = Math.max.apply(Math,fbJSONRawFilterData.map(function(o){return o.members}));
+    }
+    
+    if(maxLimit < maxLimit2){
+        maxLimit = maxLimit2;
+    }
+    
+    if(maxLimit < maxLimit3){
+        maxLimit = maxLimit3;
+    }
+    //maxLimit =  maxLimit%10 == 0? maxLimit : maxLimit+(10-(maxLimit%10));    
+    
+    function prepareData(jsObj,scale){
+        var date;
+        var isEntryFound = false;
+
+        if(scale == "week")
+            date = new Date(formatDate(jsObj.date).getWeekendDate());
+        else if(scale == "day")
+            date = new Date(formatDate(jsObj.date));
+        else
+            date = new Date(formatDate(jsObj.date).getMonthendDate());
+        
+          for(j=0;j<preparedData.length;j++){
+            //if an entry found with the partcular date, then update the corresponding data.    
+            if(preparedData[j].year == date.getTime()){ 
+                if(!preparedData[j][jsObj.page]){
+                    preparedData[j][jsObj.page] = parseInt(jsObj.likes);
+                    preparedData[j].total = preparedData[j].total + parseInt(jsObj.likes) || parseInt(jsObj.likes); 
+                    if(pages.indexOf(jsObj.page) == -1)
+                        pages[pages.length] = jsObj.page;
+                }else{
+                    preparedData[j][jsObj.page] += parseInt(jsObj.likes); 
+                    preparedData[j].total = preparedData[j].total + parseInt(jsObj.likes) || parseInt(jsObj.likes); 
+                }   
+               if(maxLimit < preparedData[j].total){
+                    maxLimit = preparedData[j].total;
+               }                                                                 
+                isEntryFound = true;    
+            }
+        } 
+        
+        //if the entry is not found for a particular date, create a new entry.         
+        if(!isEntryFound){
+              
+            var nxtIndex = preparedData.length;
+
+            preparedData[nxtIndex] = new Object();              
+            preparedData[nxtIndex].year = date.getTime();
+            timeArray[nxtIndex] = date.getTime();
+              
+            if(!preparedData[nxtIndex][jsObj.page]){
+                preparedData[nxtIndex][jsObj.page] = parseInt(jsObj.likes);
+                preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.likes) || parseInt(jsObj.likes); 
+                if(pages.indexOf(jsObj.page) == -1)
+                    pages[pages.length] = jsObj.page;
+            }else{
+                preparedData[nxtIndex][jsObj.page] += parseInt(jsObj.likes); 
+                preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.likes) || parseInt(jsObj.likes); 
+            }
+           if(maxLimit < preparedData[nxtIndex].total){
+                maxLimit = preparedData[nxtIndex].total;
+           }          
+
+        }         
+    }
+	if(actualData.length == 0){
+        pages = [];
+    }
+      return {
+        chartData: actualData,
+        maximumLimit: maxLimit,
+        itemsList: pages,
+        color: colors,
+        timescale: scale,
+        view: chartView
+    }
+}
+
+
+//start of test function
+
+
+function getERPRegionChartData(scale,chartView,chartColors,selectedOpt){
+    var preparedData = new Array();  //data for the line chart
+    var maxLimit = 0;  
+    var categories=[]; //array of regions  
+    var colors = chartColors.split(','); 
+    
+    for(i=0;i<jsonData.length;i++){
+       prepareData(jsonData[i],scale);
+    }    
+    drawColorBoxes();
+    
+    //maxLimit =  maxLimit%100 == 0? maxLimit : maxLimit+(100-(maxLimit%10));
+    maxLimit =  maxLimit*1.03;
+
+    function drawColorBoxes(){
+        var trgElement = document.getElementById(selectedOpt);
+       
+        while(trgElement.firstChild) {
+            trgElement.removeChild( trgElement.firstChild);
+        }
+        for(var i=0;i<categories.length;i++){
+            if(categories[i])
+                trgElement.appendChild(createColorBox(categories[i],colors[i]));   
+        }
+        
+    }    
+
+    //to format the jsonData such that it can be used as line chart data  
+    function prepareData(jsObj,scale){ 
+        var date;
+        if(scale == "week")
+            date = new Date(formatDate(jsObj.date).getWeekendDate());
+        else if(scale == "day")
+            date = new Date(formatDate(jsObj.date));
+        else
+            date = new Date(formatDate(jsObj.date).getMonthendDate());
+          
+          var isEntryFound = false;
+          
+          for(j=0;j<preparedData.length;j++){
+              //if an entry found with the partcular date, then update the corresponding data.         
+              if(preparedData[j].year == date.getTime()){            
+                  if(!preparedData[j][jsObj.region]){
+                      preparedData[j][jsObj.region] = parseInt(jsObj.sale);
+                      preparedData[j].total = preparedData[j].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+                      if(categories.indexOf(jsObj.region) == -1)
+                          categories[categories.length] = jsObj.region;
+                  }else{
+                      preparedData[j][jsObj.region] += parseInt(jsObj.sale); 
+                      preparedData[j].total = preparedData[j].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+                  }   
+                  if(maxLimit < preparedData[j].total){
+                      maxLimit = preparedData[j].total;
+                  }                                                                 
+                  isEntryFound = true;    
+             }
+          } 
+        
+          //if the entry is not found for a particular date, create a new entry.         
+          if(!isEntryFound){    
+              var nxtIndex = preparedData.length;
+
+              preparedData[nxtIndex] = new Object();              
+              preparedData[nxtIndex].year = date.getTime();
+              
+              if(!preparedData[nxtIndex][jsObj.region]){
+                  preparedData[nxtIndex][jsObj.region] = parseInt(jsObj.sale);
+                  preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+                  if(categories.indexOf(jsObj.region) == -1)
+                      categories[categories.length] = jsObj.region;
+              }else{
+                  preparedData[nxtIndex][jsObj.region] += parseInt(jsObj.sale); 
+                  preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+              }
+              if(maxLimit < preparedData[nxtIndex].total){
+                  maxLimit = preparedData[nxtIndex].total;
+              }          
+          }   
+            
+    }
+    
+    return {
+        chartData: preparedData,
+        maximumLimit: maxLimit,
+        itemsList: categories,
+        color: colors,
+        timescale: scale,
+        view: chartView
+    }
+    
+     
+ }//end of the fucntion drawERPChart
+
+//end of test function
+
+function drawERPChart(chartEntity){
+    var preparedData = chartEntity.chartData;  //data for the line chart
+    var maxLimit = chartEntity.maximumLimit;  
+    var categories= chartEntity.itemsList;
+    var colors = chartEntity.color; 
+    var scale = chartEntity.timescale;
+    var chartView = chartEntity.view;
+    var chartGraph = prepareChart(scale);
+      function prepareChart(scale){
+      var weekTemplate = function(obj){
+                  var b = new Date();
+                  b.setTime(obj.$unit)
+                  return (b.getWeek());
+                };
+       var dayTemplate = function(obj){
+                  var b = new Date();
+                  b.setTime(obj.$unit)
+                  return (b.getDay());
+                };
+
+       
+   var startTime = (new Date(gantt.getState().min_date)).getTime();
+   var endTime = (new Date(gantt.getState().max_date)).getTime();
+   var templateFn;
+   var addToDays;
+   
+   if(scale == 'week'){
+       startTime = (new Date(gantt.getState().min_date.getWeekendDate())).getTime();
+       endTime = (new Date(gantt.getState().max_date.getWeekendDate())).getTime();
+       addToDays = 7;
+       templateFn = weekTemplate;
+   }else{
+       startTime = (new Date(gantt.getState().min_date)).getTime();
+       endTime = (new Date(gantt.getState().max_date)).getTime();
+       addToDays = 1; 
+       weekTemplate = dayTemplate;
+   }
+
+            var chart1;
+            chart1 =  new dhtmlXChart({
+            view: chartView,
+            container:"chart_container",	            
+            offset:0,            
+            xAxis:{
+                template:templateFn,
+                value: function(obj){
+                    var t = new Date();
+                    t.setTime(obj.year)
+                    return obj.year;
+                },                
+                units: {
+                    start: startTime,
+                    end: endTime,
+                    next: function(val){
+                    var a = new Date();
+                    a.setTime(val);
+                    a.setDate(a.getDate()+addToDays);
+                    
+                    return a.getTime();
+                    }
+                }
+                
+            },
+            yAxis:{
+                start:0,
+                step:maxLimit/10,
+                end:maxLimit 
+            },
+            padding:{
+                left:0,
+                bottom: 20
+            },
+            origin:0,
+            radius:0,
+            value:"#"+categories[0]+"#",
+            label:"#"+categories[0]+"#",
+            color:colors[0],             
+            item:{
+                borderColor: "#ffffff",
+                color: colors[0]
+                },
+            tooltip:"<span class='a#"+categories[0]+"#' style='color:#293CD6'>"+categories[0]+":#"+categories[0]+"#</span>",
+            line:{
+                color:colors[0]
+                }
+        })     
+        for(var i=1;i<categories.length;i++){
+        chart1.addSeries({
+            value:"#"+categories[i]+"#",
+            label:"#"+categories[i]+"#",
+            color:colors[i],             
+            item:{
+                borderColor: "#ffffff",
+                color: colors[i]
+                },
+            tooltip:"<span class='a#"+categories[i]+"#' style='color:#293CD6'>"+categories[i]+":#"+categories[i]+"#</span>",
+            line:{
+                color:colors[i]
+                }
+        })
+
+    }
+    return chart1;
+}
+    
+        //code to clear the chart container
+        var myNode = document.getElementById("chart_container");
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
+        
+    	document.getElementById('ERPSalesLegend').style.width = document.getElementsByClassName('gantt_grid')[0].offsetWidth+'px';
+    document.getElementById('wrap_div').style.width = document.getElementsByClassName('gantt_task')[0].offsetWidth+'px';
+        document.getElementById('chart_container').style.width = document.getElementsByClassName('gantt_data_area')[0].offsetWidth+'px'; 
+        chartGraph.clearAll();
+        chartGraph.parse(preparedData,'json'); 
+            
+        arrangeScrolls();    
+ }
+
+
+
+
+//start of the area function
+
+
+function getERPAreaChartData(scale,chartView,chartColors,selectedOpt){
+    var preparedData = new Array();  //data for the line chart
+    var timeArray = new Array();
+    var maxLimit = 0;  
+    var categories=[]; //array of regions  
+    var colors = chartColors.split(','); 
+    
+    for(i=0;i<jsonData.length;i++){
+       prepareData(jsonData[i],scale);
+    }    
+    drawColorBoxes();    
+    //maxLimit =  maxLimit%100 == 0? maxLimit : maxLimit+(100-(maxLimit%10));
+    maxLimit =  maxLimit*1.03;
+
+    function drawColorBoxes(){
+        var trgElement = document.getElementById(selectedOpt);
+        while( trgElement.firstChild ) {
+            trgElement.removeChild( trgElement.firstChild);
+        }
+        for(var i=0;i<categories.length;i++){
+            if(categories[i])
+                trgElement.appendChild(createColorBox(categories[i],colors[i]));   
+        }
+    }    
+    
+   var startTime = (new Date(gantt.getState().min_date)).getTime();
+   var endTime = (new Date(gantt.getState().max_date)).getTime();
+   var incrementValue;
+   
+   if(scale == 'week'){
+       startTime = (new Date(gantt.getState().min_date.getWeekendDate())).getTime();
+       endTime = (new Date(gantt.getState().max_date.getWeekendDate())).getTime();
+       incrementValue = 7;
+   }else{
+       startTime = (new Date(gantt.getState().min_date)).getTime();
+       endTime = (new Date(gantt.getState().max_date)).getTime();
+       incrementValue = 1;   
+   }
+   var timeValue = startTime;
+   var actualData = new Array();
+   while(timeValue <= endTime){
+       var chartDataRow;
+       var isPresent = timeArray.indexOf(timeValue)+1;
+       if(isPresent){
+           chartDataRow = preparedData[isPresent-1];
+       }else{
+           chartDataRow = new Object();
+           chartDataRow.year = timeValue;
+           for(var k=0;k<categories.length;k++){
+               chartDataRow[categories[k]] = undefined;    
+           }
+           chartDataRow.total = 0;
+       }
+        actualData[actualData.length] = chartDataRow;
+        
+        var a = new Date();
+        a.setTime(timeValue);
+        a.setDate(a.getDate()+incrementValue);
+        timeValue = a.getTime();        
+        
+   }
+
+    //to format the jsonData such that it can be used as line chart data  
+    function prepareData(jsObj,scale){ 
+        var date;
+        if(scale == "week")
+            date = new Date(formatDate(jsObj.date).getWeekendDate());
+        else if(scale == "day")
+            date = new Date(formatDate(jsObj.date));
+        else
+            date = new Date(formatDate(jsObj.date).getMonthendDate());
+          
+        var isEntryFound = false;
+          
+        for(j=0;j<preparedData.length;j++){
+            //if an entry found with the partcular date, then update the corresponding data.         
+            if(preparedData[j].year == date.getTime()){            
+                if(!preparedData[j][jsObj.area]){
+                    preparedData[j][jsObj.area] = preparedData[j][jsObj.area]+parseInt(jsObj.sale)||parseInt(jsObj.sale);
+                    preparedData[j].total = preparedData[j].total + parseInt(jsObj.sale) || parseInt(jsObj.sale);
+                    if(categories.indexOf(jsObj.area) == -1)
+                        categories[categories.length] = jsObj.area;
+                }else{
+                    preparedData[j][jsObj.area] += parseInt(jsObj.sale);
+                    preparedData[j].total = preparedData[j].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+                }  
+                if(maxLimit < preparedData[j].total){
+                     maxLimit = preparedData[j].total;
+                }                                      
+                                                       
+                isEntryFound = true;    
+            }
+        } 
+        
+        //if the entry is not found for a particular date, create a new entry.         
+        if(!isEntryFound){      
+            var nxtIndex = preparedData.length;
+
+            preparedData[nxtIndex] = new Object();              
+            preparedData[nxtIndex].year = date.getTime();
+            timeArray[nxtIndex] = date.getTime();
+              
+            if(!preparedData[nxtIndex][jsObj.area]){
+                preparedData[nxtIndex][jsObj.area] = parseInt(jsObj.sale);
+                preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.sale) || parseInt(jsObj.sale);
+                if(categories.indexOf(jsObj.area) == -1)
+                    categories[categories.length] = jsObj.area;
+            }else{
+                preparedData[nxtIndex][jsObj.area] += parseInt(jsObj.sale);
+                preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+            }
+           if(maxLimit < preparedData[nxtIndex].total){
+                 maxLimit = preparedData[nxtIndex].total;
+           }                                      
+        }    
+            
+    }
+      
+    return {
+        chartData: actualData,
+        maximumLimit: maxLimit,
+        itemsList:categories,
+        color: colors,
+        timescale: scale,
+        view: chartView
+    }  
+      
+ }
+
+function getCRMChartData(scale,chartView,chartColors,selectedOpt,WatchType){
+    var preparedData = new Array();  //data for the line chart
+    var timeArray = new Array();
+    var maxLimit = 0;  
+    var categories=[]; //array of regions  
+    var colors = chartColors.split(','); 
+    
+    //for(i=0;i<jsonCRMData.length;i++){
+    //  prepareData(jsonCRMData[i],scale);
+    //}    
+    categories = [];    
+    var watchtypes = WatchType.split(';');
+    for(var i=0;i<watchtypes.length;i++){
+        if(watchtypes[i] == "No Leads"){
+        	categories[i] = 'Leads';
+        }
+        if(watchtypes[i] == "No Opportunities"){
+            categories[i] = 'Opportunities'
+        }
+        if(watchtypes[i] == "Amount Wins"){
+            categories[i] = 'Amount_Wins'
+        }
+        if(watchtypes[i] == "Amount Opportunities"){
+            categories[i] = 'Amount_Opportunities'
+        }
+        if(watchtypes[i] == "Amount (weighted) Opportunities"){
+            categories[i] = 'Amount_Weight_Opportunities'
+        }
+        if(watchtypes[i] == "No Wins"){
+            categories[i] = 'Wins'
+        }   
+    }      
+    drawColorBoxes();    
+    //maxLimit =  maxLimit%100 == 0? maxLimit : maxLimit+(100-(maxLimit%10));
+    maxLimit =  maxLimit*1.03;
+
+    function drawColorBoxes(){
+        var trgElement = document.getElementById(selectedOpt);
+        while( trgElement.firstChild ) {
+            trgElement.removeChild( trgElement.firstChild);
+        }
+        for(var i=0;i<categories.length;i++){
+            if(categories[i])
+                trgElement.appendChild(createColorBox(categories[i],colors[i]));   
+        }
+    }    
+    
+   var startTime = (new Date(gantt.getState().min_date)).getTime();
+   var endTime = (new Date(gantt.getState().max_date)).getTime();
+   var incrementValue;
+   var startDate = (new Date(gantt.getState().min_date));
+   var endDate = (new Date(gantt.getState().max_date));
+   if(scale == 'week'){
+       startTime = (new Date(gantt.getState().min_date.getWeekendDate())).getTime();
+       endTime = (new Date(gantt.getState().max_date.getWeekendDate())).getTime();
+       incrementValue = 7;
+   }else{
+       startTime = (new Date(gantt.getState().min_date)).getTime();
+       endTime = (new Date(gantt.getState().max_date)).getTime();
+       incrementValue = 1;   
+   }
+   var timeValue = startTime;
+   var actualData = new Array();
+   while(timeValue <= endTime){
+       var chartDataRow;
+       var isPresent = timeArray.indexOf(timeValue)+1;
+       if(isPresent){
+           chartDataRow = preparedData[isPresent-1];
+       }else{
+           chartDataRow = new Object();
+           chartDataRow.year = timeValue;
+           for(var k=0;k<categories.length;k++){
+               chartDataRow[categories[k]] = undefined;    
+           }
+           chartDataRow.total = 0;
+       }
+        actualData[actualData.length] = chartDataRow;
+        
+        var a = new Date();
+        a.setTime(timeValue);
+        a.setDate(a.getDate()+incrementValue);
+        timeValue = a.getTime();        
+        
+   }
+	while(startDate <= endDate){        
+        for(var i=0;i<jsonCRMData.length;i++){
+            if(startDate.yyyymmdd() == jsonCRMData[i].date){
+                //if(selectedOpt == jsonCRMData[i].connection){
+                    var chartDataRow;
+                    chartDataRow = new Object();
+                    chartDataRow.year = startDate.getTime();
+                    for(var c=0;c<watchtypes.length;c++){
+                        if(watchtypes[c] == "No Leads"){
+                            chartDataRow[categories[c]] = jsonCRMData[i].NumberLeads;
+                        }
+                        if(watchtypes[c] == "No Opportunities"){
+                            chartDataRow[categories[c]] = jsonCRMData[i].NumberOpportunities;
+                        }
+                        if(watchtypes[c] == "Amount Wins"){
+                            chartDataRow[categories[c]] = jsonCRMData[i].ValueDeals;
+                        }
+                        if(watchtypes[c] == "Amount Opportunities"){
+                            chartDataRow[categories[c]] = jsonCRMData[i].ValueOpportunities;
+                        }
+                        if(watchtypes[c] == "Amount (weighted) Opportunities"){
+                            chartDataRow[categories[c]] = jsonCRMData[i].ValueWeightOpportunities;
+                        }
+                        if(watchtypes[c] == "No Wins"){
+                            chartDataRow[categories[c]] = 0;
+                        }
+                    }                    
+                    chartDataRow.total = 0; 
+                    actualData[actualData.length] = chartDataRow;
+                //}
+            }
+        }
+        startDate.addDays(incrementValue);
+    }        
+    
+	for(var c=0;c<watchtypes.length;c++){
+        if(watchtypes[c] == "No Leads"){
+            maxLimit = Math.max.apply(Math,jsonCRMData.map(function(o){return o.NumberLeads})); 
+        }
+        if(watchtypes[c] == "No Opportunities"){
+            maxLimit = Math.max.apply(Math,jsonCRMData.map(function(o){return o.NumberOpportunities})); 
+        }
+        if(watchtypes[c] == "Amount Wins"){
+            maxLimit = Math.max.apply(Math,jsonCRMData.map(function(o){return o.ValueDeals})); 
+        }
+        if(watchtypes[c] == "Amount Opportunities"){
+            maxLimit = Math.max.apply(Math,jsonCRMData.map(function(o){return o.ValueOpportunities})); 
+        }
+        if(watchtypes[c] == "Amount (weighted) Opportunities"){
+            maxLimit = Math.max.apply(Math,jsonCRMData.map(function(o){return o.ValueWeightOpportunities})); 
+        }
+        if(watchtypes[c] == "No Wins"){
+            maxLimit = 0; 
+        }
+    }   
+    
+    //to format the jsonData such that it can be used as line chart data  
+    function prepareData(jsObj,scale){ 
+        var date;
+        if(scale == "week")
+            date = new Date(formatDate(jsObj.date).getWeekendDate());
+        else if(scale == "day")
+            date = new Date(formatDate(jsObj.date));
+        else
+            date = new Date(formatDate(jsObj.date).getMonthendDate());
+          
+        var isEntryFound = false;
+          
+        for(j=0;j<preparedData.length;j++){
+            //if an entry found with the partcular date, then update the corresponding data.         
+            if(preparedData[j].year == date.getTime()){            
+                if(!preparedData[j][jsObj.area]){
+                    preparedData[j][jsObj.area] = preparedData[j][jsObj.area]+parseInt(jsObj.sale)||parseInt(jsObj.sale);
+                    preparedData[j].total = preparedData[j].total + parseInt(jsObj.sale) || parseInt(jsObj.sale);
+                    if(categories.indexOf(jsObj.area) == -1)
+                        categories[categories.length] = jsObj.area;
+                }else{
+                    preparedData[j][jsObj.area] += parseInt(jsObj.sale);
+                    preparedData[j].total = preparedData[j].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+                }  
+                if(maxLimit < preparedData[j].total){
+                     maxLimit = preparedData[j].total;
+                }                                      
+                                                       
+                isEntryFound = true;    
+            }
+        } 
+        
+        //if the entry is not found for a particular date, create a new entry.         
+        if(!isEntryFound){      
+            var nxtIndex = preparedData.length;
+
+            preparedData[nxtIndex] = new Object();              
+            preparedData[nxtIndex].year = date.getTime();
+            timeArray[nxtIndex] = date.getTime();
+              
+            if(!preparedData[nxtIndex][jsObj.area]){
+                preparedData[nxtIndex][jsObj.area] = parseInt(jsObj.sale);
+                preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.sale) || parseInt(jsObj.sale);
+                if(categories.indexOf(jsObj.area) == -1)
+                    categories[categories.length] = jsObj.area;
+            }else{
+                preparedData[nxtIndex][jsObj.area] += parseInt(jsObj.sale);
+                preparedData[nxtIndex].total = preparedData[nxtIndex].total + parseInt(jsObj.sale) || parseInt(jsObj.sale); 
+            }
+           if(maxLimit < preparedData[nxtIndex].total){
+                 maxLimit = preparedData[nxtIndex].total;
+           }                                      
+        }    
+            
+    }
+      
+    return {
+        chartData: actualData,
+        maximumLimit: maxLimit,
+        itemsList:categories,
+        color: colors,
+        timescale: scale,
+        view: chartView
+    }  
+      
+ }
+
+
+//end of the area function
+
+
+ //end of chart by area
+ 
+ //End of the chart code
+            
+</script>
+
+<script type="text/javascript">
+
+function getChartType(chartTypeSetting){
+     if(chartTypeSetting =='Bar charts')
+          return 'bar';
+      else if(chartTypeSetting =='Stacked Bar')
+          return 'stackedBar';
+      else if(chartTypeSetting =='Line charts')
+          return 'line';
+      else if(chartTypeSetting =='Spline charts')
+          return 'spline';
+      else 
+          return 'stackedArea';
+}
+
+ function drawChart(){
+     var timeOptions = document.getElementsByName('timeSlot');
+     var chartOptions = document.getElementsByName('ChartGroup');
+      var colorBoxDivs = document.getElementsByName('colorBoxesDiv');
+     var selectedOption;
+     var chartTypes = new Array();
+     var chartColors = new Array();
+     var chartTypeSetting;
+     
+     var timeScale;
+     for(var i=0;i<timeOptions.length;i++){
+         if(timeOptions[i].checked == true){   
+             timeScale = timeOptions[i].id;
+         }
+     }
+     for(var i=0;i<chartOptions.length;i++){
+         if(chartOptions[i].checked == true){
+             selectedOption = chartOptions[i].value;
+             colorBoxDivs[i].style.display = 'block';
+         }else{
+             colorBoxDivs[i].style.display = 'none';
+         }                   
+     }     
+
+
+     var erpArray = new Array();
+     
+    <apex:repeat value="{!erpChartList}" var="item">
+        var erpItem = {};
+        erpItem.Id = '{!item.ID}';
+        erpItem.chartBy = '{!item.Selector__c}'; 
+        erpItem.chartType = getChartType('{!item.erp_Chart__c}'); 
+        erpItem.chartColors = '{!item.Bar_color__c}';
+        erpArray.push(erpItem);
+    </apex:repeat>
+    
+    var crmArray = new Array();
+     
+    <apex:repeat value="{!crmChartList}" var="item">
+        var crmItem = {};
+        crmItem.Id = '{!item.ID}';
+        crmItem.chartBy = '{!item.Selector__c}'; 
+        crmItem.chartType = getChartType('{!item.Chart__c}'); 
+        crmItem.chartColors = '{!item.Bar_color__c}';
+     	crmItem.WatchType = '{!item.Watch_type__c}';
+        crmArray.push(crmItem);
+    </apex:repeat>
+
+     var socialArray = new Array();
+     
+    <apex:repeat value="{!mediaMap}" var="m">
+        var socialItem = {};
+        socialItem.Id = '{!mediaMap[m].ID}';
+        socialItem.chartBy = '{!mediaMap[m].ID}'; 
+        socialItem.chartType = getChartType('{!mediaMap[m].Chart__c}'); 
+        socialItem.chartColors = '{!mediaMap[m].Bar_color__c}';
+        socialItem.watchType = '{!mediaMap[m].Watch_type__c}';
+        socialItem.socialmediaId = '{!mediaMap[m].Socialmedia__c}';
+        socialItem.Socialmediatype = '{!mediaMap[m].Socialmedia_type__c}';
+        socialArray.push(socialItem);
+    </apex:repeat>
+    
+        
+    
+     
+     var cEntity;
+     var selectIndex = -1;
+     var selectedType;
+     var smChartType;
+     var smChartColors;
+     var smwatchType;
+     var smId;
+     var smsId;
+     var smtype;
+     for(var l=0;l<erpArray.length;l++){
+         if(selectedOption == erpArray[l].Id){
+             selectIndex = l;    
+             selectedType = "";
+         }
+     }
+     
+     for(var c=0;c<crmArray.length;c++){
+         if(selectedOption == crmArray[c].Id){
+             selectIndex = c;   
+             selectedType = "crm";
+         }
+     }
+     
+     for(var s=0;s<socialArray.length;s++){
+         if(selectedOption == socialArray[s].Id){
+             smsId = socialArray[s].Id;
+             smChartType = socialArray[s].chartType;
+             smChartColors = socialArray[s].chartColors;
+             smwatchType = socialArray[s].watchType;
+             smId = socialArray[s].socialmediaId;
+             selectedType = "socialmedia";
+             smtype = socialArray[s].Socialmediatype;
+         }                 
+     }
+     
+     if(selectedType == "socialmedia"){//social media
+         cEntity = getFBChartData(timeScale,smChartType,smChartColors,smwatchType,smId,smsId,smtype);
+     }else if(selectedType == "crm"){
+         cEntity = getCRMChartData(timeScale,crmArray[selectIndex].chartType,crmArray[selectIndex].chartColors,crmArray[selectIndex].Id,crmArray[selectIndex].WatchType);
+     }else{//ERP Data
+         if(erpArray[selectIndex].chartBy == 'Business region'){
+             cEntity = getERPRegionChartData(timeScale,erpArray[selectIndex].chartType,erpArray[selectIndex].chartColors,erpArray[selectIndex].Id);
+         }
+         else{
+             cEntity = getERPAreaChartData(timeScale,erpArray[selectIndex].chartType,erpArray[selectIndex].chartColors,erpArray[selectIndex].Id);
+         }
+     
+     }
+     if(cEntity.itemsList.length > 0){
+       	drawERPChart(cEntity);
+   	 }else{
+       	document.getElementById('chart_container').innerHTML = '';
+     }
+ }
+
+
+
+ window.onload = function(){   
+     var chartOptions = document.getElementsByName('ChartGroup');
+     chartOptions[0].checked = true;
+     drawChart();  
+     for(i=0;i<chartOptions.length;i++){    
+        chartOptions[i].onclick=function(){
+            drawChart();
+        };
+     }            
+ };   
+ function setplantypeSelected(obj){
+        if(obj.text == "Add"){
+            setTimeout(
+                function() {
+                    var dd = document.getElementById('pg:frmNewFilter:j_id18:j_id23:j_id29:filterpatype').children[0].children;
+                    for (var i = 0; i < dd.length; i++) 
+                    {
+                        dd[i].children[0].children[0].checked = true;
+                    }
+                    document.getElementById("pg:frmNewFilter:j_id18:j_id23:j_id32:srfilterzooming:1").checked="true"
+                }, 1000);
+        }
+    }
+    
+    
+    		function validatefilterPeriod(obj){
+                if(document.getElementById("pg:frmNewFilter:j_id22:j_id27:j_id44:filterendDate").value > document.getElementById("pg:frmNewFilter:j_id22:j_id27:j_id40:filterstartDate").value){
+                    document.getElementById("pg:frmNewFilter:j_id22:j_id27:j_id40:filterstartDate").className = "";       
+                    document.getElementById("pg:frmNewFilter:j_id22:j_id27:j_id44:filterendDate").className = "";             
+                }else{
+                    document.getElementById("pg:frmNewFilter:j_id22:j_id27:j_id44:filterendDate").className = "redFont";
+                }
+            }
+                
+    		$(function(){
+            	$('input#startDate').datepicker({
+                	changeMonth: true,
+                    changeYear: true,
+                    defaultDate: -30,
+                    showAnim: 'slide',
+                    onSelect: function (dateText, inst) {
+                        $('input#startDate').datepicker('hide');
+                        gantt.config.start_date = new Date(dateText);
+                        gantt.config.end_date  = new Date($('input#endDate').val());
+                        gantt.init("gantt");
+                        drawChart();
+                    },
+                    onClose: function(selectedDate){
+                        $("input#endDate").datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                
+            	$('input#endDate').datepicker({
+                	changeMonth: true,
+                    changeYear: true,
+                    defaultDate: +60,
+                    showAnim: 'slide',
+                    onSelect: function (dateText, inst) {
+                        $('input#endDate').datepicker('hide');
+                        gantt.config.start_date = new Date($('input#startDate').val());
+                        gantt.config.end_date  = new Date(dateText);
+                        gantt.init("gantt");
+                        drawChart();
+                    },
+                    onClose: function(selectedDate){
+                        $("input#startDate").datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+            });
+    
+    		function applyDatePicker() {
+                var sdfc = new Date("{!FilterStartDate}");
+                var formattedSdfc = ("0" + (sdfc.getMonth()+1)).slice(-2) + '/' + ("0" + (sdfc.getDate())).slice(-2) + '/' + sdfc.getFullYear();
+                $('.popUpSD').val(formattedSdfc);
+                var edfc = new Date("{!FilterEndDate}");
+                var formattedEdfc = ("0" + (edfc.getMonth()+1)).slice(-2) + '/' + ("0" + (edfc.getDate())).slice(-2) + '/' + edfc.getFullYear();
+                $('.popUpED').val(formattedEdfc);
+            	$('.popUpSD').datepicker({
+                	changeMonth: true,
+                    changeYear: true,
+                    showAnim: 'slide',
+                    onClose: function(selectedDate){
+                        $(".popUpED").datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $('.popUpED').datepicker({
+                	changeMonth: true,
+                    changeYear: true,
+                    defaultDate: new Date(formattedEdfc),
+                    showAnim: 'slide',
+                    onClose: function(selectedDate){
+                        $(".popUpSD").datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+            }
+    			
+             function showInfoPopup(id) {
+                var taskObj = gantt.getTask(id);
+                $('#infoPopup .upper #name').text(taskObj.text);
+                $('#infoPopup .upper #description').text(taskObj.description);
+                $('#infoPopup .upper #owner td').text(taskObj.owner);
+                $('#infoPopup .upper #type td').text(taskObj.activityType);
+                var sd = taskObj.start_date;
+                var ed = taskObj.end_date;
+                var formattedSd = ("0" + (sd.getMonth()+1)).slice(-2) + '-' + ("0" + (sd.getDate())).slice(-2) + '-' + sd.getFullYear();
+                var formattedEd = ("0" + (ed.getMonth()+1)).slice(-2) + '-' + ("0" + (ed.getDate()-1)).slice(-2) + '-' + ed.getFullYear();
+                $('#infoPopup .upper #sd td').text(formattedSd);
+                $('#infoPopup .upper #ed td').text(formattedEd);
+                $('#infoPopup .lower input').on('click',function(){
+                	top.location.href = baseUrl + id;
+                });
+                $('.tr-bg').show();
+                //$('#infoPopup').fadeIn('fast');
+                $('#infoPopup').animate({top:'75px'},300);
+            }
+            function closeInfoPopup() {
+                //$('#infoPopup').slideUp('fast');
+                $('.tr-bg').hide();
+            	$('#infoPopup').animate({top:'-1000px'},300);
+            }
+</script>
+
+    <div class="tr-bg"></div>
+
+	<div class="popup" id="infoPopup">
+        <div class="upper">
+            <i class="icon-large icon-remove" 
+               onclick="closeInfoPopup();">
+            </i>
+        	<h2 id="name"></h2>
+            <div id="description"></div><br/>
+            <table border="0">
+                <tr id="owner">
+                	<th>{!$label.pt_Owner}</th>
+                    <td></td>
+                </tr>
+                <tr>
+                	<th>&nbsp;</th>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="type">
+                	<th>{!$Label.mrk_Activity_type}</th>
+                    <td></td>
+                </tr>
+                <tr>
+                	<th>&nbsp;</th>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="sd">
+                	<th>{!$label.pt_Start_date}</th>
+                    <td></td>
+                </tr>
+                <tr id="ed">
+                	<th>{!$label.pt_End_date}</th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="stroke"></div>
+        <div class="lower">
+            <input type="button" value="{!$Label.btn_status_open}" />
+        </div>
+    </div>
+</apex:page>

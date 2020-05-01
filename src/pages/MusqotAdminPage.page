@@ -1,0 +1,44 @@
+<apex:page controller="MusqotAdminPageController" sidebar="false" id="pg" tabStyle="Musqot_admin__tab">    
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" />  
+    <apex:outputPanel layout="block" >
+        <apex:sectionHeader title="{!$Label.musadmin_Musqot_admin}" subtitle="{!$Label.musadmin_Administration_setup}" help="musqotadminhelppage"/>
+        <apex:outputText value="{!$Label.musqot_admin_para1}"/>
+        <br/>
+        <apex:outputText value="{!$Label.musqot_admin_para2}"/>
+        <br/><br/>
+    </apex:outputPanel>
+    <apex:pageMessages ></apex:pageMessages>
+    <apex:form >   
+          <apex:outputText value="To create a Fiscal Year,  " rendered="{!if(defaultTabShow,false,true)}" ></apex:outputText> &nbsp;     
+          <apex:outputLink id="page" value="{!fiscalYearURL}" target="_blank" rendered="{!if(defaultTabShow,false,true)}" >Click here</apex:outputlink>
+    </apex:form>
+        <apex:tabPanel switchType="client" value="{!tabInFocus}" id="theTabPanel" rendered="{!defaultTabShow}">
+        <apex:tab label="{!$Label.mrk_Plan}" name="plns" id="plns">
+            <apex:include pageName="Plantype"/>
+        </apex:tab>
+        <apex:tab label="{!$Label.sub_Project}" name="proj" id="proj">
+            <apex:include pageName="ProjectType"/>
+        </apex:tab>
+        <apex:tab label="{!$Label.musadmin_Marketing_activity}" name="mar" id="mar" >
+            <apex:include pageName="ActivitytypesPage"/>
+        </apex:tab>
+        <apex:tab label="{!$Label.pur_Purchase_article}" name="purarti" id="purarti" >
+            <apex:include pageName="Purchasearticlegroups"/>
+        </apex:tab>
+        <apex:tab label="{!$Label.musadmin_Purchase_order_settings}" name="pursett" id="pursett">
+            <apex:include pageName="PurchaseOrderSettingEditPage"/>
+        </apex:tab>
+        <apex:tab label="{!$Label.musadmin_Marketing_performance_settings}" name="mpsett" id="mpsett">
+            <apex:include pageName="PerformanceSetting"/>
+        </apex:tab>
+        <apex:tab label="Musqot configurations" name="msett" id="msett" >
+            <apex:include pageName="musqotsettings"/>
+        </apex:tab>
+        <apex:tab label="{!$Label.musadmin_Install_process}" name="instal" id="instal" rendered="{!NOT(showInstallProcess)}">
+            <apex:include pageName="createApprovalProcess"/>
+        </apex:tab>
+    </apex:tabPanel> 
+    
+   
+</apex:page>

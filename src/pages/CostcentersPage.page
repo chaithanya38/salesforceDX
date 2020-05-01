@@ -1,0 +1,26 @@
+<apex:page controller="Costcenter_Ctrl" tabStyle="Costcentre__c">
+    <apex:sectionHeader subtitle="{!$Label.app_musqot}" title="{!$Label.mem_Cost_center}"/>
+    <apex:form >
+      <apex:pageMessages />
+      <apex:pageBlock title="{!$Label.mem_Cost_center}" tabStyle="Costcentre__c" rendered="{!ccRec}">
+      <apex:pageBlockButtons location="top">
+      <apex:commandButton style="centr" action="{!newCostcenter}" value="{!$Label.btn_New}"/>
+      </apex:pageBlockButtons>
+      <apex:outputPanel layout="block" styleClass="container">
+      <apex:pageBlockTable value="{!Costcenters}" var="cos">                
+            <apex:column headerValue="{!$Label.funr_Cost_center}">
+                <apex:commandLink value="{!cos.Name}" action="{!gotoccDetail}">
+                            <apex:param name="cosId" value="{!cos.id}"/>
+                </apex:commandLink>
+            </apex:column>
+            <apex:column value="{!cos.owner.name}" headerValue="{!$Label.cc_CC_Owner}"/>
+          	<apex:column value="{!cos.StatusImage__c}" headerValue="{!$Label.tsk_Status}"/>
+        </apex:pageBlockTable>
+        </apex:outputPanel>
+        <apex:commandButton rendered="{!setCon.hasPrevious}" value="{!$Label.btn_First}" action="{!setCon.first}"/>
+        <apex:commandButton rendered="{!setCon.hasPrevious}" value="{!$Label.btn_Previous}" action="{!setCon.previous}"/>
+        <apex:commandButton rendered="{!setCon.hasNext}" value="{!$Label.btn_Next}" action="{!setCon.next}"/>
+        <apex:commandButton rendered="{!setCon.hasNext}" value="{!$Label.btn_Last}" action="{!setCon.last}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

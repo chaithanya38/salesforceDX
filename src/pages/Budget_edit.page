@@ -1,0 +1,87 @@
+<apex:page standardController="Budget__c"  extensions="BudgetPlanEditclass" ShowHeader="False">
+    <head>
+        <script type="text/javascript">
+        function myClose(){    
+            if(window.parent){
+                window.parent.opener.location.href = window.parent.opener.location.href;
+                window.parent.close();
+                window.parent.reload();
+                
+            }   
+            else{
+                window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.planId)}"
+                window.close();   
+                window.parent.reload();
+            }   
+        }
+        function closeWindow_NoAction(){
+            window.close();
+        }
+        function validate(){
+            var bud=document.getElementById('{!$Component.frm.pb.pbs.bid}').value;
+            var ehour=document.getElementById('{!$Component.frm.pb.pbs.bid2}').value;
+            if(bud=='' && ehour=='')
+            {
+                alert("Please enter atleast one field value");
+                return false;
+            }
+            else
+            {  
+                myClose();   
+            }
+        }
+        function validate2(){
+            
+            var ehour=document.getElementById('{!$Component.frm.pb2.pbs2.bid2}').value;
+            
+            myClose();   
+            
+        }function validate1(){
+            var bud=document.getElementById('{!$Component.frm.pb1.pbs1.bid}').value;           
+            myClose();              
+        }        
+        </script>
+    </head>
+    <apex:form id="frm">
+        <apex:pageBlock title="{!$Label.pt_Budget}" mode="Edit" tabStyle="Musqot_admin__tab" id="pb" rendered="{!Level3}">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_save}"  action="{!save}" status="close" oncomplete="validate();" />
+                <apex:commandButton value="{!$Label.btn_cancel}" status="close" onclick="myClose();"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.pbs_Budget_for_plan},{!getbudget.Project__r.Name}" columns="1"  id="pbs">
+                <apex:inputField value="{!getbudget.Budget__c}"  label="{!$Label.bud_Plan_budget}"  id="bid" style="width:130px"/>  
+                <apex:inputField value="{!getbudget.Budget_h__c}" label="{!$Label.budhours}"   id="bid2" style="width:130px"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!getbudget.FiscalYear__c}" size="1" id="year" style="width:80px"> 
+                         <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField style="width:300px;height:100px;" value="{!getbudget.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="{!$Label.pt_Budget}" mode="Edit" tabStyle="Musqot_admin__tab" id="pb1"  rendered="{!Level1}">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_save}"  action="{!save}" status="close" oncomplete="validate1();" />
+                <apex:commandButton value="{!$Label.btn_cancel}" status="close" onclick="myClose();"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.pbs_Budget_for_plan},{!getbudget.Project__r.Name}" columns="1"  id="pbs1">
+                <apex:inputField value="{!getbudget.Budget__c}"  label="{!$Label.bud_Plan_budget}"  id="bid"/>  
+                <apex:inputField style="width:300px;height:100px;" value="{!getbudget.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="{!$Label.pt_Budget}" mode="Edit" tabStyle="Musqot_admin__tab" id="pb2"  rendered="{!Level2}">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_save}"  action="{!save}" status="close" oncomplete="validate2();" />
+                <apex:commandButton value="{!$Label.btn_cancel}" status="close" onclick="myClose();"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.pbs_Budget_for_plan},{!getbudget.Project__r.Name}" columns="1"  id="pbs2">
+                <apex:inputField value="{!getbudget.Budget_h__c}" label="{!$Label.budhours}"   id="bid2" />
+                <apex:inputField style="width:300px;height:100px;" value="{!getbudget.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

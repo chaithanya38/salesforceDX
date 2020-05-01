@@ -1,0 +1,268 @@
+<apex:page controller="costcenterfinance" tabStyle="Costcentre__c">   
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" />
+    
+    <style>
+        .apexp .totalRow{text-align:right !important;padding-top:4px !important;padding-bottom:4px !important;background:#d5d5d5 !important; border:0px !important;}
+        .TBHR{text-align:right; !important;with}
+        .TBHR2{text-align:right; !important;padding-right:4px !important;}
+        .focus{background-color:#cdcdcd !important;}
+    </style>
+    
+
+    <script> 
+    //This for default fiscalyear for amount--
+    window.onload = function(){       
+        document.getElementById("j_id0:j_id58:j_id59:frm:pgBlock:j_id66:year").value='{!JSINHTMLENCODE(defaultFiscalYear)}';
+        loaddataMydata(); 
+    }
+    function loadReource(){
+        loadResourceTab();   
+    }
+    </script>
+    
+    <apex:tabPanel switchType="client" id="theTabPanel" value="{!tabInFocus}">
+        <apex:tab label="{!$Label.tb_Financial}" name="tabDetails" id="tabDetails">
+            <apex:form id="frm">
+                
+                <apex:actionFunction name="refreshBlock" reRender="pie" action="{!selectedview}"/>
+                <apex:inputText value="{!defaultId}" id="def" style="display:none"/>
+                <apex:actionFunction name="loaddataMydata" rerender="j_id0:j_id4:perform" />               
+                <apex:pageblock title="{!$Label.pt_Financial_overview}" id="pgBlock" helpTitle="{!$Label.Help_Financial_help_page}" helpUrl="/apex/Help_Finance_planlevel" tabStyle="Costcentre__c">                     
+                   <!--<apex:inputText value="{!onchangSelectdYear}" id="opt"></apex:inputText>-->
+                    <apex:pageBlockButtons location="top">                       
+                        <apex:outputLabel value="{!$Label.fin_Fiscal_Year}"/>&nbsp;
+                        <apex:selectList value="{!selectedyear}" size="1" id="year" multiselect="false" style="width:70px"> 
+                            <apex:selectOptions value="{!fisicalYearOptions}"/>
+                            <apex:actionSupport event="onchange" reRender="detfin,sumfin,sum" action="{!selectedview}" oncomplete="myPicklistChanged();"/>
+                        </apex:selectList>         
+                        
+                        <apex:outputLabel value="View"/>&nbsp;
+                        <apex:selectList value="{!viewvalues}" styleClass="view-type" size="1" id="pro1" style="width:70px" multiselect="false" >  <!--onchange="onChangeViewType(this);"--> 
+                            <apex:selectOptions value="{!viewOptions}"/>
+                            <apex:actionSupport event="onchange" action="{!selectedview}" reRender="sum"/>
+                        </apex:selectList>                                                      
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel id="sum">
+                        <apex:outputPanel rendered="{!tb1}">
+                            <!-- Detail tab  -->
+                            <apex:variable var="totdetail" value="{!0.00}"/>
+                            <apex:pageBlockTable value="{!displaydata}" var="alm" id="detfin" rendered="{!if(AND(NOT(ISBLANK(displaydata)),displaydata.size>0),'true','false')}">
+                                <apex:column headerValue="Plan / Project">
+                                    <apex:outputPanel rendered="{!IF(alm.To_Plan__r.Name<>null,true,false)}">
+                                        <apex:outputText value="{!alm.To_Plan__r.Name}"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(alm.To_Project__r.Name<>null,true,false)}">
+                                        <apex:outputText value="{!alm.To_Project__r.Name}"/>
+                                    </apex:outputPanel>                                                                  
+                                </apex:column>
+                                <apex:column value="{!alm.Description__c}" headerValue="Description"/>
+                                <apex:column value="{!alm.Approved_By__r.name}" headerValue="Approved by" />
+                                <apex:column value="{!alm.Allocated__c}" title="{!alm.Allocated__c}" styleClass="TBHR" headerClass="TBHR" headerValue="Requested Amount" />                         
+                                <apex:column value="{!alm.Approvedate__c}" styleClass="TBHR"  headerClass="TBHR" headerValue="Approved date"/>
+                                <apex:column title="{!alm.Approved_Amount__c}"  footerClass="TBHR2" styleClass="TBHR2" headerClass="TBHR2" headerValue="Approved amount">
+                                    <apex:outputText value="{!alm.Approved_Amount__c}"/>
+                                    <apex:variable var="totdetail" value="{!totdetail + alm.Approved_Amount__c}"/>                                    
+                                     <apex:facet name="footer">
+                                       <div class="t1" style="display:inline;"></div>
+                                    </apex:facet> 
+                                </apex:column>    
+                            </apex:pageBlockTable>
+                            <script>
+    							document.getElementsByClassName('t1')[0].innerHTML = '{!ROUND(totdetail,2)}';
+                            </script>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel rendered="{!tb2}">
+                            <!-- Sum tab  -->
+                            <apex:variable var="totsum" value="{!0.00}"/>
+                            <apex:pageBlockTable value="{!financial}" var="alm" id="sumfin" rendered="{!if(AND(NOT(ISBLANK(financial)),financial.size>0),true,false)}">
+                                <apex:column value="{!alm.toplan}" headerValue="Plan / Project" />                    
+                                <apex:column value="{!alm.requestedAmt}" title="{!alm.requestedAmt}" styleClass="TBHR" headerClass="TBHR" headerValue="Requested Amount" />
+                                <apex:column footerClass="TBHR2" styleClass="TBHR2" headerClass="TBHR2" headerValue="Approved Amount">
+                                    <apex:outputText value="{!alm.approvedAmt}"/>
+                                    <apex:variable var="totsum" value="{!totsum + alm.approvedAmt}"/>
+                                    <apex:facet name="footer">
+                                            <div class="t2" style="display:inline;"></div>
+                                    </apex:facet>
+                                </apex:column>
+                            </apex:pageBlockTable>
+                            <script>
+                                document.getElementsByClassName('t2')[0].innerHTML = '{!ROUND(totsum,2)}';
+                            </script>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:pageblock>            
+            </apex:form>
+        </apex:tab>
+        
+        <apex:tab label="{!$Label.tb_Resource}" id="res" name="tabresource" onclick="loadReource();">
+            <apex:form >
+                <apex:actionFunction action="{!selectedresview}" name="loadResourceTab" rerender="pgBlock" status="myStatus" />
+                <apex:pageblock id="resources"  title="{!$Label.Resourcehrs}" helpTitle="{!$Label.Resourcehelppage}" helpUrl="/apex/Resource_Help_plan"  tabStyle="Costcentre__c">              
+                    <apex:pageBlockButtons location="top"> 
+                        <apex:outputLabel value="{!$Label.fin_Fiscal_Year}"/>
+                        <apex:selectList value="{!selectedyear}" size="1" id="year" multiselect="false" style="width:70px" styleClass="financial-year"> 
+                            <apex:selectOptions value="{!fisicalYearOptions}"/>
+                            <apex:actionSupport event="onchange" reRender="detres,sumres,sum" action="{!selectedresview}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="View"/>
+                        <apex:selectList value="{!viewvalues}" styleClass="view-type" size="1" id="pro1" style="width:70px" multiselect="false" >  <!--onchange="onChangeViewType(this);"--> 
+                            <apex:selectOptions value="{!viewOptions}"/>
+                            <apex:actionSupport event="onchange" action="{!selectedresview}" reRender="sum"/>
+                        </apex:selectList>                                    
+                    </apex:pageBlockButtons>
+                    <apex:outputPanel id="sum">
+                        <apex:outputPanel rendered="{!tb1}">
+                            <apex:variable var="tothrsdetail" value="{!0.0}"/>
+                            <apex:pageBlockTable value="{!Resourcedetaildata}" var="alr" id="detres" rendered="{!if(AND(NOT(ISBLANK(Resourcedetaildata)),Resourcedetaildata.size>0),'true','false')}">
+                                <apex:column headerValue="Plan / Project">
+                                    <apex:outputPanel rendered="{!IF(alr.To_Plan__r.Name<>null,true,false)}">
+                                        <apex:outputText value="{!alr.To_Plan__r.Name}"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(alr.To_Project__r.Name<>null,true,false)}">
+                                        <apex:outputText value="{!alr.To_Project__r.Name}"/>
+                                    </apex:outputPanel>
+                                </apex:column>
+                                <apex:column value="{!alr.Description__c}" headerValue="Description"/>
+                                <apex:column value="{!alr.Approved_By__r.name}" headerValue="Approved by"/>
+                                <apex:column value="{!alr.Requested_hours__c}" title="{!alr.Requested_hours__c}" styleClass="TBHR" headerClass="TBHR" headerValue="Requested hours" />
+                                <apex:column value="{!alr.Approved_date__c}" styleClass="TBHR" headerClass="TBHR" headerValue="Approved date"/>
+                                <apex:column title="{!alr.Approved_houver__c}" footerValue="{!totalhrs}" footerClass="TBHR2" styleClass="TBHR2" headerClass="TBHR2" headerValue="Approved hours">
+                                    <apex:outputText value="{!alr.Approved_houver__c}"/>                            
+                                 	<apex:variable var="tothrsdetail" value="{!tothrsdetail + alr.Approved_houver__c}"/>
+                                    <apex:facet name="footer">
+                                       <span class="t3"></span>
+                                    </apex:facet>  
+                                </apex:column>    
+                            </apex:pageBlockTable>  
+                            <script>
+                                document.getElementsByClassName('t3')[0].innerHTML = '{!ROUND(tothrsdetail,1)}';
+                            </script>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel rendered="{!tb2}">
+                            <apex:variable var="tothrssum" value="{!0.0}"/>
+                                    
+                            <apex:pageBlockTable value="{!Resource}" var="alr" id="sumres" rendered="{!if(AND(NOT(ISBLANK(Resource)),Resource.size>0),'true','false')}">
+                                <apex:column value="{!alr.toplan}" headerValue="Plan / Project" />
+                                <apex:column value="{!alr.requestedhrs}" title="{!alr.requestedhrs}" styleClass="TBHR" headerClass="TBHR" headerValue="Requested hours" />
+                                <apex:column headerValue="Approved hours" footerValue="{!totalhrs}" footerClass="TBHR2" styleClass="TBHR2" headerClass="TBHR2">
+                                    <apex:outputText value="{!alr.approvedhrs}"/>
+                                  	<apex:variable var="tothrssum" value="{!tothrssum + alr.approvedhrs}"/>
+                                    <apex:facet name="footer">
+                                           <span class="t4"></span>
+                                    </apex:facet>
+                                </apex:column>
+                            </apex:pageBlockTable>
+                            <script>
+                                document.getElementsByClassName('t4')[0].innerHTML = '{!ROUND(tothrssum,1)}';
+                            </script>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:pageblock>                
+            </apex:form>
+        </apex:tab>
+        
+        <apex:tab label="Pending Requests" id="req" name="Pendingrequests">
+            <apex:form id="pending">
+                <apex:pageBlock title="Pending Requests" tabstyle="Costcentre__c" id="musreq">    
+                    <apex:pageBlockButtons location="top">
+                        <apex:outputLabel value="Request"/>&nbsp;
+                        <apex:selectList value="{!Requesttype}" styleClass="view-type" size="1" id="pro1" style="width:70px" multiselect="false" >  <!--onchange="onChangeViewType(this);"--> 
+                            <apex:selectOptions value="{!Requestoptions}"/>
+                            <apex:actionSupport event="onchange" reRender="pending" action="{!selectedApprovalStatus}"/>
+                        </apex:selectList>	                
+                    </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel rendered="{!showPendingRecord}">
+                        <apex:pageBlockTable value="{!PendingrequestsList}" var="p" id="myTable1"  headerclass="headerStyle" >
+                            <apex:column headerValue="{!$Label.clm_Action}">
+                                <apex:commandLink onclick="window.open('Approvalhourdetail?id={!p.pw.ProcessInstanceId}&arsId={!p.pw.ProcessInstance.TargetObjectId}&cId={!currentRecordId}','_top');return false;" value="Approve/Reject" reRender="frm" rendered="{!if(p.allocResource!=null,true,false)}"  immediate="true"/>               
+                                <apex:commandLink onclick="window.open('approvalDetailPage?id={!p.pw.ProcessInstanceId}&amtId={!p.pw.ProcessInstance.TargetObjectId}&cId={!currentRecordId}','_top');return false;" value="Approve/Reject" reRender="frm" rendered="{!if(p.allocAmount!=null,true,false)}"  immediate="true"/>               
+                            </apex:column>
+                            <apex:column headerValue="{!$Label.appr_Request_from}">
+                                <apex:outputLabel value="{!p.pw.ProcessInstance.TargetObject.name}"></apex:outputLabel>
+                                <!--<apex:outputLink value="/{!p.pw.ProcessInstance.TargetObjectId}" id="theParentLink" target="_top">{!p.pw.ProcessInstance.TargetObject.name}</apex:outputLink>-->
+                            </apex:column>
+                            <apex:column headerValue="Type">
+                                <apex:outputLabel value="{!if(p.allocAmount!=null,'Amount','(H)')}">
+                                </apex:outputLabel>
+                            </apex:column>             
+                            <apex:column headerValue="Request">                     
+                                <apex:outputField value="{!p.allocAmount.Allocated__c}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                                <apex:outputField value="{!p.allocResource.Requested_hours__c}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                            </apex:column>
+                            <apex:column headerValue="Request By">
+                                <apex:outputField value="{!p.allocAmount.LastModifiedBy.Name}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                                <apex:outputField value="{!p.allocResource.LastModifiedBy.Name}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                            </apex:column>
+                            <apex:column headerValue="Created Date">
+                                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                    <apex:param value="{!p.pw.CreatedDate}" /> 
+                                </apex:outputText>
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!showRejectedRecord}">
+                        <apex:pageBlockTable value="{!RejectrequestsList}" var="p" id="myTable2" headerclass="headerStyle">
+                            <apex:column headerValue="{!$Label.clm_Action}">
+                                <!--<apex:commandLink value="Edit"/> -->
+                                <apex:commandLink onclick="window.open('approvalDetailPage?id={!p.p.Id}&amtId={!p.p.TargetObjectId}&cId={!currentRecordId}&reject=true','_top');return false;" value="Edit" reRender="frm" immediate="true"/>               
+                            </apex:column>
+                            <apex:column headerValue="{!$Label.appr_Request_from}">
+                                <apex:outputLabel value="{!p.p.TargetObject.name}"></apex:outputLabel>
+                                <!--<apex:outputLink value="{!p.p.TargetObjectId}" id="theParentLink" target="_top">{!p.p.TargetObject.name}</apex:outputLink>-->
+                            </apex:column>
+                            <apex:column headerValue="Type">
+                                <apex:outputLabel value="{!if(p.allocAmount!=null,'Amount','(H)')}">
+                                </apex:outputLabel>
+                            </apex:column>             
+                            <apex:column headerValue="Request">                     
+                                <apex:outputField value="{!p.allocAmount.Allocated__c}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                                <apex:outputField value="{!p.allocResource.Requested_hours__c}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                            </apex:column>
+                            <apex:column headerValue="Request By">
+                                <apex:outputField value="{!p.allocAmount.LastModifiedBy.Name}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                                <apex:outputField value="{!p.allocResource.LastModifiedBy.Name}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                            </apex:column>
+                            <apex:column headerValue="Requested Date">
+                                <!--<apex:outputField value="{!p.allocAmount.CreatedDate}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+<apex:outputField value="{!p.allocResource.CreatedDate}" rendered="{!if(p.allocResource!=null,true,false)}"/>-->
+                                <apex:outputPanel rendered="{!IF(p.allocAmount.CreatedDate<>null,true,false)}">
+                                    <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" >
+                                        <apex:param value="{!p.allocAmount.CreatedDate}"/>                                    
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(p.allocResource.CreatedDate<>null,true,false)}">
+                                    <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" >
+                                        <apex:param value="{!p.allocResource.CreatedDate}"/>                                    
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </apex:column>
+                            <apex:column headerValue="Reason"> 
+                                <apex:outputField value="{!p.allocAmount.Description__c}" rendered="{!if(p.allocAmount!=null,true,false)}"/>
+                                <apex:outputField value="{!p.allocResource.Description__c}" rendered="{!if(p.allocResource!=null,true,false)}"/>
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:outputPanel>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+    </apex:tabPanel>
+
+    <script>
+    function myPicklistChanged()
+    {
+        var myPicklistElement = document.getElementById('j_id0:j_id67:j_id68:frm:pgBlock:j_id74:year');
+        var myPicklistValue = myPicklistElement.options[myPicklistElement.selectedIndex].value;
+        alert(myPicklistValue);
+        document.getElementById('j_id0:j_id67:j_id68:frm:pgBlock:opt').value=myPicklistValue;
+        /*var url=window.location.href;
+        url += '&param='myPicklistValue;
+        alert(url);
+        window.location.href = url;*/
+    </script>
+</apex:page>

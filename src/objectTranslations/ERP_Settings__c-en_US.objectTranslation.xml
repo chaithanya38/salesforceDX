@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Settings</value>
+    </caseValues>
+    <fields>
+        <help><!-- Give the web color for each type in the ERP chart 
+Separated with comma. 
+eg. #1223344,#112244,#335566 --></help>
+        <label><!-- Bar color --></label>
+        <name>Bar_color__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP performance type --></label>
+        <name>ERP_performance_type__c</name>
+        <picklistValues>
+            <masterLabel>Milestone</masterLabel>
+            <translation><!-- Milestone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, costcenter</masterLabel>
+            <translation><!-- Performance, costcenter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, general</masterLabel>
+            <translation><!-- Performance, general --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, marketing activity</masterLabel>
+            <translation><!-- Performance, marketing activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, project</masterLabel>
+            <translation><!-- Performance, project --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Here you can enter which business areas to be included for the selected milestone, one row for each area --></help>
+        <label><!-- Expression business area --></label>
+        <name>Expression_business_area__c</name>
+    </fields>
+    <fields>
+        <help><!-- Here you can enter which business regions to be included for the selected milestone, one row for each region --></help>
+        <label><!-- Expression business region --></label>
+        <name>Expression_business_region__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select which field you will spit in Gantt view. (Business area or Business region) --></help>
+        <label><!-- Selector --></label>
+        <name>Selector__c</name>
+        <picklistValues>
+            <masterLabel>Business area</masterLabel>
+            <translation><!-- Business area --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Business region</masterLabel>
+            <translation><!-- Business region --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Chart --></label>
+        <name>erp_Chart__c</name>
+        <picklistValues>
+            <masterLabel>Area charts</masterLabel>
+            <translation><!-- Area charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Line charts</masterLabel>
+            <translation><!-- Line charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spline charts</masterLabel>
+            <translation><!-- Spline charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stacked Bar</masterLabel>
+            <translation><!-- Stacked Bar --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

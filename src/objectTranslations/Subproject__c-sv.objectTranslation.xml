@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Project</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Projects</value>
+    </caseValues>
+    <fields>
+        <label><!-- Performance CRM --></label>
+        <name>CRM__c</name>
+    </fields>
+    <fields>
+        <help><!-- Add your project description here (max 4000 chars) --></help>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Performance ERP --></label>
+        <name>ERP__c</name>
+    </fields>
+    <fields>
+        <label><!-- End date --></label>
+        <name>Ends_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Parent_project__c</name>
+        <relationshipLabel><!-- Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Priority level --></label>
+        <name>Priority_level__c</name>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation>Hög</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation>Låg</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium</masterLabel>
+            <translation>Medium</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium low</masterLabel>
+            <translation>Medium låg</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Top</masterLabel>
+            <translation>Högsta</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Parent project --></label>
+        <name>Project_del__c</name>
+        <relationshipLabel><!-- Projects --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project type --></label>
+        <name>Project_type__c</name>
+        <relationshipLabel><!-- Projects --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Performance Social media --></label>
+        <name>Social_media__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start date --></label>
+        <name>Starts_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>StatusImage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status image id --></label>
+        <name>Status_Image_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation>Färdig</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deferred</masterLabel>
+            <translation>Uppskjuten</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation>Pågående</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation>Ej startad</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- oldId --></label>
+        <name>oldId__c</name>
+    </fields>
+    <fields>
+        <label><!-- planid --></label>
+        <name>planid__c</name>
+    </fields>
+    <fields>
+        <label><!-- tempId --></label>
+        <name>tempId__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Subproject Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <validationRules>
+        <errorMessage><!-- Subproject name should not end before Parent project__r.Name+ &apos; startdate --></errorMessage>
+        <name>Plan_enddate</name>
+    </validationRules>
+</CustomObjectTranslation>

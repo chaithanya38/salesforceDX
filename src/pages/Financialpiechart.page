@@ -1,0 +1,9 @@
+<apex:page controller="costcenterfinance" title="Musqot" showHeader="false">
+        <apex:chart colorSet="#FFF240, #FFD4FC, #85FF66, #FFAA33, #30F1FF, #FF61AA, #B0B5FF, #F0FFDE" animate="true" height="200" width="100%" data="{!PieData}" > 
+            <apex:legend position="right" font="10px arial, sans-serif" spacing="-8" padding="8"/>
+            <apex:pieSeries dataField="data" labelField="name" highlight="false" tips="true" showInLegend="true"> 
+                <apex:chartLabel field="name" font="bold 10px arial, sans-serif" display="under" orientation="vertical" rendererFn=""/>
+                <apex:chartTips trackMouse="true" width="200" labelField="name" valueField="data"/>
+            </apex:pieSeries>
+        </apex:chart> 
+</apex:page>

@@ -1,0 +1,89 @@
+<apex:page standardController="task" sidebar="false" tabStyle="Project__c"  id="pg"  extensions="taskEditController" showHeader="true">
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css"/>  
+    <apex:form id="frm">
+        <apex:pageBlock title="{!$Label.tsk_Task}" id="pb" mode="Edit" tabStyle="Musqot_admin__tab" >
+            <apex:pageMessages id="showmsg"></apex:pageMessages>
+            <apex:pageBlockButtons location="top">
+                <!--<apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEditMode}"  rendered="{!isPlanCreatedUser || isTaskCreatedUser ||isTaskAssignedtoUser||issubprojectCreateduser}||{!showEdtbtn}" />-->
+                <apex:commandButton value="{!$Label.btn_update}" action="{!gotoEditMode}" rendered="{!showEdtbtn}" reRender="frm"/>
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}" rendered="{!showEdt}" />
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!gotoInfoMode}" rendered="{!showEdt}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2"   collapsible="false" id="pst" rendered="{!showRec}" >
+                <apex:outputField value="{!tsk.Task_name__c}"  label="{!$Label.tsk_Task_name}" />
+                <apex:outputField value="{!tsk.CreatedByid}"  label="{!$Label.taskcreatedby}" />
+                <apex:outputField value="{!tsk.OwnerID}" label="{!$Label.tsk_Assigned_To}"/>  
+                <apex:outputField value="{!tsk.Subject}" label="{!$Label.tsk_Subject}"/>
+                <apex:outputField value="{!tsk.ActivityDate}" label="{!$Label.tsk_Due_Date}"/>
+                <apex:outputField value="{!tsk.Priority}" label="{!$Label.tsk_Priority}"/>
+                <apex:outputField style="width:300px;height:100px;" value="{!tsk.Task_description__c}" label="{!$Label.inv_Description}"/>
+                <apex:outputField value="{!tsk.Status}" label="{!$Label.tsk_Status}" />
+                <apex:outputField style="width:300px;height:100px;" value="{!tsk.Description}" label="{!$Label.tsk_Comments}"/>
+                <apex:outputField value="{!tsk.Allocated_h__c}" label="{!$Label.tsk_estimated_time}" />
+                <apex:inputhidden value="{!tsk.WhatId}"/>
+                <apex:outputField value="{!tsk.Outcome_h__c}" label="{!$Label.tsk_outcome_time}" /> 
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2" title="{!tsk.Task_name__c}"  collapsible="false" id="ps" rendered="{!showEdt}">
+                <apex:inputField rendered="{!editDetail}" value="{!tsk.Task_name__c}"  label="{!$Label.tsk_Task_name}"  />
+                <apex:outputField rendered="{!showDetail}" value="{!tsk.Task_name__c}"  label="{!$Label.tsk_Task_name}"  />
+                <apex:inputField value="{!tsk.CreatedById}"  label="{!$Label.taskcreatedby}" />
+                <apex:inputField rendered="{!editDetail}" value="{!tsk.OwnerID}" label="{!$Label.tsk_Assigned_To}" />  
+                <apex:outputField rendered="{!showDetail}" value="{!tsk.OwnerID}" label="{!$Label.tsk_Assigned_To}" /> 
+                <apex:inputField value="{!tsk.Subject}" label="{!$Label.tsk_Subject}"  />
+                <apex:inputField rendered="{!editDetail}" value="{!tsk.ActivityDate}" label="{!$Label.tsk_Due_Date}" />
+                <apex:outputField rendered="{!showDetail}" value="{!tsk.ActivityDate}" label="{!$Label.tsk_Due_Date}" />
+                <apex:inputField rendered="{!editDetail}" value="{!tsk.Priority}" label="{!$Label.tsk_Priority}"  />
+                <apex:outputField rendered="{!showDetail}" value="{!tsk.Priority}" label="{!$Label.tsk_Priority}"  />
+                <apex:inputField rendered="{!editDetail}" style="width:300px;height:100px;" value="{!tsk.Task_description__c}"  label="{!$Label.inv_Description}" />
+                <apex:outputField rendered="{!showDetail}" style="width:300px;height:100px;" value="{!tsk.Task_description__c}" label="{!$Label.inv_Description}"/>
+                <apex:inputField value="{!tsk.Status}" label="{!$Label.tsk_Status}"  />
+                <apex:inputField rendered="{!editDetail}" value="{!tsk.Allocated_h__c}" label="{!$Label.tsk_estimated_time}" />
+                <apex:outputField rendered="{!showDetail}" value="{!tsk.Allocated_h__c}" label="{!$Label.tsk_estimated_time}" />
+                <apex:inputhidden value="{!tsk.WhatId}"/>
+                <apex:inputField style="width:300px;height:100px;" value="{!tsk.Description}" label="{!$Label.tsk_Comments}"/>
+                <apex:outputText ></apex:outputText>
+                <apex:inputField value="{!tsk.Outcome_h__c}" label="{!$Label.tsk_outcome_time}" /> 
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1" title="{!$Label.pbs_Task_attachment}" id="block1" collapsible="false" rendered="{!RenderTaskDocumentSection}">     
+                <apex:pageBlockTable value="{!getListWrapper}" var="at" id="myTable"  rendered="{!if(atts.size!=0,true,false)}" style="margin-left:-10px;width:900px;">                 
+                    <apex:column headerValue="{!$Label.clm_Action}" style="width: 80px;" > 
+                        <apex:commandLink value="{!$Label.btn_edit}" action="{!gotoeditpage}" rendered="{!isPlanCreatedUser || isTaskCreatedUser || AT.ISVISIBLE}" style="color:#015ba7">
+                            <apex:param Name="p" value="{!at.id}" assignTo="{!attsid}" />
+                        </apex:commandLink><apex:outputText rendered="{!isPlanCreatedUser || isTaskCreatedUser || AT.ISVISIBLE}">&nbsp;|&nbsp;</apex:outputText>
+                        <apex:commandLink >
+                            <apex:outputLink value="{!URLFOR($Action.Attachment.Download,at.id)}" target="_blank" style="color:#015ba7">
+                                {!$Label.btn_View}</apex:outputLink>
+                        </apex:commandLink>
+                        <apex:outputText rendered="{!isPlanCreatedUser ||isTaskCreatedUser || AT.ISVISIBLE}">&nbsp;|&nbsp;</apex:outputText>
+                        <apex:commandLink action="{!DeleteAttchment}" value="{!$Label.btn_Del}" onclick="if(!confirm('{!$Label.mem_Will_you_remove}, {!at.Name}?')) return false;" rendered="{!isPlanCreatedUser || isTaskCreatedUser || AT.ISVISIBLE}" style="color:#015ba7">              
+                            <apex:param value="{!at.id}" name="atsid"/>
+                        </apex:commandLink> 
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.att_File_Name}" style="width:140px;" value="{!at.Name}"> 
+                        <!--<a target="_Blank" href="{!URLFOR($Action.Attachment.Download, at.id)}" title="{!$Label.att_Download}" value="{!at.Name}">{!at.Name}</a>-->
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.inv_Description}" value="{!at.description}" style="width:150px;"/> 
+                    <!-- <apex:column headerValue="{!$Label.att_File_size}" value="{!at.Size}" style="width:70px;"/> -->
+                    <apex:column headerValue="{!$Label.att_File_type}" value="{!at.fileType}" style="width:70px;"/>  
+                    <!--  <apex:column headerValue="LastModified"  value="{!at.LastModifiedDate}" style="width:130px;" /> -->
+                    <apex:column headerValue="{!$Label.att_Owner_name}"  value="{!at.CreatedBy}" style="width:150px;" />
+                </apex:pageBlockTable>
+                <apex:pageBlockSectionItem rendered="{!showEdt}">
+                    {!$Label.att_Select_file}
+                    <apex:inputFile value="{!attachment.body}"  filename="{!fileName}" contentType="{!contentType}" id="file"/>
+                </apex:pageBlockSectionItem> 
+                <apex:inputTextarea value="{!attachment.description}" id="description" style="width: 300px;" rendered="{!showEdt}"  label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>    
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+     var url = location.href;
+     var match = url.match(/inline=1/);
+    if (match != null) { 
+        var newUrl = url.replace(/inline=1/, '');
+        window.top.location=newUrl;
+    }
+</script>
+</apex:page>

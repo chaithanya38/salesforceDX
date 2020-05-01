@@ -1,0 +1,54 @@
+<apex:page standardController="Marketing_activity__c" sidebar="false" extensions="marketingClass"  tabStyle="Project__c">
+    <script type="text/javascript">
+    function CreateAd(SocialMediaType) {        
+        var myWindow = window.open("/apex/Social_media_new_connection?SocialMediaType="+ SocialMediaType +"&Name="+ document.getElementById('j_id0:j_id2:j_id4:j_id35:mrkName').value+"&EndDate="+(document.getElementById('j_id0:j_id2:j_id4:j_id35:mrkEndDate').value).substring(0, 10),"Musqot_popup","width=1000,height=480"); 
+        myWindow.focus();
+    }      
+    </script> 
+    <apex:form >
+        <apex:sectionHeader title="{!$Label.mrk_Marketing_activity}"   subtitle="{!$Label.mrk_New_marketing_activity}" />
+        <apex:pageBlock title="{!$Label.mrk_Create_marketing_activity}"  mode="edit" tabStyle="Musqot_admin__tab">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton id="mrkSave" action="{!save}" value="{!$Label.btn_save}"/>
+                <apex:commandButton action="{!cancel}" value="{!$Label.btn_cancel}" />   
+                <apex:commandButton value="Create Facebook Advert"  onclick="CreateAd('Facebook');return false;" />
+                <apex:commandButton value="Create SF Marketing Cloud Campaign"  onclick="CreateAd('MailChimp');return false;" rendered="{!IF(((actvity.Use_socialmedia__c==true) && (contains(actvity.keycode__c,"aa"))),true,false)}"/>
+            </apex:pageBlockButtons>        
+            <apex:pageBlockSection >
+                <apex:inputField value="{!mr.Name}" required="True"  id="mrkName" label="{!$Label.mrk_Marketingactivity_Name}"/>
+                <apex:inputhidden value="{!mr.StatusImage__c}" /> 
+                <apex:inputField style="width:300px;hight:150px;" value="{!mr.Description__c}" label="{!$Label.inv_Description}"/>
+                <apex:inputhidden value="{!mr.Project__c}" />
+                <apex:inputField value="{!mr.Starts_date__c}"  required="true" label="{!$Label.pt_Start_date}" />
+                <apex:inputField value="{!mr.Ends_date__c}" id="mrkEndDate"  required="true" label="{!$Label.pt_End_date}"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.mrk_Activity_type}"  for="mrktype"/>
+                    <apex:actionRegion >
+                        <apex:selectList id="patype" label="{!$Label.mrk_Activity_type}" value="{!mr.Activitytype__c}"  style="widht:200;" size="1" multiselect="false" required="true">
+                            <apex:selectOptions value="{!ACTList}"  />
+                            <apex:actionSupport event="onchange" action="{!FieldSet}" rerender="flds"/>
+                        </apex:selectList>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:inputField label="{!$Label.mrk_multi_date}" value="{!mr.multi_pubication__c}"/>  
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Activity class"  for="colors"/>
+                     <apex:selectList id="colors" value="{!mr.Activity_Class__c}" size="1">
+                            <apex:selectOptions value="{!ActivityColors}"/>
+                     </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField value="{!mr.Status__c}" label="{!$Label.tsk_Status}" required="true"/>
+            </apex:pageBlockSection>
+            <apex:outputPanel id="flds">                 
+                <apex:pageblocksection title="Custom setting"  rendered="{!IF(fields.size>0,true,false)}" columns="2" >                  
+                    <apex:repeat value="{!fields}"  var="f">  
+                        <apex:inputfield value="{!mr[f.fieldPath]}" required="{!OR(f.required, f.dbrequired)}">  
+                        </apex:inputfield></apex:repeat>  
+                </apex:pageblocksection>                 
+            </apex:outputPanel>
+        </apex:pageBlock>
+       
+    </apex:form>
+</apex:page>

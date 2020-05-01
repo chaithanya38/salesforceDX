@@ -1,0 +1,23 @@
+<apex:page standardController="Project__c" extensions="PlanEditontroller" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_Edit_plan} {!$Label.btn_Custom_setting}" mode="Edit" helpTitle="{!$Label.Help_Plan_help_page}" helpUrl="/apex/Customsetting_help" >
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEditMode}" rendered="{!showEdt}" />
+                <apex:commandButton value="{!$Label.btn_save}" action="{!updPlan}" rendered="{!hiderec}"/> 
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" rendered="{!hiderec}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!ObjPro.Name}" rendered="{!showRec}" >
+                <apex:repeat value="{!fields}" var="f">
+                    <apex:outputField value="{!ObjPro[f.fieldPath]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!$Label.btn_Custom_setting}" rendered="{!hiderec}">
+                <apex:repeat value="{!fields}" var="f">
+                    <apex:inputField value="{!ObjPro[f.fieldPath]}" 
+                                     required="{!OR(f.required, f.dbrequired)}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

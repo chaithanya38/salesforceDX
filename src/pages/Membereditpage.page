@@ -1,0 +1,16 @@
+<apex:page StandardController="Members__c" Extensions="MemberEditController" sidebar="false"  tabStyle="Project__c" >
+    <apex:form >
+        <apex:pageBlock tabStyle="musqot__Project__c" title="{!$Label.pt_Edit_member} " mode="Edit" helpTitle="{!$Label.Help_Members_help_page}" helpUrl="/apex/Membershelppage">
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}" />
+                <apex:commandButton value="{!$Label.btn_Remove}" action="{!deleteMember}" onclick="return confirm('{!$Label.mem_Will_you_remove}, {!mems.ProjUsers__r.name}?');"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" title="{!mems.ProjUsers__r.name}">
+                <apex:outputField value="{!mems.ProjUsers__c}" label="{!$Label.mem_User}"/>
+                <apex:outputField value="{!mems.Email_del__c}" label="{!$Label.mem_Email}"/>
+                <apex:inputField value="{!mems.Role__c}" label="{!$Label.mem_Role}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

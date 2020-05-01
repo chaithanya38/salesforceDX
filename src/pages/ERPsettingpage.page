@@ -1,0 +1,80 @@
+<apex:page controller="Erpsettingcontroller" sidebar="false" tabStyle="Musqot_admin__tab">
+  <script>
+    function changesErpSeeting(){
+     
+      document.getElementById('j_id0:ERPform:j_id2:j_id6:j_id13').value="Line charts";
+      document.getElementById('j_id0:ERPform:j_id2:j_id6:j_id16').value="#FF9933,#A700DF,#369E2Bt";
+    }       
+    </script>
+    <apex:form id="ERPform" >
+        <apex:pageBlock title="{!$Label.musadmin_New_ERP_Setting}" tabStyle="Musqot_admin__tab" mode="Edit">
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="{!$Label.btn_save}" action="{!inserterps}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" immediate="true"/>
+             </apex:pageBlockButtons>
+             <apex:pageBlockSection columns="2">
+                <apex:inputField required="true"  value="{!erps.Name}" label="{!$Label.musadmin_Settings_name}"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="ERP performance type" for="type"/>
+                    <apex:actionRegion >
+                        <apex:selectList id="type" value="{!erps.ERP_performance_type__c}"  size="1" multiselect="false" >
+                            <apex:selectOptions value="{!MyOptions}" />
+                            <apex:actionSupport event="onchange"  rerender="ERPform" oncomplete="changesErpSeeting()"/>
+                        </apex:selectList>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>         
+                <apex:inputField required="true" value="{!erps.erp_Chart__c}" label="{!$Label.musadmin_Charts}"/>
+                <apex:inputField rendered="{!IF(erps.ERP_performance_type__c=='Milestone'||erps.ERP_performance_type__c=='Performance, project'||erps.ERP_performance_type__c=='Performance, marketing activity',false,true)}" value="{!erps.Selector__c}" label="{!$Label.musadmin_Selector}"/>
+                <apex:outputText rendered="{!IF(erps.ERP_performance_type__c=='Milestone'||erps.ERP_performance_type__c=='Performance, project'||erps.ERP_performance_type__c=='Performance, marketing activity',true,false)}" value=""/>
+                
+                <apex:inputField style="width:200px;" required="true" value="{!erps.Bar_color__c}" label="{!$Label.actt_Bar_color}"/>
+                    <apex:inputField rendered="{!IF(erps.ERP_performance_type__c='Milestone',true,false)}" style="margin-right:5px;"  value="{!erps.Expression_business_region__c}" >
+                    <div style="margin-top:-125px;display:inline-block;height:135px;vertical-align:text-top;">
+                        <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Milestone',true,false)}" >
+                          <apex:repeat value="{!Regions}" var="Summary">{!Summary.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                </apex:inputField>                   
+                    <apex:inputField rendered="{!IF(erps.ERP_performance_type__c='Performance, project',true,false)}" style="margin-right:5px;"  value="{!erps.Expression_business_region__c}" id="erp">
+                    <div style="margin-top:-125px;display:inline-block;height:135px;vertical-align:text-top;">
+                        <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Performance, project',true,false)}" >
+                          <apex:repeat value="{!Regions}" var="Summary">{!Summary.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                </apex:inputField>                         
+                    <apex:inputField rendered="{!IF(erps.ERP_performance_type__c='Performance, marketing activity',true,false)}" style="margin-right:5px;"  value="{!erps.Expression_business_region__c}" >
+                    <div style="margin-top:-125px;display:inline-block;height:135px;vertical-align:text-top;">
+                        <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Performance, marketing activity',true,false)}" >
+                          <apex:repeat value="{!Regions}" var="Summary">{!Summary.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                </apex:inputField>
+                <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Milestone',true,false)}" value=""/>
+                <apex:inputField rendered="{!IF(erps.ERP_performance_type__c='Milestone',true,false)}" style="margin-right:5px;" value="{!erps.Expression_business_area__c}" >
+                    <div style="margin-top:-125px;display:inline-block;height:135px;vertical-align:text-top;">
+                        <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Milestone',true,false)}">
+                            <apex:repeat value="{!Areas}" var="Summary">{!Summary.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                 </apex:inputField>   
+                 <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Performance, project',true,false)}" value=""/>
+                 <apex:inputField rendered="{!IF(erps.ERP_performance_type__c='Performance, project',true,false)}" style="margin-right:5px;" value="{!erps.Expression_business_area__c}" id="erp1">
+                    <div style="margin-top:-125px;display:inline-block;height:135px;vertical-align:text-top;">
+                        <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Performance, project',true,false)}" >
+                            <apex:repeat value="{!Areas}" var="Summary">{!Summary.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                 </apex:inputField>   
+                 <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Performance, marketing activity',true,false)}" value=""/>
+                 <apex:inputField rendered="{!IF(erps.ERP_performance_type__c='Performance, marketing activity',true,false)}" style="margin-right:5px;" value="{!erps.Expression_business_area__c}" >
+                    <div style="margin-top:-125px;display:inline-block;height:135px;vertical-align:text-top;">
+                        <apex:outputText rendered="{!IF(erps.ERP_performance_type__c='Performance, marketing activity',true,false)}" >
+                            <apex:repeat value="{!Areas}" var="Summary">{!Summary.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                 </apex:inputField>  
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

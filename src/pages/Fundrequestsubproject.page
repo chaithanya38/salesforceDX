@@ -1,0 +1,113 @@
+<apex:page showHeader="false" sidebar="false" controller="FRProjectPopupCtrl" tabStyle="Project__c" >
+    <style>
+       
+        .pbBottomButtons{
+            border-top:0px !important;
+        }
+        .pbBottomButtons>table {
+            border-top:0px !important;
+        }
+    </style>
+    <apex:form id="frm">
+        <apex:pageBlock mode="Edit" title="{!$Label.pt_Fund_request}" tabStyle="Project__c" >
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="Bottom">
+                <apex:outputPanel rendered="{!selfApp}">
+                <apex:commandButton action="{!saveAmt}" value="{!$Label.btn_Send_request}" oncomplete="check()" reRender="frm" disabled="{!sendRec}" rendered="{!ccRequst}"/>
+                <apex:commandButton action="{!saveAmt}" value="{!$Label.btn_Set_approved}" oncomplete="CloseWindow()" reRender="frm" rendered="{!NOT(ccRequst)}"/>                
+                </apex:outputPanel>
+                <apex:commandButton value="{!$Label.btn_Set_approved}" oncomplete="CloseWindowRef()" action="{!saveSelfAmt}" rendered="{!ccApp}" />
+                <apex:commandButton value="{!$Label.btn_cancel}" onclick="window.close()"/>
+            </apex:pageBlockButtons>    
+            <apex:pageBlockSection title="{!$Label.funr_Send_request_to}: {!parentName}" columns="1" rendered="{!selfApp}" id="pbss">                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.finov_Sponsor}"/>                
+                    <apex:actionRegion >
+                        <apex:selectList id="cc" label="{!$Label.finov_Sponsor}" value="{!ccId}"  size="1" multiselect="false">
+                            <apex:selectOptions value="{!CCList}"/>                    
+                            <apex:actionSupport event="onchange" action="{!ccUserRec}" reRender="frm"/>                    
+                        </apex:selectList>
+                        <apex:outputLabel id="ccname1" value="{!$Label.pt_Owner}: {!ownerName}" rendered="{!parentShow}"/>
+                        <apex:outputLabel id="ccname" value="{!$Label.cc_CC_Owner}: {!ccRec.owner.name}" rendered="{!if(parentShow==false,true,false)}"/>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:inputField value="{!amt.Allocated__c}" label="{!$Label.funr_Requested_amount}" required="true" rendered="{!ccRequst}" id="requstA" style="width:132px"/>                
+                <apex:inputField value="{!amt.Approved_Amount__c}"  rendered="{!NOT(ccRequst)}" required="true" id="approvA" style="width:132px"/>
+                <apex:pageBlockSectionItem rendered="{!if(fisicalYearOptions.size<>null,true,false)}">
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!amt.FiscalYear__c}" size="1" id="year" style="width:80px"> 
+                        <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField style="width:300px;height:100px;"  value="{!amt.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="{!$Label.funr_Self_approval}" columns="1" rendered="{!ccApp}">
+                <apex:inputField value="{!amt.Approved_Amount__c}" required="true" />
+                <apex:pageBlockSectionItem rendered="{!if(fisicalYearOptions.size<>null,true,false)}">
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!amt.FiscalYear__c}" size="1" id="year1" style="width:80px"> 
+                        <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField style="width:300px;height:100px;"  value="{!amt.Description__c}" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+    </apex:form>
+    <script language="JavaScript" type="text/javascript">
+    function check(){
+        var re=document.getElementById("j_id0:frm:j_id2:pbss:requstA").value;
+        if(re==''){
+            //alert('Please enter Requested Amount');
+        }
+        else{
+            if(window.parent){
+                window.parent.opener.location.href = window.parent.opener.location.href;
+                window.parent.close();
+                window.parent.reload();
+            }   
+            else{
+                window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.prjId)}"
+                window.close();   
+            }
+        }
+        
+    }
+    function CloseWindow(){ 
+        var ap=document.getElementById("j_id0:frm:j_id2:pbss:approvA").value;
+        
+        if(ap==''){
+            //alert('Please enter Approved Amount');
+        }
+        else{
+            if(window.parent){
+                window.parent.opener.location.href = window.parent.opener.location.href;
+                window.parent.close();
+                window.parent.reload();
+            }   
+            else{
+                window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.prjId)}"
+                window.close();   
+            }
+        }
+    }
+    function closeWindow_NoAction(){
+        window.close();
+    }
+    function CloseWindowRef(){
+         var am=document.getElementById("j_id0:frm:j_id2:j_id44:j_id45").value;
+        if(am==''){
+            alert('Please enter Approved Amount');
+        }else{
+        if(window.parent){
+            window.parent.opener.location.href = window.parent.opener.location.href;
+            window.parent.close();
+            window.parent.reload();
+        }   
+        else{
+            window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.prjId)}"
+            window.close();   
+          } 
+       }
+    }
+    </script>
+</apex:page>

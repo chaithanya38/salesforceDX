@@ -1,0 +1,15 @@
+<apex:page standardController="Costcentre__c" extensions="costcenteroverviewcls" sidebar="false">
+    <apex:form >      
+        <apex:pageBlock title="{!$Label.pt_Presentation}" mode="edit" tabStyle="Costcentre__c">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="{!$Label.btn_save}"/>
+                <apex:commandButton action="{!cancel}" value="{!$Label.btn_cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!CCSpace.Headline__c}"/>               
+                <!--<apex:inputhidden value="{!CCSpace.Headline__c}"/>-->
+                <apex:inputField value="{!CCSpace.Overveiw__c}" label="{!$Label.pt_Presentation}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

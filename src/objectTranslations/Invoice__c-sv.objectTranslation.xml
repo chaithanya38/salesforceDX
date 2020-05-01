@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Invoice</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Invoices</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marketing activity --></label>
+        <name>Marketing_activity__c</name>
+        <relationshipLabel><!-- Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Purchase article --></label>
+        <name>Purchase_article__c</name>
+        <relationshipLabel><!-- Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Purchase order --></label>
+        <name>Purchase_orders__c</name>
+        <relationshipLabel><!-- Invoiced --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Total spent --></label>
+        <name>Total_spent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subproject --></label>
+        <name>subproject__c</name>
+        <relationshipLabel><!-- Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Supplier --></label>
+        <name>supplier__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Spent Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

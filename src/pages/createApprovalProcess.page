@@ -1,0 +1,13 @@
+<apex:page controller="createApprovalProcess" tabStyle="musqot_admin__tab" ShowHeader="False">
+    <apex:form id="frm">
+        <apex:pageMessages />
+        <apex:pageBlock title="{!$Label.musadmin_Install_process}" mode="maindetail" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockSection columns="1">
+                
+                <apex:outputText >1. {!$Label.btn_Create_Approval_Process}&nbsp;
+                    <apex:commandButton action="{!cretaeAproval}" value="{!$Label.btn_Create}"  reRender="frm" rendered="true" disabled="{!hide}"/>
+                </apex:outputText>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

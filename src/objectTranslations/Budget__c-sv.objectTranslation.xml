@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Budget</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Budget</value>
+    </caseValues>
+    <fields>
+        <label><!-- Approved --></label>
+        <name>Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved date --></label>
+        <name>Approved_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project budget --></label>
+        <name>Budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget (h) --></label>
+        <name>Budget_h__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- FiscalYear --></label>
+        <name>FiscalYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Musqot fiscal year --></label>
+        <name>Musqot_fiscal_year__c</name>
+        <relationshipLabel><!-- Budget --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Budget --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>subproject__c</name>
+        <relationshipLabel><!-- Budget --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approved by --></label>
+        <name>user__c</name>
+        <relationshipLabel><!-- Budget --></relationshipLabel>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Budget Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>
