@@ -45,7 +45,7 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <inlineHelpText>This should be a semicolon separate list
-DD-MM-YYYY, DD-MM-YYYY, DD-MM-YYYY</inlineHelpText>
+DD-MM-YYYY, DD-MM-YYYY, DD-MM-YYYY, MM-DD-YYYY</inlineHelpText>
         <label>Company holidays</label>
         <length>2000</length>
         <type>LongTextArea</type>
