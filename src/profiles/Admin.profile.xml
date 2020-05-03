@@ -28,7 +28,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Activitycontroller</apexClass>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>ActivitycontrollerTest</apexClass>
