@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>Definite</article>
+        <plural>false</plural>
+        <value>Aktivitetstypen</value>
+    </caseValues>
+    <caseValues>
+        <article>Indefinite</article>
+        <plural>false</plural>
+        <value>Aktivitetstyp</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Activity types</value>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <plural>true</plural>
+        <value>Aktivitetstyperna</value>
+    </caseValues>
+    <caseValues>
+        <article>Indefinite</article>
+        <plural>true</plural>
+        <value>Aktivitetstyper</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Activity types</value>
+    </caseValues>
+    <fields>
+        <label>ListfÃ¤rg</label>
+        <name>Bar_color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fieldset --></label>
+        <name>F__c</name>
+    </fields>
+    <fields>
+        <help><!-- Give a url to a icon for the activity type this should be in size 24x24 px --></help>
+        <label>URL till icon</label>
+        <name>Icon__c</name>
+    </fields>
+    <fields>
+        <label><!-- sort --></label>
+        <name>sort__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Activitytype Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

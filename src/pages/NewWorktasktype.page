@@ -1,0 +1,25 @@
+<apex:page standardController="worktype__c" extensions="NewworktypeClass">
+    <apex:includeScript value="{!URLFOR($Resource.Colorpicker, 'jscolor/jscolor.js')}" />
+    <style>
+        .container{
+        
+        overflow:auto;
+        
+        height:80%;
+        }
+    </style>
+    <apex:form >
+        <apex:outputPanel layout="block" style="height:1000px">
+            <apex:pageBlock title="New Worktask Type">
+                <apex:pageBlockButtons location="Top" >
+                    <apex:commandButton value="Save" action="{!Newrec}" />
+                    <apex:commandButton value="Cancel" action="{!Cancel}"/>
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection >
+                    <apex:inputField value="{!Newworktype.Name}"/> 
+                    <apex:inputField value="{!Newworktype.bartaskcolor__c}" styleClass="color" required="true"/>
+                </apex:pageBlockSection> 
+            </apex:pageBlock>
+        </apex:outputPanel>
+    </apex:form> 
+</apex:page>

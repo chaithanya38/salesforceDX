@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Purchase order</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Purchase orders</value>
+    </caseValues>
+    <fields>
+        <label><!-- Allocation amount --></label>
+        <name>Allocation_amount__c</name>
+        <relationshipLabel><!-- Purchase Orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- Type in date the date when the cost is expected to occur. --></help>
+        <label><!-- Effective date --></label>
+        <name>Effective_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marketing activity --></label>
+        <name>Marketing_activity__c</name>
+        <relationshipLabel><!-- Purchase Orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Purchase orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Purchase article --></label>
+        <name>Purchase_article__c</name>
+        <relationshipLabel><!-- Purchase Orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Purchase order externalid --></label>
+        <name>Purchase_order__c</name>
+    </fields>
+    <fields>
+        <help><!-- If this is checked, then you can&apos;t registry more invoice on this PO number --></help>
+        <label><!-- Purchase order closed --></label>
+        <name>Purchase_order_cloesed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Purchase order number --></label>
+        <name>Purchase_order_name__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date purchase send to supplier --></help>
+        <label><!-- Purchase order send --></label>
+        <name>Purchase_order_send__c</name>
+    </fields>
+    <fields>
+        <help><!-- Purchase order will be sent to supplier this date. 
+To email you have in field &quot;Supplier email&quot;.
+Leave &quot;Send date&quot; empty if you NOT will send. --></help>
+        <label><!-- Send date --></label>
+        <name>Send_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Supplier --></label>
+        <name>Supplier__c</name>
+    </fields>
+    <fields>
+        <label><!-- Supplier email --></label>
+        <name>Supplier_email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>Total_cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subproject --></label>
+        <name>subproject__c</name>
+        <relationshipLabel><!-- Purchase orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Invoice cost --></label>
+        <name>total_Invoice_cost__c</name>
+    </fields>
+    <layouts>
+        <layout>Purchase order Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Purchase order name --></nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Plan member</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Plan members</value>
+    </caseValues>
+    <fields>
+        <label><!-- Marketing activity --></label>
+        <name>Marketing_activity__c</name>
+        <relationshipLabel><!-- Plan members --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Plan__c</name>
+        <relationshipLabel><!-- Plan members --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Role --></label>
+        <name>Role__c</name>
+        <picklistValues>
+            <masterLabel>Member</masterLabel>
+            <translation><!-- Member --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Viewer</masterLabel>
+            <translation><!-- Viewer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- User type --></label>
+        <name>User_type__c</name>
+        <picklistValues>
+            <masterLabel>Communities user</masterLabel>
+            <translation><!-- Communities user --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal user</masterLabel>
+            <translation><!-- Internal user --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner user</masterLabel>
+            <translation><!-- Partner user --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>project__c</name>
+        <relationshipLabel><!-- Plan members --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>userid__c</name>
+        <relationshipLabel><!-- Plan members --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

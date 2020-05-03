@@ -1,0 +1,53 @@
+<apex:page showHeader="false" sidebar="false" standardController="Allocation_amount__c" extensions="FRMarketingPopupCtrl">
+     <style>
+       
+        .pbBottomButtons{
+            border-top:0px !important;
+        }
+        .pbBottomButtons>table {
+            border-top:0px !important;
+        }
+    </style>
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_Fund_request}" mode="Edit"  tabStyle="musqot__Project__c">
+            <apex:pageBlockButtons location="Bottom">
+                <apex:commandButton action="{!saveAmt}" value="{!$Label.btn_Send_request}" status="close" rerender="buttons" oncomplete="CloseWindow()"/>
+                <!--<apex:commandButton action="{!saveAmt}" value="{!$Label.btn_Set_approved}" onclick="CloseWindow()" reRender="frm" rendered="{!ccApp}"/>-->
+                <apex:commandButton value="{!$Label.btn_cancel}" onclick="window.close()"/>
+               
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.funr_Send_request_to}: {!subpro.Project__r.Name}" columns="1" >
+                <apex:inputField value="{!amt.Allocated__c}" required="true" label="{!$Label.funr_Requested_amount}" />
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!amt.FiscalYear__c}" size="1" id="year" style="width:80px"> 
+                         <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputField style="width:300px;height:100px;"  value="{!amt.Description__c}" label="{!$Label.inv_Description}" />
+            </apex:pageBlockSection>
+                    <!--</apex:pageBlockSection >
+            <apex:pageBlockSection title="{!$Label.funr_Self_approval}" columns="1" rendered="{!ccApp}">
+                 <apex:inputField value="{!amt.Approved_Amount__c}" required="true" />
+                 <apex:inputField style="width:300px;height:100px;"  value="{!amt.Description__c}" label="{!$Label.inv_Description}"/>
+             </apex:pageBlockSection>--> 
+            </apex:pageBlock>
+        </apex:form>
+         <script language="JavaScript" type="text/javascript">
+        function CloseWindow(){
+            var winMain=window.opener;
+            var re=document.getElementById("j_id0:j_id2:j_id3:j_id7:j_id8").value;
+            if(re==''){
+                alert('Please enter Reuested Amount');
+            }
+            else{
+                if (winMain != null) {
+                    window.close();
+                    if (null==winMain){
+                        winMain=window.parent.opener;
+                    }
+                } 
+            }
+        }
+        </script>              
+    </apex:page>

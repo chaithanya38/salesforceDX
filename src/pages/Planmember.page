@@ -1,0 +1,30 @@
+<apex:page standardController="Musqot_member__c" extensions="PlanMemberController" sidebar="false" tabStyle="Project__c" >
+    <apex:form id="frm">
+        <apex:sectionHeader subtitle="{!$Label.pt_New_member}" title="{!$Label.mrk_Plan} {!$Label.pt_Members}" />
+        
+        <apex:pageBlock title="{!$Label.pt_New_member}" mode="edit" tabStyle="Project__c">
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="{!$Label.btn_Add_member}" action="{!saveMember}" reRender="frm" />
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" />
+            </apex:pageBlockButtons>
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockTable value="{!listWrapper}" var="w" columnsWidth="70,200,230,200,200,*" rendered="{!listWrapper.size>0}"> 
+                <apex:column title="{!$Label.clm_Action}">
+                    <apex:facet name="header">
+                        <apex:inputCheckbox value="{!allBool}">
+                        </apex:inputCheckbox>{!$Label.clm_Action}
+                    </apex:facet>
+                    <apex:inputCheckbox value="{!w.checked}"/>
+                </apex:column>
+                <apex:column headerValue="{!$Label.musadmin_Name}">
+                    <apex:image value="{!w.pmem.smallphotourl}" height="16px" style="margin:0px;"/>&nbsp;&nbsp;&nbsp;
+                    <apex:outputText value="{!w.pmem.Name}" />
+                </apex:column>              
+                <apex:column value="{!w.pmem.Email}" headerValue="{!$Label.mem_Email}"/>
+                <apex:column value="{!w.pmem.department}" headerValue="{!$Label.Resource_Department}"/> 
+                <apex:column value="{!w.pmRole}" headerValue="{!$Label.mem_Role}"/> 
+                <apex:column value="{!w.pmem.title}" headerValue="{!$Label.Resource_Title}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

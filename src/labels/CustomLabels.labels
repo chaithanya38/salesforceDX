@@ -1,0 +1,3975 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Approve_reject</fullName>
+        <categories>approvalRequests</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Approve/reject</shortDescription>
+        <value>Approve / Reject</value>
+    </labels>
+    <labels>
+        <fullName>Filtername</fullName>
+        <categories>ganttpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Filtername</shortDescription>
+        <value>Filter name</value>
+    </labels>
+    <labels>
+        <fullName>Gantt_Export_PNG</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantt_Export_PNG</shortDescription>
+        <value>Export to PNG</value>
+    </labels>
+    <labels>
+        <fullName>Gantt_Highlight</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantt_Highlight</shortDescription>
+        <value>Highlight</value>
+    </labels>
+    <labels>
+        <fullName>Gantthelp_para2</fullName>
+        <categories>Gantthelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantthelp_para2</shortDescription>
+        <value>Explanation of Musqot’s Gantt view</value>
+    </labels>
+    <labels>
+        <fullName>Gantthelp_para3</fullName>
+        <categories>Gantthelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantthelp_para3</shortDescription>
+        <value>The Gantt view gives you a perfect overview of your organizations marketing plan hierarchy, with time lines and graphic icons to illustrate Projects and Marketing activities.</value>
+    </labels>
+    <labels>
+        <fullName>Gantthelp_para4</fullName>
+        <categories>Gantthelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantthelp_para4</shortDescription>
+        <value>Monthly, weekly or daily view</value>
+    </labels>
+    <labels>
+        <fullName>Gantthelp_para5</fullName>
+        <categories>Gantthelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantthelp_para5</shortDescription>
+        <value>The Gantt view can be displayed in monthly, weekly or daily view. All depending on the level of detail you are interested in. Plans and Projects are for example often best viewed in a monthly or weekly perspective, whereas specific Marketing activities can be extremely interesting to view in a daily perspective.</value>
+    </labels>
+    <labels>
+        <fullName>Gantthelp_para6</fullName>
+        <categories>Gantthelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantthelp_para6</shortDescription>
+        <value>Easy navigation and access to work spaces</value>
+    </labels>
+    <labels>
+        <fullName>Gantthelp_para7</fullName>
+        <categories>Gantthelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Gantthelp_para7</shortDescription>
+        <value>The visual Gantt view provides the quickest and easiest navigation for users, to identify their current projects and activities. It also provides immediate access to the work spaces of these entities.</value>
+    </labels>
+    <labels>
+        <fullName>Help_Budget_help_page</fullName>
+        <categories>FinancialSummary,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Budget help page</shortDescription>
+        <value>Budget help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Financial_help_page</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Financial help page</shortDescription>
+        <value>Financial help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Help_page</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Help page</shortDescription>
+        <value>Help</value>
+    </labels>
+    <labels>
+        <fullName>Help_Invoices_help_page</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Invoices help page</shortDescription>
+        <value>Invoices help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Members_help_page</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Members help page</shortDescription>
+        <value>Members help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Milestones_help_page</fullName>
+        <categories>ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Milestones help page</shortDescription>
+        <value>Milestones help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Plan_help_page</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Plan help page</shortDescription>
+        <value>Plan help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Projects_help_page</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Projects help page</shortDescription>
+        <value>Projects help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Purchase_order_help_page</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Purchase order help page</shortDescription>
+        <value>Purchase order help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Subprojects_help_page</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Subprojects help page</shortDescription>
+        <value>Subprojects help page</value>
+    </labels>
+    <labels>
+        <fullName>Help_Tasks_help_page</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Tasks help page</shortDescription>
+        <value>Tasks help page</value>
+    </labels>
+    <labels>
+        <fullName>Helpmar_p1</fullName>
+        <categories>Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Helpmar_p1</shortDescription>
+        <value>The amount that has been requested from, and approved by parent projects.</value>
+    </labels>
+    <labels>
+        <fullName>Helpmar_p2</fullName>
+        <categories>Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Helpmar_p2</shortDescription>
+        <value>The total value of all Purchase orders that are directly attached to a specific &quot;Marketing activity&quot;</value>
+    </labels>
+    <labels>
+        <fullName>Helpmar_p3</fullName>
+        <categories>Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Helpmar_p3</shortDescription>
+        <value>The total value of all Invoices that are directly attached to a specific &quot;Marketing activity&quot;.</value>
+    </labels>
+    <labels>
+        <fullName>Helpmar_p4</fullName>
+        <categories>Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Helpmar_p4</shortDescription>
+        <value>The amount that remains after the Reserved amount has been subtracted from the Approved amount, for a specific &quot;Marketing activity&quot;.</value>
+    </labels>
+    <labels>
+        <fullName>Hepl_Marketing_activity_help_page</fullName>
+        <categories>SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Help_Marketing activity help page</shortDescription>
+        <value>Marketing activity help page</value>
+    </labels>
+    <labels>
+        <fullName>Mrk_Publication_dates</fullName>
+        <categories>Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Activity occasions</shortDescription>
+        <value>Activity occasions</value>
+    </labels>
+    <labels>
+        <fullName>Musqot_request</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Musqot request</shortDescription>
+        <value>My approvals</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para10</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plan_para10</shortDescription>
+        <value>On the other hand, if your organization has setup multiple Plans (one for each product or region, just as two examples) you will probably find it sufficient with a lower number of Projects types in each plan.</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para4</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>plan_para4</shortDescription>
+        <value>Each Musqot client can define a custom structure of their plan hierarchy, depending on how their company and operations are organized.</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para5</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plan_para5</shortDescription>
+        <value>One or several Plans?</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para6</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plan_para6</shortDescription>
+        <value>You need to decide whether you want to plan, budget and follow up all your marketing as part of one single Plan – or if you prefer to work with several Plans that includes different things.</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para7</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plan_para7</shortDescription>
+        <value>Which way is best for you depends on your organizational structure and processes, as well as the similarities/differences between your product groups, brands, markets etc.</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para8</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plan_para8</shortDescription>
+        <value>Considerations</value>
+    </labels>
+    <labels>
+        <fullName>Plan_para9</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Plan_para9</shortDescription>
+        <value>If for example your organization works with all marketing as part of one single Plan, you are more likely to require a larger number of Project types in order to keep track of all your different activities.</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_order_para1</fullName>
+        <categories>Purchaseorderhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Purchase order_para1</shortDescription>
+        <value>Explanation of how purchase orders are used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_order_para2</fullName>
+        <categories>Purchaseorderhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Purchase order_para2</shortDescription>
+        <value>Creating purchase orders directly in Musqot is an excellent way of saving time and enabling increased cost control for your organization’s marketing department.</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_order_para3</fullName>
+        <categories>Purchaseorderhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Purchase order_para3</shortDescription>
+        <value>A purchase order reserves funds for future costs</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_order_para4</fullName>
+        <categories>Purchaseorderhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Purchase order_para4</shortDescription>
+        <value>By creating a new purchase order for a given amount, that amount will in effect be handled as “reserved” in your chosen level of the plan hierarchy. Therefore, issuing a purchase order is one way of securing funds for specific marketing investments ahead.</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_order_para5</fullName>
+        <categories>Purchaseorderhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Purchase order_para5</shortDescription>
+        <value>Musqot sends the purchase order directly to your vendor/supplier</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_order_para6</fullName>
+        <categories>Purchaseorderhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Purchase order_para6</shortDescription>
+        <value>Musqot not only saves the purchase order information for your organization’s users, but also distributes it digitally to your selected vendor/supplier.</value>
+    </labels>
+    <labels>
+        <fullName>Res_W</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Res_W</shortDescription>
+        <value>W</value>
+    </labels>
+    <labels>
+        <fullName>ResourceEstimate</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ResourceEstimate</shortDescription>
+        <value>Estimate</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Department</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Department</shortDescription>
+        <value>Department</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Empl_No</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Empl No</shortDescription>
+        <value>Empl. No</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Focusdate</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Focusdate</shortDescription>
+        <value>Focusdate</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Manager</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Manager</shortDescription>
+        <value>Manager</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Public_group</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Public group</shortDescription>
+        <value>Public group</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Resource_report</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Resource report</shortDescription>
+        <value>Resource report</value>
+    </labels>
+    <labels>
+        <fullName>Resource_Title</fullName>
+        <categories>Resource_report_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_Title</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>Resource_para8</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resource_para8</shortDescription>
+        <value>The total hours of all tasks allocated hours  that are directly attached to a specific &quot;Marketing activity&quot;</value>
+    </labels>
+    <labels>
+        <fullName>Resourcehelppage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resourcehelppage</shortDescription>
+        <value>Resource help page</value>
+    </labels>
+    <labels>
+        <fullName>Resourcehrs</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Resourcehrs</shortDescription>
+        <value>Resource overview(hours)</value>
+    </labels>
+    <labels>
+        <fullName>actt_Activity_type</fullName>
+        <categories>New Activity Type,Activity Edit Page,ActivitytypesPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>actt_Activity type</shortDescription>
+        <value>Activity type</value>
+    </labels>
+    <labels>
+        <fullName>actt_Bar_color</fullName>
+        <categories>Plantype, NewPlanType, PlanTypeEditPage, ProjectType, NewActivityType, ActivitytypesPage, ActivityEditPage.,ERPSettingsEdit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>actt_Bar color</shortDescription>
+        <value>Bar color</value>
+    </labels>
+    <labels>
+        <fullName>actt_Icon</fullName>
+        <categories>ActivitytypesPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>actt_Icon</shortDescription>
+        <value>Icon</value>
+    </labels>
+    <labels>
+        <fullName>actt_Url_to_icon</fullName>
+        <categories>NewActivityType,ActivityEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>actt_Url to icon</shortDescription>
+        <value>Url to icon</value>
+    </labels>
+    <labels>
+        <fullName>allocate_funds</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>allocate_funds</shortDescription>
+        <value>Allocate funds</value>
+    </labels>
+    <labels>
+        <fullName>app_musqot</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>app_musqot</shortDescription>
+        <value>Musqot</value>
+    </labels>
+    <labels>
+        <fullName>appr_Approval_Process_already_created</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>appr_Approval Process already created...</shortDescription>
+        <value>Approval Process already created...</value>
+    </labels>
+    <labels>
+        <fullName>appr_Approval_Process_created_successfully</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>appr_Approval Process created successfully ....</shortDescription>
+        <value>Approval Process created successfully ....</value>
+    </labels>
+    <labels>
+        <fullName>appr_Approved_amount</fullName>
+        <categories>approvalDetail page.</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>appr_Approved amount</shortDescription>
+        <value>Approved amount</value>
+    </labels>
+    <labels>
+        <fullName>appr_Remaining</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>appr_Remaining</shortDescription>
+        <value>You cant approve this amount within your remaining amount.</value>
+    </labels>
+    <labels>
+        <fullName>appr_Request_from</fullName>
+        <categories>approvalDetail page.</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>appr_Request from</shortDescription>
+        <value>Request from</value>
+    </labels>
+    <labels>
+        <fullName>appr_Request_to</fullName>
+        <categories>approvalDetail page.</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>appr_Request_to</shortDescription>
+        <value>Request to</value>
+    </labels>
+    <labels>
+        <fullName>att_Download</fullName>
+        <categories>AttachmentInfopage,PurchaseorderEditdetailspage,InvoiceEditpage,ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_Download</shortDescription>
+        <value>Download</value>
+    </labels>
+    <labels>
+        <fullName>att_Edit_attachment</fullName>
+        <categories>AttachmentInfopage,</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_Edit attachment</shortDescription>
+        <value>Edit attachment</value>
+    </labels>
+    <labels>
+        <fullName>att_File_Name</fullName>
+        <categories>attachmentpage,attachmenteditpage,AttachmentInfopage,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_File Name</shortDescription>
+        <value>File Name</value>
+    </labels>
+    <labels>
+        <fullName>att_File_size</fullName>
+        <categories>AttachmentInfopage,attachmenteditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_File size</shortDescription>
+        <value>File size</value>
+    </labels>
+    <labels>
+        <fullName>att_File_type</fullName>
+        <categories>AttachmentInfopage,attachmenteditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_File type</shortDescription>
+        <value>File type</value>
+    </labels>
+    <labels>
+        <fullName>att_Owner_name</fullName>
+        <categories>AttachmentInfopage,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_Owner name</shortDescription>
+        <value>Owner name</value>
+    </labels>
+    <labels>
+        <fullName>att_Select_file</fullName>
+        <categories>attachmentpage,Task,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>att_Select file</shortDescription>
+        <value>Select file</value>
+    </labels>
+    <labels>
+        <fullName>attdocument</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>attdocument</shortDescription>
+        <value>Document</value>
+    </labels>
+    <labels>
+        <fullName>btn_Add_member</fullName>
+        <categories>ProjectDetails.</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Add member</shortDescription>
+        <value>Add member</value>
+    </labels>
+    <labels>
+        <fullName>btn_Approve</fullName>
+        <categories>approvalDetailPage.</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Approve</shortDescription>
+        <value>Approve</value>
+    </labels>
+    <labels>
+        <fullName>btn_Attachment_document</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Attach document</shortDescription>
+        <value>Add Attachment</value>
+    </labels>
+    <labels>
+        <fullName>btn_Close_budget</fullName>
+        <categories>FinancialSummary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Close budget</shortDescription>
+        <value>Close budget</value>
+    </labels>
+    <labels>
+        <fullName>btn_Collapse_all</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Collapse_all</shortDescription>
+        <value>Collapse all</value>
+    </labels>
+    <labels>
+        <fullName>btn_Create</fullName>
+        <categories>createApprovalProcess</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Create</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>btn_Create_Approval_Process</fullName>
+        <categories>createApprovalProcess</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Create Approval Process</shortDescription>
+        <value>Create Approval Process</value>
+    </labels>
+    <labels>
+        <fullName>btn_Custom_setting</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Custom setting</shortDescription>
+        <value>Custom setting</value>
+    </labels>
+    <labels>
+        <fullName>btn_Del</fullName>
+        <categories>Plantype,Purchasearticlegroups,ProjectType,PerformanceSetting,TaskEditpage,ActivitytypesPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Del</shortDescription>
+        <value>Del</value>
+    </labels>
+    <labels>
+        <fullName>btn_Delete</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>btn_Edit_budget</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Edit budget</shortDescription>
+        <value>Edit budget</value>
+    </labels>
+    <labels>
+        <fullName>btn_Expand_all</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Expand all</shortDescription>
+        <value>Expand all</value>
+    </labels>
+    <labels>
+        <fullName>btn_Export_to_PDF</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Export to PDF</shortDescription>
+        <value>Export to PDF</value>
+    </labels>
+    <labels>
+        <fullName>btn_First</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_First</shortDescription>
+        <value>First</value>
+    </labels>
+    <labels>
+        <fullName>btn_Last</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Last</shortDescription>
+        <value>Last</value>
+    </labels>
+    <labels>
+        <fullName>btn_New</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>btn_New_invoice</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New invoice</shortDescription>
+        <value>New invoice</value>
+    </labels>
+    <labels>
+        <fullName>btn_New_member</fullName>
+        <categories>SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New member</shortDescription>
+        <value>New member</value>
+    </labels>
+    <labels>
+        <fullName>btn_New_milestone</fullName>
+        <categories>ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New milestone</shortDescription>
+        <value>New milestone</value>
+    </labels>
+    <labels>
+        <fullName>btn_New_project</fullName>
+        <categories>ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New project</shortDescription>
+        <value>New project</value>
+    </labels>
+    <labels>
+        <fullName>btn_New_purchase_order</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New purchase order</shortDescription>
+        <value>New purchase order</value>
+    </labels>
+    <labels>
+        <fullName>btn_New_task</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_New task</shortDescription>
+        <value>New task</value>
+    </labels>
+    <labels>
+        <fullName>btn_Next</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Next</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>btn_Previous</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Previous</shortDescription>
+        <value>Previous</value>
+    </labels>
+    <labels>
+        <fullName>btn_Reject</fullName>
+        <categories>approvalDetailPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Reject</shortDescription>
+        <value>Reject</value>
+    </labels>
+    <labels>
+        <fullName>btn_Remove</fullName>
+        <categories>MilestoneEditpage,AttachmentInfopage,PurchaseorderEditdetailspage,InvoiceEditpage,Membereditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Remove</shortDescription>
+        <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>btn_Request_funds</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Request funds</shortDescription>
+        <value>Request funds</value>
+    </labels>
+    <labels>
+        <fullName>btn_Send_request</fullName>
+        <categories>Fundrequestsubproject,Fundrequestmarketing,Fund_request_popup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Send request</shortDescription>
+        <value>Send request</value>
+    </labels>
+    <labels>
+        <fullName>btn_Set_approved</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Set_approved</shortDescription>
+        <value>Set approved</value>
+    </labels>
+    <labels>
+        <fullName>btn_Upload</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Upload</shortDescription>
+        <value>Upload</value>
+    </labels>
+    <labels>
+        <fullName>btn_Upload_file</fullName>
+        <categories>attachmentpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Upload file</shortDescription>
+        <value>Upload file</value>
+    </labels>
+    <labels>
+        <fullName>btn_View</fullName>
+        <categories>TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_View</shortDescription>
+        <value>View</value>
+    </labels>
+    <labels>
+        <fullName>btn_back</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_back</shortDescription>
+        <value>Back</value>
+    </labels>
+    <labels>
+        <fullName>btn_cancel</fullName>
+        <categories>PlanOverview,std_workspace,Fund_request_popup,Purchaseorderpage,PurchaseorderEditdetailspage,Invoicepage,InvoiceEditpage.</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>btn_edit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_Edit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>btn_feed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_feed</shortDescription>
+        <value>Feed</value>
+    </labels>
+    <labels>
+        <fullName>btn_filter_settings</fullName>
+        <categories>GanttPage, GanttPerformance</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_filter_settings</shortDescription>
+        <value>Filter settings</value>
+    </labels>
+    <labels>
+        <fullName>btn_gantt</fullName>
+        <categories>Ganttperformance</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_gantt</shortDescription>
+        <value>Main Gantt</value>
+    </labels>
+    <labels>
+        <fullName>btn_ganttDetail</fullName>
+        <categories>gantt_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_ganttDetail</shortDescription>
+        <value>Detail Gantt</value>
+    </labels>
+    <labels>
+        <fullName>btn_performance</fullName>
+        <categories>GanttPage, GanttPerformance</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_performance</shortDescription>
+        <value>Performance Gantt</value>
+    </labels>
+    <labels>
+        <fullName>btn_save</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>btn_status_open</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn_status_open</shortDescription>
+        <value>Open</value>
+    </labels>
+    <labels>
+        <fullName>btn_update</fullName>
+        <categories>TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>btn update</shortDescription>
+        <value>Update</value>
+    </labels>
+    <labels>
+        <fullName>bud_Approved</fullName>
+        <categories>Budget_lock</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bud_Approved</shortDescription>
+        <value>Approved</value>
+    </labels>
+    <labels>
+        <fullName>bud_Approved_by</fullName>
+        <categories>FinancialSummary,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bud_Approved by</shortDescription>
+        <value>Approved by</value>
+    </labels>
+    <labels>
+        <fullName>bud_Approved_date</fullName>
+        <categories>FinancialSummary,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bud_Approved date</shortDescription>
+        <value>Approved date</value>
+    </labels>
+    <labels>
+        <fullName>bud_Plan_budget</fullName>
+        <categories>FinancialSummary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bud_Plan_budget</shortDescription>
+        <value>Plan budget</value>
+    </labels>
+    <labels>
+        <fullName>bud_Project_budget</fullName>
+        <categories>FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bud_Project budget</shortDescription>
+        <value>Project budget</value>
+    </labels>
+    <labels>
+        <fullName>bud_Total_budget</fullName>
+        <categories>FinancialSummary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bud_Total budget</shortDescription>
+        <value>Total budget</value>
+    </labels>
+    <labels>
+        <fullName>budget_para1</fullName>
+        <categories>Budgethelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>budget_para1</shortDescription>
+        <value>Explanation of how budgets are used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>budget_para2</fullName>
+        <categories>Budgethelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>budget_para2</shortDescription>
+        <value>The budget figure is a guiding reference during the planning process, which typically takes place towards the end of a year, when budgeting and planning is usually being done for the next coming year’s marketing activities.</value>
+    </labels>
+    <labels>
+        <fullName>budget_para3</fullName>
+        <categories>Budgethelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>budget_para3</shortDescription>
+        <value>The Owner typically saves the budget figures, in order to provide input for the work group members about how much they can expect to spend on any given Plan, Project or Marketing activity.</value>
+    </labels>
+    <labels>
+        <fullName>budget_para4</fullName>
+        <categories>Budgethelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>budget_para4</shortDescription>
+        <value>The budget figures have no technical function once they have been locked and the marketing plan has become active. Financial resources must still be requested for allocation before they can be reserved or spent, even if there is a sufficient amount in the budget.</value>
+    </labels>
+    <labels>
+        <fullName>budhours</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>budhours</shortDescription>
+        <value>Budget (h)</value>
+    </labels>
+    <labels>
+        <fullName>cc_CC_Owner</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CC_Owner</shortDescription>
+        <value>CC Owner</value>
+    </labels>
+    <labels>
+        <fullName>cc_createcc</fullName>
+        <categories>FRPplan controller</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>cc_createcc</shortDescription>
+        <value>Please create Cost Center</value>
+    </labels>
+    <labels>
+        <fullName>clm_Action</fullName>
+        <categories>Plantype,ProjectType,ActivitytypesPage,Purchasearticlegroups,PerformanceSetting,</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>clm_Action</shortDescription>
+        <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>clm_Info</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>clm_Info</shortDescription>
+        <value>Info</value>
+    </labels>
+    <labels>
+        <fullName>clm_PO_name</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>clm_PO name</shortDescription>
+        <value>PO name</value>
+    </labels>
+    <labels>
+        <fullName>clm_PO_number</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>clm_PO number</shortDescription>
+        <value>PO number</value>
+    </labels>
+    <labels>
+        <fullName>clm_Progress</fullName>
+        <categories>ProjectDetails,Subproectj</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>clm_Progress</shortDescription>
+        <value>Progress</value>
+    </labels>
+    <labels>
+        <fullName>filter</fullName>
+        <categories>gantt</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>filter</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>fin_Fiscal_Year</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>fin_Fiscal_Year</shortDescription>
+        <value>Fiscal year</value>
+    </labels>
+    <labels>
+        <fullName>fin_forcast</fullName>
+        <categories>FinancialSummary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>fin_forecast</shortDescription>
+        <value>Forecast</value>
+    </labels>
+    <labels>
+        <fullName>financial_para1</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel,Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para1</shortDescription>
+        <value>Definition of terms used in financial overview</value>
+    </labels>
+    <labels>
+        <fullName>financial_para10</fullName>
+        <categories>Help_Finance_malevel,Help_Finance_projlevel,Help_Finance_planlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para10</shortDescription>
+        <value>Remaining</value>
+    </labels>
+    <labels>
+        <fullName>financial_para11</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel,Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para11</shortDescription>
+        <value>The amount that remains after the Reserved amount has been subtracted from the Approved amount, for a specific Plan, Project, Sub project or Marketing activity (not including remaining amounts in sub levels of the plan hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>financial_para13</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para13</shortDescription>
+        <value>The budget for a specific level in the plan hierarchy, i.e. the budgeted costs for a specific project in itself (not including its’ sub projects and included marketing activities further below in the plan hierarchy)</value>
+    </labels>
+    <labels>
+        <fullName>financial_para14</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para14</shortDescription>
+        <value>Total budget</value>
+    </labels>
+    <labels>
+        <fullName>financial_para15</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para15</shortDescription>
+        <value>The total budget for a plan include all project and sub project, i.e. the total budgeted costs for a plan including all sub projects and marketing activities further below in the plan hierarchy.</value>
+    </labels>
+    <labels>
+        <fullName>financial_para2</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel,Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para2</shortDescription>
+        <value>Allocated</value>
+    </labels>
+    <labels>
+        <fullName>financial_para3</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para3</shortDescription>
+        <value>The amount that has been requested from, and approved by, the parent Projects or Plan.</value>
+    </labels>
+    <labels>
+        <fullName>financial_para4</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para4</shortDescription>
+        <value>Sub allocated</value>
+    </labels>
+    <labels>
+        <fullName>financial_para5</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para5</shortDescription>
+        <value>The amount that the owner of a Project or Sub project, has approved for its’ Projects/Sub projects/Marketing activity further below in the plan hierarchy.</value>
+    </labels>
+    <labels>
+        <fullName>financial_para6</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel,Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para6</shortDescription>
+        <value>Reserved</value>
+    </labels>
+    <labels>
+        <fullName>financial_para7</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para7</shortDescription>
+        <value>The total value of all Purchase orders that are directly attached to a specific Project/Sub Project (not including Purchase orders in sub levels of the project hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>financial_para8</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel,Help_Finance_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para8</shortDescription>
+        <value>Spent</value>
+    </labels>
+    <labels>
+        <fullName>financial_para9</fullName>
+        <categories>Help_Finance_planlevel,Help_Finance_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>financial_para9</shortDescription>
+        <value>The total value of all Invoices that are directly attached to a specific Plan, Project, Sub Project or Marketing activity (not including spent amounts in sub levels of the plan hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>finov_Allocated</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Allocated</shortDescription>
+        <value>Allocated</value>
+    </labels>
+    <labels>
+        <fullName>finov_Budget</fullName>
+        <categories>FinancialSummary,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Budget</shortDescription>
+        <value>Budget</value>
+    </labels>
+    <labels>
+        <fullName>finov_Marketing_activities</fullName>
+        <categories>FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Marketing activities</shortDescription>
+        <value>Marketing activities</value>
+    </labels>
+    <labels>
+        <fullName>finov_No_financials_registered</fullName>
+        <categories>FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_No financials registered</shortDescription>
+        <value>No financials registered</value>
+    </labels>
+    <labels>
+        <fullName>finov_Project</fullName>
+        <categories>FinancialSummary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Project</shortDescription>
+        <value>Project</value>
+    </labels>
+    <labels>
+        <fullName>finov_Remaining</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Remaining</shortDescription>
+        <value>Remaining</value>
+    </labels>
+    <labels>
+        <fullName>finov_Reserved</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Reserved</shortDescription>
+        <value>Reserved</value>
+    </labels>
+    <labels>
+        <fullName>finov_Spent</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Spent</shortDescription>
+        <value>Spent</value>
+    </labels>
+    <labels>
+        <fullName>finov_Sponsor</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Sponsor</shortDescription>
+        <value>Sponsor</value>
+    </labels>
+    <labels>
+        <fullName>finov_Sub_allocated</fullName>
+        <categories>FinancialSummary,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Sub allocated</shortDescription>
+        <value>Sub allocated</value>
+    </labels>
+    <labels>
+        <fullName>finov_Sub_project</fullName>
+        <categories>FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_Sub project</shortDescription>
+        <value>Sub project</value>
+    </labels>
+    <labels>
+        <fullName>finov_nofounds</fullName>
+        <categories>FinancialSummery,Purchaseorderpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>finov_nofounds</shortDescription>
+        <value>Out of date</value>
+    </labels>
+    <labels>
+        <fullName>funr_Cost_center</fullName>
+        <categories>Fund_request_popup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_Cost center</shortDescription>
+        <value>Cost center</value>
+    </labels>
+    <labels>
+        <fullName>funr_Hours_request</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_Hours request</shortDescription>
+        <value>Hours request</value>
+    </labels>
+    <labels>
+        <fullName>funr_Requested_amount</fullName>
+        <categories>Fund_request_popup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_Requested amount</shortDescription>
+        <value>Requested amount</value>
+    </labels>
+    <labels>
+        <fullName>funr_Requested_hours</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_Requested hours</shortDescription>
+        <value>Requested hours</value>
+    </labels>
+    <labels>
+        <fullName>funr_Saving</fullName>
+        <categories>Fundrequestsubproject,Fundrequestmarketing,BudgetProjEdit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_(Saving...)</shortDescription>
+        <value>(Saving...)</value>
+    </labels>
+    <labels>
+        <fullName>funr_Self_approval</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_Self approval</shortDescription>
+        <value>Self approval</value>
+    </labels>
+    <labels>
+        <fullName>funr_Send_request_to</fullName>
+        <categories>Fund request popup,Fundrequestsubproject,Fundrequestmarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>funr_Send request to</shortDescription>
+        <value>Send request to</value>
+    </labels>
+    <labels>
+        <fullName>gantt_Export_Excel</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Export Excel</shortDescription>
+        <value>Export to Excel</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Add</fullName>
+        <categories>Ganttpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt__Add</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Days</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_Days</shortDescription>
+        <value>Days</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Global</fullName>
+        <categories>Ganttpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt__Global</shortDescription>
+        <value>Global</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Months</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_Months</shortDescription>
+        <value>Months</value>
+    </labels>
+    <labels>
+        <fullName>gnt_My_default</fullName>
+        <categories>Ganttpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt__My default</shortDescription>
+        <value>My default</value>
+    </labels>
+    <labels>
+        <fullName>gnt_New_filter</fullName>
+        <categories>Ganttpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt__New filter</shortDescription>
+        <value>No filter</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Plan_hierarchy</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_Plan hierarchy</shortDescription>
+        <value>Plan hierarchy</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Pro_hierarchy</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_Pro_hierarchy</shortDescription>
+        <value>Project hierarchy</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Weeks</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_Weeks</shortDescription>
+        <value>Weeks</value>
+    </labels>
+    <labels>
+        <fullName>gnt_Zooming</fullName>
+        <categories>GanttPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_Zooming</shortDescription>
+        <value>Zooming</value>
+    </labels>
+    <labels>
+        <fullName>gnt_filter</fullName>
+        <categories>GanttPage, GanttPerformance</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>gnt_filter</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>gnt_period</fullName>
+        <categories>GanttPage, GanttPerformance</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>gnt_period</shortDescription>
+        <value>Period</value>
+    </labels>
+    <labels>
+        <fullName>helptextinfin</fullName>
+        <categories>FinancialSummary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>helptextinfin</shortDescription>
+        <value>The total budget figure is only visible in Plan view, i.e. the top level of the plan hierarchy. 
+  The total budget figure includes all budgeted amounts that belong to the Plan, i.e. not only the budget amounts for Projects that are displayed in the Plan’s financial overview. 
+                                                             The total budget figure also includes the budget amounts for Sub projects and Marketing activities that are only displayed when the financial overview is accessed from lower levels in the plan hierarchy</value>
+    </labels>
+    <labels>
+        <fullName>inv_Articel_type</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Articel type</shortDescription>
+        <value>Article type</value>
+    </labels>
+    <labels>
+        <fullName>inv_Description</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Description</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>inv_Invoice_Number</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Invoice Number</shortDescription>
+        <value>Invoice Number</value>
+    </labels>
+    <labels>
+        <fullName>inv_Invoice_cost</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Invoice cost</shortDescription>
+        <value>Invoiced</value>
+    </labels>
+    <labels>
+        <fullName>inv_Invoice_document</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Invoice document</shortDescription>
+        <value>Invoice document</value>
+    </labels>
+    <labels>
+        <fullName>inv_PO_amount</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_PO amount</shortDescription>
+        <value>PO amount</value>
+    </labels>
+    <labels>
+        <fullName>inv_Previous_invoices</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Previous invoices</shortDescription>
+        <value>Previous invoices</value>
+    </labels>
+    <labels>
+        <fullName>inv_Purchase_order</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Purchase order</shortDescription>
+        <value>Purchase order</value>
+    </labels>
+    <labels>
+        <fullName>inv_Purchase_orders</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Purchase orders</shortDescription>
+        <value>Purchase orders</value>
+    </labels>
+    <labels>
+        <fullName>inv_Select_PO</fullName>
+        <categories>InvoiceController,</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Select PO</shortDescription>
+        <value>Select PO</value>
+    </labels>
+    <labels>
+        <fullName>inv_Supplier</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Supplier</shortDescription>
+        <value>Supplier</value>
+    </labels>
+    <labels>
+        <fullName>inv_Total_spent</fullName>
+        <categories>Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Total spent</shortDescription>
+        <value>Total spent</value>
+    </labels>
+    <labels>
+        <fullName>inv_Wild_invoice</fullName>
+        <categories>InvoiceController</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>inv_Wild invoice</shortDescription>
+        <value>Wild invoice</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para1</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para1</shortDescription>
+        <value>Explanation of how invoices are used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para2</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para2</shortDescription>
+        <value>Manually adding an invoice in Musqot should be done when a vendor/supplier has invoiced your organization, for a cost associated to one of your Plans, Projects or Marketing activities.</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para3</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para3</shortDescription>
+        <value>If you have previously created a purchase order for the specific cost, the amount will automatically be transferred from “reserved” to “spent” as soon as you have added the invoice.</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para4</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para4</shortDescription>
+        <value>However if you never created a purchase order for the cost to begin with, the invoiced amount will be saved directly as “spent”</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para5</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para5</shortDescription>
+        <value>Benefits of using invoices in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para6</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para6</shortDescription>
+        <value>Marketing plans change, and the final costs for any given Plan, Project or Marketing activity can differ from the initial budget or from the amount that was allocated at the beginning of the year.</value>
+    </labels>
+    <labels>
+        <fullName>invoices_para7</fullName>
+        <categories>Invoiceshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>invoices_para7</shortDescription>
+        <value>In order to stay on top of marketing spending, and to enable a real-time view into the financial aspects of your marketing resource situation, use the invoice features of Musqot.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para1</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para1</shortDescription>
+        <value>Explanation of how Marketing activities are used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para10</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para10</shortDescription>
+        <value>Each type of Marketing activity, such as sponsorships, advertising, tradeshows, just to name a few examples (each type can be set up by your administrator) has a unique icon. These icons are displayed in the Gantt view calendar, which makes it easy to get an overview of what type of activities that are planned during a certain period of time, and how many they are.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para2</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para2</shortDescription>
+        <value>Unlike Projects, that can include many aspects of an organization’s marketing and often remain active for a long period of time, a Marketing activity is a specific event or action that takes place during a Project.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para3</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para3</shortDescription>
+        <value>Examples</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para4</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para4</shortDescription>
+        <value>If you have a Project named “Brand advertising”, this Project may include a large number of Marketing activities that each represents the advertisement in a specific media.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para5</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para5</shortDescription>
+        <value>if your Project is named “Event marketing”, you may have a number of Marketing activities in this Project that each represents a tradeshow or a hosted event.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para6</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para6</shortDescription>
+        <value>Defining the scope of a Marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para7</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para7</shortDescription>
+        <value>From time to time you might find yourself in a situation where you are uncertain whether to setup one or several Marketing activities in Musqot. For example, you might have sponsored a weekly TV-show for 5 weeks. This campaign can be saved as 5 Marketing activities, i.e. one for each show – or as 1 Marketing activity that runs for 5 weeks.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para8</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para8</shortDescription>
+        <value>Projects may be created on top of each other in an unlimited chain of Sub projects, each of which can hold Marketing activities, enabling you to create a hierarchy that fit’s whatever organization or business structure you are working with.
+Bundling the “spots” together will be administratively easier initially, but afterwards you will have less analytics data to work with. The more detailed you are when defining and saving Marketing activities, the better foundation you get for your post-campaign analytics and future performance optimization.</value>
+    </labels>
+    <labels>
+        <fullName>marketing_activity_para9</fullName>
+        <categories>Marketinghelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>marketing activity_para9</shortDescription>
+        <value>Marketing activities are displayed with icons in the Gantt view</value>
+    </labels>
+    <labels>
+        <fullName>mem_Cost_center</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Cost center</shortDescription>
+        <value>Cost center</value>
+    </labels>
+    <labels>
+        <fullName>mem_Email</fullName>
+        <categories>Membereditpage,ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Email</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>mem_Member</fullName>
+        <categories>memberobj,Membereditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Member</shortDescription>
+        <value>Member</value>
+    </labels>
+    <labels>
+        <fullName>mem_Parent</fullName>
+        <categories>Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Parent</shortDescription>
+        <value>Parent</value>
+    </labels>
+    <labels>
+        <fullName>mem_Role</fullName>
+        <categories>memberobj,Membereditpage,ProjectDetails,Marketingactivity,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Role</shortDescription>
+        <value>Role</value>
+    </labels>
+    <labels>
+        <fullName>mem_User</fullName>
+        <categories>memberobj,Membereditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_User</shortDescription>
+        <value>User</value>
+    </labels>
+    <labels>
+        <fullName>mem_Viewer</fullName>
+        <categories>memberobj,Membereditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Viewer</shortDescription>
+        <value>Viewer</value>
+    </labels>
+    <labels>
+        <fullName>mem_Will_you_remove</fullName>
+        <categories>memberobj</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_Will you remove</shortDescription>
+        <value>Will you remove the selected users from this plan</value>
+    </labels>
+    <labels>
+        <fullName>mem_member_exist</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mem_member exist</shortDescription>
+        <value>The selected member is already exist..</value>
+    </labels>
+    <labels>
+        <fullName>members_para1</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para1</shortDescription>
+        <value>Explanation of how Members are used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>members_para10</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para10</shortDescription>
+        <value>The “parent owner” of any given entity, i.e. a Project, Sub project or Marketing activity, has the exact same rights as its’ Owner.</value>
+    </labels>
+    <labels>
+        <fullName>members_para11</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para11</shortDescription>
+        <value>For Plan owners, parent ownership is inherited throughout all levels and all entities included in that plan.</value>
+    </labels>
+    <labels>
+        <fullName>members_para12</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para12</shortDescription>
+        <value>For Project owners, parent ownership is inherited only one level below in the hierarchy.</value>
+    </labels>
+    <labels>
+        <fullName>members_para14</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para14</shortDescription>
+        <value>Members of a Plan, Project or Marketing activity can have one of the following three roles in that specific entity:</value>
+    </labels>
+    <labels>
+        <fullName>members_para2</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para2</shortDescription>
+        <value>In order to access a Plan, Project or Marketing activity, you need to be a member of that specific entity.</value>
+    </labels>
+    <labels>
+        <fullName>members_para4</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para4</shortDescription>
+        <value>Entitled to request funding from the parent entity, authorize funding requests from entity members, issue purchase orders, adding invoices etc.</value>
+    </labels>
+    <labels>
+        <fullName>members_para6</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para6</shortDescription>
+        <value>Entitled to edit all entity information (except for ownership), request funding from Owner, add new sub projects and marketing activities etc.</value>
+    </labels>
+    <labels>
+        <fullName>members_para8</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para8</shortDescription>
+        <value>Entitled to view all contents of the entity, except for financial details. Viewers can also add attachments, receive tasks and take part in “Chatter”.</value>
+    </labels>
+    <labels>
+        <fullName>members_para9</fullName>
+        <categories>Membershelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>members_para9</shortDescription>
+        <value>Inherited membership</value>
+    </labels>
+    <labels>
+        <fullName>mil_Create_milestone</fullName>
+        <categories>MilestonePage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Create milestone</shortDescription>
+        <value>Create milestone</value>
+    </labels>
+    <labels>
+        <fullName>mil_Milestone</fullName>
+        <categories>MilestonePage,MilestoneEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Milestone</shortDescription>
+        <value>Milestone</value>
+    </labels>
+    <labels>
+        <fullName>mil_Milestone_type</fullName>
+        <categories>MilestonePage,MilestoneEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Milestone type</shortDescription>
+        <value>Milestone type</value>
+    </labels>
+    <labels>
+        <fullName>mil_Other</fullName>
+        <categories>MilestonePage,MilestoneEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Other</shortDescription>
+        <value>Other</value>
+    </labels>
+    <labels>
+        <fullName>mil_Taget_marketing_activity</fullName>
+        <categories>MilestonePage,MilestoneEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Taget marketing activity</shortDescription>
+        <value>Target marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>mil_Target</fullName>
+        <categories>ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Target</shortDescription>
+        <value>Target</value>
+    </labels>
+    <labels>
+        <fullName>mil_Target_date</fullName>
+        <categories>MilestonePage,MilestoneEditpage,ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Target date</shortDescription>
+        <value>Target date</value>
+    </labels>
+    <labels>
+        <fullName>mil_Target_number</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Target_number</shortDescription>
+        <value>Target volume</value>
+    </labels>
+    <labels>
+        <fullName>mil_Target_outcome_volume</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Target outcome volume</shortDescription>
+        <value>Outcome volume</value>
+    </labels>
+    <labels>
+        <fullName>mil_Target_project</fullName>
+        <categories>MilestonePage,MilestoneEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mil_Target project</shortDescription>
+        <value>Target project</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para1</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para1</shortDescription>
+        <value>Explanation of how milestones can be used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para2</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para2</shortDescription>
+        <value>Definition</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para3</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para3</shortDescription>
+        <value>A milestone can be described as a checkpoint, and is used as a means to monitor if a project or marketing activity is on track.</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para4</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para4</shortDescription>
+        <value>Functionality</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para5</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para5</shortDescription>
+        <value>A milestone can be defined as a qualitative or quantitative objective, typically specified for a specific time frame.</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para6</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para6</shortDescription>
+        <value>The milestone has a “status” which becomes increasingly relevant once the specified date has passed.</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para7</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para7</shortDescription>
+        <value>A milestone can (but it does not have to) be used as a hard “tollgate”, in order to stop projects or activities from proceeding unless the conditionalrequirements of the milestone has been reached.</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para8</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para8</shortDescription>
+        <value>Milestones can also be used as part of a workflow, enabling Owners to authorize conditional funding in advance.</value>
+    </labels>
+    <labels>
+        <fullName>milestones_para9</fullName>
+        <categories>Milestonehelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>milestones_para9</shortDescription>
+        <value>Milestones are visible in the Musqot Gantt view.</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Activity_name</fullName>
+        <categories>Marketingactivity,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Activity name</shortDescription>
+        <value>Activity name</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Activity_type</fullName>
+        <categories>Marketingactivity,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Activity type</shortDescription>
+        <value>Activity type</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Create_marketing_activity</fullName>
+        <categories>marketingpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Create marketing activity</shortDescription>
+        <value>Create marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Marketing_activity</fullName>
+        <categories>Marketingactivityeditpage,marketingpage,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Marketing activity</shortDescription>
+        <value>Marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Marketing_activity_name_already_exist</fullName>
+        <categories>marketingClass</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Marketing activity name already exist</shortDescription>
+        <value>Marketing activity name already exist</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Marketingactivity_Name</fullName>
+        <categories>Marketingactivityeditpage,marketingpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Marketingactivity Name</shortDescription>
+        <value>Marketing activity Name</value>
+    </labels>
+    <labels>
+        <fullName>mrk_New_marketing_activity</fullName>
+        <categories>marketingpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_New marketing activity</shortDescription>
+        <value>New marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Owner</fullName>
+        <categories>Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Owner</shortDescription>
+        <value>Owner</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Plan</fullName>
+        <categories>Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Plan</shortDescription>
+        <value>Plan</value>
+    </labels>
+    <labels>
+        <fullName>mrk_Project</fullName>
+        <categories>Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_Project</shortDescription>
+        <value>Project</value>
+    </labels>
+    <labels>
+        <fullName>mrk_multi_date</fullName>
+        <categories>marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mrk_multi_date</shortDescription>
+        <value>Recurring Activity</value>
+    </labels>
+    <labels>
+        <fullName>mtask_All_Open</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_All Open</shortDescription>
+        <value>All Open</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Completed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Completed</shortDescription>
+        <value>Completed</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Next_7_Days</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Next 7 Days</shortDescription>
+        <value>Next 7 Days</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Next_7_Days_Overdue</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Next 7 Days+Overdue</shortDescription>
+        <value>Next 7 Days+Overdue</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Overdue</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Overdue</shortDescription>
+        <value>Overdue</value>
+    </labels>
+    <labels>
+        <fullName>mtask_This_Month</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_This Month</shortDescription>
+        <value>This Month</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Today</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Today</shortDescription>
+        <value>Today</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Today_Overdue</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Today+Overdue</shortDescription>
+        <value>Today+Overdue</value>
+    </labels>
+    <labels>
+        <fullName>mtask_Tomorrow</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mtask_Tomorrow</shortDescription>
+        <value>Tomorrow</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Access_Token_URL</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Access Token URL</shortDescription>
+        <value>Access Token URL</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Administration_setup</fullName>
+        <categories>MusqotAdminPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Administration setup</shortDescription>
+        <value>Administration setup</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Authorization_Type</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Authorization Type</shortDescription>
+        <value>Authorization Type</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Authorization_URL</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Authorization URL</shortDescription>
+        <value>Authorization URL</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_CRM_Performance</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_CRM Performance</shortDescription>
+        <value>CRM Performance</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_CRM_import_log</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin CRM import log</shortDescription>
+        <value>CRM import log</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_CRM_setting</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin CRM setting</shortDescription>
+        <value>CRM setting</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_CRM_settings</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin CRM settings</shortDescription>
+        <value>CRM settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Charts</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Charts</shortDescription>
+        <value>Charts</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Consumer_Key</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Consumer Key</shortDescription>
+        <value>Consumer Key</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Consumer_Secret</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Consumer Secret</shortDescription>
+        <value>Consumer Secret</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_ERP_Performance</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ERP Performance</shortDescription>
+        <value>ERP Performance</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_ERP_import</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ERP import</shortDescription>
+        <value>ERP import</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_ERP_import_log</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ERP import log</shortDescription>
+        <value>ERP import log</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_ERP_setting</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ERP setting</shortDescription>
+        <value>ERP setting</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_ERP_settings</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ERP settings</shortDescription>
+        <value>ERP settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Edit_connection</fullName>
+        <categories>Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Edit connection</shortDescription>
+        <value>Edit connection</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Edit_settings</fullName>
+        <categories>Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Edit settings</shortDescription>
+        <value>Edit settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Import_message</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Import message</shortDescription>
+        <value>Import message</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Import_rate</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Import rate</shortDescription>
+        <value>Import rate</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Imported_Date</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Imported Date</shortDescription>
+        <value>Imported date</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Install_process</fullName>
+        <categories>MusqotAdminPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ Install process</shortDescription>
+        <value>Install process</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Last_used_number</fullName>
+        <categories>PurchaseOrderSettingEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Last used number</shortDescription>
+        <value>Last used number</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Marketing_activity</fullName>
+        <categories>musadmin_Marketing_activity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_ Marketing activity</shortDescription>
+        <value>Marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Marketing_performance_settings</fullName>
+        <categories>MusqotAdminPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Marketing performance settings</shortDescription>
+        <value>Marketing performance settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Musqot_admin</fullName>
+        <categories>MusqotAdminPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Musqot admin</shortDescription>
+        <value>Musqot admin</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Name</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_New_CRM_Setting</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin New CRM Setting</shortDescription>
+        <value>New CRM Setting</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_New_ERP_Setting</fullName>
+        <categories>ERPsettingpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_New ERP Setting</shortDescription>
+        <value>New ERP Setting</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_New_Settings</fullName>
+        <categories>Socialmedia_new</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_New Settings</shortDescription>
+        <value>Settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_New_connection</fullName>
+        <categories>Socialmedia_new</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_New connection</shortDescription>
+        <value>Connection</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_PO_prefix</fullName>
+        <categories>PurchaseOrderSettingEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_PO prefix</shortDescription>
+        <value>PO prefix</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_PO_prefix_auto</fullName>
+        <categories>PurchaseOrderSettingEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_PO prefix auto</shortDescription>
+        <value>PO prefix auto</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_PO_prefix_ext</fullName>
+        <categories>PurchaseOrderSettingEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_PO prefix ext</shortDescription>
+        <value>PO prefix ext</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Performance</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Performance</shortDescription>
+        <value>Performance</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Performance_settings</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Performance settings</shortDescription>
+        <value>Performance settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Purchase_order_settings</fullName>
+        <categories>MusqotAdminPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Purchase order settings</shortDescription>
+        <value>Purchaser order settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Records</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Records</shortDescription>
+        <value>Records</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Redirect_URL</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Redirect URL</shortDescription>
+        <value>Redirect URL</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Request_Token_URL</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Request Token URL</shortDescription>
+        <value>Request Token URL</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Response_Type</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Response Type</shortDescription>
+        <value>Response Type</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Scope</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Scope</shortDescription>
+        <value>Scope</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Select_a_CSV_file_with_Crmdata</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Select a CSV-file with Crmdata</shortDescription>
+        <value>Select a CSV-file with Crmdata</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Select_a_CSV_file_with_salesdata</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Select a CSV-file with salesdata</shortDescription>
+        <value>Select a CSV-file with salesdata</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Selector</fullName>
+        <categories>PerformanceSetting,ERPsettingEditpage,ERPsettingpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Selector</shortDescription>
+        <value>Selector</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Service_Name</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Service Name</shortDescription>
+        <value>Service Name</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Settings_name</fullName>
+        <categories>ERPsettingpage,ERPsettingEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Settings name</shortDescription>
+        <value>Settings name</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Signature_Method</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Signature Method</shortDescription>
+        <value>Signature Method</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Social_media</fullName>
+        <categories>Socialmedia_new</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Social media</shortDescription>
+        <value>Social media</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Social_media_Performance</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Social media Performance</shortDescription>
+        <value>Social media Performance</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Social_media_import_log</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Social media import log</shortDescription>
+        <value>Social media import log</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Social_media_name</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Social media name</shortDescription>
+        <value>Social media name</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Social_media_settings</fullName>
+        <categories>Socialmedia_settings,PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Social media settings</shortDescription>
+        <value>Social media settings</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Socialmedia_type</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings,PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Socialmedia type</shortDescription>
+        <value>Socialmedia type</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Start_number</fullName>
+        <categories>PurchaseOrderSettingEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Start number</shortDescription>
+        <value>Start number</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Watch_type</fullName>
+        <categories>Socialmedia_new,Socialmedia_settings,PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Watch type</shortDescription>
+        <value>Watch type</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_Will_you_delete</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_Will you delete</shortDescription>
+        <value>Will you delete</value>
+    </labels>
+    <labels>
+        <fullName>musadmin_dateformat</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musadmin_dateformat</shortDescription>
+        <value>Date format in the CSV file</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para10</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para10</shortDescription>
+        <value>Names and colors foryour organization’s selection of Project types.</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para11</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para11</shortDescription>
+        <value>Marketing activity settings</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para12</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para12</shortDescription>
+        <value>Names, colors and graphic icons foryour organization’s selection of Marketing activity types.</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para2</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para2</shortDescription>
+        <value>Explanation of basic admin settings</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para3</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para3</shortDescription>
+        <value>There are four fundamental settings that need to be made before your organization can start using Musqot: Financial settings, Plan settings, Project settings and Marketing activity settings.</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para4</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para4</shortDescription>
+        <value>When accessing the Musqot setup tab for the first time, you will see default examples for all these settings. The examples can be edited (names, colors, icons) or deleted, and replaced with new ones.</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para5</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para5</shortDescription>
+        <value>Financial settings</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para6</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para6</shortDescription>
+        <value>Naming of “purchase article groups”, i.e. the various type of costs (agency services, advertising, printing services, etc) that the marketing organization pays for with their marketing budget.</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para7</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para7</shortDescription>
+        <value>Plan settings</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para8</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para8</shortDescription>
+        <value>Names and colors for your organization’s selection of Plan types.</value>
+    </labels>
+    <labels>
+        <fullName>mushelp_para9</fullName>
+        <categories>musqotadminhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mushelp_para9</shortDescription>
+        <value>Project settings</value>
+    </labels>
+    <labels>
+        <fullName>musqot_admin_para1</fullName>
+        <categories>MusqotAdminPage,Adminoverveiw</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musqot admin para1</shortDescription>
+        <value>These admin settings enable you to customize the naming and coloring of main entities that your organization’s users can work with.</value>
+    </labels>
+    <labels>
+        <fullName>musqot_admin_para2</fullName>
+        <categories>MusqotAdminPage,Adminoverveiw</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>musqot admin para2</shortDescription>
+        <value>The names and colors of the pre-defined examples can be changed or removed, and additional entities can be added.</value>
+    </labels>
+    <labels>
+        <fullName>mytasks</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>mytasks</shortDescription>
+        <value>My tasks</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Approve_budget_for_all_project_in_plan</fullName>
+        <categories>Budget_lock</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Approve budget for all project in plan</shortDescription>
+        <value>Approve budget for all projects in plan</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Approve_request</fullName>
+        <categories>approvalDetailPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Approve request</shortDescription>
+        <value>Approve request</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Budget_for_plan</fullName>
+        <categories>Budget_edit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Budget for plan</shortDescription>
+        <value>Budget for plan</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Budget_for_project</fullName>
+        <categories>BudgetProjEdit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Budget for project</shortDescription>
+        <value>Budget for project</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Information</fullName>
+        <categories>attachmentpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Information</shortDescription>
+        <value>Information</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Invoice_Edit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Invoice Edit</shortDescription>
+        <value>Invoice Edit</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Task_attachment</fullName>
+        <categories>Task,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Task attachment</shortDescription>
+        <value>Task Documents</value>
+    </labels>
+    <labels>
+        <fullName>pbs_Task_information</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pbs_Task information</shortDescription>
+        <value>Task information</value>
+    </labels>
+    <labels>
+        <fullName>plan_members</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>plan_members</shortDescription>
+        <value>Plan members</value>
+    </labels>
+    <labels>
+        <fullName>plan_para1</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>plan_para1</shortDescription>
+        <value>Explanation of how Plans can be used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>plan_para11</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>plan_para11</shortDescription>
+        <value>MUSQOT ONLINE HELP</value>
+    </labels>
+    <labels>
+        <fullName>plan_para2</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>plan_para2</shortDescription>
+        <value>The plan hierarchy of Musqot includes three main components; Plan, Project (Sub project) and Marketing activity.</value>
+    </labels>
+    <labels>
+        <fullName>plan_para3</fullName>
+        <categories>Planshelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>plan_para3</shortDescription>
+        <value>Defining your own structure</value>
+    </labels>
+    <labels>
+        <fullName>projects_para1</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para1</shortDescription>
+        <value>Explanation of how Projects can be used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>projects_para10</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para10</shortDescription>
+        <value>The content of a Project</value>
+    </labels>
+    <labels>
+        <fullName>projects_para11</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para11</shortDescription>
+        <value>In addition to basic data, such as Name, Description, Owner, Status, Start/End date, all Projects can be used to manage the below assets and resources:</value>
+    </labels>
+    <labels>
+        <fullName>projects_para12</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para12</shortDescription>
+        <value>Marketing activities</value>
+    </labels>
+    <labels>
+        <fullName>projects_para13</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para13</shortDescription>
+        <value>Sub projects</value>
+    </labels>
+    <labels>
+        <fullName>projects_para15</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para15</shortDescription>
+        <value>Members</value>
+    </labels>
+    <labels>
+        <fullName>projects_para17</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para17</shortDescription>
+        <value>Budget</value>
+    </labels>
+    <labels>
+        <fullName>projects_para2</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para2</shortDescription>
+        <value>The purpose of a Project</value>
+    </labels>
+    <labels>
+        <fullName>projects_para20</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para20</shortDescription>
+        <value>Descriptions</value>
+    </labels>
+    <labels>
+        <fullName>projects_para22</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para22</shortDescription>
+        <value>Unlimited hierarchy depth</value>
+    </labels>
+    <labels>
+        <fullName>projects_para23</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para23</shortDescription>
+        <value>Projects may be created on top of each other in an unlimited chain of Sub projects, each of which can hold Marketing activities, enabling you to create a hierarchy that fit’s whatever organization or business structure you are working with.</value>
+    </labels>
+    <labels>
+        <fullName>projects_para3</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para3</shortDescription>
+        <value>The most central role of the Project level is to act as anchor for the organizations Marketing activities. No Marketing activity can be created directly under a Plan, it has to belong to a Project.</value>
+    </labels>
+    <labels>
+        <fullName>projects_para4</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para4</shortDescription>
+        <value>A Project contains the data and information required for a work group to collaborate in everything from planning and budgeting to controlling and analyzing certain parts of their marketing (as defined by the client’s chosen plan and project hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>projects_para5</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para5</shortDescription>
+        <value>Each Musqot client can define a custom structure of their plan hierarchy, depending on how their company and operations are organized.</value>
+    </labels>
+    <labels>
+        <fullName>projects_para6</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para6</shortDescription>
+        <value>Defining your organizations project structure</value>
+    </labels>
+    <labels>
+        <fullName>projects_para7</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para7</shortDescription>
+        <value>How many different types of Projects you will want to work with, as part of a given Plan, is most likely depending on your chosen approach in the Plan setup:</value>
+    </labels>
+    <labels>
+        <fullName>projects_para8</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para8</shortDescription>
+        <value>If for example your organization works with all marketing as part of one single Plan, you are more likely to require a larger number of Project types in order to keep track of all your different activities.</value>
+    </labels>
+    <labels>
+        <fullName>projects_para9</fullName>
+        <categories>Projects_help_page</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>projects_para9</shortDescription>
+        <value>On the other hand, if your organization has setup multiple Plans (one for each product or region, just as two examples) you will probably find it sufficient with a lower number of Projects types in each plan.</value>
+    </labels>
+    <labels>
+        <fullName>prt_Color</fullName>
+        <categories>NewProjectType,ProjecttypeEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>prt_Color</shortDescription>
+        <value>Color</value>
+    </labels>
+    <labels>
+        <fullName>prt_Project_type_name</fullName>
+        <categories>NewProjectType,ProjecttypeEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>prt_Project type name</shortDescription>
+        <value>Project type name</value>
+    </labels>
+    <labels>
+        <fullName>pt_Activity_detail</fullName>
+        <categories>Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Activity detail</shortDescription>
+        <value>Activity detail</value>
+    </labels>
+    <labels>
+        <fullName>pt_Activity_types</fullName>
+        <categories>ActivitytypesPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Activity types</shortDescription>
+        <value>Activity types</value>
+    </labels>
+    <labels>
+        <fullName>pt_Approve_budget</fullName>
+        <categories>Budget_lock</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Approve budget</shortDescription>
+        <value>Approve budget</value>
+    </labels>
+    <labels>
+        <fullName>pt_Attachment_information</fullName>
+        <categories>AttachmentInfopage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Attachment information</shortDescription>
+        <value>Attachment information</value>
+    </labels>
+    <labels>
+        <fullName>pt_Attachments</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Attachments</shortDescription>
+        <value>Attachments</value>
+    </labels>
+    <labels>
+        <fullName>pt_Budget</fullName>
+        <categories>Budget_edit,BudgetProjEdit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Budget</shortDescription>
+        <value>Budget</value>
+    </labels>
+    <labels>
+        <fullName>pt_Create_Plan</fullName>
+        <categories>Planpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Create Plan</shortDescription>
+        <value>Create Plan</value>
+    </labels>
+    <labels>
+        <fullName>pt_Create_project</fullName>
+        <categories>projectpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Create project</shortDescription>
+        <value>Create project</value>
+    </labels>
+    <labels>
+        <fullName>pt_Date</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Date</shortDescription>
+        <value>Date</value>
+    </labels>
+    <labels>
+        <fullName>pt_Description</fullName>
+        <categories>Planpage,ProjectDetails,PlanEditPage,attachmentpage,FinancialSummary,BudgetProjEdit,Budget_edit,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Description</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_Activity_type</fullName>
+        <categories>ActivityEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit Activity type</shortDescription>
+        <value>Edit Activity type</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_Plantype</fullName>
+        <categories>PlanTypeEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit Plantype</shortDescription>
+        <value>Edit Plantype</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_article</fullName>
+        <categories>PurchaseArticleEdit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit article</shortDescription>
+        <value>Edit article</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_marketing_activity</fullName>
+        <categories>Marketingactivityeditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit marketing activity</shortDescription>
+        <value>Edit marketing activity</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_member</fullName>
+        <categories>Membereditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit member</shortDescription>
+        <value>Edit member</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_milestone</fullName>
+        <categories>MilestoneEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit milestone</shortDescription>
+        <value>Edit milestone</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_plan</fullName>
+        <categories>PlanEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit plan</shortDescription>
+        <value>Edit plan</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_project</fullName>
+        <categories>SubprojecteditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit project</shortDescription>
+        <value>Edit project</value>
+    </labels>
+    <labels>
+        <fullName>pt_Edit_project_type</fullName>
+        <categories>ProjecttypeEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Edit project type</shortDescription>
+        <value>Edit project type</value>
+    </labels>
+    <labels>
+        <fullName>pt_End_date</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_End date</shortDescription>
+        <value>End date</value>
+    </labels>
+    <labels>
+        <fullName>pt_Financial_overview</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Financial overview</shortDescription>
+        <value>Financial overview</value>
+    </labels>
+    <labels>
+        <fullName>pt_Fund_request</fullName>
+        <categories>Fund_request_popup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Fund request</shortDescription>
+        <value>Fund request</value>
+    </labels>
+    <labels>
+        <fullName>pt_Headline</fullName>
+        <categories>std_workspace</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Headline</shortDescription>
+        <value>Headline</value>
+    </labels>
+    <labels>
+        <fullName>pt_Invoices</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing,Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Invoices</shortDescription>
+        <value>Invoices</value>
+    </labels>
+    <labels>
+        <fullName>pt_Marketing_activities</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Marketing activities</shortDescription>
+        <value>Marketing activities</value>
+    </labels>
+    <labels>
+        <fullName>pt_Members</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Members</shortDescription>
+        <value>Members</value>
+    </labels>
+    <labels>
+        <fullName>pt_Milestones</fullName>
+        <categories>ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Milestones</shortDescription>
+        <value>Milestones</value>
+    </labels>
+    <labels>
+        <fullName>pt_Name_can_not_be_same_as_Parent</fullName>
+        <categories>subprojectClass</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Name can not be same as Parent</shortDescription>
+        <value>Name can not be same as Parent</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_Activity_type</fullName>
+        <categories>NewActivityType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_ New Activity type</shortDescription>
+        <value>New Activity type</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_Invoice</fullName>
+        <categories>Invoicepage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New Invoice</shortDescription>
+        <value>New Invoice</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_Plan</fullName>
+        <categories>Planpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New Plan</shortDescription>
+        <value>New Plan</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_Plantype</fullName>
+        <categories>NewPlanType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New Plantype</shortDescription>
+        <value>New Plantype</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_Project_Type</fullName>
+        <categories>NewProjectType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New Project Type</shortDescription>
+        <value>New Project type</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_article</fullName>
+        <categories>Newarticlegroup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New article</shortDescription>
+        <value>New article</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_member</fullName>
+        <categories>memberobj</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New member</shortDescription>
+        <value>New member</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_purchase_order</fullName>
+        <categories>Purchaseorderpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New purchase order</shortDescription>
+        <value>New purchase order</value>
+    </labels>
+    <labels>
+        <fullName>pt_New_task</fullName>
+        <categories>Task</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_New task</shortDescription>
+        <value>New task</value>
+    </labels>
+    <labels>
+        <fullName>pt_Owner</fullName>
+        <categories>Planpage,ProjectDetails,PlanEditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Owner</shortDescription>
+        <value>Owner</value>
+    </labels>
+    <labels>
+        <fullName>pt_Part_of_running_date_should_be_inside_parent_date_span</fullName>
+        <categories>subprojectClass</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Part of running date should be inside parent date span</shortDescription>
+        <value>Part of running date should be inside parent date span</value>
+    </labels>
+    <labels>
+        <fullName>pt_Plan_budget</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Plan budget</shortDescription>
+        <value>Plan budget</value>
+    </labels>
+    <labels>
+        <fullName>pt_Plan_detail</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Plan detail</shortDescription>
+        <value>Plan detail</value>
+    </labels>
+    <labels>
+        <fullName>pt_Plan_name</fullName>
+        <categories>ProjectDetails,PlanEditPage,Planpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Plan name</shortDescription>
+        <value>Plan name</value>
+    </labels>
+    <labels>
+        <fullName>pt_Plan_name_already_exist</fullName>
+        <categories>ProjectController</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Plan name already exist</shortDescription>
+        <value>Plan name already exist</value>
+    </labels>
+    <labels>
+        <fullName>pt_Plantype</fullName>
+        <categories>Planpage,ProjectDetails,PlanEditPage,NewPlanType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Plantype</shortDescription>
+        <value>Plan type</value>
+    </labels>
+    <labels>
+        <fullName>pt_Plantypes</fullName>
+        <categories>Plantype</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Plantypes</shortDescription>
+        <value>Plan types</value>
+    </labels>
+    <labels>
+        <fullName>pt_Presentation</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Presentation</shortDescription>
+        <value>Presentation</value>
+    </labels>
+    <labels>
+        <fullName>pt_Project_detail</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Project detail</shortDescription>
+        <value>Project detail</value>
+    </labels>
+    <labels>
+        <fullName>pt_Project_name_already_exist</fullName>
+        <categories>subprojectClass</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Project name already exist</shortDescription>
+        <value>Project name already exist</value>
+    </labels>
+    <labels>
+        <fullName>pt_Project_types</fullName>
+        <categories>ProjectType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Project types</shortDescription>
+        <value>Project types</value>
+    </labels>
+    <labels>
+        <fullName>pt_Projects</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Projects</shortDescription>
+        <value>Projects</value>
+    </labels>
+    <labels>
+        <fullName>pt_Purchase_orders</fullName>
+        <categories>FinancialSummary,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Purchase orders</shortDescription>
+        <value>Purchase orders</value>
+    </labels>
+    <labels>
+        <fullName>pt_Start_date</fullName>
+        <categories>ProjectDetails,PlanEditPage,Planpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Start date</shortDescription>
+        <value>Start date</value>
+    </labels>
+    <labels>
+        <fullName>pt_Status</fullName>
+        <categories>ProjectDetails,PlanEditPage,Planpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>pt_Task_list</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Task list</shortDescription>
+        <value>Task list</value>
+    </labels>
+    <labels>
+        <fullName>pt_Tasks_list</fullName>
+        <categories>ProjectDetails,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Tasks list</shortDescription>
+        <value>Task list</value>
+    </labels>
+    <labels>
+        <fullName>pt_Total_budget_clarification</fullName>
+        <categories>FinancialSummary,ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Total budget clarification</shortDescription>
+        <value>Total budget clarification</value>
+    </labels>
+    <labels>
+        <fullName>pt_Upload_document</fullName>
+        <categories>attachmentpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pt_Upload document</shortDescription>
+        <value>Upload document</value>
+    </labels>
+    <labels>
+        <fullName>pur_Cost</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Cost</shortDescription>
+        <value>Cost</value>
+    </labels>
+    <labels>
+        <fullName>pur_Effective_date</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Effective date</shortDescription>
+        <value>Effective date</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_article</fullName>
+        <categories>Purchasearticlegroups</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase article</shortDescription>
+        <value>Purchase article</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_order_closed</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage,Invoicepage,InvoiceEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase order closed</shortDescription>
+        <value>Purchase order closed</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_order_document</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase order document</shortDescription>
+        <value>Purchase order document</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_order_name</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage,Purchaseorder Vf template</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase order name</shortDescription>
+        <value>Purchase order name</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_order_number</fullName>
+        <categories>Purchaseorder Vf template,</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase order number</shortDescription>
+        <value>Purchase order number</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_order_send</fullName>
+        <categories>PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase order send</shortDescription>
+        <value>Purchase order send</value>
+    </labels>
+    <labels>
+        <fullName>pur_Purchase_order_setting</fullName>
+        <categories>PerformanceSetting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Purchase order setting</shortDescription>
+        <value>Purchase order setting</value>
+    </labels>
+    <labels>
+        <fullName>pur_Send_date</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Send date</shortDescription>
+        <value>Send date</value>
+    </labels>
+    <labels>
+        <fullName>pur_Supplier_email</fullName>
+        <categories>Purchaseorderpage,PurchaseorderEditdetailspage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pur_Supplier_email</shortDescription>
+        <value>Supplier email</value>
+    </labels>
+    <labels>
+        <fullName>resource_par7</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_par7</shortDescription>
+        <value>The hours that has been requested from, and approved by parent projects.</value>
+    </labels>
+    <labels>
+        <fullName>resource_para1</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para1</shortDescription>
+        <value>Definition of terms used in Resource overview</value>
+    </labels>
+    <labels>
+        <fullName>resource_para10</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para10</shortDescription>
+        <value>The hours that remains after the Estimate hours and outcome hours  has been subtracted from the Approved hours, for a specific &quot;Marketing activity&quot;.</value>
+    </labels>
+    <labels>
+        <fullName>resource_para2</fullName>
+        <categories>Help_Resource_planlevel,Help_Resource_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para2</shortDescription>
+        <value>The hours that the owner of a Project or Sub project, has approved for its’ Projects/Sub projects/Marketing activity further below in the plan hierarchy.</value>
+    </labels>
+    <labels>
+        <fullName>resource_para3</fullName>
+        <categories>Help_Resource_planlevel,Help_Resource_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para3</shortDescription>
+        <value>The total hours of all task Allocated hours that are directly attached to a specific Project/Sub Project (not including Allocated hours  in sub levels of the project hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>resource_para4</fullName>
+        <categories>Help_Resource_planlevel,Help_Resource_projlevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para4</shortDescription>
+        <value>The total hours  of all task outcome hours that are directly attached to a specific Plan, Project, Sub Project or Marketing activity (not including outcome hours in sub levels of the plan hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>resource_para5</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para5</shortDescription>
+        <value>The hours that remains after the Estimate hours and outcome hours has been subtracted from the Approved hours, for a specific Plan, Project, Sub project or Marketing activity (not including remaining hours in sub levels of the plan hierarchy).</value>
+    </labels>
+    <labels>
+        <fullName>resource_para6</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para6</shortDescription>
+        <value>The budget hours for a specific level in the plan hierarchy, i.e. the budget hours for a specific project in itself (not including its’ sub projects and included marketing activities further below in the plan hierarchy)</value>
+    </labels>
+    <labels>
+        <fullName>resource_para7</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para7</shortDescription>
+        <value>The total budget hours  for a plan include all project and sub project, i.e. the total budget hours for a plan including all sub projects and marketing activities further below in the plan hierarchy.</value>
+    </labels>
+    <labels>
+        <fullName>resource_para9</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resource_para9</shortDescription>
+        <value>The total hours of all tasks outcome hours that are directly attached to a specific &quot;Marketing activity&quot;.</value>
+    </labels>
+    <labels>
+        <fullName>resourcehours</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resourcehours</shortDescription>
+        <value>Request hours</value>
+    </labels>
+    <labels>
+        <fullName>resourceoutcome</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resourceoutcome</shortDescription>
+        <value>Outcome</value>
+    </labels>
+    <labels>
+        <fullName>resourcepara1</fullName>
+        <categories>Resource_planlevel,Resource_projlevel,Resource_malevel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>resourcepara1</shortDescription>
+        <value>The hours that has been requested from, and approved by, the parent Projects or Plan.</value>
+    </labels>
+    <labels>
+        <fullName>sp_prioritylevel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sp_prioritylevel</shortDescription>
+        <value>Priority level</value>
+    </labels>
+    <labels>
+        <fullName>sub_New_project</fullName>
+        <categories>projectpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sub_New project</shortDescription>
+        <value>New project</value>
+    </labels>
+    <labels>
+        <fullName>sub_Parent_project</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sub_Parent project</shortDescription>
+        <value>Parent project</value>
+    </labels>
+    <labels>
+        <fullName>sub_Project</fullName>
+        <categories>SubProject,SubprojecteditPage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sub_Project</shortDescription>
+        <value>Project</value>
+    </labels>
+    <labels>
+        <fullName>sub_Project_name</fullName>
+        <categories>SubProject,SubprojecteditPage,projectpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sub_Project name</shortDescription>
+        <value>Project name</value>
+    </labels>
+    <labels>
+        <fullName>sub_Project_type</fullName>
+        <categories>SubProject,SubprojecteditPage,projectpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sub_Project type</shortDescription>
+        <value>Project type</value>
+    </labels>
+    <labels>
+        <fullName>sub_Status</fullName>
+        <categories>SubProject,SubprojecteditPage,projectpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sub_Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>task_Related_To</fullName>
+        <categories>Musqottasks</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>task_Related_To</shortDescription>
+        <value>Related to</value>
+    </labels>
+    <labels>
+        <fullName>task_para4</fullName>
+        <categories>Taskhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>task_para4</shortDescription>
+        <value>In addition to basic information such as description and due date, the creator of a task can choose to add notifications and/or to setup a workflow of recurring tasks.</value>
+    </labels>
+    <labels>
+        <fullName>task_template</fullName>
+        <categories>TaskEmailTemplate</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>task_template</shortDescription>
+        <value>For more details, click the following link</value>
+    </labels>
+    <labels>
+        <fullName>taskcreatedby</fullName>
+        <categories>TaskEditpage,ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>taskcreatedby</shortDescription>
+        <value>Created by</value>
+    </labels>
+    <labels>
+        <fullName>tasks_para1</fullName>
+        <categories>Taskhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tasks_para1</shortDescription>
+        <value>Explanation of how tasks can be used in Musqot</value>
+    </labels>
+    <labels>
+        <fullName>tasks_para2</fullName>
+        <categories>Taskhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tasks_para2</shortDescription>
+        <value>Creating and sending tasks to other members, in any level of the plan hierarchy (such as a Project or a specific Marketing activity), is a way of controlling work efforts and deadlines etc.</value>
+    </labels>
+    <labels>
+        <fullName>tasks_para3</fullName>
+        <categories>Taskhelppage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tasks_para3</shortDescription>
+        <value>A detailed task can be saved in just a few moments, and includes all information that is required for the recipient to start working on the solution or the delivery.</value>
+    </labels>
+    <labels>
+        <fullName>tb_Budget</fullName>
+        <categories>FinancialSummary,FinancialSummarysub</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Budget</shortDescription>
+        <value>Budget</value>
+    </labels>
+    <labels>
+        <fullName>tb_Financial</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Financial</shortDescription>
+        <value>Financial</value>
+    </labels>
+    <labels>
+        <fullName>tb_Invoices</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Invoices</shortDescription>
+        <value>Invoices</value>
+    </labels>
+    <labels>
+        <fullName>tb_Marketing_activites</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Marketing activites</shortDescription>
+        <value>Marketing activites</value>
+    </labels>
+    <labels>
+        <fullName>tb_Members</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Members</shortDescription>
+        <value>Members</value>
+    </labels>
+    <labels>
+        <fullName>tb_Milestones</fullName>
+        <categories>ProjectDetails,SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Milestone</shortDescription>
+        <value>Milestone</value>
+    </labels>
+    <labels>
+        <fullName>tb_Overview</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Overview</shortDescription>
+        <value>Overview</value>
+    </labels>
+    <labels>
+        <fullName>tb_Plans</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Plans</shortDescription>
+        <value>Plans</value>
+    </labels>
+    <labels>
+        <fullName>tb_Project</fullName>
+        <categories>ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Projects</shortDescription>
+        <value>Projects</value>
+    </labels>
+    <labels>
+        <fullName>tb_Purchase_orders</fullName>
+        <categories>FinancialSummary,FinancialSummarysub,FinancialSummarymarketing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Purchase orders</shortDescription>
+        <value>Purchase orders</value>
+    </labels>
+    <labels>
+        <fullName>tb_Resource</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Resource</shortDescription>
+        <value>Resource</value>
+    </labels>
+    <labels>
+        <fullName>tb_Sub_projects</fullName>
+        <categories>SubProject</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Sub projects</shortDescription>
+        <value>Sub projects</value>
+    </labels>
+    <labels>
+        <fullName>tb_Tasks</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tb_Tasks</shortDescription>
+        <value>Tasks</value>
+    </labels>
+    <labels>
+        <fullName>temp_Please_find_the_purchase_order_details</fullName>
+        <categories>Purchaseorder Vf template,</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>temp_Please find the purchase order details</shortDescription>
+        <value>Please find the purchase order details</value>
+    </labels>
+    <labels>
+        <fullName>temp_Purchase_order_details</fullName>
+        <categories>Purchaseorder Vf template,</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>temp_Purchase order details</shortDescription>
+        <value>Purchase order details</value>
+    </labels>
+    <labels>
+        <fullName>temp_Thanks</fullName>
+        <categories>Purchaseorder Vf template</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>temp_Thanks</shortDescription>
+        <value>Thanks</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Assigned_To</fullName>
+        <categories>Task,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Assigned To</shortDescription>
+        <value>Assigned To</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Comments</fullName>
+        <categories>TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Comments</shortDescription>
+        <value>Comments</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Create_Recurring_Series_of_Tasks</fullName>
+        <categories>Task</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Create Recurring Series of Tasks</shortDescription>
+        <value>Create Recurring Series of Tasks</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Due_Date</fullName>
+        <categories>Task,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Due Date</shortDescription>
+        <value>Due date</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Priority</fullName>
+        <categories>Task,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Priority</shortDescription>
+        <value>Priority</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Recurrence_and_reminder</fullName>
+        <categories>Task</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Recurrence and reminder</shortDescription>
+        <value>Recurrence and reminder</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Reminder</fullName>
+        <categories>Task</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Reminder</shortDescription>
+        <value>Reminder</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Send_notification_e_mail</fullName>
+        <categories>Task</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Send notification e-mail</shortDescription>
+        <value>Send notification e-mail</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Status</fullName>
+        <categories>Task,TaskEditpage,SubProject,Musqottasks,Marketingactivity,taskeditpage1,ProjectDetails</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Subject</fullName>
+        <categories>Task,TaskEditpage,Marketingactivity,taskeditpage1</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Subject</shortDescription>
+        <value>Subject</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Task</fullName>
+        <categories>ProjectDetails,SubProject,Marketingactivity,TaskEditpage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Task</shortDescription>
+        <value>Task</value>
+    </labels>
+    <labels>
+        <fullName>tsk_Task_name</fullName>
+        <categories>Task,TaskEditpage,taskeditpage1</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_Task name</shortDescription>
+        <value>Task name</value>
+    </labels>
+    <labels>
+        <fullName>tsk_estimated_time</fullName>
+        <categories>task, taskedit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_estimated_time</shortDescription>
+        <value>Estimated time (h)</value>
+    </labels>
+    <labels>
+        <fullName>tsk_estimated_time_short</fullName>
+        <categories>projectdetails, subproject, marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_estimated_time_short</shortDescription>
+        <value>Estimate (h)</value>
+    </labels>
+    <labels>
+        <fullName>tsk_outcome_time</fullName>
+        <categories>task, taskedit</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_outcome_time</shortDescription>
+        <value>Outcome time (h)</value>
+    </labels>
+    <labels>
+        <fullName>tsk_outcome_time_short</fullName>
+        <categories>projectdetails, subproject, marketingactivity</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tsk_outcome_time_short</shortDescription>
+        <value>Outcome (h)</value>
+    </labels>
+    <labels>
+        <fullName>user</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>user</shortDescription>
+        <value>User</value>
+    </labels>
+</CustomLabels>

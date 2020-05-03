@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>CRM settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>CRM settings</value>
+    </caseValues>
+    <fields>
+        <help><!-- Give the web color for each type in the CRM chart 
+separated with comma. 
+eg. #1223344,#112244,#335566 --></help>
+        <label><!-- Bar color --></label>
+        <name>Bar_color__c</name>
+    </fields>
+    <fields>
+        <label><!-- CRM performance type --></label>
+        <name>CRM_performance_type__c</name>
+        <picklistValues>
+            <masterLabel>Milestone</masterLabel>
+            <translation><!-- Milestone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, costcenter</masterLabel>
+            <translation><!-- Performance, costcenter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, general</masterLabel>
+            <translation><!-- Performance, general --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, marketing activity</masterLabel>
+            <translation><!-- Performance, marketing activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Performance, project</masterLabel>
+            <translation><!-- Performance, project --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Chart --></label>
+        <name>Chart__c</name>
+        <picklistValues>
+            <masterLabel>Area charts</masterLabel>
+            <translation><!-- Area charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bar charts</masterLabel>
+            <translation><!-- Bar charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Line charts</masterLabel>
+            <translation><!-- Line charts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spline charts</masterLabel>
+            <translation><!-- Spline charts --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Here you can enter which campaign to be included for the selected milestone, one row for each campaign --></help>
+        <label><!-- Campaign --></label>
+        <name>Expression_business_area__c</name>
+    </fields>
+    <fields>
+        <help><!-- Here you can enter which lead source to be included for the selected milestone, one row for each source --></help>
+        <label><!-- Lead Source --></label>
+        <name>Expression_business_region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selector --></label>
+        <name>Selector__c</name>
+        <picklistValues>
+            <masterLabel>Campaign</masterLabel>
+            <translation><!-- Campaign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead Source</masterLabel>
+            <translation><!-- Lead Source --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- For milestone you can only choice one option --></help>
+        <label><!-- Watch type --></label>
+        <name>Watch_type__c</name>
+        <picklistValues>
+            <masterLabel>Amount (weighted) Opportunities</masterLabel>
+            <translation><!-- Amount (weighted) Opportunities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Amount Opportunities</masterLabel>
+            <translation><!-- Amount Opportunities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Amount Wins</masterLabel>
+            <translation><!-- Amount Wins --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Leads</masterLabel>
+            <translation><!-- No Leads --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Opportunities</masterLabel>
+            <translation><!-- No Opportunities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Wins</masterLabel>
+            <translation><!-- No Wins --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

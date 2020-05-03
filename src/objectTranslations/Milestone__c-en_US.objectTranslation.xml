@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Milestone</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Milestones</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marketing activity --></label>
+        <name>Marketing_activity__c</name>
+        <relationshipLabel><!-- Milestones (Marketing activity) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Milestone type --></label>
+        <name>Milestone_type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Plan__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Not reach</masterLabel>
+            <translation><!-- Not reach --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reach delayed</masterLabel>
+            <translation><!-- Reach delayed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reach on time</masterLabel>
+            <translation><!-- Reach on time --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Target Achieved --></label>
+        <name>Target_Achieved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target CRM settings --></label>
+        <name>Target_CRM_settings__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Target ERP Sales --></label>
+        <name>Target_ERP_Sales__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Taget marketing activity --></label>
+        <name>Target_Marketing_activity__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Target project --></label>
+        <name>Target_Project__c</name>
+        <relationshipLabel><!-- Milestones (Target Project) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Target Socialmedia --></label>
+        <name>Target_Socialmedia__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Target_number --></label>
+        <name>Target_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target number outcome --></label>
+        <name>Target_number_outcome__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target date --></label>
+        <name>Targetdate__c</name>
+    </fields>
+    <layouts>
+        <layout>Milestone Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Milestone --></nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

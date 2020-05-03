@@ -1,0 +1,80 @@
+<apex:page showHeader="false" wizard="true" sidebar="false"  >
+    <style>  
+        @import 'https://fonts.googleapis.com/css?family=Open+Sans:400,300,700';
+        P{padding:5px;margin:0px;} 
+        .h1{font-family: 'Open Sans';color:#666;text-align:left; font-size:20px;font-weight:400;line-height: 200%;}
+        .h2{ color: #cdcdcd; font-family:'Open Sans';font-size:16px; font-weight:700; }
+        .h3{ font-family: 'Open Sans'; color:#666; text-align:left ; font-size:14px;font-weight:400; line-height: 200%;} 
+        .body{ color:#666; text-align: font-size:12px;font-weight:300;}
+        .helptop{ width:100%; height:100px; float: left;  margin:0px ;  background-color:#ff9933; background-image:url("../resource/1410868905000/musqot__Helpdesc_top");background-repeat: no-repeat;} 
+        body{ background-color:#f0f0f0 !important;} 
+        .helpbody{width:100%; overflow: hidden ; margin:0px ;background-color:#f0f0f0; } 
+        .helpfoot{width:100%; height:30px;  overflow: hidden ; margin:0px ; padding-top:3px ;   background-color:#A700DF; vertical-align:middle; text-align: center;} 
+        .helptext{ overflow: auto-scroll ; width:600px;float: left;  margin-left:50px;  margin-right:10px; margin-top:0px;  margin-bottom:0px;background-color:#fff;padding:25px;padding-top:5px;display:inline;border-left:solid 1px #ccc;border-right:solid 1px #ccc;} 
+        .toptext{ text-align:right; margin:0px;margin-bottom:20px; } 
+        .foottext{color:#eee; } 
+        .footemail a{ color:#eee;}
+    </style>
+    <div class="helpbody" >
+        <div class="helptop">
+            <!-- top -->
+        </div>    
+        <div class="helptext">
+            <p class="toptext">
+                <span class="h2">Musqot online Help</span>
+            </p>
+            <p>
+                <span class="h1">Explanation of basic ERP settings<br/></span>
+            </p>
+            <p>
+                <span class="body">In ERP setting object we have name, charts, barcolor,ERPperformance type and selector fields.<br/></span>
+               </p>
+                <p>
+                <span class="body">If you choose the ERPperformance type as 'milestone', milestone business region,business area will be displayed.<br/></span>
+               </p>
+                <p>
+                <span class="body">If you choose the ERPperformance type as 'performance project', business region,business area will be displayed.<br/></span>
+                  </p>
+                    <p>
+               <span class="body"> If you choose the ERPperformance type as 'performance marketing activity', business region,business area will be displayed.<br/></span>
+               </p>
+                <p>
+                <span class="body">If you choose the ERPperformance type as 'performance general', you have to select one Selector  at a time.<br/></span> 
+            </p> <p>       
+            <span class="h3">ERPImport <br/></span>   
+            </p>
+            <p>
+                <span class="body">The System accepts .CSV files only for importing data.  The file should contain the following columns<br/></span>
+                </p>
+                <p>
+                <span class="body">ID,Region,Businessarea,Sales,Currency,Date.<br/></span>
+                   
+            </p>
+            <p>
+             <span class="h3">ERPImportlog<br/></span> 
+             </p>
+            
+             <p> <span class="h3">A sample CSV file can be downloaded from the link below<br/></span> 
+           
+           <!--  <a href="/servlet/servlet.FileDownload?file={!attachment.00Pb000000Gv7E3}" download="{!attachment.name}">{!attachment.name}</a> -->
+       <a href="https://musqot.eu2.visual.force.com/resource/1437629038000/musqot__SampleCrmfile"   >SampleERPfile</a>
+       
+            <!-- <a href="/00Pb000000Gv7E3"   >SampleERPfile</a>-->
+   <!-- <a target="_Blank" href="{!URLFOR($Action.Attachment.Download, Attachment.00Pb000000Gv7E3)}" title="{!$Label.att_Download}" >{!atts.name}</a>-->
+           <!-- <a href="C:\Users\janardhan.g\Downloads\Sample CRMfile.csv "  target="_blank" download="Sample CRMfile.csv">Sample CRMfile</a> -->
+           <!-- <apex:image url="{!URLFOR($Action.Attachment.Download, '00Pb000000Gv7E3')}" />-->
+           
+  
+
+            </p>
+           
+            
+        </div>   
+        <div style=" height:200px;float: left;margin:40px;">
+            <iframe width="400" height="300" src="//player.vimeo.com/video/111711463?byline=0;title=0;portrait=0;" frameborder="0" allowfullscreen= "webkitallowfullscreen mozallowfullscreen allowfullscreen"></iframe>
+        </div>
+        <div class="helpfoot"><p> 
+            <span class="foottext">Copyright © 2014 Musqot marketing technology AB  &nbsp;&nbsp;&nbsp; · &nbsp;&nbsp;&nbsp;</span><span class="footemail"><a href="mailto:support@musqot.com">support@musqot.com</a></span> 
+            </p> </div> 
+    </div>       
+</apex:page>

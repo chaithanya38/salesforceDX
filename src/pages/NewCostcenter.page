@@ -1,0 +1,28 @@
+<apex:page sidebar="false" standardController="Costcentre__c" extensions="newcostCenter_ctrl" tabStyle="Costcentre__c">
+    <apex:form id="frm">
+        <apex:sectionHeader subtitle="{!$Label.funr_Cost_center}" title="Musqot" />
+        <apex:pageBlock mode="edit" tabStyle="Costcentre__c" >
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!insertCosCenter}" rendered="{!hidCos}"/>
+                <apex:commandButton value="{!$Label.btn_save}" action="{!updateCosCenter}" rendered="{!NOT(hidCos)}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection rendered="{!hidCos}" title="New Cost Center">
+                <apex:inputField value="{!costcen.Name}" required="true" label="{!$Label.funr_Cost_center}"/>
+                <apex:inputField value="{!costcen.Status__c}" label="{!$Label.tsk_Status}" required="true" />
+                <apex:inputField value="{!costcen.OwnerId}" label="{!$Label.pt_Owner}"/>
+                <apex:inputHidden />
+                <apex:inputField value="{!costcen.Headline__c}" />
+                <apex:outputText ></apex:outputText> 
+                <apex:inputField value="{!costcen.Description__c}" />
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Edit Cost Center {!cos.Name}" rendered="{!NOT(hidCos)}">
+                <apex:inputField value="{!cos.Name}" required="true" label="{!$Label.funr_Cost_center}"/>
+                <apex:inputField value="{!cos.OwnerId}" label="{!$Label.pt_Owner}"/>
+                <apex:inputField value="{!cos.Headline__c}" />
+                <apex:outputText ></apex:outputText> 
+                <apex:inputField value="{!cos.Description__c}" />
+            </apex:pageBlockSection>    
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

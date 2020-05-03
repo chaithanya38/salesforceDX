@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>CRM data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>CRM data</value>
+    </caseValues>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Business_area__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead source --></label>
+        <name>Business_region__c</name>
+    </fields>
+    <fields>
+        <label><!-- CRM import date --></label>
+        <name>CRM_import_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- CRM import id --></label>
+        <name>CRM_import_id__c</name>
+    </fields>
+    <fields>
+        <label><!-- CRM logfile --></label>
+        <name>CRM_logfile__c</name>
+        <relationshipLabel><!-- CRM data --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Wins --></label>
+        <name>No_Deals__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Leads --></label>
+        <name>No_Leads__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Opportunities --></label>
+        <name>No_Opportunities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount Wins --></label>
+        <name>Value_Deals__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount Opportunities --></label>
+        <name>Value_Opportunities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount (weighted) Opportunities --></label>
+        <name>Value_w_Opportunities__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

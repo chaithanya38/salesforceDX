@@ -1,0 +1,20 @@
+<apex:page controller="Purchasearticlegroupscontroller"  sidebar="false" tabStyle="Musqot_admin__tab">
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pur_Purchase_article}"  tabStyle="Musqot_admin__tab">  
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_New}" action="{!NewArticle}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!Purchase_article}" var="article" style="width:400px;">
+                <apex:column headerValue="{!$Label.clm_Action}" style="width:90px;">
+                    <apex:commandLink value="{!$Label.btn_edit}" action="{!redirectPage1}" style="color:#015ba7">
+                        <apex:param Name="p" value="{!article.id}" assignTo="{!Purchase_articleId}"/>
+                    </apex:commandLink>&nbsp;|&nbsp;
+                    <apex:commandLink action="{!DeleteAccount}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!article.Name} ?')) return false;" value="{!$Label.btn_Del}" style="color:#015ba7">               
+                        <apex:param value="{!article.Id}" name="deleteid" assignTo="{!Purchase_articleId}"/>    
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!article.Name}" headerValue="{!$Label.pur_Purchase_article}" style="width:310px;"/>  
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

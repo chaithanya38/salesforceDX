@@ -1,0 +1,127 @@
+<apex:page showHeader="false" sidebar="false" standardController="Marketing_activity__c" extensions="FinancialSummarymarketing"  tabStyle="Project__c"  >
+    <script type="text/javascript">
+    function openpopup(plnId)
+    {
+        var myWindow = window.open("/apex/Fundrequestmarketing?mark="+plnId,"Musqot_popup","width=670,height=480"); 
+        myWindow.focus();  
+    }
+    <!--janardhan-->
+    function resourcepopup(plnId) {
+          var mywindow = window.open("/apex/Hoursmarketingpopup?mark="+plnId,"Musqot_popup","width=670,height=480"); 
+             myWindow.focus();  
+    }
+    </script>
+    <style>
+        .TBHR{text-align:right;}
+        .TBHR2{text-align:right;padding-right: 5px !important;}
+    </style>
+    <apex:tabPanel switchType="client" id="theTabPanel" value="{!tabInFocus}">
+        <apex:tab label="{!$Label.tb_Financial}" name="tabDetails" id="tabDetails" rendered="{!Level4}">
+            <apex:form id="frm">
+                <apex:pageblock tabStyle="musqot__Project__c" id="financials" title="{!$Label.pt_Financial_overview}" helpTitle="{!$Label.Help_Financial_help_page}" helpUrl="/apex/Help_Finance_malevel" >
+                    
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton value="{!$Label.btn_Request_funds}"   rendered="{!Level3}"  onclick="openpopup('{!URLENCODE(markid)}');return false;" disabled="{!disableReFund}"/>
+                       
+                    </apex:pageBlockButtons>                    
+                    <apex:pageBlockTable value="{!fin}" var="f" rendered="{!NOT(ISNULL(fin))}">
+                     <apex:column value="{!f.type}" style="width: 150px;" headerValue="{!$Label.finov_Sponsor}"/>
+                        <apex:column value="{!f.allocated}" style="width: 70px;text-align:right;" headerValue="{!$Label.finov_Allocated}" headerClass="TBHR"/>
+                       <apex:column value="{!f.reserved}" style="width: 70px;text-align:right;" headerValue="{!$Label.finov_Reserved}" headerClass="TBHR"/>
+                        <apex:column value="{!f.spent}" style=" width: 70px;text-align:right;" headerValue="{!$Label.finov_Spent}" headerClass="TBHR" />          
+                        <apex:column value="{!f.remaining}" style="width: 70px;color:{!HTMLENCODE(f.color)};text-align:right;" headerValue="{!$Label.finov_Remaining}"  headerClass="TBHR"/>
+                       </apex:pageBlockTable>
+                    <apex:outputLabel value="{!$Label.finov_No_financials_registered}" rendered="{!(ISNULL(fin))}"></apex:outputLabel>
+                </apex:pageblock>
+            </apex:form>
+        </apex:tab>
+        <apex:tab label="{!$Label.tb_Purchase_orders}" id="purchase" rendered="{!Level4}">
+            <apex:form >
+                <apex:pageBlock tabStyle="musqot__Project__c"  title="{!$Label.tb_Purchase_orders}" helpTitle="{!$Label.Help_Purchase_order_help_page}" helpUrl="/apex/Purchaseorderhelppage">
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton value="{!$Label.btn_New_purchase_order}"  disabled="{!disablePO}"  action="{!neworders}" />
+                        <!--<apex:outputText rendered="{!disablePO}" value="{!$Label.finov_nofounds}" />-->
+                    </apex:pageBlockButtons>               
+                    <apex:pageBlockTable value="{!orders}" var="oi" style="min-width: 500px;max-width: 800px;"  rendered="{!IF(orders.size>0,true,false)}"> 
+                        <apex:column headerValue="{!$Label.clm_PO_number}" style="width: 80px;">                  
+                            <apex:commandLink value="{!oi.Purchase_order_name__c}" action="{!gotopurchaseorderedit}">
+                                <apex:param name="orderId" value="{!oi.id}"/> 
+                            </apex:commandLink>
+                        </apex:column>           
+                        <apex:column headerValue="{!$Label.clm_PO_name}" value="{!oi.Name}" />
+                        <apex:column value="{!oi.Total_cost__c}" style="width: 80px;text-align:right;" headerValue="{!$Label.pur_Cost}" headerClass="TBHR"/>
+                        <apex:column value="{!oi.total_Invoice_cost__c}" style="width: 80px;text-align:right;" headerValue="{!$Label.inv_Invoice_cost }" headerClass="TBHR"/>
+                        <apex:column value="{!oi.Send_date__c}" style="width: 80px;text-align:right;" headerValue="{!$Label.pur_Send_date}" headerClass="TBHR"/>
+                        <apex:column value="{!oi.Effective_date__c}" style="width: 80px;text-align:right;" headerValue="{!$Label.pur_Effective_date}" headerClass="TBHR" />
+                        <apex:column style="width: 80px;text-align:right;padding-right: 5px;" headerValue="{!$Label.sub_Status}" headerClass="TBHR">
+                            <!--  <apex:outputLabel value="{!IF(oi.Purchase_order_cloesed__c==true,'{!$Label.btn_status_closed}','{!$Label.btn_status_open}')}"></apex:outputLabel> -->
+                            <apex:outputLabel value="{!IF(oi.Purchase_order_cloesed__c==true,'Closed','Open')}"></apex:outputLabel> 
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+        <apex:tab label="{!$Label.pt_Invoices}" id="inv" rendered="{!Level4}">
+            <apex:form >
+                <apex:pageBlock tabStyle="musqot__Project__c"  title="{!$Label.pt_Invoices}" helpTitle="{!$Label.Help_Invoices_help_page}" helpUrl="/apex/Invoiceshelppage" >
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandButton value="{!$Label.btn_New_invoice}" action="{!newinvoices}" />
+                    </apex:pageBlockButtons>               
+                    <apex:pageBlockTable value="{!inv}" var="in" style="min-width: 500px;max-width: 800px;"  rendered="{!IF(inv.size>0,true,false)}"> 
+                        <apex:column headerValue="{!$Label.inv_Supplier}" >                   
+                            <apex:commandLink value="{!in.supplier__c}" action="{!gotoinvoiceedit}">
+                                <apex:param name="invid" value="{!in.Id}"/> 
+                            </apex:commandLink>
+                        </apex:column>           
+                        <apex:column headerValue="{!$Label.inv_Invoice_Number}" style="width: 100px;text-align:right;" value="{!in.Name}" headerClass="TBHR"/>             
+                        <apex:column value="{!in.Purchase_orders__R.Purchase_order_name__c}" style="width: 100px;text-align:right;" headerValue="{!$Label.inv_Purchase_order}" headerClass="TBHR"/> 
+                        <apex:column value="{!in.Total_spent__c}" style="width: 100px;text-align:right;padding-right: 5px;" headerValue="{!$Label.inv_Total_spent}" headerClass="TBHR2"/>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+        <apex:tab label="{!$Label.tb_Resource}" id="res" rendered="{!Level5}">
+            <apex:form id="frm1" >
+                <apex:pageblock id="resources"  title="{!$Label.Resourcehrs}"   tabStyle="musqot__Project__c" >
+                   
+                    <apex:pageBlockButtons location="top"  >
+                        <apex:commandButton value="{!$Label.resourcehours}"  rendered="{!Level3}" onclick="resourcepopup('{!URLENCODE(markid)}');return false;" reRender="true" disabled="{!disableReFund}"/>
+                     <div  class="pbHelp" style="float:right;"> 
+                            <span class="help" style="line-height:24px;" title="Resource help page (New Window)">
+                                <a href="javascript:openPopupFocusEscapePounds('/apex/Resource_Help_marketing', 'Help', 1024, 768, 'width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no', false, false);" class="linkCol">
+                                    <span class="linkSpan" >{!$Label.Resourcehelppage}
+                                        <img src="/s.gif" alt="{!$Label.Resourcehelppage} (New Window)" class="helpIcon" style="vertical-align: super;" title="{!$Label.Resourcehelppage} (New Window)"/>
+                                    </span></a></span>
+                            <span style="datacell">
+                                <apex:outputLink value="/apex/Resource_report_page" target="_blank"> 
+                                    <img src="{!URLFOR($Resource.musqot__users)}"  alt="Resource Report" title="{!$Label.Resource_Resource_report}" height="24" onclick="resourcereport"/>
+                                </apex:outputlink> 
+                            </span>
+                        </div>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockTable value="{!res}" var="r" rendered="{!NOT(ISNULL(res))}">
+                        <apex:column value="{!r.type}" style="width: 150px;" headerValue="{!$Label.finov_Sponsor}" />
+                        <apex:column value="{!r.allocated}" style="width: 70px;text-align:right;" headerValue="{!$Label.finov_Allocated}"  headerClass="TBHR"/>
+                        <apex:column value="{!r.Estimate}" style=" center;width: 70px;text-align:right;" headerValue="{!$Label.tsk_estimated_time_short}"  headerClass="TBHR"/>
+                        <apex:column value="{!r.Outcome}" style=" width: 70px;text-align:right;" headerValue="{!$Label.tsk_outcome_time_short}"  headerClass="TBHR" />
+                        <apex:column value="{!r.remaining}" style="width: 70px;color:{!HTMLENCODE(r.color)};text-align:right;" headerValue="{!$Label.finov_Remaining}"  headerClass="TBHR" />
+                    </apex:pageBlockTable>
+                    <apex:pageBlockTable value="{!taskrecs}" var="rt" rendered="{!IF(taskrecs.size>0,true,false)}">
+                        <apex:column value="{!rt.Task_name__c}" style="width: 150px;"  headerValue="{!$Label.tsk_Task}"/>
+                        <apex:column headerValue=" " style="width: 70px;"/>
+                        <apex:column value="{!rt.Allocated_h__c}" style="width: 70px;text-align:right;" headerValue="{!$Label.tsk_estimated_time_short}" headerClass="TBHR"/>
+                        <apex:column value="{!rt.Outcome_h__c}" style=" width: 70px;text-align:right;" headerValue="{!$Label.tsk_outcome_time_short}"  headerClass="TBHR"/>             
+                       <apex:column value="{!rt.Remaining__c}" style="width: 70px;text-align:right;" headerValue="{!$Label.finov_Remaining}"  headerClass="TBHR"/>
+                    </apex:pageBlockTable>
+                   <apex:pageBlockTable value="{!usertaskrecs}" var="utask" style=""   rendered="{!IF(usertaskrecs.size>0,true,false)}">
+                       <apex:column value="{!utask.type}" style="width: 150px;"  headerValue="{!$Label.mem_User}"/>
+                        <apex:column style="width: 70px;" headerValue=" "/>
+                        <apex:column value="{!utask.Estimate}" style="width: 70px;text-align:right;" headerValue="{!$Label.tsk_estimated_time_short}" headerClass="TBHR"/>
+                        <apex:column value="{!utask.Outcome}" style=" width: 70px;text-align:right;" headerValue="{!$Label.tsk_outcome_time_short}"  headerClass="TBHR"/>             
+                       <apex:column value="{!utask.remaining}" style="width: 70px;text-align:right;" headerValue="{!$Label.finov_Remaining}"  headerClass="TBHR"/>
+                      </apex:pageBlockTable>
+                </apex:pageblock>
+            </apex:form>
+        </apex:tab>
+    </apex:tabPanel>
+</apex:page>

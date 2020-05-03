@@ -1,0 +1,111 @@
+<apex:page standardController="task" extensions="tasktablecontroller" sidebar="false" showHeader="false" id="pg" tabStyle="User_setting__c">
+    <script>
+    function changeStyle(x) {
+        x.style.textDecoration="underline";
+    }
+    function removeLine(x) {
+        x.style.textDecoration="none" ;  
+    }
+    </script>
+    <script >
+    
+    function openWin(url){
+        window.open(url);
+    } 
+    </script>
+    <style>
+        .container
+        {
+        overflow:auto; 
+        height:235px;   
+        }
+        .headerRow .headerStyle
+        {
+        color: #000000 !important;
+        position:relative;
+        TOP: expression(this.offsetParent.scrollTop-2);        
+        }
+        .center{
+     
+          align-left: auto;
+          }
+    .bPageBlock {
+    border-top: 4px solid #1797C0;    
+    }    
+    </style> 
+    <script> 
+     var previousOnload = window.onload; 
+     window.onload = function(){ 
+             FindByAttributeValue("name","pg:frm:j_id3:j_id4:j_id13").value='{!JSINHTMLENCODE(regionValue)}'; 
+     }
+     function FindByAttributeValue(attribute, value){
+         var All = document.getElementsByTagName('*');
+         for (var i = 0; i < All.length; i++){
+             if (All[i].getAttribute(attribute) == value) { return All[i]; }
+          }
+    }
+   </script>
+   
+    <apex:form id="frm">
+        
+        <apex:actionFunction name="goToPraentscript" action="{!gotoParent}">
+            <apex:param name="parentId" value="" assignTo="{!selectedParent}"/>
+        </apex:actionFunction>
+        <apex:pageBlock tabStyle="musqot__User_setting__c" >
+            <apex:pageBlockSection columns="4" >
+                <apex:outputLabel style="width:50px; height=50px;" ><b>{!$Label.mytasks}</b></apex:outputLabel>        
+                     <apex:outputLabel style="align:Left:330px" >  
+                     <apex:panelGrid width="200px">            
+                    
+                    <apex:commandButton title="New Task" value="{!$Label.btn_New}" onclick="window.open('/00T/e?','_top','width=600,height=600,location=no,resizable=yes,toolbar=no,status=no,menubar=no,scrollbars=1', 1)"   /> 
+                     </apex:panelGrid>
+                     </apex:outputLabel>
+                     <apex:outputPanel /> 
+                    <apex:outputLabel style="align:right" >
+                    <apex:actionRegion >          
+                        <apex:selectList value="{!regionValue}" size="1">
+                            <apex:selectOptions value="{!regionOptions}"/> 
+                            <apex:actionSupport event="onchange" action="{!tasklist}" oncomplete="storeValues()"/>  
+                        </apex:selectList>
+                    </apex:actionRegion>
+                  </apex:outputLabel>
+               </apex:pageBlockSection>    
+           <apex:outputPanel layout="block" styleClass="container"  > 
+                <apex:pageMessages />
+                <apex:pageBlockTable value="{!TaskByFilter}" var="t" id="myTable1"  headerclass="headerStyle"   rendered="{!IF(TaskByFilter.size>0,true,false)}"  >  
+                   
+                    <apex:column headerValue="{!$Label.clm_Action}" style="width: 80px;" >
+                        <apex:actionRegion >
+                            <apex:outputPanel style="color:#015ba7">
+                            <apex:commandLink value="{!$Label.btn_edit}" action="{!gotoTaskEdit}" id="commandLink" target="_top" style="color:#015ba7">
+                                <apex:param name="taskid" value="{!t.id}"  assignTo="{!selectedTask}" />
+                            </apex:commandLink>&nbsp;|&nbsp;
+                            <apex:commandLink value="X"  action="{!gotoeditmode}" style="text-decoration:none;color:#015ba7" target="_top">
+                                <apex:param name="taskid" value="{!t.id}"  assignTo="{!selectedTask}" />
+                            </apex:commandLink>
+                            <!--<apex:image id="theImage" onclick="gotoeditmode" value="{!$Resource.MarkOtherComplete}"   " title="Mark OtherComplete" />-->
+                            </apex:outputPanel>
+                        </apex:actionRegion>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.musadmin_Name}" >
+                        <apex:outputText value="{!t.Task_name__c}" rendered="{!t.whoid=null}"/>
+                        <apex:outputText value="{!t.who.LastName}" rendered="{!t.Task_name__c=null}"/>  
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.tsk_Subject}">{!t.Subject}
+                        <apex:image id="Black_Box" value="{!$Resource.HighPriority}" width="15" height="11"  rendered="{!t.Priority == 'High'}" title="HighPriority"/>
+                    </apex:column>
+                    <!-- Adding OutputLinks to WhatId and OwnerId -->
+                    <apex:column headerValue="{!$Label.task_Related_To}">
+                        <apex:outputLink value="/{!t.WhatId}" id="theParentLink" target="_top">{!t.What.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column headerValue="{!$Label.taskcreatedby}" >
+                        <apex:outputLink value="/{!t.CreatedById}" id="theOwnerLink" target="_top">{!t.CreatedBy.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!t.ActivityDate}" headerValue="{!$Label.tsk_Due_Date}"/>
+                    <!-- <apex:column value="{!t.Priority}" headerValue="{!$Label.tsk_Priority}"/>-->
+                    <apex:column value="{!t.Status}"  headerValue="{!$Label.tsk_Status}"/>
+                    <!-- <apex:column value="{!t.StatusImage__c}" styleClass="tooltip" title="{!t.Status}" headerValue="{!$Label.tsk_Status}"/>-->
+                </apex:pageBlockTable></apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

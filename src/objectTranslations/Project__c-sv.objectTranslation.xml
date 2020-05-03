@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>Definite</article>
+        <plural>false</plural>
+        <value>Planen</value>
+    </caseValues>
+    <caseValues>
+        <article>Indefinite</article>
+        <plural>false</plural>
+        <value>En plan</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Plan</value>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <plural>true</plural>
+        <value>Planerna</value>
+    </caseValues>
+    <caseValues>
+        <article>Indefinite</article>
+        <plural>true</plural>
+        <value>Planer</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Plans</value>
+    </caseValues>
+    <fields>
+        <label><!-- Performance CRM --></label>
+        <name>CRM__c</name>
+    </fields>
+    <fields>
+        <help>Skriv kort projektbeskrivning här (max 4000 tecken)</help>
+        <label>Beskrivning</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Performance ERP --></label>
+        <name>ERP__c</name>
+    </fields>
+    <fields>
+        <label>Slutdatum</label>
+        <name>Ends_date__c</name>
+    </fields>
+    <fields>
+        <label>Rubrik</label>
+        <name>Headline__c</name>
+    </fields>
+    <fields>
+        <label>Plan typ</label>
+        <name>Plantype__c</name>
+        <relationshipLabel>Planer</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product__c</name>
+        <picklistValues>
+            <masterLabel>PROD B</masterLabel>
+            <translation><!-- PROD B --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Performance Social media --></label>
+        <name>Social_media__c</name>
+    </fields>
+    <fields>
+        <label>Startdatum</label>
+        <name>Starts_date__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>StatusImage__c</name>
+    </fields>
+    <fields>
+        <label>statusbild id</label>
+        <name>Status_Image_Id__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation>Färdig</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deferred</masterLabel>
+            <translation>Uppskjuten</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation>Pågående</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation>Ej startad</translation>
+        </picklistValues>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Projects layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <webLinks>
+        <label>BegÃ¤r medel</label>
+        <name>Fund_request</name>
+    </webLinks>
+</CustomObjectTranslation>

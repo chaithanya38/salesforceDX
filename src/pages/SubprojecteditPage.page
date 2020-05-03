@@ -1,0 +1,56 @@
+<apex:page standardController="Subproject__c" sidebar="false" extensions="SubprojecteditEditontroller" tabStyle="Project__c">
+    <apex:form >
+        <apex:sectionHeader subtitle="{!objSubpro.Name}" title="{!$Label.sub_Project}" />
+        <apex:pageBlock title="{!$Label.pt_Edit_project}: {!objSubpro.Name}" mode="edit" tabStyle="Musqot_admin__tab" >
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="{!$Label.btn_save}" action="{!save}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection collapsible="true" >
+                <apex:inputField value="{!objSubpro.Name}" required="True" label="{!$Label.sub_Project_name}"/>
+                <apex:inputfield value="{!objSubpro.Priority_level__c}" label="{!$Label.sp_prioritylevel}"/> 
+                <apex:inputField style="width:300px;hight:150px;"  value="{!objSubpro.Description__c}" label="{!$Label.inv_Description}"/>
+                <apex:inputhidden value="{!objSubpro.Parent_project__c}" />
+                <apex:inputField value="{!objSubpro.Starts_date__c}" required="false" label="{!$Label.pt_Start_date}"/>
+                <apex:inputField value="{!objSubpro.Ends_date__c}" required="false" label="{!$Label.pt_End_date}"/>
+                <apex:selectList id="patype"  value="{!objSubpro.Project_type__c}"  size="1" multiselect="false" required="true" label="{!$Label.sub_Project_type}">
+                    <apex:selectOptions value="{!PROTList}" />
+                    <apex:actionSupport event="onchange" action="{!getCustomSettRec}" rerender="customseting" />
+                </apex:selectList>
+                <apex:inputField value="{!objSubpro.Status__c}" label="{!$Label.tsk_Status}" required="true" />
+            </apex:pageBlockSection>
+            <!--
+            <apex:outputPanel id="customseting">
+                <apex:pageblocksection title="{!$Label.btn_Custom_setting}" rendered="{!IF(fields.size>0,true,false)}" columns="2" collapsible="true">  
+                    <apex:repeat value="{!fields}" var="f">  
+                        <apex:inputfield value="{!objSubpro[f.fieldPath]}" required="{!OR(f.required, f.dbrequired)}">  
+                        </apex:inputfield></apex:repeat>  
+                </apex:pageblocksection> 
+            </apex:outputPanel>
+-->
+            <apex:outputPanel id="performance_settings" >
+                <apex:pageblocksection title="{!$Label.musadmin_Performance_settings}"  rendered="{!IF(CRMFilter.size>0 ||SocialFilter.size>0||ERPFilter.size>0,true,false)}" columns="2" collapsible="true"  >  
+                    <apex:pageBlockSectionItem rendered="{!IF(CRMFilter.size>0,true,false)}" >
+                        <apex:outputlabel value="{!$Label.musadmin_CRM_Performance}"/>   
+                        <apex:selectCheckboxes id="CRM" value="{!CRMItems}" immediate="true"  borderVisible="true" layout="pageDirection" style="width:300px;" >
+                            <apex:selectOptions value="{!CRMFilter}"  />
+                        </apex:selectCheckboxes>
+                    </apex:pageBlockSectionItem> 
+                    <apex:pageBlockSectionItem rendered="{!IF(SocialFilter.size>0,true,false)}">
+                        <apex:outputlabel value="{!$Label.musadmin_Social_media_Performance}"/> 
+                        <apex:selectCheckboxes id="socialmedia" value="{!SocialItems}" borderVisible="true" layout="pageDirection">
+                            <apex:selectOptions value="{!SocialFilter}" />
+                        </apex:selectCheckboxes>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!IF(ERPFilter.size>0,true,false)}">
+                        <apex:outputlabel value="{!$Label.musadmin_ERP_Performance}"/> 
+                        <apex:selectCheckboxes id="ERP" value="{!ERPItems}"  borderVisible="true" layout="pageDirection">
+                            <apex:selectOptions value="{!ERPFilter}" />
+                        </apex:selectCheckboxes>
+                    </apex:pageBlockSectionItem> 
+                </apex:pageblocksection> 
+            </apex:outputPanel>
+        </apex:pageBlock>        
+    </apex:form>   
+</apex:page>

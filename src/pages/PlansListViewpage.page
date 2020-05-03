@@ -1,0 +1,28 @@
+<apex:page controller="PlansListView_Ctrl" tabStyle="Project__c">
+    <apex:sectionHeader subtitle="{!$Label.app_musqot}" title="{!$Label.mrk_Plan}"/>
+    <apex:form >
+        <apex:pageBlock title="{!$Label.mrk_Plan}" >
+             <apex:pageBlockButtons location="top">
+                 <apex:commandButton style="centr" value="{!$Label.btn_New}" action="{!redirectPlanpage}"/>
+             </apex:pageBlockButtons>
+             <apex:outputPanel layout="block" styleClass="container">
+                 <apex:pageBlockTable value="{!PlanRecs}" var="pln" rendered="{!if(PlanRecs.size>0,true,false)}">
+                    <apex:column headerValue="{!$Label.pt_Plan_name}">
+                        <apex:commandLink value="{!pln.Name}" action="{!gotoPlanDetail}">
+                            <apex:param name="plnId" value="{!pln.id}"/>
+                        </apex:commandLink>
+                    </apex:column> 
+                    <apex:column value="{!Pln.Plantype__r.Name}" headerValue="{!$Label.pt_Plantype}"/>
+                    <apex:column value="{!pln.Starts_date__c}" headerValue="{!$Label.pt_Start_date}"/>
+                    <apex:column value="{!pln.Ends_date__c}" headerValue="{!$Label.pt_End_date}"/>
+                    <apex:column value="{!pln.ownerId}" headerValue="{!$Label.pt_Owner}"/>
+                    <apex:column value="{!pln.StatusImage__c}" headerValue="{!$Label.tsk_Status}"/>
+                </apex:pageBlockTable>
+            </apex:outputPanel>
+            <apex:commandButton rendered="{!setCon.hasPrevious}" value="{!$Label.btn_First}" action="{!setCon.first}"/>
+            <apex:commandButton rendered="{!setCon.hasPrevious}" value="{!$Label.btn_Previous}" action="{!setCon.previous}"/>
+            <apex:commandButton rendered="{!setCon.hasNext}" value="{!$Label.btn_Next}" action="{!setCon.next}"/>
+            <apex:commandButton rendered="{!setCon.hasNext}" value="{!$Label.btn_Last}" action="{!setCon.last}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,113 @@
+<apex:page controller="ERPSalesCotroller">
+ <html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      
+
+      var jsonData= {!data}; //jsonData contains array of data entries
+      var regions=[]; //array of regions  
+      var preparedData = new Array();  //data for the line chart
+      for(i=0;i<jsonData.length;i++){
+          prepareData(jsonData[i]); 
+      } 
+      
+      function ERPSalesObject(){
+          var year;
+          var EMEA = 0;
+          var APAC = 0;
+      }
+      
+      //to format the jsonData such that it can be used as line chart data
+      function prepareData(jsObj){
+          //var date = jsObj.date; 
+          var date = new Date(jsObj.date+"T00:00:00");
+          //var region = jsObj.region;
+          
+          //if region is a new region, add a new row in the line chart data
+          if(regions.indexOf(region) == -1){
+              //firstColumn[firstColumn.length] = region;
+              regions[regions.length] = region;
+          }
+          var isEntryFound = false;
+          
+          for(j=0;j<preparedData.length;j++){
+ 
+              //if an entry found with the partcular date, then update the corresponding data.         
+              if(preparedData[j][0].getTime() == date.getTime()){
+              var index = regions.indexOf(jsObj.region)+1;
+              preparedData[j][index] == undefined ? preparedData[j][index] = jsObj.sale : preparedData[j][index] += jsObj.sale;
+            
+              isEntryFound = true;
+            
+              }
+          } 
+        
+          //if the entry is not found for a particular date, create a new entry.         
+          if(!isEntryFound){
+              
+              var index = regions.indexOf(jsObj.region)+1;
+              preparedData[preparedData.length] = new Array();
+              var newEntry = new Array();
+              newEntry[0]=date;            
+              
+              //intialize the data for an entry with zeros by default 
+              for(var k=1;k<=regions.length;k++){
+                newEntry[k]=0;
+              }
+              
+              newEntry[index]=jsObj.sale;
+              preparedData[j] = newEntry;
+          }
+        
+    
+      }
+      
+      //Draw line chart
+      function drawChart() {
+        //var data = google.visualization.arrayToDataTable(preparedData);
+        //data.setColumnProperty(1, 'type', 'date');
+        //var test = data.getColumnProperties(0);
+        //console.log(JSON.stringify(test));
+
+        
+        var data = new google.visualization.DataTable();
+        
+        data.addColumn('date','ERP Date');
+        data.addColumn('number','EMEA');
+        data.addColumn('number','APAC');
+        
+        
+        var mini = new Date('2014-01-01T00:00:00');
+        data.addRows(preparedData);
+        
+        var options = {
+          title: 'EPR Sales',
+          explorer: { axis: 'horizontal',maxZoomIn: 0.002} ,
+          hAxis: {viewWindow: {min: mini},gridlines: {count: 10}}
+          
+        };
+        alert(options.hAxis.viewWindow.min);
+        //options.hAxis.viewWindow = obj;
+        //hAxis: {gridlines: {count: 1, color:'white'}}
+       // options.hAxis.gridlines={color:'#333'};
+        //options.hAxis.gridlines={count:4};
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      } 
+
+
+
+    </script>
+
+
+  </head>
+  <body>
+    <div id="chart_div" style="width: 1200px; height: 500px;"></div>
+  </body>
+</html>
+</apex:page>

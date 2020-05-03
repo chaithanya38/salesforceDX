@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>Definite</article>
+        <plural>false</plural>
+        <value>Marknadsaktiviteten</value>
+    </caseValues>
+    <caseValues>
+        <article>Indefinite</article>
+        <plural>false</plural>
+        <value>Marknadsaktivitet</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Marketing activity</value>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <plural>true</plural>
+        <value>Marknadsaktiviteterna</value>
+    </caseValues>
+    <caseValues>
+        <article>Indefinite</article>
+        <plural>true</plural>
+        <value>Marknadsaktiviteter</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Marketing activities</value>
+    </caseValues>
+    <fields>
+        <help><!-- This will give different color in Gantt view --></help>
+        <label><!-- Activity class --></label>
+        <name>Activity_Class__c</name>
+        <picklistValues>
+            <masterLabel>Activity blue</masterLabel>
+            <translation><!-- Activity blue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Activity green</masterLabel>
+            <translation><!-- Activity green --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Activity red</masterLabel>
+            <translation><!-- Activity red --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Aktivitetstyp</label>
+        <name>Activitytype__c</name>
+        <relationshipLabel>Marknadsaktivitet</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Performance CRM --></label>
+        <name>CRM__c</name>
+    </fields>
+    <fields>
+        <label>Beskrivning</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Performance ERP --></label>
+        <name>ERP__c</name>
+    </fields>
+    <fields>
+        <label>Slutdatum</label>
+        <name>Ends_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plan --></label>
+        <name>Plan__c</name>
+        <relationshipLabel>Marknadsaktivitet</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Priority level --></label>
+        <name>Priority_level__c</name>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation>Hög</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation>Låg</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium</masterLabel>
+            <translation>Medium</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium low</masterLabel>
+            <translation>Medium låg</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Top</masterLabel>
+            <translation>Högsta</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Projekt</label>
+        <name>Project__c</name>
+        <relationshipLabel>Marknadsaktivitet</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This field is a container for Socialmedia setting, on this marketing activity.
+DONT DO CHANGE THIS! --></help>
+        <label><!-- Performance Social media --></label>
+        <name>Social_media__c</name>
+    </fields>
+    <fields>
+        <label>Startdatum</label>
+        <name>Starts_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>StatusImage__c</name>
+    </fields>
+    <fields>
+        <label>Status ikon id</label>
+        <name>Status_Image_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation>Färdig</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deferred</masterLabel>
+            <translation>Uppskjuten</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation>Pågående</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation>Ej startad</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- If you has mor the one publication of activity --></help>
+        <label><!-- multi_pubication --></label>
+        <name>multi_pubication__c</name>
+    </fields>
+    <fields>
+        <label><!-- oldId --></label>
+        <name>oldId__c</name>
+    </fields>
+    <fields>
+        <label><!-- tempid --></label>
+        <name>tempid__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Event Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

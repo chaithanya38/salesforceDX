@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value>Musqot setting</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value>Musqot setting</value>
+    </caseValues>
+    <fields>
+        <help><!-- This should be a semicolon separate list
+DD-MM-YYYY, DD-MM-YYYY, DD-MM-YYYY --></help>
+        <label><!-- Company holidays --></label>
+        <name>Company_holidays__c</name>
+    </fields>
+    <fields>
+        <label><!-- Drag to change date_Detail --></label>
+        <name>Drag_to_change_date_Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Drag to change date_Main --></label>
+        <name>Drag_to_change_date_Main__c</name>
+    </fields>
+    <fields>
+        <label><!-- Forcasting period --></label>
+        <name>Forcasting_period__c</name>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarter</masterLabel>
+            <translation><!-- Quarter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Week</masterLabel>
+            <translation><!-- Week --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Incl Marketing activity_Detail --></label>
+        <name>Incl_Marketing_activity_Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incl Marketing activity_Main --></label>
+        <name>Incl_Marketing_activity_Main__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incl Milestone_Detail --></label>
+        <name>Incl_Milestone_Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incl Milestone_Main --></label>
+        <name>Incl_Milestone_Main__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incl Task_Detail --></label>
+        <name>Incl_Task_Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incl Task --></label>
+        <name>Incl_Task_main_gantt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Performance milestone_Detail --></label>
+        <name>Performance_milestone_Detail__c</name>
+    </fields>
+    <fields>
+        <help><!-- If this is checked then you need to defined all user who should have access to each Plan --></help>
+        <label><!-- Plan access controll --></label>
+        <name>Plan_access_controll__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Allocation --></label>
+        <name>Use_Allocation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Budget --></label>
+        <name>Use_Budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Finance --></label>
+        <name>Use_Finance1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Forcasting --></label>
+        <name>Use_Forcasting__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use CRM Performance --></label>
+        <name>Use_Performance_CRM__c</name>
+        <picklistValues>
+            <masterLabel>Not used</masterLabel>
+            <translation><!-- Not used --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other CRM system</masterLabel>
+            <translation><!-- Other CRM system --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce (outside Musqot org)</masterLabel>
+            <translation><!-- Salesforce (outside Musqot org) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Use ERP Performance --></label>
+        <name>Use_Performance_ERP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Resource --></label>
+        <name>Use_Resource__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use milestones --></label>
+        <name>Use_milestones__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Socialmedia --></label>
+        <name>Use_socialmedia__c</name>
+    </fields>
+    <fields>
+        <label><!-- keycode --></label>
+        <name>keycode__c</name>
+    </fields>
+    <gender>Neuter</gender>
+</CustomObjectTranslation>

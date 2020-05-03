@@ -1,0 +1,26 @@
+<apex:page sidebar="false" controller="approvalDetail" >
+    <apex:form id="frm">
+        <apex:pageBlock id="block" title="{!$Label.pt_Fund_request}" mode="edit"  >
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_Approve}" action="{!approveRecord}"  reRender="frm"/> 
+                <apex:commandButton value="{!$Label.btn_Reject}" action="{!rejectRecord}" disabled="{!if(fromReject=='true',true,false)}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancleApproval}"/>
+            </apex:pageBlockButtons>            
+            <apex:pageBlockSection title="{!$Label.pbs_Approve_request}" id="section" columns="1" >
+                <apex:outputField label="{!$Label.appr_Request_to}" value="{!amt.project__r.name}"  rendered="{!IF(amt.project__r.name <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_to}" value="{!amt.plan__r.name}"  rendered="{!IF(amt.plan__r.name <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_to}" value="{!amt.Costcentre__r.name}"  rendered="{!IF(amt.Costcentre__r.name <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_from}" value="{!amt.To_Marketing_activity__c}"  rendered="{!IF(amt.To_Marketing_activity__c <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_from}" value="{!amt.To_Project__c}"  rendered="{!IF(amt.To_Project__c <> '',true,false)}"/>
+                <apex:outputField label="{!$Label.appr_Request_from}" value="{!amt.To_Plan__c}"  rendered="{!IF(amt.To_Plan__c <> '',true,false)}"/>
+                <apex:outputText value="{!fiscalYear}" label="Fiscal year" rendered="{!if(amt.FiscalYear__c<>'',true,false)}"/>
+                <apex:inputField style="width:300px;hight:100px;"  value="{!amt.Description__c}" label="{!$Label.inv_Description}"/> 
+                <apex:outputField id="requestamount" value="{!amt.Allocated__c}" label="{!$Label.funr_Requested_amount}"/>
+                <apex:inputField value="{!amt.Approved_Amount__c}"  label="{!$Label.appr_Approved_amount}" id="approvedamount"/>                    
+                <!--<a href="#" onClick="document.getElementById('{!$Component.approvedamount}').value = ''; return false;"></a>-->
+                <apex:outputText value="{!Remainingamount}"  label="{!$Label.finov_Remaining}" rendered="{!IF(amt.To_Plan__c <> null,false,true)}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

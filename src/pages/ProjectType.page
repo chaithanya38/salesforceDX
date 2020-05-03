@@ -1,0 +1,30 @@
+<apex:page controller="ProjectEditController" sidebar="false">
+    <apex:form id="form" >
+        <apex:pageBlock title="{!$Label.pt_Project_types}" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_New}" action="{!NewPrtype}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!plan}" var="row" style="width:700px;">
+                <apex:column headerValue="{!$Label.clm_Action}" style="width:100px;">
+                    <apex:commandLink value="{!$Label.btn_edit}" action="{!ProjectEdit}" style="color:#015ba7">
+                        <apex:param value="{!row.id}" name="pr" assignTo="{!ProjectId}"/>
+                    </apex:commandLink>&nbsp;|&nbsp;
+                    <apex:commandLink action="{!DeleteProject}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!row.Name} ?')) return false;" value="{!$Label.btn_Del}" style="color:#015ba7">               
+                        <apex:param value="{!row.Id}" name="deleteid" assignTo="{!planid}"/>    
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!row.Name}" headerValue="{!$Label.prt_Project_type_name}" style="width:250px;"/>
+                <apex:column style="width:75px;" title="{!SUBSTITUTE(row.Plantype__c,';',', ')}" headerValue="In Plans" >
+                    <apex:outputText rendered="{!LEN(row.Plantype__c)>0}">Limited*</apex:outputText>
+                    <apex:outputText rendered="{!LEN(row.Plantype__c)<1}">All</apex:outputText>
+                </apex:column>
+                <apex:column value="{!row.Fieldset__c}"  style="width:200px;"/>
+                <apex:column headerValue="{!$Label.actt_Bar_color}" style="width:100px;">
+                    <div Style="background-color:#{!HTMLENCODE(row.Color__c)};padding-top:2px;padding-bottom:2px;padding-left:20px;padding-right:20px; height:15px;width:200px;display:inline;">
+                        <span style="color:#fff;">{!row.Color__c}</span> </div>    
+                </apex:column>     
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

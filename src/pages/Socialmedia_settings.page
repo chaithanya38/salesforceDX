@@ -1,0 +1,28 @@
+<apex:page standardController="socialmedia_settings__c" extensions="Socialmedia_Edit_Ctrl"  sidebar="false" id="pg"> 
+    <apex:form id="frm">
+        <apex:pageBlock title="{!$Label.musadmin_Social_media_settings}" mode="Edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_save}"  action="{!updSocial}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.musadmin_Edit_settings}"   >  
+                <apex:inputField value="{!ObjSMS.Name}"  required="True" style="width:200px;" label="{!$Label.musadmin_Name}"/>
+                <apex:inputHidden value="{!ObjSMS.Import_rate__c}" />                
+              <!--  <apex:inputField value="{!ObjSMS.Import_rate__c}" required="True" label="{!$Label.musadmin_Import_rate}"/>     -->            
+                <apex:inputField value="{!ObjSMS.Socialmedia_type__c}" required="True" label="{!$Label.musadmin_Socialmedia_type}"/>
+                <apex:inputField value="{!ObjSMS.Chart__c}" required="True" />
+                <apex:inputField value="{!ObjSMS.Watch_type__c}" required="True" label="{!$Label.musadmin_Watch_type}"/>
+                <!--<apex:inputField value="{!ObjSMS.Type__c}" required="True" label="Type"/>-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Type" for="type"/>
+                    <apex:actionRegion >
+                        <apex:selectList id="type" value="{!ObjSMS.Type__c}"  size="1" multiselect="false" >
+                            <apex:selectOptions value="{!MyOptions}" />
+                        </apex:selectList>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:inputField value="{!ObjSMS.Socialmedia__c}" required="True" label="Social media connetion" />
+            </apex:pageBlockSection>
+</apex:pageBlock>    
+    </apex:form>
+</apex:page>

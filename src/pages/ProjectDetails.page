@@ -1,0 +1,300 @@
+<apex:page sidebar="false" standardStylesheets="false" standardController="Project__c" extensions="ProjectDetailsExtensionController" id="pg" doctype="html-5.0">
+   <style> 
+        .progressBar{
+            background-color:#f8f8f8;
+            border:1px solid #DDDDDD;
+            height:18px;
+            width: 200px;
+           -moz-border-radius: 3px; 
+           -webkit-border-radius: 3px;
+            text-align: center;
+          }
+          .progress{
+            background-color: #ff9933;
+            border:1px solid #E78F08;
+            height:100%;  
+            margin:-1px;
+            text-align:center;
+            -moz-border-radius:3px; 
+            -webkit-border-radius:3px;
+            line-height:15px;
+            font-weight: bold;
+        }
+        .progress2{
+            background-color: #369E2B;
+            border:1px solid #369E2B;
+            height:100%;  
+            margin:-1px;
+            text-align:center;
+        	padding-top:3px;
+            -moz-border-radius:3px; 
+            -webkit-border-radius:3px;
+            line-height:15px;
+            font-weight: bold;
+             }
+          .progress3{
+            background-color: #F52C3D;
+            border:1px solid #F52C3D;
+            height:100%;  
+            margin:-1px;
+            text-align:center;
+            padding-top:3px;
+            -moz-border-radius:3px; 
+            -webkit-border-radius:3px;
+            line-height:15px;
+            font-weight: bold;
+           }
+       .optlinkcls{
+            margin-left:10px;
+            }
+   </style>   
+   <script>
+    if('{!JSENCODE(activeTab)}'=='planMember')
+            document.getElementById('pg:tb6_lbl').click();
+    
+    function myFunction(){
+        location.reload();
+    } 
+    function RemoveEnable(){
+        document.getElementById('pg:plnMember:plnMember1:j_id126:removb').className='btn';
+        document.getElementById('pg:plnMember:plnMember1:j_id126:removb').removeAttribute('disabled');
+    } 
+    </script>
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" />  
+ <!--   <apex:outputPanel layout="block" style=" {!if(Level5=true,'  float: left; width: 65%; padding-right: 1.5%; border-right: 1px solid #DADADA','')}"> -->
+        <apex:outputPanel layout="block" style="float: left; width: 65%;margin:0px;padding-left:0px; padding-right: 1%; border-right: 1px solid #DADADA">
+        
+        
+        <apex:form >
+            <apex:sectionHeader title="{!$Label.mrk_Plan}" subtitle="{!Project__c.Name}"/>
+            <apex:outputPanel layout="block" style="{!if(Level5=true,'float:left;width:60%;','')}"  >
+            
+                <apex:pageBlock title="{!$Label.pt_Plan_detail}"  id="pls">
+                    <apex:pageBlockButtons location="top" rendered="{!Level2}">
+                        <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoProjectEdit}" />
+                        <apex:commandButton value="{!$Label.btn_Delete}" action="{!delete}" onclick="return confirm('{!$Label.musadmin_Will_you_delete},{!Project__c.Name} ?');"/>
+                        <apex:commandButton value="{!$Label.btn_Custom_setting}"  action="{!customset}" reRender="pls" disabled="{!if((Project__c.Plantype__R.Fieldset__c==null || Project__c.Plantype__R.Fieldset__c='None'),true,false)}"/>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection columns="2" >
+                        <apex:outputField value="{!Project__c.Name}" label="{!$Label.pt_Plan_name}"/>
+                        <apex:outputField value="{!Project__c.Plantype__R.name}" label="{!$Label.pt_Plantype}"/>
+                        <apex:outputField value="{!Project__c.Description__c}" label="{!$Label.inv_Description}"/>
+                        <apex:outputField value="{!Project__c.Starts_date__c}" label="{!$Label.pt_Start_date}"/>
+                        <apex:outputField id="owner" value="{!Project__c.OwnerId}" label="{!$Label.pt_Owner}">&nbsp;&nbsp;&nbsp;
+                            <apex:outputLink rendered="{!Level3}" value="{!URLFOR('/' + workId + '/a?retURL=' + URLENCODE($CurrentPage.Url))}">[Change]</apex:outputLink>
+                        </apex:outputField>
+                        <apex:outputField value="{!Project__c.Ends_date__c}" label="{!$Label.pt_End_date}"/>
+                        <apex:outputtext />
+                        <apex:outputField value="{!Project__c.StatusImage__c}" label="{!$Label.tsk_Status}"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:outputPanel>
+            
+            <apex:outputPanel layout="block"  style="float:left;display:inline; width:0px; margin-right:0px;margin-left:1%; min-width:200px;width:39%;" rendered="{!Level5}" >                
+                <apex:pageBlock title="{!$Label.musadmin_Performance}" tabStyle="Costcentre__c"  id="perform" >
+                <apex:pageBlockButtons location="top" rendered="{!Level2}"  style="float:right;height:24px;">
+                    <apex:outputLink value="/apex/ProjectPerformance?planId={!workId}" target="_self" rendered="{!if(Project__c.CRM__c <>null ||Project__c.ERP__c <>null||Project__c.Social_media__c<>null,true,false)}" >
+                        <img  src="{!URLFOR($Resource.musqot__Gantt_chart)}"   alt="{!$Label.btn_performance}" title="{!$Label.btn_performance}" height="24" />
+                    </apex:outputLink>
+                    </apex:pageBlockButtons>
+                    <apex:include pageName="FinancialGuageChart"  rendered="true"  />
+                </apex:pageBlock>
+           </apex:outputPanel>
+        </apex:form> 
+        <apex:tabPanel switchType="client"  id="theTabPanel" value="{!tabInFocus}">
+            <apex:tab label="{!$Label.tb_Overview}"  name="tabDetails" id="tabDetails">
+                <apex:form > 
+                    <!--<apex:pageMessages ></apex:pageMessages>-->
+                    <apex:pageBlock title="{!$Label.pt_Presentation}" >
+                        <apex:pageBlockButtons location="top" >                       
+                            <apex:commandButton value="{!$Label.btn_edit}" action="{!workSpace}" immediate="true" rendered="{!Level2}"/>
+                            <apex:commandButton value="{!$Label.btn_Attachment_document}" action="{!Savedoc}" rendered="{!Level1}" />                     
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </apex:form>
+                <apex:form id="for_workspace">            
+                    <table width="100%" id="table1" style="border-spacing: 10px;">                    
+                        <apex:repeat value="{!workSpaceList}" var="wrk">
+                            <tr>                            
+                                <td  valign="top">
+                                    <h1><apex:outputText value="{!workSpaceList[0].Name}"/><br/></h1>
+                                    <apex:dynamicComponent componentValue="{!gadgetHTMLContent}"/>
+                                </td>                           
+                                <td width="250px" valign="top">                                
+                                    <apex:outputText value="{!workSpaceList[0].Description__c}"/> 
+                                    <br/>
+                                    <br/> 
+                                    <apex:pageBlock tabStyle="Musqot_admin__tab" rendered="{!Level1}"> 
+                                        <apex:outputText style="font-weight: bold;" value="{!$Label.pt_Attachments}" rendered="{!IF(wrk.NotesAndAttachments.size>0,true,false)}"/><br/>
+                                        <br/>
+                             
+                                         <apex:repeat value="{!AttLinks}" var="wk" > 
+                                            <div style="vertical-align: middle;line-height:28px;padding-left:5px;background-image: url({!$Resource.Download});background-repeat:no-repeat;">                                                                                                                                                                                          
+                                                <a href="/servlet/servlet.FileDownload?file={!wk.id}" download="{!wk.name}" style="text-decoration:none">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;                                                                                                                          
+                                             <apex:commandLink Target="_self" action="{!gotoattchmentpage}" rendered="{!Level1}" id="optlink" style=""  value="{!wk.Name}">                                                          
+                                                 <apex:param name="atmid" value="{!wk.id}"/>
+                                             </apex:commandLink>
+                                            </div> 
+                                        </apex:repeat>                                        
+                                    </apex:pageBlock>   
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                    </table>               
+                </apex:form>
+            </apex:tab>
+            <apex:tab label="{!$Label.tb_Project}" reRender="work"  rendered="{!Level1}" name="Projtab" id="Projtab" >
+                <apex:form >
+                    <apex:pageBlock title="{!$Label.pt_Projects}" helpTitle="{!$Label.Help_Projects_help_page}" helpUrl="/apex/Projects_help_page">      
+                        <apex:pageBlockButtons location="top" rendered="{!Level2}">
+                            <apex:commandButton value="{!$Label.btn_New_project}" action="{!newPoject}" disabled="{!if(pro.Ends_date__c<todate,true,false)}"/>
+                        </apex:pageBlockButtons>               
+                        
+                        <apex:pageBlockTable value="{!subRecs}" var="s" id="myTable" rendered="{!IF(subRecs.size>0,true,false)}">                 
+                            <apex:column headerValue="{!$Label.sub_Project_name}">
+                                <a href="/{!s.Id}"><apex:outputText value="{!s.Name}"/></a>
+                            </apex:column>
+                            <apex:column headerValue="{!$Label.sub_Project_type}" value="{!s.Project_type__r.name}"/> 
+                            <apex:column value="{!s.Starts_date__c}" headerValue="{!$Label.pt_Start_date}"/>
+                            <apex:column value="{!s.Ends_date__c}"  headerValue="{!$Label.pt_End_date}"/>
+                            <apex:column value="{!s.StatusImage__c}" styleClass="tooltip" style="display:inline" title="{!s.Status__c}"  headerValue="{!$Label.sub_Status}"/> 
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+            <apex:tab label="{!$Label.tb_Tasks}" reRender="work1" rendered="{!Level1}" id="tb3">
+                <apex:form >
+                    <apex:pageBlock title="{!$Label.pt_Tasks_list}" helpTitle="{!$Label.Help_Tasks_help_page}" helpUrl="/apex/Taskhelppage">
+                        <apex:pageBlockButtons location="top"   rendered="{!Level2}">
+                            <apex:commandButton value="{!$Label.btn_New_task}" action="{!newtask}" />
+                        </apex:pageBlockButtons>               
+                        <apex:pageBlockTable value="{!taskrecs}" var="t" id="myTable1" columnsWidth="*,140,140,35,35,75,35" rendered="{!IF(taskrecs.size>0,true,false)}">                 
+                            <apex:column headerValue="{!$Label.tsk_Task}">
+                                <apex:commandLink value="{!t.Task_name__c}" action="{!gotoTaskEdit}">
+                                    <apex:param name="taskid" value="{!t.id}"/></apex:commandLink>
+                            </apex:column> 
+                            <apex:column value="{!t.OwnerId}" headerValue="{!$Label.tsk_Assigned_To}"/>
+                            <apex:column value="{!t.CreatedById}" headerValue="{!$Label.taskcreatedby}"/>
+                            <apex:column value="{!t.Allocated_h__c}"  headerValue="{!$Label.tsk_estimated_time_short}" title="{!$Label.tsk_estimated_time}" />
+                            <apex:column value="{!t.Outcome_h__c}"  headerValue="{!$Label.tsk_outcome_time_short}" title="{!$Label.tsk_outcome_time}" /> 
+                            <apex:column value="{!t.ActivityDate}" headerValue="{!$Label.tsk_Due_Date}"/>
+                            <apex:column value="{!t.StatusImage__c}" styleClass="tooltip" title="{!t.Status}" headerValue="{!$Label.tsk_Status}"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+            <apex:tab label="{!$Label.tb_Members}"  rendered="{!Level1}" id="tb4"> 
+                <apex:form >
+                    <apex:pageBlock title="{!$Label.pt_Members}" helpTitle="{!$Label.Help_Members_help_page}" helpUrl="/apex/Membershelppage">
+                        <apex:pageBlockButtons location="top" >
+                            <apex:commandButton value="{!$Label.btn_Add_member}" action="{!newMember}"  rendered="{!Level2}"/>
+                        </apex:pageBlockButtons> 
+                        <apex:pageBlockTable value="{!members}" var="mi" columnsWidth="200,200,200,*" rendered="{!IF(members.size>0,true,false)}"> 
+                            <apex:column rendered="{!Level2}" headerValue="{!$Label.musadmin_Name}">
+                                <apex:image value="{!mi.ProjUsers__r.smallphotourl}" height="16px" style="margin:0px;"/>&nbsp;&nbsp;&nbsp;
+                                <apex:commandLink value="{!mi.ProjUsers__r.name}"  rendered="{!IF(mi.Role__c<>'Owner'&&Level2,true,false)}" action="{!gotoMemberEdit}">
+                                    <apex:param name="mbrId" value="{!mi.Id}"/> 
+                                </apex:commandLink>  
+                                <apex:outputText value="{!mi.ProjUsers__r.name}" rendered="{!IF(mi.Role__c='Owner'&&Level2,true,false)}" />  
+                            </apex:column>
+                            <apex:column value="{!mi.ProjUsers__r.email}" id="text" headerValue="{!$Label.mem_Email}"/>
+                            <apex:column value="{!mi.Role__c}" headerValue="{!$Label.mem_Role}"/>                            
+                        </apex:pageBlockTable>
+                        <apex:pageBlockTable value="{!parentmembers}" var="pmi" columnsWidth="200,200,200,*"  rendered="{!IF(parentmembers.size>0,true,false)}">                            
+                            <apex:column headerValue="{!$Label.mem_Parent}">
+                                <apex:image value="{!pmi.Costcentre__r.cc_Owner__r.smallphotourl}" height="16px" style="margin:0px;"/>&nbsp;&nbsp;&nbsp;                                
+                                <apex:outputText value="{!pmi.Costcentre__r.Owner.name}"/>
+                            </apex:column>
+                                <apex:column value="{!pmi.Costcentre__r.Email__c}" headerValue="{!$Label.mem_Email}"/>
+                            <apex:column value="{!$Label.cc_CC_Owner} ({!pmi.Costcentre__r.name})" headerValue="{!$Label.mem_Role}"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+            <apex:tab label="{!$Label.plan_members }" id="tb6" rendered="{!if(act.Plan_access_controll__c && Level2,true,false)}">
+                <apex:form id="plnMember"> 
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:pageBlock title="{!$Label.plan_members}" id="plnMember1" helpTitle="{!$Label.Help_Members_help_page}" helpUrl="/apex/Membershelppage">
+                  
+                    <apex:pageBlockButtons location="top" >
+                         <apex:commandButton value="{!$Label.btn_Add_member}" action="{!planNewmember}" />
+                         <apex:commandButton value="{!$Label.btn_Remove}" id="removb" onclick="return confirm('{!$Label.mem_Will_you_remove}?')" action="{!delMember}"/>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockTable value="{!listWrapper}" var="w" columnsWidth="50,*,*,*,*" rendered="{!if(listWrapper.size>0,true,false)}"> 
+                        <apex:column title="{!$Label.clm_Action}">
+                            <apex:facet name="header">
+                                <apex:inputCheckbox value="{!allBool}" rendered="{!if(w.powner='Owner',false,true)}">
+                                </apex:inputCheckbox>
+                                {!$Label.clm_Action}
+                            </apex:facet>
+                            <apex:inputCheckbox value="{!w.checked}" rendered="{!if(w.powner='Owner',false,true)}" onclick="RemoveEnable();"/>
+                            <apex:inputHidden value="{!w.checked}" rendered="{!if(w.powner='Owner',true,false)}" />
+                        </apex:column>
+     
+                        <apex:column headerValue="{!$Label.musadmin_Name}">
+                            <apex:image value="{!w.pmem.userid__r.smallphotourl}" height="16px"/>&nbsp;&nbsp;
+                            {!w.pmem.userid__r.Name}
+                        </apex:column>    
+                        <apex:column value="{!w.pmem.userid__r.Email}" id="text" headerValue="{!$Label.mem_Email}"/>
+                        <apex:column value="{!w.pmem.userid__r.department}" headerValue="{!$Label.Resource_Department}"/> 
+                        <apex:column value="{!w.pmRole}" headerValue="{!$Label.mem_Role}"/>   
+                   </apex:pageBlockTable>
+                </apex:pageBlock>
+                </apex:form>  
+            </apex:tab>   
+            <apex:tab label="{!$Label.tb_Milestones}"  id="tb5"  rendered="{!Level4}">
+                <apex:form id="milstone">
+                    <apex:pageBlock title="{!$Label.pt_Milestones}" helpTitle="{!$Label.Help_Milestones_help_page}" helpUrl="/apex/Milestonehelppage">
+                        <apex:pageBlockButtons location="top" rendered="{!Level2}">
+                            <apex:commandButton value="{!$Label.btn_New_milestone}" action="{!newMilstone}"/>
+                        </apex:pageBlockButtons>               
+                        <apex:pageBlockTable value="{!milston}" var="mi"   rendered="{!IF(AND(NOT(ISBLANK(milston)),milston.size>0),true,false)}"> 
+                            <apex:column rendered="{!Level2}" headerValue="{!$Label.mil_Milestone}">                   
+                                <apex:commandLink value="{!mi.mil.Name}" rendered="{!Level2}" action="{!gotoMilestoneEdit}">
+                                    <apex:param name="mileId" value="{!mi.mil.Id}"/> 
+                                </apex:commandLink> 
+                            </apex:column>           
+                            <apex:column headerValue="{!$Label.mil_Target}" > 
+                                <apex:outputLabel rendered="{!IF(mi.mil.Milestone_type__c==9,true,false)}" value="{!$Label.mil_Other}"></apex:outputLabel>
+                                <apex:outputLabel rendered="{!IF(mi.mil.Milestone_type__c==1,true,false)}" value="{!mi.mil.Target_Project__r.Name}"></apex:outputLabel>
+                                <apex:outputLabel rendered="{!IF(mi.mil.Milestone_type__c==2,true,false)}"  value="{!mi.mil.Target_Marketing_activity__r.Name}"></apex:outputLabel>
+                                <apex:outputLabel rendered="{!IF(mi.mil.Milestone_type__c==3,true,false)}"  value="{!mi.mil.Target_Socialmedia__r.Name}"></apex:outputLabel>
+                                <apex:outputLabel rendered="{!IF(mi.mil.Milestone_type__c==4,true,false)}"  value="{!mi.mil.Target_ERP_Sales__r.Name}"></apex:outputLabel>
+                                <apex:outputLabel rendered="{!IF(mi.mil.Milestone_type__c==5,true,false)}"  value="{!mi.mil.Target_CRM_settings__r.Name}"></apex:outputLabel>
+                            </apex:column>  
+                            <apex:column value="{!mi.mil.Targetdate__c}" headerValue="{!$Label.mil_Target_date}" />
+                            <apex:column headerValue="{!$Label.mil_Target_outcome_volume}">
+                                <apex:outputLabel rendered="{!IF(mi.mil.Target_number__c <> NULL,true,false)}"  >
+                                    {!mi.mil.Target_number_outcome__c} ({!mi.mil.Target_number__c})
+                                </apex:outputLabel>
+             				<apex:outputLabel rendered="{!IF(mi.mil.Target_number__c <> NULL,false,true)}" value="-" ></apex:outputLabel>
+                            </apex:column>
+                            <apex:column value="{!mi.mil.Status__c}"  headerValue="{!$Label.tsk_Status}"/>
+                             <apex:column headerValue="{!$Label.clm_Progress}" width="204px" >
+                                 <apex:outputPanel rendered="{!IF(AND(NOT(ISBLANK(milston)),milston.size>0),true,false)}">
+                                    <div  class="progressBar"> 
+                                        <div class="{!IF(mi.mil.Status__c=='Reach on time','progress2','progress')}" style="width:{!IF(AND(NOT(ISBLANK(mi.iProgress_value)),mi.iProgress_value<100),mi.iProgress_value,100)}%;"> 
+                                            <span >{!mi.displayblock}</span>
+                                        </div>
+                                    </div>
+                                 </apex:outputPanel>     
+                            </apex:column>  
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:tab>
+        </apex:tabPanel>
+        <apex:include pageName="FinancialSummary" rendered="{!Level2}"/>
+    </apex:outputPanel>
+    <apex:outputPanel layout="block" style="float:right;width:33%;margin:0px;"  >
+        <chatter:feed entityId="{!Id}" rendered="{!Level1}" />
+    </apex:outputPanel> 
+    <script>
+     function keepIds(el) {
+      var id = $(el).closest("tr").find('td:eq(2)').text();
+     alert(id);   
+       
+     }
+    </script>
+</apex:page>

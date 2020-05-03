@@ -1,0 +1,53 @@
+<apex:page standardController="Attachment" extensions="AttachmentInfoController" sidebar="false" tabStyle="Project__c">
+    <apex:sectionHeader subtitle="{!attachmentName}" title="Attachment" />
+    <apex:form id="frm">
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock title="{!$label.pt_Attachment_information }" mode="edit" >
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_edit}" action="{!EditAttachmentPage}" rendered="{!showRec}" reRender="frm"/>
+                <apex:commandButton value="{!$Label.btn_Remove}" rendered="{!showRec}" action="{!delDoc}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete} {!atts[0].Name}?')) return false;" />
+                <apex:commandButton value="{!$Label.btn_save}" action="{!savedoc}" rendered="{!showEdt}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" rendered="{!showRec}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!backtoAttinfo}" rendered="{!showEdt}"/>&nbsp;
+                <apex:outputPanel rendered="{!showRec}">&nbsp;&nbsp;
+                    <a href="/servlet/servlet.FileDownload?file={!atts[0].id}" download="{!atts[0].name}">
+                        <apex:image url="{!$Resource.Download}" style="margin-top:0px" width="24" height="24"/>
+                    </a></apex:outputPanel>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2"  collapsible="False" rendered="{!showRec}"  >  
+                <!--<apex:outputField value="{!atts[0].Name}" label="{!$Label.att_File_Name}"/>-->
+                <apex:outputText value="{!attachmentName}" label="{!$Label.att_File_Name}"/>
+                <apex:outputText label="{!$Label.att_File_type}">    
+                    {!atts[0].contentType} 
+                </apex:outputText>
+                <apex:outputField value="{!atts[0].Description}" label="{!$Label.inv_Description}"/>
+                <apex:outputText label="{!$Label.att_File_size}"> 
+                    {!fileSize} {!fileSize2} 
+                </apex:outputText> 
+                <apex:outputField label="{!$Label.att_Owner_name}"  value="{!atts[0].OwnerID}"/> 
+                <!--<apex:outputText label="{!$Label.att_Download}">
+<a target="_Blank" href="{!URLFOR($Action.Attachment.Download, atts[0].id)}" title="{!$Label.att_Download}" >{!atts[0].Name}</a>
+</apex:outputText>-->  
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1" title="{!$Label.att_Edit_attachment}" collapsible="False" rendered="{!showEdt}">
+                <apex:inputText value="{!attachmentName}" label="{!$Label.att_File_Name}"></apex:inputText>
+                <apex:inputField style="width:300px;height:100px;"  value="{!att.Description}" label="{!$Label.inv_Description}"/>                              
+                <apex:outputText label=" ">This will replace the previous file</apex:outputText>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value=" "></apex:outputText>
+                    <apex:inputFile value="{!att.body}" filename="{!att.name}" contentType="{!contentType}" id="file" onchange="check(this)"/>
+                </apex:pageBlockSectionItem> 
+                <apex:inputText value="{!fileNmaeWithExtension}" id="ip" style="display:none"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Preview" id="Resume" rendered="{!if(showRec  && showPreveiw ,true,false)}">
+               <apex:iframe src="/servlet/servlet.FileDownload?file={!atts[0].id}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+    function check(obj_inpf)
+    { 
+        var s= document.getElementById("j_id0:frm:j_id28:j_id47:ip").value=obj_inpf.value;
+    }
+    </script>
+</apex:page>

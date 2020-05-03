@@ -1,0 +1,330 @@
+<apex:page controller="Performance_setting_controller" sidebar="false" tabStyle="Musqot_admin__tab">
+    <style>
+        .Links {
+            margin-top: -24px;
+        }
+        
+        .bPageBlock .detailList tr td, .bPageBlock .detailList tr th, .hoverDetail .bPageBlock .detailList tr td, .hoverDetail .bPageBlock .detailList tr th {border: 0 !important;}
+    </style>
+    
+    
+   <apex:form id="theForm">
+          <apex:actionFunction action="{!setSocialMediaValue}" name="setSocialMediaValue" >
+              <apex:param id="sm" name="sm" value="" />
+          </apex:actionFunction>
+        <apex:pageBlock title="{!$Label.musadmin_Performance_settings}" mode="maindetail" tabStyle="Musqot_admin__tab" id="thePb">   
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:outputPanel layout="block" styleclass="container" id="outpanal"  >
+                <apex:pageBlockSection collapsible="true" title="{!$Label.musadmin_Social_media_Performance}" showHeader="true" columns="1" id="thepbs" ><!--rendered="{!if(act.Use_socialmedia__c,true,false)}">-->
+                    <div  class="Links" style="margin-left:20px;margin-bottom:5px;display:inline;float:right;text-decoration:None;"> 
+                        <a style="text-decoration:None;" href="javascript:openPopupFocusEscapePounds('/apex/Socialmediahelppage', 'Help', 1024, 768, 'width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no', false, false);" class="linkCol">
+                            <span class="helpLink">Social media help page</span>
+                            <img src="/s.gif" alt="Social media help page (New Window)" class="helpIcon" style="vertical-align:text-bottom;" title="Social media help page (New Window)"/>
+                        </a>
+                    </div>
+                    
+                                   
+              <!-- Modified by chaithanya -- start -->
+              <apex:outputPanel layout="block" style="float:left;width:100%; border:none" rendered="{!mediaFilterList.size!=0}">                        
+                  <apex:pageBlockSection columns="2" id="pbs" >
+                      <apex:panelGrid columns="2">
+                        <apex:actionRegion >
+                        <apex:pageBlockSectionItem id="pbsi">                                         
+                        <apex:selectList id="smFilter" value="{!selectedMediaFilter}" size="1" multiselect="false">
+                            <apex:selectOptions value="{!mediaFilterList}" />
+                            <apex:actionSupport event="onchange" action="{!LoadDataByFilter}" reRender="theForm" onsubmit="saveSocialMediaToBrowserCookie(this.value)" oncomplete="setLastSelectedTab()"/>
+                        </apex:selectList>   
+                        </apex:pageBlockSectionItem>&nbsp;
+                        </apex:actionRegion>
+                                               
+                        <apex:actionRegion >
+                        <div id="hhhh" style="width:400px;display:inline;float:left;">
+                        <apex:outputLabel value="Auto import" for="autoImportChBox" style="position:relative;bottom:6px; padding-left:27px;">
+                            <apex:inputCheckbox label="Autoimport" value="{!isAutoimport}" selected="{!isAutoimport}" id="autoImportChBox">
+                           <apex:actionSupport event="onchange" action="{!LoadDataByFilter}" reRender="theForm" onsubmit="saveAutoimportToBrowserCookie(this.checked)" oncomplete="setLastSelectedTab()"/>
+                        </apex:inputCheckbox>
+                        </apex:outputLabel><br/>
+                         
+                        <apex:outputLabel value="Non Autoimport" for="nonAutoImportChBox" style="position:relative;bottom:6px; padding-left:5px;">
+                            <apex:inputCheckbox label="Non Autoimport" value="{!isNonAutoimport}" selected="{!isNonAutoimport}" id="nonAutoImportChBox">
+                            <apex:actionSupport event="onchange" action="{!LoadDataByFilter}" reRender="theForm" onsubmit="saveNonAutoimportToBrowserCookie(this.checked)" oncomplete="setLastSelectedTab()"/>
+                        </apex:inputCheckbox>
+                        </apex:outputLabel>
+                       </div>
+                       </apex:actionRegion>
+                      </apex:panelGrid>
+                  </apex:pageBlockSection>
+              </apex:outputPanel>
+             <!-- Modified by chaithanya -- end -->
+                   
+                   <!--    
+              START FILTER HERE
+                <apex:outputPanel layout="block" style="float:left;width:100%; border:none" rendered="{!IF(AND(NOT(ISBLANK(mediaTypeList)),mediaTypeList.size>0),true,false)}" >               
+                <apex:pageBlockSection columns="2" id="pbs">
+                   <apex:panelGrid columns="2">
+                   <apex:actionRegion >
+                        <apex:pageBlockSectionItem id="pbsi">  Media type:  &nbsp;
+                            <apex:selectList id="sts"  value="{!selectedMedia}" size="1" multiselect="false" >
+                                <apex:selectOptions value="{!mediaTypeList}"/>
+                                <apex:actionSupport event="onchange" reRender="theForm"/>     
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>&nbsp;
+                   </apex:actionRegion>        
+                   <apex:actionRegion >
+                       <div style="float:left:25px">
+                        <apex:outputLabel value="Auto import" for="Autoimport1" style="position:relative;bottom:6px; padding-left:27px;">
+                            <apex:inputCheckbox value="{!autoImport}" id="Autoimport1">
+                                <apex:actionSupport event="onclick" rerender="theForm" />       
+                            </apex:inputCheckbox>
+                         </apex:outputLabel><br/>
+                         <apex:outputLabel value="Non Autoimport" for="NonAutoimport1" style="position:relative;bottom:6px; padding-left:5px;">       
+                             <apex:inputCheckbox value="{!nonAutoImport}" id="NonAutoimport1">
+                                <apex:actionSupport event="onclick" rerender="theForm"/>    
+                             </apex:inputCheckbox> 
+                         </apex:outputLabel>   
+                       </div >      
+                    </apex:actionRegion>
+                 </apex:panelGrid>
+              </apex:pageBlockSection>
+               </apex:outputPanel>
+                                          -->
+                    
+                    <apex:outputPanel id="SocMedia">
+                    <apex:tabPanel switchType="client"  id="theTabPanel"  value="{!selectedTab}" onclick="setActiveTabInCookie(this);"> 
+                        <apex:tab label="Social media connections" id="social" name="socialMediaConition" >
+                            <apex:pageBlockSection collapsible="false"  title="Social media connections" showHeader="true" columns="1">
+                                <apex:commandButton value="{!$Label.btn_New}"  action="{!NewConnection}" disabled="{!isNumberofConnections}"/><br/>
+                                <apex:pageBlockTable value="{!socialMediaConnection}" var="conn" style="width:700px;" id="soc" rendered="{!if(socialMediaConnection.size>0,true,false)}">
+                                    <apex:column headerValue="{!$Label.clm_Action}" style="width:90px;">
+                                        <apex:commandLink value="{!$Label.btn_edit}" action="{!editConnection}" style="color:#015ba7"> 
+                                             <apex:param name="conid" value="{!conn.Id}" /> 
+                                        </apex:commandLink>&nbsp;|&nbsp;
+                                        <apex:commandLink onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!conn.Name} ?')) return false;" value="{!$Label.btn_Del}" action="{!DeleteConnection}" style="color:#015ba7">       
+                                            <apex:param value="{!conn.id}" name="deleteconnid"/>    
+                                        </apex:commandLink>   
+                                    </apex:column>
+                                    <apex:column value="{!conn.Name}" headerValue="Connection name" style="width:200px;"/>  
+                                    <apex:column value="{!conn.Social_media__c}" style="width:210px;"/> 
+                                    <apex:column value="{!conn.End_Date__c}" headerValue="End date" style="width:80px;"/>                              
+                                    <apex:column value="{!conn.Auto_import__c}" headerValue="Auto import" style="width:20px;"/>                               
+                                </apex:pageBlockTable>
+                          </apex:pageBlockSection>
+                        </apex:tab>
+                        <apex:tab label="{!$Label.musadmin_Social_media_settings}" id="smseting" name="Socialmediasettings" >
+                            <apex:pageBlockSection collapsible="false"  title="{!$Label.musadmin_Social_media_settings}" showHeader="true" columns="1">
+                                <apex:commandButton value="{!$Label.btn_New}"  action="{!NewSocial}" disabled="{!hide1}"/><br/>
+                                <apex:pageBlockTable value="{!socialMediaSettings}" var="social" style="width:800px;" rendered="{!if(socialMediaSettings.size>0,true,false)}">
+                                    <apex:column headerValue="{!$Label.clm_Action}" style="width:90px;">
+                                        <apex:commandLink value="{!$Label.btn_edit}" action="{!editPage}"  style="color:#015ba7"> 
+                                             <apex:param name="socialid" value="{!social.Id}" /> <!-- -->
+                                        </apex:commandLink>&nbsp;|&nbsp;
+                                        <apex:commandLink onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!social.Name} ?')) return false;" value="{!$Label.btn_Del}" action="{!DeleteSettings}" reRender="" style="color:#015ba7">       
+                                            <apex:param value="{!social.id}" name="deleteid"  />    
+                                        </apex:commandLink>
+                                    </apex:column>
+                                    <apex:column value="{!social.Name}" headerValue="{!$Label.musadmin_Social_media_name}" style="width:185px;"/>  
+                                    <apex:column value="{!social.Type__c}" headerValue="Performance type" style="width:175px;"/> 
+                            <!--        <apex:column value="{!social.Socialmedia_type__c}" headerValue="{!$Label.musadmin_Socialmedia_type}" style="width:75px;"/> -->
+                                    <apex:column value="{!social.Watch_type__c}" headerValue="{!$Label.musadmin_Watch_type}" style="width:100px;"/> 
+                            <!--        <apex:column value="{!social.Import_rate__c}" headerValue="{!$Label.musadmin_Import_rate}" style="width:50px;"/> -->
+                                    <apex:column value="{!social.Chart__c}" headerValue="{!$Label.musadmin_Charts}" style="width:75px;"/>  
+                                    <apex:column value="{!social.Socialmedia__c}" headerValue="Connection" style="width:120px;"/> 
+                                </apex:pageBlockTable>
+                          </apex:pageBlockSection>
+                        </apex:tab>
+                        <apex:tab label="{!$Label.musadmin_Social_media_import_log}" name="socialmediaImportlog" id="socImport" >
+                            <apex:pageBlockSection title="{!$Label.musadmin_Social_media_import_log}" collapsible="false" columns="1" >
+                                 <apex:pageBlockTable value="{!socialMediaLogFiles}" var="sm" rendered="{!IF(socialMediaLogFiles.size>0,true,false)}" style="width:900px;">
+                                    <apex:column value="{!sm.createdDate}" headerValue="{!$Label.musadmin_Imported_Date}" style="width:130px;"/>
+                                    <apex:column headerValue="{!$Label.musadmin_Name}" value="{!sm.Name}" style="width:170px;" />                                                                         
+                                    <apex:column value="{!sm.Imported__c}"  style="width:50px;"/>
+                                    <apex:column headerValue="{!$Label.musadmin_Records}"  title="Number of records" value="{!sm.Number_of_records__c}" style="position:ceneter;width:100px;"/>
+                                    <apex:column value="{!sm.Import_message__c}" headerValue="{!$Label.musadmin_Import_message}" style="width:450px;"/>
+                                </apex:pageBlockTable>
+                            </apex:pageBlockSection>
+                       </apex:tab>
+                   </apex:tabPanel>
+                  </apex:outputPanel>  
+                </apex:pageBlockSection>   
+                <apex:pageBlockSection collapsible="true"  title="{!$Label.musadmin_ERP_Performance}" showHeader="true" columns="1" id="pbs1" rendered="{!if(act.Use_Performance_ERP__c ,true,false)}">
+                    <div  class="Links" style="margin-left:20px;margin-bottom:5px;display:inline;float:right;text-decoration:None;"> 
+                        <a style="text-decoration:None;" href="javascript:openPopupFocusEscapePounds('/apex/ERPhelppage', 'Help', 1024, 768, 'width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no', false, false);" class="linkCol">
+                            <span class="helpLink">ERP help page</span>
+                            <img src="/s.gif" alt="ERP help page (New Window)" class="helpIcon" style="vertical-align:text-bottom;" title="ERP help page (New Window)"/>
+                        </a>
+                    </div>
+                    <apex:tabPanel switchType="client" selectedTab="{!selectedTab}" value="{!selectedTab}" id="PN1">
+                        <apex:tab label="{!$Label.musadmin_ERP_settings}" id="erp">
+                            <apex:pageBlockSection title="{!$Label.musadmin_ERP_settings}" collapsible="false" columns="1">
+                                <apex:commandButton value="{!$Label.btn_New}" action="{!newERP}" disabled="{!hide}"/><br/>
+                                <apex:pageBlockTable value="{!ERP}" var="ei" style="width:800px;" rendered="{!if(ERP.size>0,true,false)}"> 
+                                    <apex:column headerValue="{!$Label.clm_Action}" style="width:90px;">                   
+                                        <apex:commandLink value="{!$Label.btn_edit}" action="{!gotoERPedit}" style="color:#015ba7">
+                                            <apex:param name="erpid" value="{!ei.id}"/> 
+                                        </apex:commandLink>&nbsp;|&nbsp;
+                                        <apex:commandLink action="{!deletemethod}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!ei.Name} ?')) return false;" value="{!$Label.btn_Del}" style="color:#015ba7">               
+                                            <apex:param value="{!ei.id}" name="deleteid" assignTo="{!erpId}"/>
+                                        </apex:commandLink>
+                                   </apex:column>           
+                                   <apex:column headerValue="{!$Label.musadmin_Name}" value="{!ei.Name}" style="width:210px;"/>     
+                                   <apex:column value="{!ei.ERP_performance_type__c}" style="width:200px;"/> 
+                                    <apex:column headerValue="{!$Label.musadmin_Selector}" value="{!ei.Selector__c}" style="width:100px;"/> 
+                                   <apex:column headerValue="{!$Label.musadmin_Charts}" value="{!ei.erp_Chart__c}" style="width:75px;"/>  
+                                </apex:pageBlockTable>
+                            </apex:pageBlockSection>
+                        </apex:tab>
+                        <apex:tab label="{!$Label.musadmin_ERP_import}"  id="erp1" name="ERP_import" >
+                            <apex:pageBlockSection title="{!$Label.musadmin_ERP_import}" collapsible="false" columns="1" id="pbs">
+                                <apex:outputLabel value="{!$Label.musadmin_Select_a_CSV_file_with_salesdata}"/>   
+                                    <!--apex:inputfile accept="csv" title="" value="{!myfile.body}" filename="{!myfile.Name}"   /> -->
+                                    <apex:inputfile accept="csv" title="" value="{!csvFileBody}" filename="{!csvName}" id="file"/> 
+                                    <apex:message for="file"/>                                                        
+                                <apex:pageBlockSectionItem >
+                                <apex:outputPanel layout="block" style="padding-bottom:20px; width:300px;">
+                                <div style="float:left">                                                    
+                                <apex:selectList value="{!selecteddateformat}" multiselect="false" size="1">
+                                    <apex:selectOption itemValue="1" itemLabel="mm/dd/yyyy"/>
+                                    <apex:selectOption itemValue="2" itemLabel="dd/mm/yyyy"/>
+                                    <apex:selectOption itemValue="3" itemLabel="yyyy-mm-dd"/>                                    
+                                </apex:selectList>&nbsp;
+                                <apex:outputText value="Date format in the CSV file." label="{!$Label.musadmin_dateformat}"/>&nbsp;
+                                    <br/>
+                                <apex:outputText value="The delimiter can be '/' or '-' for all date format." label="{!$Label.musadmin_dateformat}"/>
+                                </div>   
+                                </apex:outputPanel>
+                                </apex:pageBlockSectionItem>  
+                                <apex:outputText value="Please select csv file" style="color:red" rendered="{!text}"/>                                                              
+                                <apex:commandbutton value="{!$Label.btn_Upload}" action="{!Savedoc}" id="upb"/>
+                            </apex:pageBlockSection>
+                        </apex:tab>
+                        <apex:tab label="{!$Label.musadmin_ERP_import_log}" id="erp2">
+                            <apex:pageBlockSection title="{!$Label.musadmin_ERP_import_log}" collapsible="false" columns="1"/>
+                                <apex:pageBlockTable value="{!erpLoglist}" var="e" rendered="{!IF(erpLoglist.size>0,true,false)}" style="width:900px;">
+                                    <apex:column value="{!e.createdDate}" headerValue="{!$Label.musadmin_Imported_Date}" style="width:130px;"/>
+                                    <apex:column headerValue="{!$Label.att_File_Name}" style="width:150px;">
+                                        <apex:repeat var="c" value="{!e.NotesAndAttachments}">
+                                            <apex:outputText value="{!c.Title }"/></apex:repeat>
+                                    </apex:column>
+                                    <apex:column value="{!e.ownerID}" headerValue="{!$Label.pt_Owner}" style="width:150px;"/>
+                                    <apex:column headerValue="{!$Label.musadmin_Records}"  title="Number of records" value="{!e.Number_of_records__c}" style="position:ceneter;width:70px;"/>
+                                    <apex:column value="{!e.Import_message__c}" headerValue="{!$Label.musadmin_Import_message}" style="width:450px;"/>
+                                </apex:pageBlockTable>
+                            <!--</apex:pageBlockSection> -->
+                        </apex:tab>
+                    </apex:tabPanel>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection collapsible="true"  title="{!$Label.musadmin_CRM_Performance}" showHeader="true" columns="1" rendered="{!if(act.Use_Performance_CRM__c=='Not used',false,true)}"  >
+                            <div  class="Links" style="margin-left:20px;margin-bottom:6px;display:inline;float:right;text-decoration:None;"> 
+                                <a style="text-decoration:None;" href="javascript:openPopupFocusEscapePounds('/apex/crmhelppage', 'Help', 1024, 768, 'width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no', false, false);" class="linkCol">
+                                    <span class="helpLink">CRM help page</span>
+                                    <img src="/s.gif" alt="CRM help page (New Window)" class="helpIcon" style="vertical-align:text-bottom;" title="CRM help page (New Window)"/>
+                                </a>
+                            </div>
+                    <apex:tabPanel switchType="client" selectedTab="{!selectedTab}" value="{!selectedTab}"   > 
+                        <apex:tab label="{!$Label.musadmin_CRM_settings}" id="crm"  >
+                            <apex:pageBlockSection title="{!$Label.musadmin_CRM_settings}" collapsible="false" columns="1">  
+                                <apex:commandButton value="{!$Label.btn_New}" action="{!newCRM}" disabled="{!hide}"/>                            
+                                  <apex:pageBlockTable value="{!CRM}" var="cr" style="width:800px;" rendered="{!if(CRM.size>0,true,false)}"> 
+                                    <apex:column headerValue="{!$Label.clm_Action}" style="width:90px;">                   
+                                        <apex:commandLink value="{!$Label.btn_edit}" action="{!gotoCRMedit}" style="color:#015ba7">
+                                            <apex:param name="crmid" value="{!cr.id}"/> 
+                                        </apex:commandLink>&nbsp;|&nbsp;
+                                        <apex:commandLink action="{!deleteCRM}" onclick="if(!confirm('{!$Label.musadmin_Will_you_delete}, {!cr.Name} ?')) return false;" value="{!$Label.btn_Del}" style="color:#015ba7">               
+                                            <apex:param value="{!cr.id}" name="deleteid" assignTo="{!crmid}"/>
+                                        </apex:commandLink>
+                                   </apex:column>           
+                                   <apex:column headerValue="{!$Label.musadmin_Name}" value="{!cr.Name}" style="width:175px;"/>     
+                                   <apex:column value="{!cr.CRM_performance_type__c}" style="width:185px;"/> 
+                                   <apex:column value="{!cr.Watch_type__c }" style="width:180px;"/> 
+                                   <apex:column headerValue="{!$Label.musadmin_Selector}" value="{!cr.Selector__c}" style="width:100px;"/> 
+                                   <apex:column headerValue="{!$Label.musadmin_Charts}" value="{!cr.Chart__c}" style="width:100px;"/>  
+                                </apex:pageBlockTable>
+                                 </apex:pageBlockSection>
+                            
+                        </apex:tab>
+                        <apex:tab label="CRM import"  id="crm1" name="CRM_import" rendered="{!if(act.Use_Performance_CRM__c=='Salesforce (in same org)',false,true)}">                       
+                            <apex:pageBlockSection title="CRM import" collapsible="false" columns="1" id="crmpbs">
+                                <apex:outputLabel value="{!$Label.musadmin_Select_a_CSV_file_with_Crmdata}"/> 
+                                    <apex:inputfile accept="csv" title="" value="{!csvFileBody}" filename="{!csvName}"/>                                                         
+                                <apex:pageBlockSectionItem >
+                                <apex:outputPanel layout="block" style="padding-bottom:20px; width:300px;">
+                                <div style="float:left">                                                    
+                                <apex:selectList value="{!selectedcrmdateformat}" multiselect="false" size="1">
+                                    <apex:selectOption itemValue="1" itemLabel="mm/dd/yyyy"/>
+                                    <apex:selectOption itemValue="2" itemLabel="dd/mm/yyyy"/>
+                                    <apex:selectOption itemValue="3" itemLabel="yyyy-mm-dd"/>                                    
+                                </apex:selectList>&nbsp;
+                                <apex:outputText value="Date format in the CSV file." label="{!$Label.musadmin_dateformat}"/>
+                                    <br/>
+                                <apex:outputText value="The delimiter can be '/' or '-' for all date format." label="{!$Label.musadmin_dateformat}"/>
+                                </div>   
+                                </apex:outputPanel>
+                                </apex:pageBlockSectionItem>                                                               
+                                <apex:message title=""/>
+                                <apex:commandbutton value="{!$Label.btn_Upload}"  action="{!uploadcrmDoc}" id="upb1"/>
+                            </apex:pageBlockSection>
+                        </apex:tab>
+                        <apex:tab label="{!$Label.musadmin_CRM_import_log}" id="crm2">
+                            <apex:pageBlockSection title="{!$Label.musadmin_CRM_import_log}" collapsible="false" columns="1"/>
+                                <apex:pageBlockTable value="{!crmLoglist}" var="cr" rendered="{!IF(crmLoglist.size>0,true,false)}" style="width:900px;">
+                                    <apex:column value="{!cr.createdDate}" headerValue="{!$Label.musadmin_Imported_Date}" style="width:130px;"/>
+                                    <apex:column headerValue="{!$Label.musadmin_Name}" style="width:150px;">
+                                        <apex:repeat var="n" value="{!cr.NotesAndAttachments}">
+                                            <apex:outputText value="{!n.Title }"/></apex:repeat>
+                                    </apex:column>
+                                    <apex:column value="{!cr.OwnerId}" headerValue="{!$Label.pt_Owner}" style="width:150px;"/>
+                                    <apex:column headerValue="{!$Label.musadmin_Records}"  title="Number of records" value="{!cr.Number_of_records__c}" style="position:ceneter;width:70px;"/>
+                                    <apex:column value="{!cr.Import_message__c}" headerValue="{!$Label.musadmin_Import_message}" style="width:400px;"/>
+                                </apex:pageBlockTable>
+                            <!--</apex:pageBlockSection>-->
+                        </apex:tab>
+                    </apex:tabPanel>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            
+        </apex:pageBlock>   
+    </apex:form>   
+                
+    
+    <script>    
+        function saveSocialMediaToBrowserCookie(sm) {
+            document.cookie = "apex__current_sm="+sm;
+        }
+    
+        function saveAutoimportToBrowserCookie(ai) {
+            document.cookie = "apex__current_ai="+ai;
+        }
+    
+        function saveNonAutoimportToBrowserCookie(nai) {
+            document.cookie = "apex__current_nai="+nai;
+        }
+        
+        function getCookieByName(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+    
+    
+    // keeping social media selected tab in cookie
+    // added by Narendra
+    function setActiveTabInCookie(el) {
+        var currentSM_ActiveTabId = el.getElementsByClassName('rich-tab-active')[0].id;
+        document.cookie = "currentSM_ActiveTabId="+currentSM_ActiveTabId;
+    }
+    
+    // on pageload, select the tab in cookie
+    setLastSelectedTab();
+    
+    function setLastSelectedTab() {
+        var SM_TabId = getCookieByName('currentSM_ActiveTabId');
+        if(SM_TabId != '')
+            document.getElementById(SM_TabId).click();
+    }
+    </script>
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page StandardController="worktype__c"  ShowHeader="false">
+    <apex:includeScript value="{!URLFOR($Resource.Colorpicker, 'jscolor/jscolor.js')}" />
+    <apex:form >
+    </apex:form>
+</apex:page>

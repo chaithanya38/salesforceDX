@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Sales Data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP_sales_obj</value>
+    </caseValues>
+    <fields>
+        <label><!-- Business area --></label>
+        <name>Business_area__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business region --></label>
+        <name>Business_region__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP logfile --></label>
+        <name>ERP_logfile__c</name>
+        <relationshipLabel><!-- ERP_sales_obj --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales --></label>
+        <name>Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales date --></label>
+        <name>Sales_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales import date --></label>
+        <name>Sales_import_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- sales currency --></label>
+        <name>sales_currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales import id --></label>
+        <name>sales_import_id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

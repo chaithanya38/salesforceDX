@@ -1,0 +1,16 @@
+<apex:page standardController="Workspace__c" extensions="WorkSpaceExtensionController" sidebar="false" tabStyle="Project__c">
+    <apex:form >      
+        <apex:pageBlock title="{!$Label.pt_Presentation}" mode="edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="{!$Label.btn_save}"/>
+                <apex:commandButton action="{!cancel}" value="{!$Label.btn_cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Workspace.Name}" label="{!$Label.pt_Headline}"/>
+                <apex:inputtextarea value="{!Workspace.Description__c}" rows="7" cols="70" label="{!$Label.inv_Description}"/>
+                <apex:inputhidden value="{!Workspace.ProjectName__c}"/>
+                <apex:inputField value="{!Workspace.html_description__c}" label="{!$Label.pt_Presentation}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

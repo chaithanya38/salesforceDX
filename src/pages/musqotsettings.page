@@ -1,0 +1,295 @@
+<apex:page standardController="Activity__c" extensions="Musqotsettingscontroller" sidebar="false" tabStyle="Project__c" language="en_US">
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+    <apex:stylesheet value="/sCSS/25.0/sprites/1342034628000/Theme3/default/gc/extended.css" /> 
+    <apex:stylesheet value="{!URLFOR($Resource.DHTMLGantt, 'codebase/dhtmlxgantt.css')}"/>
+    
+    <style>
+        .custPopup{
+        background-color: white;
+        border-width: 2px;
+        border-style: solid;
+        z-index: 9999;
+        left: 30%;
+        padding:10px;
+        position: absolute;
+        width: 500px;
+        margin-left: 0px;
+        top:50px;
+        }
+        .popupBackground{
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        } 
+    </style>
+    <apex:form id="frm" >
+        <apex:pageBlock title="Musqot configuration" id="pb" mode="edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:outputPanel id="allBtnBlock">
+                    <apex:commandButton value="{!$Label.btn_edit}" action="{!gotoEditMode}" rendered="{!showRec}" reRender="frm" style="margin-left:160px;"/>
+                    <apex:commandButton value="{!$Label.btn_save}" styleClass="saveBtn" action="{!Save}" rendered="{!showEdt}" disabled="{!isSaveBtnDisabled}" style="margin-left:160px;"/>         
+                    <!--<apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" rendered="{!showRec}" style="margin-left:200px;"/>-->
+                    <apex:commandButton value="{!$Label.btn_cancel}" action="{!gotoInfoMode}" rendered="{!showEdt}"/>
+                </apex:outputPanel>
+                <apex:outputPanel id="messageBlock" styleClass="messageBlock" style="float: left;position: relative; right: 5px; bottom: 3px;">
+                    <apex:pageMessage summary="{!message}" severity="info" strength="1" rendered="{!isValidKeyCode}"/>
+                    <apex:pageMessage summary="{!message}" severity="error" strength="1" rendered="{!isNotValidKeyCode}"/>
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="General settings" columns="2"  collapsible="false" rendered="{!showRec}"> 
+                <apex:outputfield value="{!mus.Use_milestones__c}"/>
+                <apex:pageBlockSectionItem rendered="true">
+                    <apex:outputLabel value="Keycode"/><apex:outputText value="?????-?????-?????-?????" />
+                </apex:pageBlockSectionItem>
+                <apex:outputfield value="{!mus.Plan_access_controll__c}"/> 
+                <apex:pageBlockSectionItem rendered="{!if(currentFisicalYear<>null,true,false)}">
+                    <apex:outputLabel value="Musqot version & Expiry date" />
+                    <apex:outputText value="{!currentEdition}, {!expiryDate}" />
+                </apex:pageBlockSectionItem>
+                <apex:outputfield value="{!mus.Use_Allocation__c}" label="Use Cost center(hierarchy)"/>    
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Financial and resource settings" columns="2"  collapsible="false" rendered="{!showRec}"> 
+                <apex:inputHidden value="{!mus.Use_Finance1__c}" rendered="{!if(isPerformance,false,true)}"/>
+                <apex:outputfield value="{!mus.Use_Finance1__c}" rendered="{!isPerformance}"/> 
+                <apex:inputHidden value="{!mus.Use_Resource__c}" rendered="{!if(isResource,false,true)}"/>
+                <apex:outputField value="{!mus.Use_Resource__c}" rendered="{!isResource}"/>
+                <apex:outputfield value="{!mus.Use_Budget__c}"/>
+                <apex:pageBlockSectionItem rendered="{!if(currentFisicalYear<>null,true,false)}">
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year" />
+                    <apex:outputText value="{!currentFisicalYear}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:outputfield value="{!mus.Use_Forcasting__c}"/>
+                <apex:inputHidden value="{!mus.Use_Forcasting__c}"/>
+                <apex:outputfield value="{!mus.Forcasting_period__c}"/>
+                <apex:outputField value="{!mus.Company_holidays__c}" rendered="{!isholidaayList}"/>
+
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Gantt settings" columns="2"  collapsible="false" rendered="{!showRec}">                 
+                <apex:pageBlockSectionItem labelTitle="Main Gantt" labelStyle="font-weight:bold;font-size:10pt;">
+                    <apex:outputLabel >Main Gantt</apex:outputLabel>
+                    <apex:outputPanel />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem labelTitle="Detail Gantt" labelStyle="font-weight:bold;font-size:10pt;" >
+                    <apex:outputLabel >Detail Gantt</apex:outputLabel>
+                    <apex:outputPanel />
+                </apex:pageBlockSectionItem>
+                <apex:outputfield value="{!mus.Incl_Marketing_activity_Main__c}" label="Incl Marketing activity"/>
+                <apex:outputfield value="{!mus.Incl_Marketing_activity_Detail__c}" label="Incl Marketing activity"/> 
+                <apex:outputfield value="{!mus.Incl_Task_main_gantt__c}" label="Incl Task"/> 
+                <apex:outputfield value="{!mus.Incl_Task_Detail__c}" label="Incl Task"/> 
+                <!--<apex:outputfield value="{!mus.Incl_Milestone_Main__c}" label="Incl Milestone"/>-->
+                <!--<apex:outputfield value="{!mus.Incl_Milestone_Detail__c}" label="Incl Milestone"/>-->
+                <apex:outputfield value="{!mus.Drag_to_change_date_Main__c}" label="Drag to change date"/> 
+                <apex:outputfield value="{!mus.Drag_to_change_date_Detail__c}" label="Drag to change date" />
+             <!--   <apex:outputfield value="{!mus.Performance_milestone_Detail__c}" label="Performance milestone"/> -->
+                <apex:outputText ></apex:outputText>
+                
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="{!$Label.musadmin_Performance_settings}" columns="1" rendered="{!isAdvanceMilestone}"> 
+                <apex:outputfield value="{!mus.Use_socialmedia__c}"/>
+                <apex:outputfield value="{!mus.Use_Performance_ERP__c}"/>
+                <apex:outputfield value="{!mus.Use_Performance_CRM__c}"/>  
+            </apex:pageBlockSection>   
+            
+            <apex:pageBlockSection title="General settings" columns="2"  collapsible="false" rendered="{!showEdt}"  > 
+                <apex:inputfield value="{!mus.Use_milestones__c}">
+                    <apex:actionSupport event="onclick" action="{!autoSel}" reRender="mil,mil1"/> </apex:inputfield>
+                <apex:pageBlockSectionItem rendered="{!CurrentUser[0].Profile.Name=='System Administrator'}">
+                    <apex:outputText value="Keycode" style="position: relative; top: 3px;"/>
+                    <apex:outputpanel >
+                        <apex:inputField value="{!mus.keycode__c}" id="keycodeInput" html-oninput="keycodeActivationProcessing(this)" style="width:175px;"/>
+                        <apex:outputpanel id="verifyKeycodeBtnContainer">
+                            <apex:commandButton value="Validate" onclick="validationProcessing()" action="{!verifyKeycode}" style="display: none;" styleClass="verifyKeycodeBtn" reRender="messageBlock,allBtnBlock,verifyKeycodeBtnContainer"/>
+                            <script>
+                            var validateBtn = document.getElementsByClassName('verifyKeycodeBtn')[0];
+                            if('{!showVerifyKeycodeBtn}'=='true')
+                                validateBtn.style.display = "inline";
+                            else
+                                validateBtn.style.display = "none";
+                            </script>
+                        </apex:outputpanel>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputfield value="{!mus.Plan_access_controll__c}"/>
+                <apex:pageBlockSectionItem rendered="{!CurrentUser[0].Profile.Name=='System Administrator'}">
+                    &nbsp;
+                    <apex:outputpanel id="requestLicenceUpgradeLinkPanel">
+                        <apex:commandLink id="requestLicenceUpgradeLink" value="Request licence upgrade" action="{!showLicenceUpgradePopUp}" rendered="{!isPeakEdition==false}"/>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+                <apex:inputfield value="{!mus.Use_Allocation__c}" label="Use Cost center(hierarchy)"/> 
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Financial and resource settings" columns="2"  collapsible="false" rendered="{!showEdt}"  > 
+                <apex:inputHidden value="{!mus.Use_Resource__c}" rendered="{!if(isPerformance,false,true)}"/>
+                <apex:inputfield value="{!mus.Use_Finance1__c}" id="uFin" rendered="{!isPerformance}">
+                    <apex:actionSupport event="onclick" action="{!autoSel}" reRender="pbs" status="counterStatus"/>
+                </apex:inputfield> 
+                <apex:inputHidden value="{!mus.Use_Resource__c}" rendered="{!if(isResource,false,true)}"/>
+                <apex:inputField value="{!mus.Use_Resource__c}" id="uRec" rendered="{!isResource}"/>
+                <apex:inputfield value="{!mus.Use_Budget__c}"  id="ubud" />
+                <apex:pageBlockSectionItem rendered="{!if(currentFisicalYear<>null,true,false)}">                                   
+                    <apex:outputLabel value="Fiscal Year" for="year"/>
+                    <!--<apex:outputPanel >--> 
+                    <!--<apex:outputText value="{!currentFisicalYear}" id="year"/> -->                                                        
+                    <apex:commandLink value="{!currentFisicalYear}" action="{!redirectToMusqotFiscalYearPage}" target="_blank" style="color:#3399FF"/>   
+                    <!--</apex:outputPanel>-->                                                                                  
+                </apex:pageBlockSectionItem>      
+                <apex:inputfield value="{!mus.Use_Forcasting__c}"/>
+                <apex:outputText ></apex:outputText>
+                <apex:inputfield value="{!mus.Forcasting_period__c}"/>
+                <apex:inputfield value="{!mus.Company_holidays__c}" rendered="{!isholidaayList}" style="width: 300px; height: 60px;"  />
+            </apex:pageBlockSection> 
+            
+            <apex:pageBlockSection title="Gantt settings" columns="2"  collapsible="false" rendered="{!showEdt}"> 
+                <apex:pageBlockSectionItem labelTitle="Main Gantt" labelStyle="font-weight:bold;font-size:10pt;">
+                    <apex:outputLabel >Main Gantt</apex:outputLabel>
+                    <apex:outputPanel />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem labelTitle="Detail Gantt" labelStyle="font-weight:bold;font-size:10pt;" >
+                    <apex:outputLabel >Detail Gantt</apex:outputLabel>
+                    <apex:outputPanel />
+                </apex:pageBlockSectionItem>
+                <apex:inputfield value="{!mus.Incl_Marketing_activity_Main__c}" label="Incl Marketing activity"/>
+                <apex:inputfield value="{!mus.Incl_Marketing_activity_Detail__c}" label="Incl Marketing activity"/> 
+                <apex:inputfield value="{!mus.Incl_Task_main_gantt__c}" label="Incl Task"/>
+                <apex:inputfield value="{!mus.Incl_Task_Detail__c}" label="Incl Task"/> 
+                <!--<apex:inputCheckbox value="{!mus.Incl_Milestone_Main__c}" label="Incl Milestone" id="mil" disabled="{!if(mus.Use_milestones__c==false,true,false)}"/>
+                <apex:inputCheckbox value="{!mus.Incl_Milestone_Detail__c}" label="Incl Milestone" id="mil1" disabled="{!if(mus.Use_milestones__c==false,true,false)}"/>--> 
+                <apex:inputfield value="{!mus.Drag_to_change_date_Main__c}" label="Drag to change Gantt"/> 
+                <apex:inputfield value="{!mus.Drag_to_change_date_Detail__c}" label="Drag to change Detail Gantt"/>
+           <!--     <apex:inputCheckbox value="{!mus.Performance_milestone_Detail__c}" label="Performance milestone" id="perGnt" disabled="{!perGantt}"/> -->
+                <apex:outputText ></apex:outputText>
+                
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="{!$Label.musadmin_Performance_settings}" columns="1"  collapsible="false" rendered="{!isAdvanceMilestonedit}"> 
+                <apex:inputfield value="{!mus.Use_socialmedia__c}">
+                    <apex:actionSupport event="onclick" action="{!autoSel}" reRender="perGnt"/> </apex:inputfield>
+                <apex:inputfield value="{!mus.Use_Performance_ERP__c}"  >
+                    <apex:actionSupport event="onclick" action="{!autoSel}" reRender="perGnt"/> </apex:inputfield>
+                <apex:inputfield value="{!mus.Use_Performance_CRM__c}" required="true"> 
+                    <apex:actionSupport event="onclick" action="{!autoSel}" reRender="perGnt"/> </apex:inputfield> 
+            </apex:pageBlockSection>   
+        </apex:pageBlock>  
+    </apex:form>
+    
+    
+    
+    <!-- Upgrade licence form, added by Narendra -- start-- -->
+    <apex:form id="upgradeLicenceForm">
+        <apex:outputPanel id="upgradeLicencepopup" >
+            <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!licenceUpgradePopUp}"/>
+            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!licenceUpgradePopUp}">   
+                <apex:pageBlock title="Licence upgrade" mode="Edit">
+                    
+                    <apex:pageBlockButtons location="bottom">                                  
+                        <apex:commandButton styleClass="btn btn" value="Submit" action="{!sendUpgradeRequest}"  />
+                        <apex:commandButton styleClass="btn btn" value="Cancel" action="{!hideLicenceUpgradePopUp}"  />
+                    </apex:pageBlockButtons>
+                    
+                    <apex:pageBlockSection columns="1" >
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Org Id"/>
+                            <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                <apex:outputPanel styleClass="requiredBlock"/>
+                                <apex:inputText value="{!orgId}" required="True" disabled="True" />
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Org Name"/>                                       
+                            <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                <apex:outputPanel styleClass="requiredBlock"/>
+                                <apex:inputText value="{!orgName}" required="True" disabled="True" />
+                            </apex:outputPanel>  
+                        </apex:pageBlockSectionItem>
+                        
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Username"/>                            
+                            <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                <apex:outputPanel styleClass="requiredBlock"/>
+                                <apex:inputText value="{!CurrentUser[0].Name}" required="True" disabled="True" />
+                            </apex:outputPanel>  
+                        </apex:pageBlockSectionItem>
+                        
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Email"/>                            
+                            <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                <apex:outputPanel styleClass="requiredBlock"/>
+                                <apex:inputText value="{!CurrentUser[0].Email}" required="True" disabled="True" />
+                            </apex:outputPanel>  
+                        </apex:pageBlockSectionItem>
+                        
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Mobile"/>                            
+                            <apex:outputPanel styleClass="" layout="block" >
+                                <apex:inputText value="{!CurrentUser[0].MobilePhone}" required="False" disabled="False" />
+                            </apex:outputPanel>  
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Upgrade To"/>                            
+                            <apex:outputPanel styleClass="requiredInput" layout="block" > 
+                                <apex:outputPanel styleClass="requiredBlock"/>
+                                <apex:selectList id="editions" size="1" multiselect="false" value="{!selectedEdition}">
+                                    <apex:selectOptions value="{!editionList}" />
+                                </apex:selectList>
+                            </apex:outputPanel>  
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputlabel value="Additional Info"/>                            
+                            <apex:outputPanel styleClass="" layout="block" >
+                                <apex:inputTextarea id="additonalInfo" value="{!additionalInfo}" rows="3" cols="50"/>
+                            </apex:outputPanel>  
+                        </apex:pageBlockSectionItem>               
+                        
+                    </apex:pageBlockSection>    
+                </apex:pageBlock>         
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:form>
+    <!-- Upgrade licence form, added by Narendra -- end-- -->
+    
+    <script>
+    if('{!JSENCODE(activeTab)}'== 'musqotConfig')
+        document.getElementById('pg:msett_lbl').click();
+    
+    
+    function keycodeActivationProcessing(el) {
+        if(el.value != '') {
+            var saveBtn = document.getElementsByClassName('saveBtn')[0];
+            saveBtn.setAttribute('disabled','disabled');
+            saveBtn.className += ' btnDisabled';
+            
+            var validateBtn = document.getElementsByClassName('verifyKeycodeBtn')[0];
+            validateBtn.style.display = "inline";
+        }
+        var msgEl = document.getElementsByClassName('messageBlock')[0];
+        msgEl.style.display = "none";
+    }
+    
+    function validationProcessing() {
+        var validateBtn = document.getElementsByClassName('verifyKeycodeBtn')[0];
+        validateBtn.value = "Validating";
+        setInterval(
+            function() {
+                if(validateBtn.value == 'Validating...')
+                    validateBtn.value = "Validating";
+                validateBtn.value += ".";
+            }, 700);
+    }
+    </script>
+    
+</apex:page>

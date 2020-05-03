@@ -1,0 +1,66 @@
+<apex:page controller="CRMsettingcontroller" sidebar="false" tabStyle="Musqot_admin__tab">
+   <script>
+    function changesCrmSeeting(){
+      document.getElementById('j_id0:CRMform:j_id2:j_id6:j_id13').value="Line charts";
+      document.getElementById('j_id0:CRMform:j_id2:j_id6:j_id16').value="#FF9933,#A700DF,#369E2B";
+    }       
+    </script>
+    <apex:form id="CRMform">
+        <apex:pageBlock title="{!$Label.musadmin_New_CRM_Setting}" tabStyle="Musqot_admin__tab" mode="edit">
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="{!$Label.btn_save}" action="{!insertcrms}"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}" immediate="true"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2" >
+                <apex:inputField required="true"  value="{!crms.Name}" label="{!$Label.musadmin_Settings_name}"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="CRM performance type" for="type"/>
+                    <apex:actionRegion >
+                        <apex:selectList id="type" value="{!crms.CRM_performance_type__c}" size="1" multiselect="false" >
+                            <apex:selectOptions value="{!MyOptions}" />
+                            <apex:actionSupport event="onchange"  rerender="CRMform"  oncomplete="changesCrmSeeting()"/>
+                        </apex:selectList>
+                    </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:inputField required="true" value="{!crms.Chart__c}" label="{!$Label.musadmin_Charts}"/>
+                <apex:inputField value="{!crms.Selector__c}" rendered="{!IF(crms.CRM_performance_type__c=='Performance, General',true,false)}"  label="{!$Label.musadmin_Selector}"/>                                
+                <apex:outputText rendered="{!IF(crms.CRM_performance_type__c=='Performance, General',false,true)}"></apex:outputText>
+                <apex:inputField style="width:200px;" required="true" value="{!crms.Bar_color__c}" label="{!$Label.actt_Bar_color}"/>
+                <apex:selectList value="{!crms.Watch_type__c}" size="1" required="true" rendered="{!IF(crms.CRM_performance_type__c='Milestone',true,false)}" multiselect="false">
+                    <apex:selectOptions value="{!watchtype}"/>
+                </apex:selectList>
+                <apex:inputField required="true" value="{!crms.Watch_type__c}" rendered="{!IF(crms.CRM_performance_type__c='Milestone',false,true)}"/>                
+                <apex:outputText />
+                <apex:inputField rendered="{!IF(level1,false,true)}" style="margin-right:5px;width:200px;"  value="{!crms.Expression_business_region__c}" >
+                    <div style="margin-top:-105px;display:inline-block;height:125px;vertical-align:text-top;">
+                        <apex:outputText >
+                            <apex:repeat value="{!Leads}" var="leadsource">{!leadsource.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                </apex:inputField>
+                <apex:pageBlockSectionItem rendered="{!getleadsources != null}"  > 
+                    <apex:outputlabel value="Lead Sources"/>
+                    <apex:selectCheckboxes id="ld1" value="{!LeadItems}" immediate="true" borderVisible="true" layout="pageDirection">
+                        <apex:selectOptions value="{!getleadsources}"  />
+                    </apex:selectCheckboxes>
+                </apex:pageBlockSectionItem> 
+                <apex:outputText ></apex:outputText>
+                <!--<apex:inputField rendered="{!IF(level1,false,true)}" style="margin-right:5px;width:200px;" value="{!crms.Expression_business_area__c}" >
+                    <div style="margin-top:-105px;display:inline-block;height:125px;vertical-align:text-top;">
+                        <apex:outputText >
+                            <apex:repeat value="{!Campaigns}" var="campsource">{!campsource.Name}<br/></apex:repeat>
+                        </apex:outputText>
+                    </div> 
+                </apex:inputField>--> 
+                <!--
+                <apex:pageBlockSectionItem rendered="{!getCampaigns != null}" > 
+                    <apex:outputlabel value="Campaigns"/>
+                    <apex:selectCheckboxes id="ld" value="{!CampItems}" immediate="true" borderVisible="true" layout="pageDirection">
+                        <apex:selectOptions value="{!getCampaigns}"  />
+                    </apex:selectCheckboxes>
+                </apex:pageBlockSectionItem>  
+                --> 
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

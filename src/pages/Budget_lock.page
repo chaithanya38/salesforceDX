@@ -1,0 +1,48 @@
+<apex:page standardController="Budget__c" extensions="BudgetLockclass" ShowHeader="False" tabStyle="Project__c" >
+    <head>
+        <script type="text/javascript">
+        function myClose(){    
+            if(window.parent){
+                window.parent.opener.location.href = window.parent.opener.location.href;
+                window.parent.close();
+            }   
+            else{
+                window.opener.location.href = "{!JSENCODE($CurrentPage.parameters.planId)}"
+                window.close();   
+            }   
+        }
+        function closeWindow_NoAction(){
+            window.close();
+        }
+        </script>
+    </head>
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_Approve_budget}" mode="Edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="bottom" rendered="true">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!CloseBudget}" status="close" oncomplete="myClose();"/>
+                
+                <apex:commandButton value="{!$Label.btn_cancel}"  onclick="window.close();"/>
+                <apex:actionStatus startText="{!$Label.funr_Saving}" stopText="" onStop="top.window.close();" id="close"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.pbs_Approve_budget_for_all_project_in_plan}, {!plan.Name}" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.bud_Total_budget}"/>
+                    <apex:outputtext value="{!mybudget}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.bud_Total_budget}(h)"/>
+                    <apex:outputtext value="{!mybudget_h}"/>
+                </apex:pageBlockSectionItem>
+                <apex:inputField value="{!bud.Approved__c}" label="{!$Label.bud_Approved}" />
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.fin_Fiscal_Year}" for="year"/>
+                    <apex:selectList value="{!bud.FiscalYear__c}" size="1" id="year" style="width:80px"> 
+                         <apex:selectOptions value="{!fisicalYearOptions}"/> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputhidden value="{!bud.Approved_date__c}"/>
+                <apex:inputhidden value="{!bud.user__c}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

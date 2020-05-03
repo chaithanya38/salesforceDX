@@ -1,0 +1,26 @@
+<apex:page controller="AttachmentUploadController" sidebar="false" tabStyle="Project__c" >
+    <apex:form enctype="multipart/form-data"  id="frm">
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock title="{!$Label.pt_Upload_document}" mode="Edit" id="pb">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!upload}" value="{!$Label.btn_Upload_file}" onclick="check"/>
+                <apex:commandButton action="{!Cancel}" value="{!$Label.btn_cancel}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.pbs_Information}" columns="1" id="pbs">
+                <apex:inputField value="{!attachment.name}" required="false" label="{!$Label.att_File_Name}"/> 
+                <apex:pageBlockSectionItem >
+                    {!$Label.att_Select_file}
+                    <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" contentType="{!contentType}" id="file" onchange="check(this)"/>
+                </apex:pageBlockSectionItem>          
+                <apex:inputField style="width:300px;height:100px;" value="{!attachment.description}" label="{!$Label.inv_Description}"/> 
+                <apex:inputText value="{!fileNmaeWithExtension}" id="ip" style="display:none"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+       <script>
+        function check(obj_inpf)
+        { 
+            var s= document.getElementById("j_id0:frm:pb:pbs:ip").value=obj_inpf.value;
+        }
+</script>
+</apex:page>

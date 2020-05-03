@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Social media data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Social media data</value>
+    </caseValues>
+    <fields>
+        <label><!-- Compound Id --></label>
+        <name>Compound_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- OAuth service --></label>
+        <name>Connection__c</name>
+        <relationshipLabel><!-- Social media data --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of likes --></label>
+        <name>Number_of_likes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of member --></label>
+        <name>Number_of_member__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of unik visitor --></label>
+        <name>Number_of_unik_visitor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Socialmedia Settings --></label>
+        <name>Socialmedia_Settings__c</name>
+        <relationshipLabel><!-- Social media data --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

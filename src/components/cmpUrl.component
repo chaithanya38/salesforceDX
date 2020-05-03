@@ -1,0 +1,4 @@
+<apex:component controller="cls_CmpApprovalURL" access="global">  
+<apex:attribute name="objID" description="Obj ID" type="Id" assignTo="{!amtId}"/>  
+  <a href="{!urlStr}">{!urlStr}</a>  
+</apex:component>

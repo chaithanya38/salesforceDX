@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Socialmedia connection</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Socialmedia connections</value>
+    </caseValues>
+    <fields>
+        <label><!-- Access Token URL --></label>
+        <name>Access_Token_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Access Token --></label>
+        <name>Access_Token__c</name>
+    </fields>
+    <fields>
+        <label><!-- Authorization Type --></label>
+        <name>Authorization_Type__c</name>
+        <picklistValues>
+            <masterLabel>Request Header (Authorization: Bearer)</masterLabel>
+            <translation><!-- Request Header (Authorization: Bearer) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Request Header (Authorization: OAuth)</masterLabel>
+            <translation><!-- Request Header (Authorization: OAuth) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>URI Query Parameter</masterLabel>
+            <translation><!-- URI Query Parameter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Authorization URL --></label>
+        <name>Authorization_URL__c</name>
+    </fields>
+    <fields>
+        <help><!-- If this is checked then the import will run every day into the enddate --></help>
+        <label><!-- Auto import --></label>
+        <name>Auto_import__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is color to be us in Charts to representation of different data in the performance veiw --></help>
+        <label><!-- Bar colors --></label>
+        <name>Bar_color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign ID --></label>
+        <name>Campaign_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consumer Key --></label>
+        <name>Consumer_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consumer Secret --></label>
+        <name>Consumer_Secret__c</name>
+    </fields>
+    <fields>
+        <help><!-- After this date will Musqot not collect data from this social media connection. --></help>
+        <label><!-- End date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is to watch a page or webpage. Used in Facebook, Google --></help>
+        <label><!-- Page ID --></label>
+        <name>Page_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is used for watch a Post in Facebook --></help>
+        <label><!-- Post ID --></label>
+        <name>Post_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- this url is used for create url in the ad incl the ID --></help>
+        <label><!-- Redirect URL --></label>
+        <name>Redirect_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Request Token URL --></label>
+        <name>Request_Token_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Response Type --></label>
+        <name>Response_Type__c</name>
+        <picklistValues>
+            <masterLabel>code</masterLabel>
+            <translation><!-- code --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>token</masterLabel>
+            <translation><!-- token --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scope --></label>
+        <name>Scope__c</name>
+    </fields>
+    <fields>
+        <label><!-- Signature Method --></label>
+        <name>Signature_Method__c</name>
+        <picklistValues>
+            <masterLabel>HMAC-SHA1</masterLabel>
+            <translation><!-- HMAC-SHA1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PLAINTEXT</masterLabel>
+            <translation><!-- PLAINTEXT --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Social media --></label>
+        <name>Social_media__c</name>
+        <picklistValues>
+            <masterLabel>Facebook</masterLabel>
+            <translation><!-- Facebook --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Google analytics</masterLabel>
+            <translation><!-- Google analytics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Google+</masterLabel>
+            <translation><!-- Google+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LinkedIn</masterLabel>
+            <translation><!-- LinkedIn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MailChimp</masterLabel>
+            <translation><!-- MailChimp --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Twitter</masterLabel>
+            <translation><!-- Twitter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vimeo</masterLabel>
+            <translation><!-- Vimeo --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>YouTube</masterLabel>
+            <translation><!-- YouTube --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Socialmedia --></label>
+        <name>Socialmedia__c</name>
+        <relationshipLabel><!-- Socialmedia connections --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This is the id of Ad, Ad set or Campian to watch, used in Facebook, MailChimp, Google --></help>
+        <label><!-- Ad/Ad set ID --></label>
+        <name>ad_id__c</name>
+    </fields>
+    <layouts>
+        <layout>OAuth Service Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- OAuth 1.0 --></label>
+        <name>OAuth1</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Authorizaion --></label>
+        <name>Authorizaion</name>
+    </webLinks>
+</CustomObjectTranslation>

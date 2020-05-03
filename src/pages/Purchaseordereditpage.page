@@ -1,0 +1,18 @@
+<apex:page standardController="Purchase_order_setting__c" sidebar="false" showHeader="false"  >
+    <apex:form >
+        <apex:pageBlock title="Edit, purchase order settings">
+            <apex:pageBlockButtons location="top">    
+                <apex:commandButton value="Save" action="{!Cancel}"/>    
+                <apex:commandButton value="Cancel" action="{!Cancel}"/>   
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Purchase_order_setting__c.Name}" required="true"/>
+                <apex:inputField value="{!Purchase_order_setting__c.PO_Startnumber__c}"/>
+                <apex:inputField value="{!Purchase_order_setting__c.PO_Prefix__c}"/>
+                <apex:inputField value="{!Purchase_order_setting__c.PO_Autoprefix__c}" required="true"/>
+                <apex:inputField value="{!Purchase_order_setting__c.PO_External__c}"/>
+                <apex:inputField value="{!Purchase_order_setting__c.PO_Lastnumber__c}"/>
+            </apex:pageBlockSection>        
+        </apex:pageBlock>        
+    </apex:form>
+</apex:page>

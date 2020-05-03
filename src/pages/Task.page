@@ -1,0 +1,60 @@
+<apex:page standardController="task" sidebar="false" tabStyle="Project__c" id="pg" extensions="TaskController"> 
+    <script>
+    function setSecondDate(elem){
+        document.getElementById('{!$Component.frm.pb.ps.date1.date2}').value = elem.value;
+    }
+  </script>
+    <apex:form id="frm">
+        <apex:pageMessages ></apex:pageMessages>
+      <apex:actionRegion >
+        <apex:actionFunction name="setDate" action="{!dauDateMethod}" reRender="date2"/>
+     </apex:actionRegion>
+        <apex:pageBlock title="{!$Label.pt_New_task}" id="pb" mode="Edit" tabStyle="Musqot_admin__tab" >
+        
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}"/> 
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2" id="ps">
+                <apex:inputField value="{!Task.Task_name__c}" label="{!$Label.tsk_Task_name}"/>
+                <apex:inputField value="{!Task.Status}" label="{!$Label.tsk_Status}" />
+                <apex:inputField value="{!Task.OwnerID}" label="{!$Label.tsk_Assigned_To}"/>
+                <apex:inputField value="{!Task.Subject}" label="{!$Label.tsk_Subject}"/>
+                <apex:inputField value="{!Task.ActivityDate}" required="false" label="{!$Label.tsk_Due_Date}" id="due" onblur="setSecondDate(this);" />
+                <apex:inputField value="{!Task.Allocated_h__c}" label="{!$Label.tsk_estimated_time}" />
+                <apex:inputField style="width:300px;height:100px;" value="{!Task.Task_description__c}" label="{!$Label.inv_Description}"/>
+                <apex:inputField value="{!Task.Priority}" label="{!$Label.tsk_Priority}"/>
+                <apex:inputField value="{!Task.sendEmail__c}" label="{!$Label.tsk_Send_notification_e_mail}"/>
+                <apex:inputHidden value="{!Task.WhatId}"/>
+                <apex:inputField value="{!Task.IsReminderSet}" label="{!$Label.tsk_Reminder}" id="date1">
+                <apex:inputText value="{!myRemaid}" id="date2" style="width:80px;"/>
+                <apex:selectList size="1" value="{!selectedTime}">
+                  <apex:selectOptions value="{!Items}"></apex:selectOptions>
+                </apex:selectList>
+                </apex:inputField>
+                
+                <!--<apex:inputField value="{!Task.ReminderDateTime}" id="date2"/>-->
+                <apex:inputHidden value="{!Task.Outcome_h__c}" id="oh"/> 
+                <apex:inputHidden value="{!Task.WhatId}"/>
+                <apex:inputHidden value="{!Task.StatusImage__c}"/>
+            </apex:pageBlockSection>
+            <!-- File Upload --->
+            <apex:pageBlockSection title="{!$Label.pbs_Task_attachment}" columns="1" id="block1" >    
+                <apex:pageBlockSectionItem >
+                    {!$Label.att_Select_file}
+                    <apex:inputFile value="{!attachment.body}"  filename="{!attachment.name}" contentType="{!contentType}" id="file"/>
+                </apex:pageBlockSectionItem>  
+                <apex:inputTextarea value="{!attachment.description}" id="description" style="width:300px;" label="{!$Label.inv_Description}"/>
+            </apex:pageBlockSection>
+            <!-- End File Upload --->
+            <!--
+            <apex:pageBlockSection title="{!$Label.tsk_Recurrence_and_reminder}" collapsible="false" columns="1" >
+                <apex:inputField value="{!Task.ReminderDateTime}"/>
+                <apex:inputField value="{!Task.IsReminderSet}" label="{!$Label.tsk_Reminder}"/>
+                <apex:inputCheckbox label="{!$Label.tsk_Create_Recurring_Series_of_Tasks}"/>
+                <apex:inputCheckbox label="{!$Label.tsk_Reminder}"/>
+           </apex:pageBlockSection> 
+            -->
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

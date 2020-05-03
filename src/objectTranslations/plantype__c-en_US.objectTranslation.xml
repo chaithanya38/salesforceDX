@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Plan type</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Plan types</value>
+    </caseValues>
+    <fields>
+        <label><!-- Barcolor --></label>
+        <name>Barcolor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fieldset --></label>
+        <name>Fieldset__c</name>
+    </fields>
+    <fields>
+        <label><!-- sort --></label>
+        <name>sort__c</name>
+    </fields>
+    <nameFieldLabel><!-- Plantype --></nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

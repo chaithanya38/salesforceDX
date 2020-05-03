@@ -1,0 +1,85 @@
+<apex:page standardController="OAuthService__c" extensions="Socialmedia_connection_Ctrl" sidebar="false" id="pg">  
+    <script>
+    function showStatus(val){
+        if(val){
+            alert('Connection Success, now you can import the data');
+        } 
+        else{
+            alert('Connection Fialed, Please verify social media settings');
+        }   
+    }
+    
+    function openLookupPopup(uri){
+        
+        //var pgId = document.getElementById('pg:frm:pgId').innerHTML;    
+        // var url = uri+'?pgId='+pgId;       
+        newWin=window.open(uri, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+        //sendPageInfo(pgId);
+        
+        if (window.focus){
+            newWin.focus();
+        }
+    }
+      
+    function showfacebookConnectionMessage(data) {
+      if(data == 'true'){
+          alert("connection succeeded");
+      }else if(data == 'false'){
+          alert("connection not succeeded");
+      }
+    }
+    function showfacebookImportMessage(data) {
+      if(data == 'true'){
+          alert("Import data from facebook successfully");
+      }else if(data == 'false'){
+          alert("Import data from facebook not successfully");
+      }
+    }
+    function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+    </script>    
+    <apex:form id="frm">                  
+        <apex:pageBlock title="{!$Label.musadmin_Edit_connection}" mode="Edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="{!$Label.btn_save}"  action="{!updSocial}" oncomplete="showfacebookConnectionMessage('{!smMessage}')"/>  
+                <apex:commandButton value="{!$Label.btn_back}" action="{!cancel}"/>
+                        
+                <apex:outputPanel style="margin-left:30px;" >                    
+                    <apex:commandButton value="Test connection" reRender="frm" action="{!socialmediaConnection}" oncomplete="showfacebookConnectionMessage('{!smMessage}')">
+                        <apex:param value="{!ObjSMS.id}" assignTo="{!connectionId}" name="cntId"/>
+                    </apex:commandButton>
+                    <apex:commandButton value="Import all data" title="This will replace all data with data from, {!ObjSMS.Name}" action="{!importsocialmediaData}" onclick="if(!confirm('Your existing social media will be erased/reset for this connection, still you want to import?')){return};" oncomplete="showfacebookImportMessage('{!smMessage}')">
+                        <apex:param value="{!ObjSMS.id}" assignTo="{!connectionId}" name="cntId"/>
+                    </apex:commandButton>                              
+                </apex:outputPanel>                                 
+            </apex:pageBlockButtons>    
+            <apex:pageBlockSection title="{!$Label.musadmin_Edit_connection}" collapsible="false">                 
+                <apex:inputField value="{!ObjSMS.Name}" required="True" style="width:200px;" />
+                <apex:inputField value="{!ObjSMS.Access_Token_URL__c}" style="width:300px;" />
+                <apex:inputField value="{!ObjSMS.Social_media__c}" id="socialmedia" />
+                <!--<apex:inputField value="{!ObjSMS.Authorization_Type__c}" required="False" />
+                <apex:inputField value="{!ObjSMS.Authorization_URL__c}" style="width:300px;" />-->
+                <apex:inputField value="{!ObjSMS.Consumer_Key__c}" style="width:200px;" />               
+                <apex:inputField value="{!ObjSMS.Page_Id__c}" style="width:200px;" id="pgId" />                 
+                <apex:inputField value="{!ObjSMS.Consumer_Secret__c}" style="width:300px;" />
+                <apex:inputField value="{!ObjSMS.Post_ID__c}" style="width:200px;" /> 
+                <apex:inputField value="{!ObjSMS.Bar_color__c}" required="True" style="width:300px;"/> 
+                <apex:inputField value="{!ObjSMS.Campaign_Id__c}" style="width:200px;" />                                
+                <!--<apex:inputField value="{!ObjSMS.Request_Token_URL__c}" style="width:300px;" />-->
+                <apex:inputField value="{!ObjSMS.End_Date__c}" /> 
+                <apex:inputField value="{!ObjSMS.ad_id__c}" id="adId" style="width:200px;" /> 
+                <!--<apex:inputField value="{!ObjSMS.Response_Type__c}" />
+                <apex:inputField value="{!ObjSMS.Scope__c}" style="width:300px;" />
+                <apex:inputField value="{!ObjSMS.Signature_Method__c}" />-->
+                <apex:inputField value="{!ObjSMS.Auto_import__c}" /> 
+                <apex:inputField value="{!ObjSMS.Redirect_URL__c}" style="width:300px;" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>

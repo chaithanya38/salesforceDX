@@ -1,0 +1,13 @@
+<apex:page StandardController="Purchase_article__c" Extensions="PurchaseArticleEditController" sidebar="false" >
+    <apex:form >
+        <apex:pageBlock title="{!$Label.pt_Edit_article}" mode="Edit" tabStyle="Musqot_admin__tab">
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton value="{!$Label.btn_save}" action="{!Save}" styleClass="btn"/>
+                <apex:commandButton value="{!$Label.btn_cancel}" action="{!Cancel}" styleClass="btn"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" showHeader="true">
+                <apex:inputField value="{!Purchasearticle.Name}" required="true" label="{!$Label.pur_Purchase_article}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
