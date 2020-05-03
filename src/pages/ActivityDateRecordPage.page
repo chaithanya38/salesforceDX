@@ -14,7 +14,7 @@
             </apex:pageBlockSection>
         </apex:pageBlock>
         <apex:pageBlock title="Edit Activity occasion" mode="edit" rendered="{!if(activityDatId<>null,true,false)}">
-            <apex:pageBlockButtons location="top">
+            <apex:pageBlockButtons location="bottom">
                 <apex:commandButton value="{!$Label.btn_save}" action="{!updateActivityDateRec}"/> 
                 <apex:commandButton value="{!$Label.btn_Remove}" onclick="return confirm('will you remove, {!activityDateList.Name}?');" action="{!deletActivityDateRec}" />
                 <apex:commandButton value="{!$Label.btn_cancel}" action="{!cancel}"/>
