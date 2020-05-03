@@ -20,7 +20,8 @@ trigger CCMembercreation on Costcentre__c (After Insert) {
        mbr.Cost_center__c = cos.id;
        mbr.ProjUsers__c  = cos.ownerid;
        mbr.Role__c = 'Owner'; 
-       mbrs.add(mbr);      
+       mbrs.add(mbr);
+	   system.debug('mbrs');	   
     }
     insert mbrs;
 }
