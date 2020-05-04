@@ -66,7 +66,7 @@
         <fullName>Icon__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Give a url to a icon for the activity type this should be in size 24x24 px</inlineHelpText>
+        <inlineHelpText>Give a url to a icon for the activity type this should be in size 48x48 px</inlineHelpText>
         <label>Url to icon</label>
         <length>250</length>
         <required>true</required>
